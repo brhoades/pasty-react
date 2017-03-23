@@ -24,7 +24,7 @@ function encryptFile(e) {
   console.log(`Contents: ${data}`);
 
   let password = randomPassword(64);
-  var crypted = CryptoJS.AES.encrypt(data, password);
+  var crypted = CryptoJS.AES.encrypt(data, password).toString();
 
   console.log(`Encrypted: ${crypted}`);
   console.log(`Password: ${password}`);
@@ -32,8 +32,19 @@ function encryptFile(e) {
   return crypted;
 }
 
-function uploadFile(e) {
+function uploadFile(data) {
   console.log("Upload file");
+
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:3000/paste",
+    data: {
+      data: data
+    },
+    success: (response) => {
+      console.log(response);
+    }
+  });
 }
 
 $("#filename").fileReaderJS({
@@ -43,8 +54,7 @@ $("#filename").fileReaderJS({
     progress: (e, file) => null,
     error: (e, file) => console.log("ERROR"),
     load: (e, file) => {
-      encryptFile(e);
-      uploadFile(e);
+      uploadFile(encryptFile(e));
     }
   }
 });

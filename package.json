@@ -3,10 +3,17 @@
   "version": "0.0.1",
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
-    "server": "node server/main.js"
+    "server": "node server/main.js",
+    "devserver": "nodemon server/main.js"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "config": "^1.25.1",
     "crypto-js": "^3.1.9-1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "filesize-parser": "^1.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

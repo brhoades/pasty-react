@@ -4,7 +4,7 @@
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
     "server": "node server/main.js",
-    "devserver": "nodemon server/main.js"
+    "devserver": "nodemon server/main.js -w server"
   },
   "dependencies": {
     "body-parser": "^1.17.1",

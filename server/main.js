@@ -30,10 +30,15 @@ function getFilename() {
   let full_path = "";
   let name = "";
 
+  if(!fs.existsSync(storage_path)) {
+    console.log(`"${storage_path}" does not exist, cannot create files in it.`);
+    return;
+  }
+
   do {
     name = randomName(config.get("server.storage.filename_length"));
 
-    full_path = storage_path.join(storage_path, name);
+    full_path = path.join(storage_path, name);
   } while(fs.existsSync(full_path));
 
   return {
@@ -45,16 +50,20 @@ function getFilename() {
 // POST x-www-form-urlencoded with a data field
 // Returns a JSON hash with "filename": "file name".
 app.post("/paste", (req, res) => {
-  console.log(req.body);
   let data = req.body.data;
 
   if(data.length > filesizeParser(config.get("server.storage.size_limit"))) {
     res.status(413);
+    return;
   }
 
   let file_details = getFilename();
+  if(!file_details) {
+    res.status(500);
+    return;
+  }
 
-  fs.writeFileSync(file_details.full_path, data.body);
+  fs.writeFileSync(file_details.path, data.body);
 
   res.send({
     filename: file_details.name

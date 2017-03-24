@@ -40,6 +40,17 @@ function encryptFile(file, e) {
   };
 }
 
+function getConfig(cb) {
+  console.log("Get Configuration");
+
+  $.ajax({
+    type: "GET",
+    url: "config/client.json",
+    success: (response) => cb(response),
+    error: (err) => console.log(err)
+  });
+}
+
 function decryptFile(data, key) {
   // base64 to a buffer array
   data = CryptoJS.AES.decrypt(btoa(data), key);
@@ -50,22 +61,26 @@ function decryptFile(data, key) {
 
 function uploadFile(crypted_data, cb) {
   console.log("Upload file");
-
-  $.ajax({
-    type: "POST",
-    url: "http://localhost:3000/paste",
-    data: {
-      data: crypted_data.data
-    },
-    success: (response) => cb(response, crypted_data.key)
+  getConfig((config) => {
+    $.ajax({
+      type: "POST",
+      url: config.paste,
+      data: {
+        data: crypted_data.data
+      },
+      success: (response) => cb(response, crypted_data.key)
+    });
   });
 }
 
 function getFile(id, cb) {
-  $.ajax({
-    type: "GET",
-    url: `http://localhost:3000/get/${id}`,
-    success: cb
+  console.log("Getting file");
+  getConfig((config) => {
+    $.ajax({
+      type: "GET",
+      url: `${config.get}${id}`,
+      success: cb
+    });
   });
 }
 
@@ -101,6 +116,7 @@ $("#filename").fileReaderJS({
     error: (e, file) => console.log("ERROR", e),
     load: (e, file) => {
       uploadFile(encryptFile(file, e), (res, key) => {
+        console.log(res);
         window.location.href = res.url + encodeURIComponent(key);
       });
     }

@@ -4,3 +4,4 @@ node_modules
 config/client.json
 yarn.lock
 *.log
+aws-credentials.json

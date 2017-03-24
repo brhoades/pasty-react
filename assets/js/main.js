@@ -79,7 +79,16 @@ function getFile(id, cb) {
     $.ajax({
       type: "GET",
       url: `${config.get}${id}`,
-      success: cb
+      success: cb,
+      complete: (xhr, status) => {
+        if(xhr.status == 302) {
+          return $.ajax({
+            type: "GET",
+            url: xhr.getResponseHeader("Location"),
+            success: cb
+          });
+        }
+      }
     });
   });
 }

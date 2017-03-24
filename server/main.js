@@ -33,6 +33,8 @@ function buildFilename(name) {
     }
 
     return path.join(storage_path, name);
+  } else {
+    return `${config.get("server.storage.aws.baseurl")}${name}`;
   }
 }
 
@@ -60,9 +62,23 @@ function getFilename() {
   };
 }
 
+// Reads credentials from the environment
+// Upload some Base64 data to our configured aws bucket.
+function uploadAWS(filename, data, cb) {
+  const aws = require('aws-sdk');
+  const s3 = new aws.S3({apiVersion: '2006-03-01'});
+
+  let res = s3.upload({
+    Key: filename,
+    Body: data,
+    ACL: config.get("server.storage.aws.acl"),
+    Bucket: config.get("server.storage.aws.bucket"),
+  }, cb);
+}
+
 // POST json with a data field
 // Returns a JSON hash with "filename": "file name".
-app.post("/paste", (req, res) => {
+app.post("/paste", (req, res, next) => {
   let data = req.body.data;
   res.setHeader("Access-Control-Allow-Origin", "*");
 
@@ -77,50 +93,68 @@ app.post("/paste", (req, res) => {
     return;
   }
 
-  fs.writeFileSync(file_details.path, data);
+  if(config.get("server.storage.type") == "local") {
+    fs.writeFile(file_details.path, data, (err) => {
+      res.send({
+        filename: file_details.name,
+        url: `${config.get("server.storage.local.external")}#${file_details.name}-`
+      });
 
-  res.send({
-    filename: file_details.name,
-    // TODO: AWS
-    url: `${config.get("server.storage.local.external")}#${file_details.name}-`
-  });
+      next();
+    });
+
+  } else if(config.get("server.storage.type") == "aws") {
+    uploadAWS(file_details.name, data, (err, awsres) => {
+      res.send({
+        filename: file_details.name,
+        url: `${config.get("server.storage.local.external")}#${file_details.name}-`
+      });
+
+      next();
+    });
+  }
+
 });
 
 app.get("/get/:file", (req, res, next) => {
   let file = req.params.file;
   let file_path = buildFilename(file);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
 
   if(file.length != config.get("server.storage.filename_length")) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(`${req.params.file} != config length`);
     return res.status(404) && next();
   }
 
   if(/[^A-Za-z0-9]/.exec(file) != null) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(`${req.params.file} has bad characters`);
     return res.status(404) && next();
   }
 
-  fs.exists(file_path, (exists) => {
-    if(!exists) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      console.log(`File ${file_path} does not exist.`);
-      return res.status(404) && next();
-    }
-
-    fs.readFile(file_path, (err, data) => {
-      if(err) {
-        console.log(`Error in reading: ${err}`);
-        return res.status(500) && next(err);
+  if(config.get("server.storage.type") == "local") {
+    // read and send
+    fs.exists(file_path, (exists) => {
+      if(!exists) {
+        console.log(`File ${file_path} does not exist.`);
+        return res.status(404) && next();
       }
 
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.send(data);
-      return next();
+      fs.readFile(file_path, (err, data) => {
+        if(err) {
+          console.log(`Error in reading: ${err}`);
+          return res.status(500) && next(err);
+        }
 
+        res.send(data);
+        return next();
+
+      });
     });
-  });
+  } else if(config.get("server.storage.type") == "aws") {
+    // 301
+    res.redirect(301, buildFilename(file));
+  }
 });
 
 app.listen(3000, () => {

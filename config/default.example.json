@@ -7,6 +7,12 @@
       "local": {
         "path": "/tmp/files",
         "external": "http://localhost:8080/view.html"
+      },
+      "aws": {
+        "bucket": "bucket",
+        "storage_class": "STANDARD",
+        "baseurl": "https://region.amazonaws.com/bucket/",
+        "acl": "public-read"
       }
     }
   }

@@ -8,6 +8,7 @@
     "devserver-static": "live-server"
   },
   "dependencies": {
+    "aws-sdk": "^2.32.0",
     "body-parser": "^1.17.1",
     "config": "^1.25.1",
     "crypto-js": "^3.1.9-1",

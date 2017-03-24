@@ -4,7 +4,8 @@
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
     "server": "node server/main.js",
-    "devserver": "live-server"
+    "devserver": "live-server",
+    "upload": "s3-upload"
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1"

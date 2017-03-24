@@ -1,0 +1,10 @@
+{
+  "server": {
+    "storage": {
+      "local": "/var/www/files",
+      "external": "https://somesite.tld/files",
+      "size_limit": "1 MB",
+      "filename_length": 8
+    }
+  }
+}

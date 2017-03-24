@@ -106,7 +106,7 @@ app.get("/get/:file", (req, res, next) => {
       }
 
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.send(data.toString('base64'));
+      res.send(data);
       return next();
 
     });

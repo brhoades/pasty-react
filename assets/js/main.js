@@ -18,17 +18,21 @@ function randomPassword(length) {
     return pass;
 }
 
-function encryptFile(e) {
-  console.log("Encrypt file");
-  let data = e.target.result;
+function encryptFile(file, e) {
+  let payload = {
+    name: file.name
+  };
 
-  console.log(`Contents: ${data}`);
+  let data = e.target.result;
+  let mimeString = data.split(',')[0].split(':')[1].split(';')[0]
+  let byteString = data.split(',')[1];
+  payload.mime = mimeString;
+  payload.data = byteString;
+
+  payload = JSON.stringify(payload);
 
   let password = randomPassword(64);
-  var crypted = CryptoJS.AES.encrypt(data, password).toString();
-
-  console.log(`Encrypted: ${crypted}`);
-  console.log(`Password: ${password}`);
+  let crypted = atob(CryptoJS.AES.encrypt(payload, password));
 
   return {
     data: crypted,
@@ -37,7 +41,11 @@ function encryptFile(e) {
 }
 
 function decryptFile(data, key) {
-  console.log("Decrypted data", CryptoJS.AES.decrypt(data, key));
+  // base64 to a buffer array
+  data = CryptoJS.AES.decrypt(btoa(data), key);
+  data = JSON.parse(CryptoJS.enc.Utf8.stringify(data));
+
+  return data;
 }
 
 function uploadFile(crypted_data, cb) {
@@ -61,6 +69,8 @@ function getFile(id, cb) {
   });
 }
 
+/////////////////////////////////////////
+/////////////// view.html ///////////////
 // call on doc ready
 // gets the file from the url, gets data from the server,
 // decrypts it, then downloads it
@@ -69,23 +79,28 @@ function getFileFromURL() {
   if(!match) {
     return;
   }
-
   let file = match[1],
       key = decodeURIComponent(match[2]);
 
   getFile(file, (response) => {
-    decryptFile(response.body.data, key);
+    let data = decryptFile(response, key);
+
+    $('body').append($(`<a href="data:${data.mime};base64,${data.data}">View Raw</a><br />`));
+    $('body').append(
+      $(`<a download="${data.name}" href="data:application/octet-stream;base64,${data.data}">Download</a><br />`));
   });
 }
 
+///////////////////////////////////////////
+//////////////// index.html ///////////////
 $("#filename").fileReaderJS({
   on: {
     beforestart: (e, file) => true,
     loadstart: (e, file) => null,
     progress: (e, file) => null,
-    error: (e, file) => console.log("ERROR"),
+    error: (e, file) => console.log("ERROR", e),
     load: (e, file) => {
-      uploadFile(encryptFile(e), (res, key) => {
+      uploadFile(encryptFile(file, e), (res, key) => {
         window.location.href = res.url + encodeURIComponent(key);
       });
     }

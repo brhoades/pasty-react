@@ -24,13 +24,16 @@ function randomName(length) {
 }
 
 function buildFilename(name) {
-  const storage_path = config.get("server.storage.local");
-  if(!fs.existsSync(storage_path)) {
-    console.log(`"${storage_path}" does not exist, cannot create files in it.`);
-    return;
-  }
+  if(config.get("server.storage.type") == "local") {
+    const storage_path = config.get("server.storage.local.path");
 
-  return path.join(storage_path, name);
+    if(!fs.existsSync(storage_path)) {
+      console.log(`"${storage_path}" does not exist, cannot create files in it.`);
+      return;
+    }
+
+    return path.join(storage_path, name);
+  }
 }
 
 // Gets a unique filename that doesn't exist.
@@ -39,11 +42,17 @@ function getFilename() {
   let full_path = "";
   let name = "";
 
-  do {
-    name = randomName(config.get("server.storage.filename_length"));
+  // If we're local, verify this file doesn't exist
+  if(config.get("server.storage.type") == "local") {
+    do {
+      name = randomName(config.get("server.storage.filename_length"));
 
+      full_path = buildFilename(name);
+    } while(fs.existsSync(full_path));
+  } else {
+    name = randomName(config.get("server.storage.filename_length"));
     full_path = buildFilename(name);
-  } while(fs.existsSync(full_path));
+  }
 
   return {
     name: name,
@@ -72,7 +81,8 @@ app.post("/paste", (req, res) => {
 
   res.send({
     filename: file_details.name,
-    url: `${config.get("server.storage.external")}#${file_details.name}-`
+    // TODO: AWS
+    url: `${config.get("server.storage.local.external")}#${file_details.name}-`
   });
 });
 

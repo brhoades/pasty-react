@@ -1,10 +1,13 @@
 {
   "server": {
     "storage": {
-      "local": "/var/www/files",
-      "external": "https://somesite.tld/files",
-      "size_limit": "1 MB",
-      "filename_length": 8
+      "type": "local",
+      "size_limit": "5 MB",
+      "filename_length": 8,
+      "local": {
+        "path": "/tmp/files",
+        "external": "http://localhost:8080/view.html"
+      }
     }
   }
 }

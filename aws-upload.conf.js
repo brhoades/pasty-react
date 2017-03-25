@@ -3,7 +3,7 @@ module.exports = {
   bucketName: "p.brod.es",
   patterns:[
     "config/*.json",
-    "assets/**/*",
+    "dist/**/*",
     "*.html"
   ]
 }

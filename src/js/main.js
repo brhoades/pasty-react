@@ -1,6 +1,10 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
+import riot from 'riot'
+import 'riot-hot-reload'
+require('./app/index.js');
+
 function uploadFile(crypted_data, cb) {
   console.log("Upload file");
   util.getConfig((config) => {

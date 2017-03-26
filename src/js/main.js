@@ -17,7 +17,7 @@ function uploadFile(crypted_data, cb) {
 
 function getFile(id, cb) {
   console.log("Getting file");
-  getConfig((config) => {
+  util.getConfig((config) => {
     $.ajax({
       type: "GET",
       url: `${config.get}${id}`,
@@ -78,3 +78,4 @@ function previewFile() {
 }
 
 $("#upload").click(previewFile);
+$(document).ready(getFileFromURL);

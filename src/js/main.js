@@ -1,9 +1,19 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
-import riot from 'riot'
-import 'riot-hot-reload'
 require('./app/index.js');
+import css from '../css/main.css';
+import css2 from '../css/libs/blaze.min.css';
+
+function oneoffError(message) {
+  console.log(`Error: ${message}`);
+  riot.mount('rg-alerts', {
+    alerts: [{
+      type: 'error',
+      text: message
+    }]
+  });
+}
 
 function uploadFile(crypted_data, cb) {
   console.log("Upload file");
@@ -14,7 +24,11 @@ function uploadFile(crypted_data, cb) {
       data: {
         data: crypted_data.data
       },
-      success: (response) => cb(response, crypted_data.key)
+      success: (response) => cb(response, crypted_data.key),
+      error: (response) => {
+        console.log("ERROR UPLOADING");
+        oneoffError("Error uploading.");
+      }
     });
   });
 }

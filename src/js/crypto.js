@@ -1,5 +1,4 @@
 const util = require("./util");
-const CryptoJS = require("crypto-js");
 
 function decryptFile(data, key) {
   // base64 to a buffer array

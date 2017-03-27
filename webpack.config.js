@@ -1,58 +1,85 @@
-var path = require("path");
-var webpack = require("webpack");
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    main: './src/js/main.js',
-    libs: ['crypto-js', 'jquery', 'riot', 'riotgear']
+    build: './src/main.js',
+    libs: ['crypto-js', 'jquery']
   },
   output: {
-    path: path.join(__dirname, 'dist/'),
-    filename: '[name].js',
-    publicPath: '/dist/'
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: '[name].js'
   },
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+          }
+          // other vue-loader options go here
+        }
+      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
+        exclude: /node_modules/
       },
       {
-        test: /\.tag$/,
-        exclude: /node_modules/,
-        loader: 'riot-tag-loader',
-        query: {
-          hot: false, // set it to true if you are using hmr
-          // add here all the other riot-compiler options riotjs.com/guide/compiler/
-          // template: 'pug' for example
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
         }
-      },
-      {
-        test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
       }
     ]
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
+  },
+  performance: {
+    hints: false
+  },
+  devtool: '#eval-source-map',
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      mangle: false
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
+      "CryptoJS": "crypto-js"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",
       minChunks: Infinity,
     }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-      riot: "riot",
-      "riot-hot-reload": "riot-hot-reload",
-      "CryptoJS": "crypto-js"
-    })
   ]
-};
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
+}

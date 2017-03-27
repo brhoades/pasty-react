@@ -1,18 +1,8 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
-require('./app/index.js');
-import css from '../css/main.css';
-import css2 from '../css/libs/blaze.min.css';
-
 function oneoffError(message) {
   console.log(`Error: ${message}`);
-  riot.mount('rg-alerts', {
-    alerts: [{
-      type: 'error',
-      text: message
-    }]
-  });
 }
 
 function uploadFile(crypted_data, cb) {

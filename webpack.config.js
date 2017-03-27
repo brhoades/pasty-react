@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     build: './src/main.js',
-    libs: ['crypto-js', 'jquery']
+    libs: ['crypto-js', 'jquery', 'vue']
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -25,7 +25,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015']
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,

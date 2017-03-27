@@ -89,12 +89,13 @@ function previewFile() {
   }
 }
 
-$("#upload").click(previewFile);
-$(document).ready(getFileFromURL);
-
 
 module.exports = {
-  previewFile: previewFile,
-  getFileFromURL: getFileFromURL,
+  uploadHook: () => {
+    $("#upload").click(previewFile);
+  },
+  viewHook: () => {
+    $(document).ready(getFileFromURL);
+  },
   isView: isView
 };

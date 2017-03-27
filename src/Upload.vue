@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    UPLOADING
     <h2>Pasty</h2>
 
     <input type="file" id="filename" size="60"><br /><br />

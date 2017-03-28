@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -63,6 +64,12 @@ module.exports = {
       name: "libs",
       minChunks: Infinity,
     }),
+    new CopyWebpackPlugin([
+      {
+        from: "src/main.css",
+        to: "main.css"
+      }
+    ])
   ]
 }
 

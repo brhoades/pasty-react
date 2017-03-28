@@ -65,7 +65,7 @@ function getFileFromURL() {
 }
 
 function isView() {
-  return /\/\#([^-]+)-(.+)$/.exec(window.location.href) != null;
+  return /\/(index.html)?\#([^-]+)-(.+)$/.exec(window.location.href) != null;
 }
 
 ///////////////////////////////////////////

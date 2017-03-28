@@ -11,7 +11,7 @@
 
       <template slot="clip-uploader-body" scope="props">
         <div v-for="file in props.files">
-          {{ file.name }} {{ file.status }}
+          {{ file.name }} {{ file.errorMessage }}
         </div>
       </template>
     </vue-clip>

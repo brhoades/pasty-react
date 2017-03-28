@@ -75,6 +75,7 @@ function previewFile(file, err) {
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
+      err("Successfully uploaded");
       window.location.href = res.url + encodeURIComponent(key);
       window.location.reload(true);
     }, err);

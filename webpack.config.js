@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     build: './src/main.js',
-    libs: ['crypto-js', 'jquery', 'vue']
+    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip']
   },
   output: {
     path: path.resolve(__dirname, './dist'),

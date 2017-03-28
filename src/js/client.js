@@ -5,7 +5,7 @@ function oneoffError(message) {
   console.log(`Error: ${message}`);
 }
 
-function uploadFile(crypted_data, cb) {
+function uploadFile(crypted_data, cb, err) {
   console.log("Upload file");
   util.getConfig((config) => {
     $.ajax({
@@ -16,8 +16,7 @@ function uploadFile(crypted_data, cb) {
       },
       success: (response) => cb(response, crypted_data.key),
       error: (response) => {
-        console.log("ERROR UPLOADING");
-        oneoffError("Error uploading.");
+        return err(`Error uploading: ${response}`);
       }
     });
   });
@@ -71,28 +70,26 @@ function isView() {
 
 ///////////////////////////////////////////
 //////////////// index.html ///////////////
-function previewFile() {
-  let file    = document.querySelector('input[type=file]').files[0];
+function previewFile(file, err) {
   let reader  = new FileReader();
-  console.log("file");
 
   reader.addEventListener("load", () => {
-    console.log(reader);
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      console.log(res);
       window.location.href = res.url + encodeURIComponent(key);
-    });
+      window.location.reload(true);
+    }, err);
   }, false);
 
   if(file) {
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file._file);
   }
 }
 
 
 module.exports = {
-  uploadHook: () => {
-    $("#upload").click(previewFile);
+  uploadHook: (file, done) => {
+    previewFile(file, done);
+    done("Uploaded");
   },
   viewHook: () => {
     $(document).ready(getFileFromURL);

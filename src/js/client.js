@@ -44,25 +44,12 @@ function getFile(id, cb) {
   });
 }
 
-/////////////////////////////////////////
-/////////////// view.html ///////////////
-function buildURL(file, key, options="") {
-  // get absolute url without final page
-  // http://stackoverflow.com/questions/16417791/how-to-get-current-url-without-page-in-javascript-or-jquery
-  let urlBase = url.substring(0, url.lastIndexOf('/')+1);
-
-  return `#view${file}-${options}-${encodeURIComponent(key)}`;
-}
-
-
-///////////////////////////////////////////
-//////////////// index.html ///////////////
 function previewFile(file, err) {
   let reader  = new FileReader();
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      window.location.href = `/view.html#${res.filename}--${encodeURIComponent(key)}`;
+      window.location.href = `/#/view/${res.filename}/${encodeURIComponent(key)}`;
     }, err);
   }, false);
 

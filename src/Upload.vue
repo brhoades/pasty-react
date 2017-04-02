@@ -4,7 +4,7 @@
 
     <vue-clip :options="options">
       <template slot="clip-uploader-action">
-        <div>
+        <div v-bind:class="{'is-dragging': params.dragging}" class="upload-action">
           <div class="dz-message"><h2> Click or Drag and Drop files here upload </h2></div>
         </div>
       </template>
@@ -33,6 +33,9 @@
          url: '/bad-url',
          accept: client.uploadHook,
          uploadMultiple: false
+       },
+       params: {
+         dragging: false
        }
      }
    }
@@ -40,4 +43,7 @@
 </script>
 
 <style>
+ .upload-action.is-dragging {
+   background: green;
+ }
 </style>

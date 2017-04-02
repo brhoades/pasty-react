@@ -25,6 +25,8 @@ function uploadFile(crypted_data, cb, err) {
 function getFile(id, cb) {
   console.log("Getting file");
   util.getConfig((config) => {
+    console.log("Getting config");
+    console.log(`${config.get}${id}`);
     $.ajax({
       type: "GET",
       url: `${config.get}${id}`,
@@ -52,16 +54,6 @@ function buildURL(file, key, options="") {
   return `#view${file}-${options}-${encodeURIComponent(key)}`;
 }
 
-// call on doc ready
-// gets the file and its key, decrypts it, then downloads it
-function getData(file, key) {
-  key = decodeURIComponent(key);
-
-  getFile(file, (response) => {
-    let data = crypto.decryptFile(response, key);
-    let base64data = `data:${data.mime};base64,${data.data}`;
-  });
-}
 
 ///////////////////////////////////////////
 //////////////// index.html ///////////////
@@ -85,5 +77,21 @@ module.exports = {
     previewFile(file, done);
     done("Uploaded");
   },
-  view: getData
+  view: (file, key, loadingMessage, errorMessage, dataCb) => {
+    getFile(file, (response) => {
+      loadingMessage("Decrypting...");
+      let data = crypto.decryptFile(response, key);
+
+      data.fileDataB64 = () => {
+        return `data:${data.mime};base64,${data.data}`;
+      };
+
+      data.fileDataB64Download = () => {
+        return `data:application/octet-stream;base64,${data.data}`;
+      };
+
+      loadingMessage("Displaying...");
+      dataCb(data);
+    });
+  }
 };

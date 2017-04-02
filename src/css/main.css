@@ -62,3 +62,7 @@ a {
   display: table-cell;
   vertical-align: middle;
 }
+
+.spinner-message {
+  text-align: center;
+}

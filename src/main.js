@@ -7,16 +7,16 @@ Vue.use(VueClip);
 
 const client = require('./js/client');
 
-if(client.isView()) {
+if($("#view").length) {
   new Vue({
-    el: '#app',
+    el: '#view',
     render: h => h(View)
   });
 
   client.viewHook();
-} else {
+} else if($("#upload").length) {
   new Vue({
-    el: '#app',
+    el: '#upload',
     render: h => h(Upload)
   });
 }

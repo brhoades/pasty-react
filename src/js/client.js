@@ -48,7 +48,7 @@ function getFile(id, cb) {
 // gets the file from the url, gets data from the server,
 // decrypts it, then downloads it
 function getFileFromURL() {
-  let match = /\/\#([^-]+)-(.+)$/.exec(window.location.href);
+  let match = /\#([^-]+)-(.+)$/.exec(window.location.href);
   if(!match) {
     return;
   }
@@ -64,10 +64,6 @@ function getFileFromURL() {
   });
 }
 
-function isView() {
-  return /\/\#([^-]+)-(.+)$/.exec(window.location.href) != null;
-}
-
 ///////////////////////////////////////////
 //////////////// index.html ///////////////
 function previewFile(file, err) {
@@ -75,8 +71,7 @@ function previewFile(file, err) {
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      window.location.href = res.url + encodeURIComponent(key);
-      window.location.reload(true);
+      window.location.href = `/view.html#${res.filename}-${encodeURIComponent(key)}`;
     }, err);
   }, false);
 
@@ -93,6 +88,5 @@ module.exports = {
   },
   viewHook: () => {
     $(document).ready(getFileFromURL);
-  },
-  isView: isView
+  }
 };

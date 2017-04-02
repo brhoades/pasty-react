@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  View
   </div>
 </template>
 

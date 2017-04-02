@@ -48,19 +48,27 @@ function getFile(id, cb) {
 // gets the file from the url, gets data from the server,
 // decrypts it, then downloads it
 function getFileFromURL() {
-  let match = /\#([^-]+)-(.+)$/.exec(window.location.href);
+  let match = /\#([^-]+)-([^-]*)-(.+)$/.exec(window.location.href);
   if(!match) {
     return;
   }
   let file = match[1],
-      key = decodeURIComponent(match[2]);
+      options = match[2],
+      key = decodeURIComponent(match[3]);
 
   getFile(file, (response) => {
     let data = crypto.decryptFile(response, key);
+    let base64data = `data:${data.mime};base64,${data.data}`;
 
-    $('#app').append($(`<a href="data:${data.mime};base64,${data.data}">View Raw</a><br />`));
-    $('#app').append(
-      $(`<a download="${data.name}" href="data:application/octet-stream;base64,${data.data}">Download</a><br />`));
+    if(/^image\//.exec(data.mime)) {
+      $('#content').append(`<img src="${base64data}" id="stored-image"></img>`);
+    }
+    if(options == "download") {
+    } else {
+      $('#links').append($(`<a href="data:${data.mime};base64,${data.data}">View Raw</a><br />`));
+      $('#links').append(
+        $(`<a download="${data.name}" href="data:application/octet-stream;base64,${data.data}">Download</a><br />`));
+    }
   });
 }
 
@@ -71,7 +79,7 @@ function previewFile(file, err) {
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      window.location.href = `/view.html#${res.filename}-${encodeURIComponent(key)}`;
+      window.location.href = `/view.html#${res.filename}--${encodeURIComponent(key)}`;
     }, err);
   }, false);
 

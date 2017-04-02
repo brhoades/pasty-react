@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-  View
+    <h1>Pasty</h1>
+    <div id="content"></div>
+    <div id="links"></div>
   </div>
 </template>
 
 
 <script>
-module.exports = {
-}
+ module.exports = {
+ }
 </script>
 
 <style>

@@ -44,31 +44,22 @@ function getFile(id, cb) {
 
 /////////////////////////////////////////
 /////////////// view.html ///////////////
+function buildURL(file, key, options="") {
+  // get absolute url without final page
+  // http://stackoverflow.com/questions/16417791/how-to-get-current-url-without-page-in-javascript-or-jquery
+  let urlBase = url.substring(0, url.lastIndexOf('/')+1);
+
+  return `#view${file}-${options}-${encodeURIComponent(key)}`;
+}
+
 // call on doc ready
-// gets the file from the url, gets data from the server,
-// decrypts it, then downloads it
-function getFileFromURL() {
-  let match = /\#([^-]+)-([^-]*)-(.+)$/.exec(window.location.href);
-  if(!match) {
-    return;
-  }
-  let file = match[1],
-      options = match[2],
-      key = decodeURIComponent(match[3]);
+// gets the file and its key, decrypts it, then downloads it
+function getData(file, key) {
+  key = decodeURIComponent(key);
 
   getFile(file, (response) => {
     let data = crypto.decryptFile(response, key);
     let base64data = `data:${data.mime};base64,${data.data}`;
-
-    if(/^image\//.exec(data.mime)) {
-      $('#content').append(`<img src="${base64data}" id="stored-image"></img>`);
-    }
-    if(options == "download") {
-    } else {
-      $('#links').append($(`<a href="data:${data.mime};base64,${data.data}">View Raw</a><br />`));
-      $('#links').append(
-        $(`<a download="${data.name}" href="data:application/octet-stream;base64,${data.data}">Download</a><br />`));
-    }
   });
 }
 
@@ -94,7 +85,5 @@ module.exports = {
     previewFile(file, done);
     done("Uploaded");
   },
-  viewHook: () => {
-    $(document).ready(getFileFromURL);
-  }
+  view: getData
 };

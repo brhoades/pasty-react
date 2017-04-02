@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="upload">
     <h2>Pasty</h2>
 
     <vue-clip :options="options">
@@ -20,19 +20,23 @@
 
 
 <script>
-const client = require('./js/client');
+ console.log("Upload");
 
-module.exports = {
-  data: () => {
-    return {
-      options: {
-        url: '/bad-url',
-        accept: client.uploadHook,
-        uploadMultiple: false
-      }
-    }
-  }
-}
+ export default {
+   data () {
+     const client = require("./js/client.js");
+     console.log("Upload inner");
+
+     return {
+       client: client,
+       options: {
+         url: '/bad-url',
+         accept: client.uploadHook,
+         uploadMultiple: false
+       }
+     }
+   }
+ }
 </script>
 
 <style>

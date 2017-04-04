@@ -49,7 +49,7 @@ function previewFile(file, err) {
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      window.location.href = `/#/view/${res.filename}/${encodeURIComponent(key)}`;
+      window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
     }, err);
   }, false);
 

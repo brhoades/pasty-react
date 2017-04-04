@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     build: './src/main.js',
-    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard']
+    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router']
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -19,7 +19,6 @@ module.exports = {
         options: {
           loaders: {
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -82,9 +81,7 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false
-      }
+      compress: false
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true

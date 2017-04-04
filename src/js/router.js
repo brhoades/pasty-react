@@ -4,20 +4,19 @@ import Upload from '../Upload.vue'
 
 const routes = [
   {
+    path: '/view/:file/:key',
+    component: View
+  },
+  {
     path: '/',
     component: Upload
   },
-  {
-    path: '/view/:file/:key',
-    component: View
-  }
 ];
 
 const router = new VueRouter({
-  routes /*{
-    history: false,
-    hashbang: true  // Do not store history in the browser
-  }*/
+  base: window.location.href,
+  mode: "hash",
+  routes: routes
 });
 
 module.exports = {

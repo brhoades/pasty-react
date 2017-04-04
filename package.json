@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
-    "upload": "s3-upload",
+    "upload": "yarn build && s3-upload",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },

@@ -1,13 +1,10 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
-function oneoffError(message) {
-  console.log(`Error: ${message}`);
-}
-
-function uploadFile(crypted_data, cb, err) {
-  console.log("Upload file");
+function uploadFile(crypted_data, cb, msg) {
+  msg("Getting configuration...");
   util.getConfig((config) => {
+    msg("Uploading...");
     $.ajax({
       type: "POST",
       url: config.paste,
@@ -16,7 +13,7 @@ function uploadFile(crypted_data, cb, err) {
       },
       success: (response) => cb(response, crypted_data.key),
       error: (response) => {
-        return err(`Error uploading: ${response}`);
+        return msg(`Error uploading: ${response}`);
       }
     });
   });
@@ -60,8 +57,8 @@ function previewFile(file, err) {
 
 
 module.exports = {
-  uploadHook: (file, done) => {
-    previewFile(file, done);
+  uploadHook: (file, msg, state) => {
+    previewFile(file, msg, state);
     done("Uploaded");
   },
   view: (file, key, loadingMessage, errorMessage, dataCb) => {

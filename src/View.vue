@@ -6,7 +6,6 @@
   </div>
 
   <div v-else-if="error">
-    bad things man
     {{ error }}
   </div>
 
@@ -21,7 +20,7 @@
 
 <script>
  import Spinner from './spinner.vue'
-  const client = require("./js/client.js");
+ const client = require("./js/client.js");
 
  export default {
    components: {
@@ -45,7 +44,6 @@
      fetchData () {
        this.message = "Downloading...";
        const params = this.$route.params;
-       console.log(`${params.file}, ${params.key}`);
 
        this.error = this.post = null;
        this.loading = true;

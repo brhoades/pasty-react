@@ -13,7 +13,7 @@
     <h1>Pasty - {{ paste.name }}</h1>
 
     <a :href=paste.fileDataB64()>View Raw</a>
-    <button class="btn" data-clipboard-text={paste.getURL()}>[clip]</button><br />
+    <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
     <a :download=paste.name :href=paste.fileDataB64Download()>Download</a>
   </div>
 </template>
@@ -22,6 +22,7 @@
 <script>
  import Spinner from './spinner.vue'
  const client = require("./js/client.js");
+ new Clipboard('.clipboard');
 
  export default {
    components: {
@@ -61,6 +62,7 @@
            this.paste = data;
            this.loading = false;
 
+           // TODO: if someone hit back (referrer? don't redirect)
            if(params.options && params.options == "raw") {
              window.location.href = data.fileDataB64();
            }

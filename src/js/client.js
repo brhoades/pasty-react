@@ -62,6 +62,8 @@ module.exports = {
       state.message("Decrypting...");
       let data = crypto.decryptFile(response, key);
 
+      // TODO: separate data object
+      // TODO: get configuration URL.
       state.message("Displaying...");
       data.fileDataB64 = () => {
         return `data:${data.mime};base64,${data.data}`;
@@ -70,6 +72,15 @@ module.exports = {
       data.fileDataB64Download = () => {
         return `data:application/octet-stream;base64,${data.data}`;
       };
+
+      data.getURL = () => {
+        let baseLocation = location.href.replace(location.hash, "");
+        return `${baseLocation}#/view/${file}/${encodeURIComponent(key)}`;
+      };
+
+      data.getRawURL = () => {
+        return `${data.getURL()}/raw`
+      }
 
       state.data(data);
     });

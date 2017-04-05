@@ -14,7 +14,7 @@
       <div class="vertical-center-child">
         <spinner v-bind:message="message"></spinner>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +52,7 @@
            };
 
            client.uploadHook(file, state);
+           return false;
          },
          uploadMultiple: false
        },

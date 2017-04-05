@@ -12,7 +12,8 @@
   <div v-else-if="paste">
     <h1>Pasty - {{ paste.name }}</h1>
 
-    <a :href=paste.fileDataB64()>View Raw</a><br />
+    <a :href=paste.fileDataB64()>View Raw</a>
+    <button class="btn" data-clipboard-text={paste.getURL()}>[clip]</button><br />
     <a :download=paste.name :href=paste.fileDataB64Download()>Download</a>
   </div>
 </template>
@@ -52,6 +53,10 @@
        let data = (data) => {
          this.paste = data;
          this.loading = false;
+
+         if(params.options && params.options == "raw") {
+           window.location.href = data.fileDataB64();
+         }
        };
 
        client.view(params.file, params.key, message, error, data);

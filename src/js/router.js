@@ -8,6 +8,10 @@ const routes = [
     component: View
   },
   {
+    path: '/view/:file/:key/:options',
+    component: View
+  },
+  {
     path: '/',
     component: Upload
   },

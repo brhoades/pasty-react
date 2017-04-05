@@ -39,12 +39,19 @@
            this.waiting = false;
            this.uploading = true;
 
-           client.uploadHook(file, (msg) => {
-             this.message = msg;
-           }, (state) => {
-             this.waiting = state.waiting;
-             this.uploading = state.uploading;
-           });
+           let state = {
+             message: (msg) => {
+               this.loading = msg;
+             },
+             waiting: (status) => {
+               this.waiting = status;
+             },
+             uploading: (status) => {
+               this.uploading = status;
+             }
+           };
+
+           client.uploadHook(file, state);
          },
          uploadMultiple: false
        },

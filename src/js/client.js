@@ -1,10 +1,10 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
-function uploadFile(crypted_data, cb, msg) {
-  msg("Getting configuration...");
+function uploadFile(crypted_data, state, cb) {
+  state.message("Getting configuration...");
   util.getConfig((config) => {
-    msg("Uploading...");
+    state.message("Uploading...");
     $.ajax({
       type: "POST",
       url: config.paste,
@@ -13,7 +13,7 @@ function uploadFile(crypted_data, cb, msg) {
       },
       success: (response) => cb(response, crypted_data.key),
       error: (response) => {
-        return msg(`Error uploading: ${response}`);
+        return state.message(`Error uploading: ${response}`);
       }
     });
   });
@@ -22,7 +22,6 @@ function uploadFile(crypted_data, cb, msg) {
 function getFile(id, cb) {
   console.log("Getting file");
   util.getConfig((config) => {
-    console.log("Getting config");
     console.log(`${config.get}${id}`);
     $.ajax({
       type: "GET",
@@ -41,13 +40,13 @@ function getFile(id, cb) {
   });
 }
 
-function previewFile(file, err) {
+function previewFile(file, state) {
   let reader  = new FileReader();
 
   reader.addEventListener("load", () => {
-    uploadFile(crypto.encryptFile(file, reader), (res, key) => {
+    uploadFile(crypto.encryptFile(file, reader), state, (res, key) => {
       window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
-    }, err);
+    });
   }, false);
 
   if(file) {
@@ -57,10 +56,7 @@ function previewFile(file, err) {
 
 
 module.exports = {
-  uploadHook: (file, msg, state) => {
-    previewFile(file, msg, state);
-    done("Uploaded");
-  },
+  uploadHook: previewFile,
   view: (file, key, state) => {
     getFile(file, (response) => {
       state.message("Decrypting...");

@@ -1,20 +1,23 @@
 <template>
-  <div class="vertical-center-parent" v-if="loading">
-    <div class="vertical-center-child">
-      <spinner v-bind:message="message"></spinner>
+  <div>
+    <div class="vertical-center-parent" v-if="loading">
+      <div class="vertical-center-child">
+        <spinner v-bind:message="message"></spinner>
+      </div>
     </div>
-  </div>
 
-  <div v-else-if="error">
-    {{ error }}
-  </div>
+    <div v-else-if="error">
+      {{ error }}
+    </div>
 
-  <div v-else-if="paste">
-    <h1>Pasty - {{ paste.name }}</h1>
+    <div v-else-if="paste">
+      <h1>Pasty - {{ paste.name }}</h1>
 
-    <a :href=paste.fileDataB64()>View Raw</a>
-    <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
-    <a :download=paste.name :href=paste.fileDataB64Download()>Download</a>
+      <a :href=paste.fileDataB64()>View Raw</a>
+      <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
+      <a :download=paste.name :href=paste.fileDataB64Download()>Download</a>
+
+    </div>
   </div>
 </template>
 
@@ -62,8 +65,9 @@
            this.paste = data;
            this.loading = false;
 
-           // TODO: if someone hit back (referrer? don't redirect)
            if(params.options && params.options == "raw") {
+             // go to the primary URL so if back is hit, we don't redirect to raw
+             window.location.href = data.getURL();
              window.location.href = data.fileDataB64();
            }
          }

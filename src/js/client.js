@@ -61,11 +61,12 @@ module.exports = {
     previewFile(file, msg, state);
     done("Uploaded");
   },
-  view: (file, key, loadingMessage, errorMessage, dataCb) => {
+  view: (file, key, state) => {
     getFile(file, (response) => {
-      loadingMessage("Decrypting...");
+      state.message("Decrypting...");
       let data = crypto.decryptFile(response, key);
 
+      state.message("Displaying...");
       data.fileDataB64 = () => {
         return `data:${data.mime};base64,${data.data}`;
       };
@@ -74,8 +75,7 @@ module.exports = {
         return `data:application/octet-stream;base64,${data.data}`;
       };
 
-      loadingMessage("Displaying...");
-      dataCb(data);
+      state.data(data);
     });
   }
 };

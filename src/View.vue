@@ -43,23 +43,31 @@
    },
    methods: {
      fetchData () {
-       this.message = "Downloading...";
        const params = this.$route.params;
 
-       this.error = this.post = null;
+       this.message = "Downloading...";
+       this.error = this.paste = null;
        this.loading = true;
-       let error = (message) => { this.error = message; };
-       let message = (message) => { this.message = message; };
-       let data = (data) => {
-         this.paste = data;
-         this.loading = false;
 
-         if(params.options && params.options == "raw") {
-           window.location.href = data.fileDataB64();
+       // restrict state access
+       let state = {
+         error: (message) => {
+           this.error = message;
+         },
+         message: (message) => {
+           this.message = message;
+         },
+         data: (data) => {
+           this.paste = data;
+           this.loading = false;
+
+           if(params.options && params.options == "raw") {
+             window.location.href = data.fileDataB64();
+           }
          }
        };
 
-       client.view(params.file, params.key, message, error, data);
+       client.view(params.file, params.key, state);
      }
    }
  }

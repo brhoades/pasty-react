@@ -21,7 +21,7 @@ function encryptFile(file, e) {
 
   payload = JSON.stringify(payload);
 
-  let password = util.randomPassword(64);
+  let password = util.randomPassword(32);
   let crypted = btoa(CryptoJS.AES.encrypt(payload, password));
 
   return {

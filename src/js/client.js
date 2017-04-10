@@ -13,9 +13,11 @@ function uploadError(xhr, status, error) {
   return `Error: HTTP${status}: ${error}`;
 }
 
-function uploadFile(crypted_data, cb, err) {
-  console.log("Upload file");
+function uploadFile(crypted_data, state, cb) {
+  state.message("Getting configuration...");
+
   util.getConfig((config) => {
+    state.message("Uploading...");
     $.ajax({
       type: "POST",
       url: config.paste,
@@ -23,8 +25,8 @@ function uploadFile(crypted_data, cb, err) {
         data: crypted_data.data
       },
       success: (response) => cb(response, crypted_data.key),
-      error: (xhr, status, error) => {
-        return err(uploadError(xhr, status, error));
+      error: (response) => {
+        return state.message(`Error uploading: ${response}`);
       }
     });
   });
@@ -33,6 +35,7 @@ function uploadFile(crypted_data, cb, err) {
 function getFile(id, cb) {
   console.log("Getting file");
   util.getConfig((config) => {
+    console.log(`${config.get}${id}`);
     $.ajax({
       type: "GET",
       url: `${config.get}${id}`,
@@ -50,50 +53,13 @@ function getFile(id, cb) {
   });
 }
 
-/////////////////////////////////////////
-/////////////// view.html ///////////////
-// call on doc ready
-// gets the file from the url, gets data from the server,
-// decrypts it, then downloads it
-function getFileFromURL() {
-  let match = /\#([^-]+)-(.+)$/.exec(window.location.href);
-  if(!match) {
-    return;
-  }
-  let file = match[1],
-      key = decodeURIComponent(match[2]);
-
-  getFile(file, (response) => {
-    let data = crypto.decryptFile(response, key);
-    let b64data = btoa(data.data);
-
-    $('#app').append($(`<a href="data:${data.mime};base64,${b64data}">View Raw</a><br />`));
-    $('#app').append(
-      $(`<a download="${data.name}" href="data:application/octet-stream;base64,${b64data}">Download</a><br />`));
-  });
-}
-
-function isView() {
-  return /\#([^-]+)-(.+)$/.exec(window.location.href) != null;
-}
-
-///////////////////////////////////////////
-//////////////// index.html ///////////////
-function previewFile(file, err) {
+function previewFile(file, state) {
   let reader  = new FileReader();
 
   reader.addEventListener("load", () => {
-    uploadFile(crypto.encryptFile(file, reader), (res, key) => {
-      if(res.error) {
-        return err(res.error);
-      }
-      err("Successfully uploaded");
-      console.log(res);
-      // A random key so we actually redirect and reload the page
-      let randomKey = encodeURIComponent(util.randomPassword(2));
-
-      window.location += "?t=" + randomKey + "#" + res.filename + "-" + encodeURIComponent(key);
-    }, err);
+    uploadFile(crypto.encryptFile(file, reader), state, (res, key) => {
+      window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
+    });
   }, false);
 
   if(file) {
@@ -103,11 +69,33 @@ function previewFile(file, err) {
 
 
 module.exports = {
-  uploadHook: (file, done) => {
-    previewFile(file, done);
-  },
-  viewHook: () => {
-    $(document).ready(getFileFromURL);
-  },
-  isView: isView
+  uploadHook: previewFile,
+  view: (file, key, state) => {
+    getFile(file, (response) => {
+      state.message("Decrypting...");
+      let data = crypto.decryptFile(response, key);
+
+      // TODO: separate data object
+      // TODO: get configuration URL.
+      state.message("Displaying...");
+      data.fileDataB64 = () => {
+        return `data:${data.mime};base64,${data.data}`;
+      };
+
+      data.fileDataB64Download = () => {
+        return `data:application/octet-stream;base64,${data.data}`;
+      };
+
+      data.getURL = () => {
+        let baseLocation = location.href.replace(location.hash, "");
+        return `${baseLocation}#/view/${file}/${encodeURIComponent(key)}`;
+      };
+
+      data.getRawURL = () => {
+        return `${data.getURL()}/raw`
+      }
+
+      state.data(data);
+    });
+  }
 };

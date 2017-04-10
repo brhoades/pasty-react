@@ -1,22 +1,13 @@
-import View from './View.vue'
-import Upload from './Upload.vue'
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import VueClip from 'vue-clip'
 
+Vue.use(VueRouter);
 Vue.use(VueClip);
 
+const router = require('./js/router').router;
 const client = require('./js/client');
 
-if(client.isView()) {
-  new Vue({
-    el: '#app',
-    render: h => h(View)
-  });
-
-  client.viewHook();
-} else {
-  new Vue({
-    el: '#app',
-    render: h => h(Upload)
-  });
-}
+const app = new Vue({
+  router
+}).$mount("#app");

@@ -5,7 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     build: './src/main.js',
-    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip']
+    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router']
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -20,7 +20,6 @@ module.exports = {
         options: {
           loaders: {
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -30,6 +29,10 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -58,7 +61,8 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery",
-      "CryptoJS": "crypto-js"
+      "CryptoJS": "crypto-js",
+      "Clipboard": "clipboard"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",
@@ -84,9 +88,7 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false
-      }
+      compress: false
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true

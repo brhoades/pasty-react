@@ -2,8 +2,16 @@ const util = require("./util");
 
 function decryptFile(data, key) {
   // base64 to a buffer array
-  data = CryptoJS.AES.decrypt(atob(data), key);
-  data = JSON.parse(CryptoJS.enc.Utf8.stringify(data));
+  let cipherParams = CryptoJS.lib.CipherParams.create({
+    ciphertext: CryptoJS.enc.Base64.parse(data)
+  });
+  let raw = CryptoJS.AES.decrypt(cipherParams, key);
+
+  console.dir(raw);
+  console.dir(btoa(raw));
+
+  data = CryptoJS.enc.Base64.stringify(atob(CryptoJS.AES.decrypt(cipherParams, key)));
+  console.log(data);
 
   return data;
 }
@@ -18,14 +26,20 @@ function encryptFile(file, e) {
   let byteString = data.split(',')[1];
   payload.mime = mimeString;
   payload.data = atob(byteString);
+  console.log(`1: ${byteString.length}`);
+  payload.data = byteString;
 
   payload = JSON.stringify(payload);
+  console.log(`2: ${payload.length}`);
 
   let password = util.randomPassword(32);
-  let crypted = btoa(CryptoJS.AES.encrypt(payload, password));
+  let encrypted = CryptoJS.AES.encrypt(payload, password);
+  payload = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+
+  console.log(`3: ${payload.length}`);
 
   return {
-    data: crypted,
+    data: payload,
     key: password
   };
 }

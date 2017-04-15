@@ -1,18 +1,6 @@
 const util = require("./util");
 const crypto = require("./crypto");
 
-function uploadError(xhr, status, error) {
-  console.log(`Error: ${xhr}`);
-  console.log(xhr);
-  console.dir(xhr);
-
-  if(!status || !error) {
-    return `Undefined error. Perhaps the server is misconfigured?`;
-  }
-
-  return `Error: HTTP${status}: ${error}`;
-}
-
 function uploadFile(crypted_data, state, cb) {
   state.message("Getting configuration...");
 
@@ -58,7 +46,12 @@ function previewFile(file, state) {
 
   reader.addEventListener("load", () => {
     uploadFile(crypto.encryptFile(file, reader), state, (res, key) => {
-      window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
+      if(res && res.error) {
+        state.message(`Error uploading: ${res.error}`);
+        console.log(res.error);
+      } else {
+        window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
+      }
     });
   }, false);
 

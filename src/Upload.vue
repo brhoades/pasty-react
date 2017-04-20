@@ -20,8 +20,9 @@
 
 
 <script>
+ import Vue, { ComponentOptions } from 'vue'
  import Spinner from './spinner.vue'
- const client = require("./js/client.js");
+ const client = require("./js/client.ts");
 
  export default {
    components: {
@@ -61,7 +62,7 @@
        }
      }
    }
- }
+ } as ComponentOptions<Vue>;
 </script>
 
 <style>

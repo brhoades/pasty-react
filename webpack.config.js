@@ -4,7 +4,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    build: './src/main.js',
+    build: './src/main.ts',
     libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router']
   },
   output: {
@@ -21,6 +21,10 @@ module.exports = {
           loaders: {
           }
         }
+      },
+      {
+        test: /.ts$/,
+        loader: 'awesome-typescript-loader'
       },
       {
         test: /\.js$/,
@@ -40,10 +44,11 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
     ]
   },
   resolve: {
+    extensions: ['.ts', '.js', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     }

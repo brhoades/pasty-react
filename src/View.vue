@@ -24,7 +24,7 @@
 
 <script>
  import Spinner from './spinner.vue'
- const client = require("./js/client.js");
+ const client = require("./js/client.ts");
  new Clipboard('.clipboard');
 
  export default {

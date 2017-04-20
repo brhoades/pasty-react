@@ -23,6 +23,4 @@ const router = new VueRouter({
   routes: routes
 });
 
-module.exports = {
-  router: router
-};
+export { router };

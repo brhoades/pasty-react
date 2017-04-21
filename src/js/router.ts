@@ -1,6 +1,7 @@
+declare function require(path: string): any;
 import VueRouter from 'vue-router'
-import View from '../View.vue'
-import Upload from '../Upload.vue'
+let View = require('../View.vue');
+let Upload = require('../Upload');
 
 const routes = [
   {

@@ -17,14 +17,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: {
-          }
-        }
       },
       {
-        test: /.ts$/,
-        loader: 'awesome-typescript-loader'
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
       },
       {
         test: /\.js$/,
@@ -48,9 +44,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js', '.json'],
+    extensions: ['.ts', '.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.common.js'
     }
   },
   devServer: {

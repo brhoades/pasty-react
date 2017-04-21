@@ -62,7 +62,7 @@
        }
      }
    }
- } as ComponentOptions<Vue>;
+ }
 </script>
 
 <style>

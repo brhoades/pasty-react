@@ -1,11 +1,11 @@
 <template>
   <div id="">
-    Filename: <input v-model="filetype" placeholder="helloworld.rb" type="text"></input>
+    Filename: <input v-model="data.name" placeholder="helloworld.rb" type="text"></input>
     <br />
-    <textarea placeholder="puts 'Hello World'" class="code-input">
+    <textarea v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">
     </textarea>
     <br />
-    File type: <select>
+    File type: <select v-model="data.type">
     </select>
   </div>
 </template>
@@ -15,11 +15,9 @@
  export default {
    data() {
      return {
-       filetype: "",
-       contents: "",
-       id: -1
      }
-   }
+   },
+   props: ['data']
  }
 </script>
 

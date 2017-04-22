@@ -1,6 +1,7 @@
 import { getConfig, randomPassword } from "./util"
 import { crypto } from "./crypto"
 import File from "./file"
+import CodeFile from "./codefile"
 declare var $: any;
 
 function uploadFile(crypted_data, state, cb) {
@@ -43,33 +44,55 @@ function getFile(id: string, cb) {
    });
 }
 
-export function uploadHook(file: any, state: any): void {
-   let reader: FileReader = new FileReader();
+export function uploadFileHook(file: any, state: any): void {
+  let reader: FileReader = new FileReader();
 
-   reader.addEventListener("load", () => {
-      uploadFile(crypto.encryptFile(file, reader), state, (res, key) => {
-         if (res && res.error) {
-            state.message(`Error uploading: ${res.error}`);
-            console.log(res.error);
-         } else {
-            window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
-         }
-      });
-   }, false);
+  reader.addEventListener("load", () => {
+    const mimeString: string = reader.result.split(',')[0].split(':')[1].split(';')[0]
+    const byteString: string = reader.result.split(',')[1];
+    const data = {
+      name: file.name,
+      data: byteString,
+      mime: mimeString
+    };
 
-   if (file) {
-      reader.readAsDataURL(file._file);
-   }
+    uploadFile(crypto.encryptFile(JSON.stringify(data)), state, (res, key) => {
+      if (res && res.error) {
+        state.message(`Error uploading: ${res.error}`);
+        console.log(res.error);
+      } else {
+        window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
+      }
+    });
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file._file);
+  }
+}
+
+export function uploadCodeFiles(files: [CodeFile], state: any): void {
+  const data = JSON.stringify(files.map((f) => f.rawObject()));
+  console.log(data);
+
+  uploadFile(crypto.encryptFile(data, ), state, (res, key) => {
+    if (res && res.error) {
+      state.message(`Error uploading: ${res.error}`);
+      console.log(res.error);
+    } else {
+      window.location.href = `#/view/${res.filename}/${encodeURIComponent(key)}`;
+    }
+  });
 }
 
 export function view(file: string, key: string, state: any): void {
-   getFile(file, (response) => {
-     state.message("Decrypting...");
-     const dataBlob: { mime: string, data: string, name: string } = crypto.decryptFile(response, key);
-     const data : File = new File(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
+  getFile(file, (response) => {
+    state.message("Decrypting...");
+    const dataBlob: { mime: string, data: string, name: string } = JSON.parse(crypto.decryptFile(response, key));
+    const data : File = new File(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
 
-     state.message("Displaying...");
+    state.message("Displaying...");
 
-     state.data(data);
-   });
+    state.data(data);
+  });
 }

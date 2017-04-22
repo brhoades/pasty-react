@@ -3,7 +3,7 @@
     <h2>Pasty</h2>
 
     <div id="content-paste-file">
-      <codefileinput :id="1"/>
+      <codefileinput :data="files[0]"/>
       <button style="margin-top: 30px;" v-on:click="submit();">Paste</button>
     </div>
   </div>
@@ -12,6 +12,7 @@
 
 <script>
  const client = require("./js/client.ts");
+ import CodeFile from "./js/codefile.ts"
  import CodeFileInput from "./CodeFileInput.vue"
 
  export default {
@@ -21,17 +22,33 @@
    data() {
      return {
        submit: () => {
-         console.log("HELLO WORLD");
+         const files = this.files.map((f) => {
+           return new CodeFile(f.id, f.name, f.contents, f.type);
+         });
+
+         let state = {
+           message: () => {}
+         };
+
+         client.uploadCodeFiles(files, state);
        },
-       filetype: ""
+       filetype: "",
+       files: [
+         {
+           id: 0,
+           type: "",
+           contents: "",
+           name: ""
+         }
+       ]
      }
    }
  }
 </script>
 
 <style>
- #content-paste-file {
-   text-align: left;
-   padding: 25px;
- }
+  #content-paste-file {
+    text-align: left;
+    padding: 25px;
+  }
 </style>

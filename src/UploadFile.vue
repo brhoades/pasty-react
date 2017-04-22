@@ -51,7 +51,7 @@
              }
            };
 
-           client.uploadHook(file, state);
+           client.uploadFileHook(file, state);
            return false;
          },
          uploadMultiple: false

@@ -71,8 +71,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: "src/main.css",
-        to: "main.css"
+        from: "src/assets/*",
+        to: "assets/[name].[ext]"
       }
     ])
   ]

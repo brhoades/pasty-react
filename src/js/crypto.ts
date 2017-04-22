@@ -1,7 +1,7 @@
 import { randomPassword } from "./util"
 declare var CryptoJS: any;
 
-function decryptFile(data, key): string {
+function decryptFile(data, key): { data: string, mime: string, name: string } {
   let rawWords: string = CryptoJS.AES.decrypt(data, key);
   let jsonPayload: string = CryptoJS.enc.Utf8.stringify(rawWords);
   return JSON.parse(jsonPayload);

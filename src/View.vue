@@ -11,11 +11,11 @@
     </div>
 
     <div v-else-if="paste">
-      <h1>Pasty - {{ paste.name }}</h1>
+      <h1>Pasty - {{ paste.real_filename }}</h1>
 
-      <a :href=paste.fileDataB64()>View Raw</a>
+      <a :href=paste.base64String()>View Raw</a>
       <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
-      <a :download=paste.name :href=paste.fileDataB64Download()>Download</a>
+      <a :download=paste.real_filename :href=paste.base64DownloadString()>Download</a>
 
     </div>
   </div>
@@ -68,7 +68,7 @@
            if(params.options && params.options == "raw") {
              // go to the primary URL so if back is hit, we don't redirect to raw
              window.location.href = data.getURL();
-             window.location.href = data.fileDataB64();
+             window.location.href = data.base64String();
            }
          }
        };

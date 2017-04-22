@@ -1,6 +1,7 @@
 import { getConfig, randomPassword } from "./util"
 import { crypto } from "./crypto"
-import $ from "jquery"
+import File from "./file"
+declare var $: any;
 
 function uploadFile(crypted_data, state, cb) {
    state.message("Getting configuration...");
@@ -63,30 +64,12 @@ export function uploadHook(file: any, state: any): void {
 
 export function view(file: string, key: string, state: any): void {
    getFile(file, (response) => {
-      state.message("Decrypting...");
-      let data : any = crypto.decryptFile(response, key);
+     state.message("Decrypting...");
+     const dataBlob: { mime: string, data: string, name: string } = crypto.decryptFile(response, key);
+     const data : File = new File(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
 
-      // TODO: separate data object
-      // TODO: proper data class
-      // TODO: get configuration URL.
-      state.message("Displaying...");
-      data.fileDataB64 = () => {
-         return `data:${data.mime};base64,${data.data}`;
-      };
+     state.message("Displaying...");
 
-      data.fileDataB64Download = () => {
-         return `data:application/octet-stream;base64,${data.data}`;
-      };
-
-      data.getURL = () => {
-         let baseLocation = location.href.replace(location.hash, "")
-         return `${baseLocation}#/view/${file}/${encodeURIComponent(key)}`;
-      };
-
-      data.getRawURL = () => {
-         return `${data.getURL()}/raw`
-      }
-
-      state.data(data);
+     state.data(data);
    });
 }

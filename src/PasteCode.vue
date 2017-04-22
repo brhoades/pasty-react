@@ -32,14 +32,8 @@
 
          client.uploadCodeFiles(files, state);
        },
-       filetype: "",
        files: [
-         {
-           id: 0,
-           type: "",
-           contents: "",
-           name: ""
-         }
+         (new CodeFile(0, "", "", "")).rawObject()
        ]
      }
    }

@@ -1,6 +1,6 @@
 import { getConfig, randomPassword } from "./util"
 import { crypto } from "./crypto"
-import File from "./file"
+import UploadedFile from "./uploadedfile"
 import CodeFile from "./codefile"
 declare var $: any;
 
@@ -53,7 +53,8 @@ export function uploadFileHook(file: any, state: any): void {
     const data = {
       name: file.name,
       data: byteString,
-      mime: mimeString
+      mime: mimeString,
+      type: "file"
     };
 
     uploadFile(crypto.encryptFile(JSON.stringify(data)), state, (res, key) => {
@@ -72,10 +73,12 @@ export function uploadFileHook(file: any, state: any): void {
 }
 
 export function uploadCodeFiles(files: [CodeFile], state: any): void {
-  const data = JSON.stringify(files.map((f) => f.rawObject()));
-  console.log(data);
+  let data = {
+    files: files.map((f) => f.rawObject()),
+    type: "code"
+  };
 
-  uploadFile(crypto.encryptFile(data, ), state, (res, key) => {
+  uploadFile(crypto.encryptFile(JSON.stringify(data)), state, (res, key) => {
     if (res && res.error) {
       state.message(`Error uploading: ${res.error}`);
       console.log(res.error);
@@ -88,11 +91,16 @@ export function uploadCodeFiles(files: [CodeFile], state: any): void {
 export function view(file: string, key: string, state: any): void {
   getFile(file, (response) => {
     state.message("Decrypting...");
-    const dataBlob: { mime: string, data: string, name: string } = JSON.parse(crypto.decryptFile(response, key));
-    const data : File = new File(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
+    const dataBlob: any = JSON.parse(crypto.decryptFile(response, key));
+
+    if(dataBlob.type == "file") {
+      const data : UploadedFile = new UploadedFile(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
+      state.data(data);
+    } else {
+      const data = dataBlob;
+      state.data(data);
+    }
 
     state.message("Displaying...");
-
-    state.data(data);
   });
 }

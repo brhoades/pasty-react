@@ -20,7 +20,7 @@
  export default {
    components: {
      'UploadFile': UploadFile,
-     "PasteCode": PasteCode
+     'PasteCode': PasteCode
    },
    data() {
      return {

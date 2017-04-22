@@ -1,9 +1,10 @@
-export default class File {
+export default class UploadedFile {
   data: string;
   mime: string;
   key: string;
   server_filename: string;
   real_filename: string;
+  type: string;
 
 
   // data: base64 string for data
@@ -16,6 +17,7 @@ export default class File {
     this.key = key;
     this.server_filename = sfilename;
     this.real_filename = rfilename;
+    this.type = "file";
   }
 
   // URL to view the file directly.

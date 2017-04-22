@@ -2,7 +2,7 @@
   <div>
     <div class="vertical-center-parent" v-if="loading">
       <div class="vertical-center-child">
-        <spinner v-bind:message="message"></spinner>
+        <Spinner v-bind:message="message"/>
       </div>
     </div>
 
@@ -10,12 +10,11 @@
       {{ error }}
     </div>
 
-    <div v-else-if="paste">
-      <h1>Pasty - {{ paste.real_filename }}</h1>
-
-      <a :href=paste.base64String()>View Raw</a>
-      <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
-      <a :download=paste.real_filename :href=paste.base64DownloadString()>Download</a>
+    <div v-else-if="pasteFile">
+      <ViewUploadedFile :paste="paste"/>
+    </div>
+    <div v-else-if="pasteCode">
+      Code!
 
     </div>
   </div>
@@ -24,12 +23,14 @@
 
 <script>
  import Spinner from './spinner.vue'
+ import ViewUploadedFile from './ViewUploadedFile.vue'
  const client = require("./js/client.ts");
  new Clipboard('.clipboard');
 
  export default {
    components: {
-     'spinner': Spinner
+     'Spinner': Spinner,
+     'ViewUploadedFile': ViewUploadedFile,
    },
    watch: {
      '$route': 'fetchData'
@@ -39,6 +40,8 @@
        loading: true,
        paste: null,
        error: null,
+       pasteFile: false,
+       pasteCode: false,
        message: "Initializing..."
      };
    },
@@ -63,13 +66,11 @@
          },
          data: (data) => {
            this.paste = data;
+           console.log(data[0]);
+           console.log(data.type);
+           this.pasteFile = data.type == "file";
+           this.pasteCode = data.type == "code";
            this.loading = false;
-
-           if(params.options && params.options == "raw") {
-             // go to the primary URL so if back is hit, we don't redirect to raw
-             window.location.href = data.getURL();
-             window.location.href = data.base64String();
-           }
          }
        };
 
@@ -81,18 +82,3 @@
 
 <style>
 </style>
-
-<file-view>
-  <h1 id="header">Pasty</h1>
-  <div id="content"></div>
-  <div id="links">
-    <a id="download">Download</a>&nbsp;
-    <a id="download-clp">[clip]</a><br />
-
-    <a id="view">View</a>&nbsp;
-    <a id="view-clp">[clip]</a><br />
-
-    <a id="overview">Overview (this page)</a>&nbsp;
-    <a id="overview-clp">[clip]</a><br />
-  </div>
-</file-view>

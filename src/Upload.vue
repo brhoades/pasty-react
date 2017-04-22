@@ -1,72 +1,39 @@
 <template>
   <div id="upload">
-    <h2>Pasty</h2>
-
-    <vue-clip :options="options" v-if="waiting">
-      <template slot="clip-uploader-action">
-        <div v-bind:class="{'is-dragging': params.dragging}" class="upload-action">
-          <div class="dz-message"><h2> Click or Drag and Drop files here upload </h2></div>
-        </div>
-      </template>
-    </vue-clip>
-
-    <div class="vertical-center-parent" v-else-if="uploading">
-      <div class="vertical-center-child">
-        <spinner v-bind:message="message"></spinner>
-      </div>
+    <div style="padding-bottom: 25px;">
+      <a id="paste_button" style="padding-right: 30px;" v-on:click="p=true; u=false;">paste</a>
+      <a id="paste_button" v-on:click="p=false; u=true;">upload</a>
+    </div>
+    <div v-if="u">
+      <UploadFile/>
+    </div>
+    <div v-else-if="p">
+      <PasteCode/>
     </div>
   </div>
 </template>
 
-
 <script>
- import Vue, { ComponentOptions } from 'vue'
- import Spinner from './spinner.vue'
- const client = require("./js/client.ts");
+ import UploadFile from "./UploadFile.vue"
+ import PasteCode from "./PasteCode.vue"
 
  export default {
    components: {
-     'spinner': Spinner
+     'UploadFile': UploadFile,
+     "PasteCode": PasteCode
    },
-   data () {
+   data() {
      return {
-       message: "",
-       uploading: false,
-       waiting: true,
-       client: client,
-       options: {
-         url: '/bad-url',
-         accept: (file, done) => {
-           this.waiting = false;
-           this.uploading = true;
-
-           let state = {
-             message: (msg) => {
-               this.loading = msg;
-             },
-             waiting: (status) => {
-               this.waiting = status;
-             },
-             uploading: (status) => {
-               this.uploading = status;
-             }
-           };
-
-           client.uploadHook(file, state);
-           return false;
-         },
-         uploadMultiple: false
-       },
-       params: {
-         dragging: false
-       }
+       u: true,
+       p: false,
      }
    }
  }
 </script>
 
 <style>
- .upload-action.is-dragging {
-   background: green;
+ .code-input {
+   width: 600px;
+   height: 300px;
  }
 </style>

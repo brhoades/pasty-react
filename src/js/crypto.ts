@@ -1,49 +1,39 @@
 import { randomPassword } from "./util"
-import { CryptoJS } from "crypto-js"
+declare var CryptoJS: any;
 
 function decryptFile(data, key): string {
-    // base64 to a buffer array
-    let cipherParams = CryptoJS.lib.CipherParams.create({
-        ciphertext: CryptoJS.enc.Base64.parse(data)
-    });
-    let raw = CryptoJS.AES.decrypt(cipherParams, key);
-
-    console.dir(raw);
-    console.dir(btoa(raw));
-
-    data = CryptoJS.enc.Base64.stringify(atob(CryptoJS.AES.decrypt(cipherParams, key)));
-    console.log(data);
-
-    return data;
+  let rawWords: string = CryptoJS.AES.decrypt(data, key);
+  let jsonPayload: string = CryptoJS.enc.Utf8.stringify(rawWords);
+  return JSON.parse(jsonPayload);
 }
 
 function encryptFile(file, e): { data: string, key: string } {
-    let payload = {
-        name: file.name,
-        data: null,
-        mime: null
-    };
+  let payload = {
+    name: file.name,
+    data: null,
+    mime: null
+  };
 
-    let data: string = e.result;
-    let mimeString: string = data.split(',')[0].split(':')[1].split(';')[0]
-    let byteString: string = data.split(',')[1];
-    payload.mime = mimeString;
-    payload.data = atob(byteString);
+  let data: string = e.result;
+  let mimeString: string = data.split(',')[0].split(':')[1].split(';')[0]
+  let byteString: string = data.split(',')[1];
+  payload.mime = mimeString;
+  payload.data = byteString;
 
-    let result: string = JSON.stringify(payload);
+  let result: string = CryptoJS.enc.Utf8.parse(JSON.stringify(payload));
 
-    let password: string = randomPassword(32);
-    let encrypted: any = CryptoJS.AES.encrypt(payload, password);
-    result = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+  let password: string = randomPassword(32);
+  let encrypted: any = CryptoJS.AES.encrypt(result, password);
+  result = encrypted.toString();
 
-    return {
-        data: result,
-        key: password
-    };
+  return {
+    data: result,
+    key: password
+  };
 }
 
 
 export let crypto = {
-    decryptFile: decryptFile,
-    encryptFile: encryptFile
+  decryptFile: decryptFile,
+  encryptFile: encryptFile
 };

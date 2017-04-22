@@ -42,7 +42,7 @@ function getFile(id: string, cb) {
    });
 }
 
-export function previewFile(file: any, state: any): void {
+export function uploadHook(file: any, state: any): void {
    let reader: FileReader = new FileReader();
 
    reader.addEventListener("load", () => {

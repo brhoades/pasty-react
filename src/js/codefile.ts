@@ -28,4 +28,9 @@ export default class CodeFile {
   serialize(): string {
     return JSON.stringify(this.rawObject());
   }
+
+  // base64 string for forcing a file download.
+  base64DownloadString(): string {
+    return `data:application/octet-stream;base64,${btoa(this.contents)}`;
+  }
 }

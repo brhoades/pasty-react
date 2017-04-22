@@ -97,7 +97,9 @@ export function view(file: string, key: string, state: any): void {
       const data : UploadedFile = new UploadedFile(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
       state.data(data);
     } else {
-      const data = dataBlob;
+      let data = dataBlob;
+      data.files = data.files.map((f) => new CodeFile(f.id, f.name, f.contents, f.type));
+
       state.data(data);
     }
 

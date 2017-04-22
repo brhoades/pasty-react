@@ -5,7 +5,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     build: './src/main.ts',
-    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router']
+    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router', 'highlight.js']
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -63,7 +63,8 @@ module.exports = {
       jQuery: "jquery",
       "window.jQuery": "jquery",
       "CryptoJS": "crypto-js",
-      "Clipboard": "clipboard"
+      "Clipboard": "clipboard",
+      "hljs": "highlight.js"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",
@@ -72,6 +73,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: "src/assets/*",
+        from: "node_modules/highlight.js/styles/obsidian.css",
         to: "assets/[name].[ext]"
       }
     ])

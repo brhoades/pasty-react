@@ -10,12 +10,11 @@
       {{ error }}
     </div>
 
-    <div v-else-if="pasteFile">
+    <div v-else-if="paste.type == 'file'">
       <ViewUploadedFile :paste="paste"/>
     </div>
-    <div v-else-if="pasteCode">
-      Code!
-
+    <div v-else-if="paste.type == 'code'">
+      <ViewCodeFiles :files="paste.files"/>
     </div>
   </div>
 </template>
@@ -24,6 +23,7 @@
 <script>
  import Spinner from './spinner.vue'
  import ViewUploadedFile from './ViewUploadedFile.vue'
+ import ViewCodeFiles from './ViewCodeFiles.vue'
  const client = require("./js/client.ts");
  new Clipboard('.clipboard');
 
@@ -31,6 +31,7 @@
    components: {
      'Spinner': Spinner,
      'ViewUploadedFile': ViewUploadedFile,
+     'ViewCodeFiles': ViewCodeFiles
    },
    watch: {
      '$route': 'fetchData'
@@ -40,8 +41,6 @@
        loading: true,
        paste: null,
        error: null,
-       pasteFile: false,
-       pasteCode: false,
        message: "Initializing..."
      };
    },
@@ -66,10 +65,6 @@
          },
          data: (data) => {
            this.paste = data;
-           console.log(data[0]);
-           console.log(data.type);
-           this.pasteFile = data.type == "file";
-           this.pasteCode = data.type == "code";
            this.loading = false;
          }
        };

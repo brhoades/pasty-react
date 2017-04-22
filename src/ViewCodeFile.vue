@@ -1,15 +1,9 @@
 <template>
-  <div>
-    CODE FILE!
-    {{ file.name }}
-    <pre>
-      <code ref="code">
-        {{ file.contents }}
-      </code>
-    </pre>
+  <div style="padding: 25px; max-width: 800px;">
+    <h2>{{ file.name }}</h2>
+    <pre><code ref="code">{{ file.contents }}</code></pre>
   </div>
 </template>
-
 
 <script>
  export default {
@@ -25,4 +19,10 @@
 </script>
 
 <style>
+ pre code {
+   padding-left: 1em !important;
+   padding-right: 1em !important;
+   padding-top: 2em !important;
+   padding-bottom: 2em !important;
+ }
 </style>

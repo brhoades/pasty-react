@@ -1,12 +1,10 @@
 <template>
   <div>
-    CODE! LIST
     <div v-for="file in files">
       <ViewCodeFile :file="file"/>
     </div>
   </div>
 </template>
-
 
 <script>
  import ViewCodeFile from './ViewCodeFile.vue'

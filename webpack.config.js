@@ -86,6 +86,10 @@ module.exports = {
       {
         from: "node_modules/highlight.js/styles/obsidian.css",
         to: "assets/[name].[ext]"
+      },
+      {
+        from: "node_modules/purecss/build/pure-min.css",
+        to: "assets/[name].[ext]"
       }
     ])
   ]

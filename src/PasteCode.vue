@@ -3,12 +3,14 @@
     <h2>Pasty</h2>
 
     <div id="content-paste-file">
-      <div v-for="file in files">
-        <CodeFileInput :data="file"/>
-      </div>
-      <button v-on:click="addEmptyFile();">Add another File</button>
+      <form class="pure-form">
+        <div v-for="file in files">
+          <CodeFileInput :data="file"/>
+        </div>
+        <button class="pure-button" v-on:click="addEmptyFile();">Add Another File</button>
 
-      <button style="margin-top: 30px;" v-on:click="submit();">Paste</button>
+        <button class="pure-button" v-on:click="submit();">Paste</button>
+      </form>
     </div>
   </div>
 </template>

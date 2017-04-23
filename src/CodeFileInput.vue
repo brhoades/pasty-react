@@ -1,16 +1,18 @@
 <template>
   <div class="code-file-input container">
-    Filename: <input v-model="data.name" placeholder="helloworld.rb" type="text"></input>
-    <br />
-    <textarea v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">
-    </textarea>
-    <br />
-    File type: <select v-model="data.type">
-      <option value="auto" selected="">--auto--</option>
-      <option v-for="option in options" :value="option">
-        {{ option }}
-      </option>
-    </select>
+    <fieldset>
+      Filename: <input v-model="data.name" placeholder="helloworld.rb" type="text"></input>
+      <br />
+      <textarea v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">
+      </textarea>
+      <br />
+      File type: <select v-model="data.type">
+        <option value="auto" selected="">--auto--</option>
+        <option v-for="option in options" :value="option">
+          {{ option }}
+        </option>
+      </select>
+    </fieldset>
   </div>
 </template>
 

@@ -1,7 +1,5 @@
 <template>
   <div id="paste-file">
-    <h2>Pasty</h2>
-
     <div id="content-paste-file">
       <form class="pure-form">
         <div v-for="file in files">

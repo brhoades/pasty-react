@@ -1,13 +1,9 @@
 <template>
   <div id="upload">
-    <div style="padding-bottom: 25px;">
-      <a id="paste_button" style="padding-right: 30px;" v-on:click="p=true; u=false;">paste</a>
-      <a id="paste_button" v-on:click="p=false; u=true;">upload</a>
-    </div>
-    <div v-if="u">
+    <div v-if="upload">
       <UploadFile/>
     </div>
-    <div v-else-if="p">
+    <div v-else>
       <PasteCode/>
     </div>
   </div>
@@ -22,11 +18,23 @@
      'UploadFile': UploadFile,
      'PasteCode': PasteCode
    },
+   watch: {
+     '$route': 'updateView'
+   },
    data() {
      return {
-       u: true,
-       p: false,
+       'upload': false
      }
+   },
+   methods: {
+     updateView() {
+       const params = this.$route.params;
+
+       this.upload = params.type == "up";
+     }
+   },
+   created() {
+     this.updateView();
    }
  }
 </script>

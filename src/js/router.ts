@@ -13,7 +13,7 @@ const routes = [
     component: View
   },
   {
-    path: '/',
+    path: '/up/:type',
     component: Upload
   },
 ];

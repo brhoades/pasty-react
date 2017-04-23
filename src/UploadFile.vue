@@ -1,7 +1,5 @@
 <template>
   <div id="upload-file">
-    <h2>Pasty</h2>
-
     <vue-clip :options="options" v-if="waiting">
       <template slot="clip-uploader-action">
         <div v-bind:class="{'is-dragging': params.dragging}" class="upload-action">

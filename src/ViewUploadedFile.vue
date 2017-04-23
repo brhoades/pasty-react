@@ -6,17 +6,21 @@
     <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
     <a :download=paste.real_filename :href=paste.base64DownloadString()>Download</a>
 
+    <DisplayImage :paste=paste />
   </div>
 </template>
 
 <script>
+ import DisplayImage from './DisplayImage'
  new Clipboard('.clipboard');
 
  export default {
    data () {
-
      return {
      };
+   },
+   components: {
+     'DisplayImage': DisplayImage
    },
    watch: {
      '$route': 'fetchData'

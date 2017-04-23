@@ -5,7 +5,15 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     build: './src/main.ts',
-    libs: ['crypto-js', 'jquery', 'vue', 'vue-clip', 'clipboard', 'vue-router', 'highlight.js']
+    libs: [
+      'crypto-js',
+      'jquery',
+      'vue',
+      'vue-clip',
+      'clipboard',
+      'vue-router',
+      'highlight.js'
+    ]
   },
   output: {
     path: path.resolve(__dirname, './dist'),

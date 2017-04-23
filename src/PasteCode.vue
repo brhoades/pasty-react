@@ -3,7 +3,11 @@
     <h2>Pasty</h2>
 
     <div id="content-paste-file">
-      <CodeFileInput :data="files[0]"/>
+      <div v-for="file in files">
+        <CodeFileInput :data="file"/>
+      </div>
+      <button v-on:click="addEmptyFile();">Add another File</button>
+
       <button style="margin-top: 30px;" v-on:click="submit();">Paste</button>
     </div>
   </div>
@@ -19,8 +23,19 @@
    components: {
      "CodeFileInput": CodeFileInput
    },
+   methods: {
+     defaultFile() {
+       return new CodeFile(0, "", "", "auto");
+     },
+     addFile() {
+       this.files.push(this.defaultFile().rawObject());
+     }
+   },
    data() {
      return {
+       addEmptyFile: () => {
+         this.addFile();
+       },
        submit: () => {
          const files = this.files.map((f) => {
            return new CodeFile(f.id, f.name, f.contents, f.type);
@@ -33,7 +48,7 @@
          client.uploadCodeFiles(files, state);
        },
        files: [
-         (new CodeFile(0, "", "", "auto")).rawObject()
+         (this.defaultFile()).rawObject()
        ]
      }
    }

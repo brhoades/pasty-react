@@ -1,5 +1,5 @@
 <template>
-  <div id="">
+  <div class="code-file-input container">
     Filename: <input v-model="data.name" placeholder="helloworld.rb" type="text"></input>
     <br />
     <textarea v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">

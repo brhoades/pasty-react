@@ -81,6 +81,9 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: "src/assets/*",
+        to: "assets/[name].[ext]"
+      },
+      {
         from: "node_modules/highlight.js/styles/obsidian.css",
         to: "assets/[name].[ext]"
       }

@@ -16,6 +16,10 @@ const routes = [
     path: '/up/:type',
     component: Upload
   },
+  {
+    path: '/',
+    component: Upload
+  },
 ];
 
 const router = new VueRouter({

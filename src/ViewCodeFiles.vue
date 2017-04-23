@@ -14,7 +14,7 @@
      'ViewCodeFile': ViewCodeFile
    },
    props: ['files'],
-   data () {
+   data() {
      return {
      };
    },

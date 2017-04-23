@@ -6,6 +6,10 @@
     </textarea>
     <br />
     File type: <select v-model="data.type">
+      <option value="auto" selected="">--auto--</option>
+      <option v-for="option in options" :value="option">
+        {{ option }}
+      </option>
     </select>
   </div>
 </template>
@@ -14,7 +18,10 @@
 <script>
  export default {
    data() {
+     let options = hljs.listLanguages();
+
      return {
+       options: options
      }
    },
    props: ['data']

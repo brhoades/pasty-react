@@ -3,7 +3,7 @@
     <h2>Pasty</h2>
 
     <div id="content-paste-file">
-      <codefileinput :data="files[0]"/>
+      <CodeFileInput :data="files[0]"/>
       <button style="margin-top: 30px;" v-on:click="submit();">Paste</button>
     </div>
   </div>
@@ -17,7 +17,7 @@
 
  export default {
    components: {
-     "codefileinput": CodeFileInput
+     "CodeFileInput": CodeFileInput
    },
    data() {
      return {
@@ -33,7 +33,7 @@
          client.uploadCodeFiles(files, state);
        },
        files: [
-         (new CodeFile(0, "", "", "")).rawObject()
+         (new CodeFile(0, "", "", "auto")).rawObject()
        ]
      }
    }

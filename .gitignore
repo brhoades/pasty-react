@@ -1,7 +1,7 @@
 node_modules
 .projectile
 .DS_Store
-config/client.json
+config.ts
 yarn.lock
 *.log
 aws-credentials.json

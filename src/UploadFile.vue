@@ -63,9 +63,3 @@
    }
  }
 </script>
-
-<style>
- .upload-action.is-dragging {
-   background: green;
- }
-</style>

@@ -33,7 +33,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        include: [ path.join(__dirname, './src') ],
         query: {
           presets: ['es2015']
         }

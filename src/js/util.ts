@@ -1,4 +1,4 @@
-import $ from "jquery"
+declare var $: any;
 
 // https://jsfiddle.net/Guffa/DDn6W/
 function randomPassword(length): string {

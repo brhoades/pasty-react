@@ -15,7 +15,7 @@
  new Clipboard('.clipboard');
 
  export default {
-   data () {
+   data() {
      return {
      };
    },
@@ -37,6 +37,3 @@
    props: ['paste']
  }
 </script>
-
-<style>
-</style>

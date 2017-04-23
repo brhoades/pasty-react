@@ -49,16 +49,16 @@ a
 }
 
 /***************************************
-* Upload
-****************************************/
+ * Upload
+ ****************************************/
 #upload {
   text-align: center;
   height: 100%;
 }
 
 /***************************************
-* View
-***************************************/
+ * View
+ ***************************************/
 
 /* Loading */
 .vertical-center-parent {
@@ -75,3 +75,32 @@ a
 .spinner-message {
   text-align: center;
 }
+
+/***************************************
+ * DisplayImage
+ ***************************************/
+.viewimage > img {
+  padding-top: 25px;
+
+  width: 95vw;
+  height: auto;
+  resize: both;
+}
+
+/***************************************
+ * PasteCodeFile
+ ***************************************/
+#content-paste-file {
+  text-align: left;
+  padding: 25px;
+}
+
+/***************************************
+ * ViewCodeFile
+ ***************************************/
+ pre code {
+   padding-left: 1em !important;
+   padding-right: 1em !important;
+   padding-top: 0.5em !important;
+   padding-bottom: 2em !important;
+ }

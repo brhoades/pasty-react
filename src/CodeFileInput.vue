@@ -20,6 +20,3 @@
    props: ['data']
  }
 </script>
-
-<style>
-</style>

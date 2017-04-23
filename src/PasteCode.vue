@@ -39,10 +39,3 @@
    }
  }
 </script>
-
-<style>
-  #content-paste-file {
-    text-align: left;
-    padding: 25px;
-  }
-</style>

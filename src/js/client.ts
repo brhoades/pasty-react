@@ -1,23 +1,26 @@
+declare var require: any;
+var promise = require("./vendor/promise.js");
+
 import { getConfig, randomPassword } from "./util"
 import { crypto } from "./crypto"
 import config from "./config"
 import UploadedFile from "./uploadedfile"
 import CodeFile from "./codefile"
-declare var $: any;
 
 function uploadFile(crypted_data, state, cb) {
   state.message("Uploading...");
 
-  $.ajax({
-    type: "POST",
-    url: config.paste,
-    data: {
-      data: crypted_data.data
-    },
-    success: (response) => cb(response, crypted_data.key),
-    error: (response) => {
-      return state.message(`Error uploading: ${response}`);
+  promise.post(config.paste, {
+    data: crypted_data.data
+  }).then((error: boolean, text: string, xhr) => {
+    if(error) {
+      console.dir(xhr);
+      return state.message(`Error uploading: ${xhr}`);
     }
+
+    console.log("DONE");
+    console.log(text);
+    cb(JSON.parse(text), crypted_data.key);
   });
 }
 
@@ -25,19 +28,13 @@ function getFile(id: string, cb) {
   console.log("Getting file");
 
   console.log(`${config.get}${id}`);
-  $.ajax({
-    type: "GET",
-    url: `${config.get}${id}`,
-    success: cb,
-    complete: (xhr, status) => {
-      if (xhr.status == 302) {
-        return $.ajax({
-          type: "GET",
-          url: xhr.getResponseHeader("Location"),
-          success: cb
-        });
-      }
+  promise.get(`${config.get}${id}`).then((error: string, text: string) => {
+    if(error) {
+      console.log(error);
+      return;
     }
+
+    cb(text);
   });
 }
 

@@ -7,12 +7,11 @@ module.exports = {
     build: './src/main.ts',
     libs: [
       'crypto-js',
-      'jquery',
       'vue',
       'vue-clip',
       'clipboard',
       'vue-router',
-      'highlight.js'
+      'highlight.js',
     ]
   },
   output: {
@@ -67,12 +66,9 @@ module.exports = {
   devtool: '#source-map',
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-      "CryptoJS": "crypto-js",
       "Clipboard": "clipboard",
-      "hljs": "highlight.js"
+      "hljs": "highlight.js",
+      "CryptoJS": "crypto-js"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",

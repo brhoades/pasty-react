@@ -115,3 +115,7 @@ pre code {
   padding-top: 0.5em !important;
   padding-bottom: 2em !important;
 }
+
+pre > code {
+  font-family: "Sans Mono", "Consolas", "Courier", monospace;
+}

@@ -114,8 +114,15 @@ pre code {
   padding-right: 1em !important;
   padding-top: 0.5em !important;
   padding-bottom: 2em !important;
+  font-family: "Sans Mono", "Consolas", "Courier", monospace;
+
+  overflow: hidden;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 pre > code {
-  font-family: "Sans Mono", "Consolas", "Courier", monospace;
 }

@@ -1,17 +1,18 @@
 import { randomPassword } from "./util"
-declare var CryptoJS: any;
+import * as CAES from "crypto-js/aes"
+import * as CENC from "crypto-js/enc-utf8"
 
 function decryptFile(data, key): string {
-  let rawWords: string = CryptoJS.AES.decrypt(data, key);
+  let rawWords: string = CAES.decrypt(data, key);
 
-  return CryptoJS.enc.Utf8.stringify(rawWords);
+  return CENC.stringify(rawWords);
 }
 
 function encryptFile(b64data: string): { data: string, key: string } {
-  let result: string = CryptoJS.enc.Utf8.parse(b64data);
+  let result: string = CENC.parse(b64data);
 
   let password: string = randomPassword(32);
-  let encrypted: any = CryptoJS.AES.encrypt(result, password);
+  let encrypted: any = CAES.encrypt(result, password);
   result = encrypted.toString();
 
   return {

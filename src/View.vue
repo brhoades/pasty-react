@@ -25,7 +25,6 @@
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
  const client = require("./js/client.ts");
- new Clipboard('.clipboard');
 
  export default {
    components: {

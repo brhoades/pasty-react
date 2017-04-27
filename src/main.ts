@@ -6,7 +6,6 @@ import { router } from './js/router'
 Vue.use(VueRouter);
 Vue.use(VueClip);
 
-
 const app = new Vue({
   router
 }).$mount("#app");

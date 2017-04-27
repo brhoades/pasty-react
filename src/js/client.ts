@@ -1,7 +1,7 @@
 declare var require: any;
 var promise = require("./vendor/promise.js");
 
-import { getConfig, randomPassword } from "./util"
+import { randomPassword } from "./util"
 import { crypto } from "./crypto"
 import config from "./config"
 import UploadedFile from "./uploadedfile"
@@ -18,8 +18,6 @@ function uploadFile(crypted_data, state, cb) {
       return state.message(`Error uploading: ${xhr}`);
     }
 
-    console.log("DONE");
-    console.log(text);
     cb(JSON.parse(text), crypted_data.key);
   });
 }

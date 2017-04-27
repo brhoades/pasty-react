@@ -1,4 +1,4 @@
-declare var $: any;
+import { ajax } from 'jquery/src/ajax'
 
 // https://jsfiddle.net/Guffa/DDn6W/
 function randomPassword(length): string {
@@ -13,15 +13,4 @@ function randomPassword(length): string {
   return pass;
 }
 
-function getConfig(cb): void {
-  console.log("Get Configuration");
-
-  $.ajax({
-    type: "GET",
-    url: "config/client.json",
-    success: (response) => cb(response),
-    error: (err) => console.log(err)
-  });
-}
-
-export { getConfig, randomPassword };
+export { randomPassword };

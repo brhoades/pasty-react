@@ -12,6 +12,7 @@
 
 <script>
  import DisplayImage from './DisplayImage'
+ import Clipboard from "clipboard"
  new Clipboard('.clipboard');
 
  export default {

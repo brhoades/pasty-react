@@ -98,6 +98,10 @@ module.exports = {
         to: "assets/[name].[ext]"
       },
       {
+        from: "src/assets/font/*",
+        to: "assets/font/[name].[ext]"
+      },
+      {
         from: "node_modules/highlight.js/styles/obsidian.css",
         to: "assets/[name].[ext]"
       },

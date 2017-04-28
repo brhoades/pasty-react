@@ -1,7 +1,7 @@
 declare function require(path: string): any;
 import VueRouter from 'vue-router'
 let View = require('../View.vue');
-let Upload = require('../Upload');
+let Upload = require('../Upload.vue');
 
 const routes = [
   {
@@ -19,6 +19,10 @@ const routes = [
   {
     path: '/',
     component: Upload
+  },
+  {
+    path: '/settings',
+    component: require("../Settings.vue")
   },
 ];
 

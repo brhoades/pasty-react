@@ -1,5 +1,3 @@
-import { ajax } from 'jquery/src/ajax'
-
 // https://jsfiddle.net/Guffa/DDn6W/
 function randomPassword(length): string {
   let chars: string = "abcdefghijklmnopqrstuvwxyz-_.ABCDEFGHIJKLMNOP1234567890";

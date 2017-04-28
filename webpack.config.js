@@ -1,6 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -23,6 +23,9 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
       },
       {
         test: /\.tsx?$/,
@@ -85,8 +88,7 @@ module.exports = {
   devtool: '#source-map',
   plugins: [
     new webpack.ProvidePlugin({
-      "hljs": "highlight.js",
-      "ajax": "jquery/src/ajax"
+      "hljs": "highlight.js"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",
@@ -132,6 +134,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
-    }),
+    })
   ])
 }

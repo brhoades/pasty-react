@@ -100,6 +100,26 @@
     transform: translateY(-44px);
 }
 
+@media (min-width: 62em) {
+  .pm--left {
+    float: left;
+  }
+
+  .pm--right {
+    float: right;
+  }
+
+  .pm--flex-grow-100 {
+    display: block !important;
+    flex-grow: 100;
+  }
+
+  .pm--flexbox {
+    width: 100%;
+    display: flex;
+  }
+}
+
 @media (max-width: 62em) {
 
     .custom-menu {

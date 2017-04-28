@@ -12,19 +12,27 @@
     <title>Pasty</title>
   </head>
   <body>
-    <div class="custom-menu-wrapper">
+    <div class="custom-menu-wrapper pm--flexbox">
       <div class="pure-menu custom-menu custom-menu-top">
         <a href="#/about" class="pure-menu-heading custom-menu-brand">PASTY</a>
         <a href="#" class="custom-menu-toggle" id="toggle"><s class="bar"></s><s class="bar"></s></a>
       </div>
-      <div class="pure-menu pure-menu-horizontal pure-menu-scrollable custom-menu custom-menu-bottom custom-menu-tucked" id="tuckedMenu">
+      <div
+        class="pure-menu pure-menu-horizontal pure-menu-scrollable custom-menu custom-menu-bottom custom-menu-tucked pm--flex-grow-100"
+        id="tuckedMenu"
+      >
         <div class="custom-menu-screen"></div>
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item"><a href="#/up/paste" class="pure-menu-link">Paste</a></li>
-          <li class="pure-menu-item"><a href="#/up/up" class="pure-menu-link">Upload</a></li>
-          <li class="pure-menu-item">
+        <ul class="pure-menu-list pm--flex-grow-100">
+          <li class="pure-menu-item pm--left">
+            <a href="#/up/paste" class="pure-menu-link">Paste</a>
+          </li>
+          <li class="pure-menu-item pm--left">
+            <a href="#/up/up" class="pure-menu-link">Upload</a>
+          </li>
+          <li class="pure-menu-item pm--right">
             <a href="#/settings" class="pure-menu-link">
-              <i class="icon-cog"></i>Settings
+              <i class="icon-cog"></i>
+              Settings
             </a>
           </li>
         </ul>

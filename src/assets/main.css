@@ -22,11 +22,18 @@ html, body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  //text-align: center;
   color: #2c3e50;
-  // margin-top: 60px;
-  width: 99%;
-  height: 99%;
+  margin: auto;
+  width: 50%;
+  padding: 2.5em 0 2.5em 0;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  #app {
+    width: 100%;
+    padding: 1em 0.5em 1em 0.5em;
+  }
 }
 
 h1, h2 {
@@ -43,17 +50,8 @@ li {
   margin: 0 10px;
 }
 
-a
-{
+a {
   color: #42b983;
-}
-
-/***************************************
- * Upload
- ****************************************/
-#upload {
-  text-align: center;
-  height: 100%;
 }
 
 /***************************************
@@ -85,15 +83,6 @@ a
   width: 95vw;
   height: auto;
   resize: both;
-}
-
-/***************************************
- * PasteCodeFile
- ***************************************/
-#content-paste-file {
-  text-align: left;
-  padding: 25px;
-  padding-top: 0px;
 }
 
 /***************************************

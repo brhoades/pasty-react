@@ -5,6 +5,9 @@
         Filename
       </label>
       <input id="filename" v-model="data.name" placeholder="helloworld.rb" type="text"></input>
+      <div v-on:click="$emit('delete')" class="icon-delete">
+        <i class="icon-minus"></i>
+      </div>
       <br />
       <textarea id="code" v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">
       </textarea>
@@ -33,3 +36,20 @@
    props: ['data']
  }
 </script>
+
+<style>
+ .icon-delete {
+   color: red;
+   display: inline;
+   padding: 2px;
+ }
+
+ .code-file-input.container {
+   padding-top: 1.5em;
+   padding-bottom: 0.5em;
+ }
+
+ #filename {
+   display: inline-block;
+ }
+</style>

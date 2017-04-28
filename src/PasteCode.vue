@@ -2,8 +2,11 @@
   <div id="paste-file">
     <div id="content-paste-file">
       <form class="pure-form pure-form-stacked">
-        <div v-for="file in files">
-          <CodeFileInput :data="file"/>
+        <div v-for="(file, i) in files">
+          <CodeFileInput
+            :data="file"
+            v-on:delete="deleteFile(i);"
+          />
         </div>
         <button class="pure-button" v-on:click="addEmptyFile();">
           <i class="icon-plus"></i>
@@ -31,6 +34,9 @@
      },
      addFile() {
        this.files.push(this.defaultFile().rawObject());
+     },
+     deleteFile(index) {
+       this.files.splice(index, 1);
      }
    },
    data() {

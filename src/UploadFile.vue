@@ -3,7 +3,7 @@
     <vue-clip :options="options" v-if="waiting">
       <template slot="clip-uploader-action">
         <div v-bind:class="{'is-dragging': params.dragging}" class="upload-action">
-          <h2> Click or drag and drop files here to upload</h2>
+          <div class="dz-message"><h2>Click or drag and drop files here to upload</h2></div>
         </div>
       </template>
     </vue-clip>

@@ -1,12 +1,14 @@
 <template>
   <div id="paste-file">
     <div id="content-paste-file">
-      <form class="pure-form">
+      <form class="pure-form pure-form-stacked">
         <div v-for="file in files">
           <CodeFileInput :data="file"/>
         </div>
-        <button class="pure-button" v-on:click="addEmptyFile();">Add Another File</button>
-
+        <button class="pure-button" v-on:click="addEmptyFile();">
+          <i class="icon-plus"></i>
+          Add Another File
+        </button>
         <button class="pure-button" v-on:click="submit();">Paste</button>
       </form>
     </div>
@@ -54,3 +56,6 @@
    }
  }
 </script>
+
+<style>
+</style>

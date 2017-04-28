@@ -1,7 +1,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  background-color: #dee1e3;
+  background-color: #e9e9e9;
 
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,7 +26,11 @@ html, body {
   width: 60%;
   display: block;
   min-height: 100%;
-  box-shadow: 0 0 2px 1px rgba(0,0,0,.35);
+  border-style: solid;
+  border-color: #c2c2c2;
+
+  border-width: 0px 1px 0px 1px;
+
   color: #131516;
   background-color: #f1f2f3;
 }

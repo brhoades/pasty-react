@@ -1,8 +1,11 @@
 html, body {
   width: 100%;
   height: 100%;
-  margin: 0px;
-  padding: 0px;
+  background-color: #dee1e3;
+
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #content {
@@ -18,14 +21,18 @@ html, body {
   height: 80%;
 }
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+#content {
   margin: auto;
-  width: 50%;
-  padding: 2.5em 0 2.5em 0;
+  width: 60%;
+  display: block;
+  min-height: 100%;
+  box-shadow: 0 0 2px 1px rgba(0,0,0,.35);
+  color: #131516;
+  background-color: #f1f2f3;
+}
+
+#app {
+  padding: 2.5em 3em 2.5em 2em;
   text-align: left;
 }
 

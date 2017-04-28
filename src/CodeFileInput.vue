@@ -42,6 +42,7 @@
    color: red;
    display: inline;
    padding: 2px;
+   cursor: pointer;
  }
 
  .code-file-input.container {

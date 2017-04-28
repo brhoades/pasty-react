@@ -24,7 +24,7 @@
  import Spinner from './spinner.vue'
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
- const client = require("./js/client.ts");
+ const client = require("../js/client.ts");
 
  export default {
    components: {

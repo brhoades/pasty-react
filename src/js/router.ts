@@ -1,7 +1,7 @@
 declare function require(path: string): any;
 import VueRouter from 'vue-router'
-let View = require('../View.vue');
-let Upload = require('../Upload.vue');
+let View = require('../components/View.vue');
+let Upload = require('../components/Upload.vue');
 
 const routes = [
   {
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/settings',
-    component: require("../Settings.vue")
+    component: require("../components/Settings.vue")
   },
 ];
 

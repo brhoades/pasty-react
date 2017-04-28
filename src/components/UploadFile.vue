@@ -19,7 +19,7 @@
 
 <script>
  import Spinner from './spinner.vue'
- const client = require("./js/client.ts");
+ const client = require("../js/client.ts");
 
  export default {
    components: {
@@ -64,6 +64,6 @@
 
 <style>
   #upload-file {
-    text-align: center; 
+    text-align: center;
   }
 </style>

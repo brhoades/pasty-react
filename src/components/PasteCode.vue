@@ -20,8 +20,8 @@
 
 
 <script>
- const client = require("./js/client.ts");
- import CodeFile from "./js/codefile.ts"
+ const client = require("../js/client.ts");
+ import CodeFile from "../js/codefile.ts"
  import CodeFileInput from "./CodeFileInput.vue"
 
  export default {

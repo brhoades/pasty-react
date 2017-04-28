@@ -13,7 +13,7 @@
 
 <script>
  import Spinner from './spinner.vue'
- import css from '../node_modules/spinkit/css/spinkit.css'
+ import css from '../../node_modules/spinkit/css/spinkit.css'
 
  export default {
    props: [

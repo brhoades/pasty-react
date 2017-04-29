@@ -1,5 +1,12 @@
 <template>
   <div>
+    <a
+     class="clipboard"
+     :data-clipboard-text=getShortURL(params)
+     alt="Copy shortened link to this page"
+     title="Copy shortened link to this page">
+      <i class="icon-clipboard"></i>
+    </a><br />
     <div class="vertical-center-parent" v-if="loading">
       <div class="vertical-center-child">
         <Spinner v-bind:message="message"/>
@@ -40,7 +47,9 @@
        loading: true,
        paste: null,
        error: null,
-       message: "Initializing..."
+       message: "Initializing...",
+       getShortURL: client.getShortURL,
+       params: this.$route.params
      };
    },
    created () {

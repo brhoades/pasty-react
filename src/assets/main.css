@@ -90,6 +90,17 @@ a {
   text-align: center;
 }
 
-/***************************************
- * DisplayImage
- ***************************************/
+.clipboard {
+  cursor: pointer;
+  float: right;
+  color: black;
+  opacity: 0.4;
+}
+
+.clipboard:hover {
+  opacity: 0.65;
+}
+
+.clipboard:active {
+  opacity: 0.9;
+}

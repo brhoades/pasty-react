@@ -98,3 +98,8 @@ export function view(file: string, key: string, state: any): void {
     state.message("Displaying...");
   });
 }
+
+// get a short url to this page
+export function getShortURL(params): string {
+  return `${config.shortURL}#/view/${params.file}/${encodeURIComponent(params.key)}`;
+}

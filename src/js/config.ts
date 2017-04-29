@@ -2,7 +2,8 @@ import configuration from "../../config"
 
 const defaults = {
   paste: "http://localhost:3000/paste",
-  get: "http://localhost:3000/get/"
+  get: "http://localhost:3000/get/",
+  shortURL: "http://127.0.0.1:3000/"
 };
 
 // recursively populate missing config entries from default

@@ -16,7 +16,6 @@
           v-on:focus="checkContent();"
           v-model="data.contents"
           placeholder="puts 'Hello World'"
-          class="code-input"
       >
       </textarea>
       <br />
@@ -65,12 +64,20 @@
    cursor: pointer;
  }
 
- .code-file-input.container {
-   padding-top: 1.5em;
-   padding-bottom: 0.5em;
- }
-
  #filename {
    display: inline-block;
+ }
+
+ #code {
+   width: 90%;
+   heigth: auto;
+   min-height: 60vh;
+ }
+
+ @media (max-width: 62em) {
+   #code {
+     width: 90%;
+     min-width: 300px;
+   }
  }
 </style>

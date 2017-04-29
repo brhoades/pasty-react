@@ -82,7 +82,7 @@
 }
 
 .custom-menu-screen {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #82898c;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
@@ -136,7 +136,8 @@
     position: absolute;
     width: 100%;
     border-top: 1px solid #eee;
-    background-color: #808080;
+    background-color: #82898c;
+    overflow: hidden !important;
     z-index: 100;
   }
 

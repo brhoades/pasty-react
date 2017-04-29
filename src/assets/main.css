@@ -24,6 +24,7 @@ html, body {
 #content {
   margin: auto;
   width: 60%;
+  max-width: 1200px;
   display: block;
   min-height: 100%;
   border-style: solid;
@@ -40,10 +41,14 @@ html, body {
   text-align: left;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 62em) {
   #app {
     width: 100%;
     padding: 1em 0.5em 1em 0.5em;
+  }
+
+  #content {
+    width: 100%;
   }
 }
 

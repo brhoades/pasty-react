@@ -79,6 +79,7 @@
  }
 
  #code {
+   font-family: "Sans Mono", "Consolas", "Courier", monospace;
    width: 90%;
    heigth: auto;
    min-height: 60vh;

@@ -14,15 +14,17 @@ export function splitWithLineNumbers(code: string): string {
 }
 
 export function registerClickHandlers(fileid: number, code: any): void {
-  $(code).find('.cv--line-number').on("click", (e) => {
+  let $s = $(code);
+
+  $s.find('.cv--line-number').on("click", (e) => {
     // shift highlights code between this line and the last-clicked
     if(e.shiftKey && $(".cv--last-clicked").length) {
       let last = $(".cv--last-clicked");
-      $(".cv--last-clicked").removeClass("cv--last-clicked");
+      $s.find(".cv--last-clicked").removeClass("cv--last-clicked");
 
       if(!e.ctrlKey) {
         // remove all other highlights
-        $(".cv--highlighted").removeClass("cv--highlighted");
+        $s.find(".cv--highlighted").removeClass("cv--highlighted");
         last.addClass("cv--highlighted");
         $(e.target).parent('tr').addClass("cv--highlighted");
       }
@@ -42,21 +44,28 @@ export function registerClickHandlers(fileid: number, code: any): void {
       });
 
       // unhighlight other lines unless control is held
-    } else if(!e.ctrlKey) {
-      // remove all other highlights
-      $(".cv--highlighted").removeClass("cv--highlighted");
-    }
-
-    // highlight this line
-    let tr = $(e.target).parent('tr');
-
-    $(".cv--last-clicked").removeClass("cv--last-clicked");
-    if(tr.hasClass("cv--highlighted")) {
-      tr.removeClass("cv--highlighted");
     } else {
-      tr.addClass("cv--highlighted");
+      // highlight this line
+      let tr = $(e.target).parent('tr');
+
+      $s.find(".cv--last-clicked").removeClass("cv--last-clicked");
+      if(tr.hasClass("cv--highlighted")) {
+        tr.removeClass("cv--highlighted");
+
+        if(!e.ctrlKey) {
+          // remove all other highlights
+          $s.find(".cv--highlighted").removeClass("cv--highlighted");
+        }
+      } else {
+        if(!e.ctrlKey) {
+          // remove all other highlights
+          $s.find(".cv--highlighted").removeClass("cv--highlighted");
+        }
+
+        tr.addClass("cv--highlighted");
+        tr.addClass("cv--last-clicked");
+      }
     }
 
-    tr.addClass("cv--last-clicked");
   });
 }

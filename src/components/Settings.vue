@@ -66,7 +66,6 @@ $unactiveHoverColor: #dddddd;
 body {
   -webkit-font-smoothing: antialiased;
   background: #ecf0f1;
-  font-family: 'Raleway';
 }
 
 h1 {

@@ -93,10 +93,3 @@ a {
 /***************************************
  * DisplayImage
  ***************************************/
-.viewimage > img {
-  padding-top: 25px;
-
-  width: 95vw;
-  height: auto;
-  resize: both;
-}

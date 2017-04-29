@@ -19,3 +19,13 @@
    }
  };
 </script>
+
+<style>
+ .viewimage > img {
+   padding-top: 25px;
+
+   width: 95%;
+   height: auto;
+   resize: both;
+ }
+</style>

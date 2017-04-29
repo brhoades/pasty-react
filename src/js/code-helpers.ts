@@ -13,6 +13,7 @@ export function splitWithLineNumbers(code: string): string {
   return `<table class="cv--table"><tbody class="cv--tbody">${inner.join("\n")}</tbody></table>`;
 }
 
+// todo: modularize and cleanup
 export function registerClickHandlers(fileid: number, code: any): void {
   let $s = $(code);
 
@@ -42,10 +43,8 @@ export function registerClickHandlers(fileid: number, code: any): void {
         }
 
       });
-
-      // unhighlight other lines unless control is held
     } else {
-      // highlight this line
+      // If shift isn't held, handle individual lines.
       let tr = $(e.target).parent('tr');
 
       $s.find(".cv--last-clicked").removeClass("cv--last-clicked");
@@ -53,12 +52,10 @@ export function registerClickHandlers(fileid: number, code: any): void {
         tr.removeClass("cv--highlighted");
 
         if(!e.ctrlKey) {
-          // remove all other highlights
           $s.find(".cv--highlighted").removeClass("cv--highlighted");
         }
       } else {
         if(!e.ctrlKey) {
-          // remove all other highlights
           $s.find(".cv--highlighted").removeClass("cv--highlighted");
         }
 
@@ -67,5 +64,34 @@ export function registerClickHandlers(fileid: number, code: any): void {
       }
     }
 
+    $s.trigger($.Event("highlight-update"));
   });
+}
+
+// return comma-separated string of ranges... ie:
+// 21-30, 10-16, 3, 4
+// for all highlighted line number
+export function serializeLineNumbers(lines: number[]): string {
+  return lines.sort().reduce((acc: number[][], e: number) => {
+    // start
+    if(acc.length == 0) {
+      return [[e]];
+    }
+
+    let lastArray: number[] = acc[acc.length - 1];
+    let lastArrayE: number = lastArray[lastArray.length - 1];
+
+    if(lastArrayE + 1 == e) {
+      return [...acc.slice(0, -1), [...lastArray, e]];
+    }
+
+    return [...acc, [e]];
+  }, []).reduce((acc: string[], e: number[]) => {
+
+    if(e.length > 1) {
+      return [...acc, `${e[0]}-${e[e.length - 1]}`];
+    }
+
+  return [...acc, `${e[0]}`];
+  }, []).join(",");
 }

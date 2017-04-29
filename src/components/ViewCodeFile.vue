@@ -4,12 +4,14 @@
 
     <a :download=file.name :href=file.base64DownloadString()>Download</a>
     <pre v-if="!file.type || file.type == 'auto'"><code ref="code">{{ file.contents }}</code></pre>
-      <pre v-else><code :class=file.type ref="code">{{ file.contents }}</code></pre>
+
+    <pre v-else><code :class=file.type ref="code">{{ file.contents }}</code></pre>
   </div>
 </template>
 
 <script>
- import {splitWithLineNumbers, registerClickHandlers} from '../js/code-helpers.ts'
+ import {splitWithLineNumbers, registerClickHandlers, serializeLineNumbers} from '../js/code-helpers.ts'
+
  export default {
    props: ['file'],
    mounted() {
@@ -21,11 +23,23 @@
      $(this.$refs.code).css('background', 'transparent');
 
      registerClickHandlers(this.file.id, this.$refs.code);
+
+     $(this.$refs.code).on("highlight-update", this.updateLines);
    },
    data () {
      return {
+       highlighted: ""
      };
    },
+   methods: {
+     updateLines(event) {
+       let lines = Array.from($(this.$refs.code).find(".cv--highlighted").map((i, e) => {
+         return parseInt($(e).attr("line"));
+       }));
+
+       this.data.highlighted = serializeLineNumbers(lines);
+     }
+   }
  }
 </script>
 

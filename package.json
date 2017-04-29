@@ -16,7 +16,8 @@
     "spinkit": "^1.2.5",
     "vue": "^2.2.1",
     "vue-clip": "^1.0.0",
-    "vue-router": "^2.2.1"
+    "vue-router": "^2.2.1",
+    "zepto-webpack": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
@@ -26,6 +27,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.28.0",
+    "exports-loader": "^0.6.4",
     "s3-upload": "^0.1.0",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.3",

@@ -4,7 +4,7 @@
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
     "upload": "yarn build && s3-upload",
-    "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot",
+    "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --cache --debug",
     "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
     "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json"
   },

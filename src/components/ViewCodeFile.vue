@@ -9,10 +9,12 @@
 </template>
 
 <script>
+ import splitWithLineNumbers from '../js/code-helpers.ts'
  export default {
    props: ['file'],
    mounted() {
      hljs.highlightBlock(this.$refs.code);
+     this.$refs.code.innerHTML = splitWithLineNumbers(this.$refs.code.innerHTML);
    },
    data () {
      return {
@@ -26,8 +28,10 @@
     padding-left: 1em !important;
     padding-right: 1em !important;
     padding-top: 0.5em !important;
-    padding-bottom: 2em !important;
+    padding-bottom: 0.25em !important;
     font-family: "Sans Mono", "Consolas", "Courier", monospace;
+
+    min-height: 300px;
 
     overflow: hidden;
     white-space: pre-wrap;       /* css-3 */
@@ -36,4 +40,15 @@
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
   }
+
+ .cv--line-number {
+   padding-right: 0.5em;
+ }
+
+ .cv--code {
+   padding-left: 1em;
+   border-style: solid;
+   border-width: 0px 0px 0px 1px;
+   border-color: #525252;
+ }
 </style>

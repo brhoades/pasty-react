@@ -1,12 +1,14 @@
 <template>
   <div>
-    <a
-     class="clipboard"
-     :data-clipboard-text=getShortURL(params)
-     alt="Copy shortened link to this page"
-     title="Copy shortened link to this page">
-      <i class="icon-clipboard"></i>
-    </a><br />
+    <div class="action-box">
+      <a
+          class="icon--link icon--action"
+          :data-clipboard-text=getShortURL(params)
+          alt="Copy shortened link to this page"
+          title="Copy shortened link to this page">
+        <i class="icon-clipboard icon--scaling"></i>
+      </a><br />
+    </div>
     <div class="vertical-center-parent" v-if="loading">
       <div class="vertical-center-child">
         <Spinner v-bind:message="message"/>
@@ -82,3 +84,56 @@
    }
  }
 </script>
+
+
+<style>
+.vertical-center-parent {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.vertical-center-child {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.spinner-message {
+  text-align: center;
+}
+
+.icon--action {
+  cursor: pointer;
+  float: right;
+  color: black;
+  opacity: 0.4;
+}
+
+.icon--link:hover {
+  opacity: 0.65;
+}
+
+.icon--link:active {
+  opacity: 0.9;
+}
+
+.action-box {
+  width: auto;
+  float: right;
+  // border-style: solid;
+  border-color: #c2c2c2;
+  padding: 1px 1px 1px 1px;
+
+  border-width: 1px 1px 1px 1px;
+}
+
+.icon--scaling:before {
+  font-size: 1.25em;
+}
+
+@media (max-width: 62em) {
+  .icon--scaling:before {
+    font-size: 2em;
+  }
+}
+</style>

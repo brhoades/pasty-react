@@ -54,20 +54,6 @@ $activeColor: #ffffff;
 $unactiveColor: #eeeeee;
 $unactiveHoverColor: #dddddd;
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700);
-@import url(http://fonts.googleapis.com/css?family=Raleway:100,400,700);
-
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  background: #ecf0f1;
-}
-
 h1 {
   text-align: center;
   font-weight: 100;

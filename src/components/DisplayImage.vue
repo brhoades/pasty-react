@@ -1,6 +1,6 @@
 <template>
   <div class="viewimage" v-if="canDisplay(paste)">
-    <img :src=paste.base64String() />
+    <img class="pure-img" :src=paste.base64String() />
   </div>
 </template>
 

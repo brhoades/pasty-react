@@ -12,7 +12,7 @@
       <textarea
           ref="code"
           id="code"
-          v-on:blur="checkContent();"
+          v-on:blur="checkContent(); checkType();"
           v-on:focus="checkContent();"
           v-model="data.contents"
           placeholder="puts 'Hello World'"
@@ -50,6 +50,16 @@
        if(this.data.contents != code.value) {
          code.dispatchEvent(new Event('input'));
        }
+     },
+     checkType() {
+       // things get slow when it gets larger
+       if(this.$refs.code.value.length > 1000) {
+         return;
+       }
+
+       let res = hljs.highlightAuto(this.$refs.code.value);
+
+       this.data.type = res.language;
      }
    },
    props: ['data']

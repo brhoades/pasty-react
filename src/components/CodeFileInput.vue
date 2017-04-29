@@ -9,7 +9,15 @@
         <i class="icon-minus"></i>
       </div>
       <br />
-      <textarea ref="code" id="code" v-model="data.contents" placeholder="puts 'Hello World'" class="code-input">
+      <textarea
+          ref="code"
+          id="code"
+          v-on:blur="checkContent();"
+          v-on:focus="checkContent();"
+          v-model="data.contents"
+          placeholder="puts 'Hello World'"
+          class="code-input"
+      >
       </textarea>
       <br />
       <label for="filetype">File type</label>
@@ -29,9 +37,6 @@
    data() {
      let options = hljs.listLanguages();
 
-     // TODO: config for vimperator compatibility.
-     setTimeout(this.checkContent, 1000);
-
      return {
        options: options
      }
@@ -46,8 +51,6 @@
        if(this.data.contents != code.value) {
          code.dispatchEvent(new Event('input'));
        }
-
-       setTimeout(this.checkContent, 500);
      }
    },
    props: ['data']

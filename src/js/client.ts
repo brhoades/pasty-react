@@ -101,5 +101,7 @@ export function view(file: string, key: string, state: any): void {
 
 // get a short url to this page
 export function getShortURL(params): string {
-  return `${config.shortURL}#/view/${params.file}/${encodeURIComponent(params.key)}`;
+  let ret = `${config.shortURL}#/view/${params.file}/${encodeURIComponent(params.key)}`;
+
+  return params.options ? `${ret}/${params.options}` : ret;
 }

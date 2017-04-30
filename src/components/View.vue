@@ -2,7 +2,7 @@
   <div id="view" ref="view">
     <div class="action-box">
       <a
-          class="icon--link icon--action"
+          class="clipboard icon--link icon--action"
           :data-clipboard-text=getShortURL(params)
           alt="Copy shortened link to this page"
           title="Copy shortened link to this page">
@@ -33,8 +33,11 @@
  import Spinner from './spinner.vue'
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
+ import Clipboard from 'clipboard'
  const client = require("../js/client.ts");
  import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers.ts'
+
+ new Clipboard('.clipboard');
 
  export default {
    components: {

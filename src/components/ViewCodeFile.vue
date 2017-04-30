@@ -96,9 +96,12 @@
    animation-delay: 0s;
  }
 
- .cv--row {
-   padding-top: 0.5em !important;
-   padding-bottom: 0.25em !important;
+ tr:first-child > * {
+   padding-top: 1.25em !important;
+ }
+
+ tr:last-child > * {
+   padding-bottom: 1.25em !important;
  }
 
  .cv--table, .cv--row {

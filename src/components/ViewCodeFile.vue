@@ -16,13 +16,13 @@
    props: ['file'],
    mounted() {
      hljs.highlightBlock(this.$refs.code);
-     this.$refs.code.innerHTML = helpers.splitWithLineNumbers(this.$refs.code.innerHTML);
-     let bgcolor = $('.hljs').css('background-color');
+     helpers.splitWithLineNumbers(this.$refs.code);
 
+     let bgcolor = $(this.$refs.code).css('background-color');
      $(this.$refs.code).find('tr').css('background', bgcolor);
      $(this.$refs.code).css('background', 'transparent');
 
-     helpers.registerClickHandlers(this.file.id, this.$refs.code);
+     helpers.registerClickHandlers($(this.$refs.code));
 
      $(this.$refs.code).on("highlight-update", this.updateLines);
 
@@ -49,8 +49,6 @@
   pre code {
     font-family: "Sans Mono", "Consolas", "Courier", monospace;
 
-    min-height: 300px;
-
     overflow: hidden;
     white-space: pre-wrap;       /* css-3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
@@ -63,6 +61,7 @@
    padding-right: 0.5em;
    padding-left: 1em;
    cursor: pointer;
+   width: 1%;
 
     user-select: none; /* CSS3 (little to no support) */
     -ms-user-select: none; /* IE 10+ */
@@ -98,8 +97,8 @@
  }
 
  .cv--row {
-    padding-top: 0.5em !important;
-    padding-bottom: 0.25em !important;
+   padding-top: 0.5em !important;
+   padding-bottom: 0.25em !important;
  }
 
  .cv--table, .cv--row {

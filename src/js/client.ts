@@ -1,4 +1,5 @@
 declare var require: any;
+declare var $: any;
 var promise = require("./vendor/promise.js");
 
 import { randomPassword } from "./util"
@@ -6,6 +7,7 @@ import { crypto } from "./crypto"
 import config from "./config"
 import UploadedFile from "./uploadedfile"
 import CodeFile from "./codefile"
+import Settings from "./settings"
 
 function uploadFile(crypted_data, state, cb) {
   state.message("Uploading...");
@@ -23,9 +25,6 @@ function uploadFile(crypted_data, state, cb) {
 }
 
 function getFile(id: string, cb) {
-  console.log("Getting file");
-
-  console.log(`${config.get}${id}`);
   promise.get(`${config.get}${id}`).then((error: string, text: string) => {
     if(error) {
       console.log(error);
@@ -38,6 +37,7 @@ function getFile(id: string, cb) {
 
 export function uploadFileHook(file: any, state: any): void {
   let reader: FileReader = new FileReader();
+  let settings: Settings = new Settings($);
 
   reader.addEventListener("load", () => {
     const mimeString: string = reader.result.split(',')[0].split(':')[1].split(';')[0]
@@ -49,7 +49,8 @@ export function uploadFileHook(file: any, state: any): void {
       type: "file"
     };
 
-    uploadFile(crypto.encryptFile(JSON.stringify(data)), state, (res, key) => {
+    uploadFile(crypto.encryptFile(JSON.stringify(data), settings.security.keysize),
+               state, (res, key) => {
       if (res && res.error) {
         state.message(`Error uploading: ${res.error}`);
         console.log(res.error);
@@ -69,8 +70,9 @@ export function uploadCodeFiles(files: [CodeFile], state: any): void {
     files: files.map((f) => f.rawObject()),
     type: "code"
   };
+  let settings: Settings = new Settings($);
 
-  uploadFile(crypto.encryptFile(JSON.stringify(data)), state, (res, key) => {
+  uploadFile(crypto.encryptFile(JSON.stringify(data), settings.security.keysize), state, (res, key) => {
     if (res && res.error) {
       state.message(`Error uploading: ${res.error}`);
       console.log(res.error);

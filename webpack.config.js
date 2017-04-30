@@ -11,7 +11,8 @@ module.exports = {
       'vue-clip',
       'vue-router',
       'highlight.js',
-      'zepto-webpack'
+      'zepto-webpack',
+      'pgwcookie'
     ]
   },
   output: {
@@ -56,7 +57,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      $: "zepto-webpack"
     }
   },
   devServer: {
@@ -70,7 +72,6 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       "hljs": "highlight.js",
-      $: "zepto-webpack"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",

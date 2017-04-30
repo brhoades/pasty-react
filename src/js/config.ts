@@ -1,31 +1,18 @@
 import configuration from "../../config"
+import { populateDefaults } from './util'
 
-const defaults = {
+type ConfigT = {
+  paste: string,
+  get: string,
+  shortURL: string
+};
+
+const defaults: ConfigT = {
   paste: "http://localhost:3000/paste",
   get: "http://localhost:3000/get/",
   shortURL: "http://127.0.0.1:3000/"
 };
 
-// recursively populate missing config entries from default
-function populateDefaults(config: any, def: any): any {
-  let ret = {};
-
-  Object.keys(def).map((key) => {
-    if(typeof(def[key]) == 'object') {
-      // TODO: if config doesn't have the obj, this'd be bad
-      ret[key] = populateDefaults(config[key], def[key]);
-    } else if(def[key] != undefined) {
-      if(config[key] == undefined) {
-        ret[key] = def[key];
-      }
-    } else {
-      ret[key] = config[key];
-    }
-  });
-
-  return config;
-}
-
-const config: any = populateDefaults(configuration, defaults);
+const config: ConfigT = populateDefaults(configuration, defaults);
 
 export default config;

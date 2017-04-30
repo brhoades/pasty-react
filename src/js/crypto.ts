@@ -8,10 +8,10 @@ function decryptFile(data, key): string {
   return CENC.stringify(rawWords);
 }
 
-function encryptFile(b64data: string): { data: string, key: string } {
+function encryptFile(b64data: string, keysize=32): { data: string, key: string } {
   let result: string = CENC.parse(b64data);
 
-  let password: string = randomPassword(32);
+  let password: string = randomPassword(keysize);
   let encrypted: any = CAES.encrypt(result, password);
   result = encrypted.toString();
 

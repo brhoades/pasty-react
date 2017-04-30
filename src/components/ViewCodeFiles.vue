@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="file in files">
-      <ViewCodeFile :file="file"/>
+      <ViewCodeFile @highlightupdate="update()" :file="file"/>
     </div>
   </div>
 </template>
@@ -18,5 +18,10 @@
      return {
      };
    },
+   methods: {
+     update() {
+       this.$emit("highlightupdate");
+     }
+   }
  }
 </script>

@@ -3,6 +3,7 @@ export default class CodeFile {
   type: string;
   contents: string;
   name: string;
+  highlighted: number[];
 
   // id: 0-indexed order for this file
   // name: name of this file
@@ -13,6 +14,7 @@ export default class CodeFile {
     this.name = name;
     this.contents = contents;
     this.type = type;
+    this.highlighted = [];
   }
 
   rawObject(): { id: number, name: string, contents: string, type: string } {

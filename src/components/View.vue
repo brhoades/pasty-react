@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="view" ref="view">
     <div class="action-box">
       <a
           class="icon--link icon--action"
@@ -23,7 +23,7 @@
       <ViewUploadedFile :paste="paste"/>
     </div>
     <div v-else-if="paste.type == 'code'">
-      <ViewCodeFiles :files="paste.files"/>
+      <ViewCodeFiles v-on:highlightupdate="updateURL()" :files="paste.files"/>
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
  const client = require("../js/client.ts");
+ import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers.ts'
 
  export default {
    components: {
@@ -54,32 +55,56 @@
        params: this.$route.params
      };
    },
-   created () {
-     this.fetchData();
+   created() {
+     const params = this.$route.params;
+
+     this.message = "Downloading...";
+     this.error = this.paste = null;
+     this.loading = true;
+
+     // restrict state access
+     let state = {
+       error: (message) => {
+         this.error = message;
+       },
+       message: (message) => {
+         this.message = message;
+       },
+       data: (data) => {
+         this.paste = data;
+         this.loading = false;
+
+         // attach highlighted lines to corresponding files
+         if(params.options && data && data.type == "code") {
+           const highlights = params.options.split(";");
+
+           if(highlights.length == data.files.length) {
+             for(let i=0; i<highlights.length; i++) {
+               data.files[i].highlighted = unserializeLineNumbers(highlights[i]);
+             }
+           }
+         }
+       }
+     };
+
+     client.view(params.file, params.key, state);
    },
    methods: {
-     fetchData () {
-       const params = this.$route.params;
+     fetchData(to, from) {
+     },
+     updateURL() {
+       const highlightedlines = this.paste.files.map((e) => {
+         return serializeLineNumbers(e.highlighted);
+       }).join(";");
 
-       this.message = "Downloading...";
-       this.error = this.paste = null;
-       this.loading = true;
-
-       // restrict state access
-       let state = {
-         error: (message) => {
-           this.error = message;
-         },
-         message: (message) => {
-           this.message = message;
-         },
-         data: (data) => {
-           this.paste = data;
-           this.loading = false;
+       this.$router.replace({
+         name: highlightedlines ? 'view-options': 'view',
+         params: {
+           options: highlightedlines,
+           key: this.$route.params.key,
+           file: this.$route.params.file
          }
-       };
-
-       client.view(params.file, params.key, state);
+       });
      }
    }
  }

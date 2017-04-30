@@ -1,4 +1,6 @@
 declare var $: any;
+import _ from "lodash/util"
+
 // helpers to use when displaying code
 
 // Take some the contents of pre > code with line endings
@@ -87,11 +89,28 @@ export function serializeLineNumbers(lines: number[]): string {
 
     return [...acc, [e]];
   }, []).reduce((acc: string[], e: number[]) => {
-
     if(e.length > 1) {
       return [...acc, `${e[0]}-${e[e.length - 1]}`];
     }
 
-  return [...acc, `${e[0]}`];
+    return [...acc, `${e[0]}`];
   }, []).join(",");
+}
+
+export function unserializeLineNumbers(lines: string): number[] {
+  return lines.split(",").reduce((acc: number[], e: string) => {
+    if(/-/.test(e)) {
+      const [lower, upper] = e.split("-");
+
+      return [...acc, ..._.range(lower, upper)];
+    }
+
+    return [...acc, parseInt(e)];
+  }, []);
+}
+
+export function highlightLines(scope, highlighted) {
+  scope.find('tr').filter((i) => {
+    return highlighted.indexOf(i + 1) >= 0;
+  }).addClass('cv--highlighted');
 }

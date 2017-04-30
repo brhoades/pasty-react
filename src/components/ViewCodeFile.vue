@@ -10,34 +10,36 @@
 </template>
 
 <script>
- import {splitWithLineNumbers, registerClickHandlers, serializeLineNumbers} from '../js/code-helpers.ts'
+ import * as helpers from '../js/code-helpers.ts'
 
  export default {
    props: ['file'],
    mounted() {
      hljs.highlightBlock(this.$refs.code);
-     this.$refs.code.innerHTML = splitWithLineNumbers(this.$refs.code.innerHTML);
+     this.$refs.code.innerHTML = helpers.splitWithLineNumbers(this.$refs.code.innerHTML);
      let bgcolor = $('.hljs').css('background-color');
-     console.log(`bgcolor: ${bgcolor}`);
+
      $(this.$refs.code).find('tr').css('background', bgcolor);
      $(this.$refs.code).css('background', 'transparent');
 
-     registerClickHandlers(this.file.id, this.$refs.code);
+     helpers.registerClickHandlers(this.file.id, this.$refs.code);
 
      $(this.$refs.code).on("highlight-update", this.updateLines);
+
+     helpers.highlightLines($(this.$refs.code), this.file.highlighted);
    },
-   data () {
+   data() {
      return {
-       highlighted: ""
      };
    },
    methods: {
      updateLines(event) {
-       let lines = Array.from($(this.$refs.code).find(".cv--highlighted").map((i, e) => {
+       this.file.highlighted = Array.from($(this.$refs.code).find(".cv--highlighted").map((i, e) => {
          return parseInt($(e).attr("line"));
        }));
 
-       this.data.highlighted = serializeLineNumbers(lines);
+       // tell view
+       this.$emit("highlightupdate");
      }
    }
  }

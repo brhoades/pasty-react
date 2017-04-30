@@ -6,10 +6,12 @@ let Upload = require('../components/Upload.vue');
 const routes = [
   {
     path: '/view/:file/:key',
+    name: 'view',
     component: View
   },
   {
     path: '/view/:file/:key/:options',
+    name: 'view-options',
     component: View
   },
   {

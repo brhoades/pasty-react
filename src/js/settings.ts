@@ -6,10 +6,12 @@ type SecuritySettingsT = {
 };
 
 type SettingsT = {
+  theme: string,
   security: SecuritySettingsT
 };
 
 const defaults: SettingsT = {
+  theme: 'obsidian.css',
   security: {
     keysize: 32
   }
@@ -47,7 +49,6 @@ export default class Settings {
 
     // debounce calls to prevent sliders from setting the cookie hundreds of times
     this._write = _.debounce(() => {
-      console.log("WRITE");
       $.pgwCookie({
         'name': 'settings',
         'value': this._settings,
@@ -56,12 +57,9 @@ export default class Settings {
     }, 250, { trailing: true });
 
     if(!cookie) {
-      console.log("No cookie");
       this._settings = (<any>Object).assign({}, defaults);
       this._write();
     } else {
-      console.log("read cookie");
-      console.dir(cookie);
       this._settings = populateDefaults(cookie, defaults);
     }
 
@@ -70,5 +68,14 @@ export default class Settings {
 
   public get security(): SecuritySettings {
     return this._security;
+  }
+
+  public get theme(): string {
+    return this._settings.theme;
+  }
+
+  public set theme(value: string) {
+    this._settings.theme = value;
+    this._write();
   }
 }

@@ -22,11 +22,13 @@ export function populateDefaults(config: any, def: any): any {
     } else if(def[key] != undefined) {
       if(config[key] == undefined) {
         ret[key] = def[key];
+      } else {
+        ret[key] = config[key];
       }
     } else {
       ret[key] = config[key];
     }
   });
 
-  return config;
+  return ret;
 }

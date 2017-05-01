@@ -5,18 +5,19 @@
     <nav>
       <ul>
         <li class="tab1">
-          <label for="tab1">Security</label>
+          <label for="tab1">General</label>
         </li>
         <li class="tab2">
-          <label for="tab2">Advanced</label>
+          <label for="tab2">Security</label>
         </li>
       </ul>
     </nav>
     <section>
       <div class="tab1 tab">
-        <SecuritySettings :settings="settings.security" />
+        <GeneralSettings :settings="settings" />
       </div>
       <div class="tab2 tab">
+        <SecuritySettings :settings="settings.security" />
       </div>
     </section>
   </div>
@@ -24,10 +25,12 @@
 
 <script>
  import SecuritySettings from './SecuritySettings.vue'
+ import GeneralSettings from './GeneralSettings.vue'
  import Settings from '../js/settings.ts'
 
  export default {
    components: {
+     'GeneralSettings': GeneralSettings,
      'SecuritySettings': SecuritySettings
    },
    data() {

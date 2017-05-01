@@ -93,6 +93,10 @@ module.exports = {
       {
         from: "node_modules/purecss/build/pure-min.css",
         to: "assets/[name].[ext]"
+      },
+      {
+        from: "node_modules/highlight.js/styles/*",
+        to: "assets/hljs-themes/[name].[ext]"
       }
     ])
   ]

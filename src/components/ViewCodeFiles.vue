@@ -8,7 +8,7 @@
 
 <script>
  import ViewCodeFile from './ViewCodeFile.vue'
- import Settings from '../js/Setting.ts'
+ import Settings from '../js/settings.ts'
 
  export default {
    components: {

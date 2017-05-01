@@ -8,7 +8,6 @@
 
 <script>
  import ViewCodeFile from './ViewCodeFile.vue'
- import Settings from '../js/settings.ts'
 
  export default {
    components: {
@@ -16,10 +15,6 @@
    },
    props: ['files'],
    data() {
-     let settings = new Settings($);
-
-     $("#hljs-theme").attr("href", `dist/assets/hljs-themes/${settings.theme}`);
-
      return {
      };
    }

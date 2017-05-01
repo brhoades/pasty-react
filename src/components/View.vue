@@ -35,6 +35,7 @@
  import ViewCodeFiles from './ViewCodeFiles.vue'
  import Clipboard from 'clipboard'
  const client = require("../js/client.ts");
+ import Settings from '../js/settings.ts'
  import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers.ts'
 
  new Clipboard('.clipboard');
@@ -49,6 +50,10 @@
      '$route': 'fetchData'
    },
    data () {
+     let settings = new Settings($);
+
+     $("#hljs-theme").attr("href", `dist/assets/hljs-themes/${settings.theme}`);
+
      return {
        loading: true,
        paste: null,

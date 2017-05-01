@@ -1,7 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700);
+@import url(https://fnts.googleapis.com/css?family=Droid+Serif:400,700);
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
 
-html, body {
+body, html {
   width: 100%;
   height: 100%;
   background-color: #e9e9e9;
@@ -9,10 +9,6 @@ html, body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-#content {
-  width: 100%;
 }
 
 #links {
@@ -33,7 +29,7 @@ html, body {
   border-style: solid;
   border-color: #c2c2c2;
 
-  border-width: 0px 1px 0px 1px;
+  border-width: 0 1px 0 1px;
 
   color: #131516;
   background-color: #f1f2f3;
@@ -44,17 +40,16 @@ html, body {
   text-align: left;
 }
 
-@media (max-width: 62em) {
+@media(max-width: 62em) {
   #app {
-    width: 100%;
     padding: 1em 0.5em 1em 0.5em;
   }
 
-  // remove borders and side width on smaller displays
+  /* remove borders and side width on smaller displays */
   #content {
+    margin: 0;
     width: 100%;
     border-style: none;
-    border-color: #c2c2c2;
   }
 }
 

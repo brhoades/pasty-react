@@ -10,10 +10,10 @@
   </div>
 </template>
 
-<script>
- import DisplayImage from './DisplayImage'
- import Clipboard from "clipboard"
- new Clipboard('.clipboard');
+<script lang="ts">
+ import DisplayImage from './DisplayImage.vue'
+ // import Clipboard from "clipboard"
+ // new Clipboard('.clipboard');
 
  export default {
    data() {
@@ -22,9 +22,6 @@
    },
    components: {
      'DisplayImage': DisplayImage
-   },
-   watch: {
-     '$route': 'fetchData'
    },
    created() {
      const params = this.$route.params;

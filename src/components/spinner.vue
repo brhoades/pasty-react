@@ -11,9 +11,10 @@
 </template>
 
 
-<script>
- import Spinner from './spinner.vue'
- import css from '../../node_modules/spinkit/css/spinkit.css'
+<script lang="ts">
+ declare var require: any;
+
+ require('../../node_modules/spinkit/css/spinkit.css');
 
  export default {
    props: [

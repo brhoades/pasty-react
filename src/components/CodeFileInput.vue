@@ -31,7 +31,9 @@
 </template>
 
 
-<script>
+<script lang="ts">
+ declare var hljs: any;
+
  export default {
    data() {
      let options = hljs.listLanguages();

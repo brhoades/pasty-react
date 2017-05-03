@@ -19,9 +19,9 @@
 </template>
 
 
-<script>
- const client = require("../js/client.ts");
- import CodeFile from "../js/codefile.ts"
+<script lang="ts">
+ import * as client from "../js/client"
+ import CodeFile from "../js/codefile"
  import CodeFileInput from "./CodeFileInput.vue"
 
  export default {

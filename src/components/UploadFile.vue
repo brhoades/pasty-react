@@ -17,9 +17,9 @@
 </template>
 
 
-<script>
+<script lang="ts">
  import Spinner from './spinner.vue'
- const client = require("../js/client.ts");
+ import * as client from '../js/client'
 
  export default {
    components: {

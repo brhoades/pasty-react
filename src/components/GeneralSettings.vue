@@ -101,7 +101,10 @@ if __name__ == "__main__":
   </form>
 </template>
 
-<script>
+<script lang="ts">
+ declare var $: any;
+ declare var hljs: any;
+
  export default {
    props: ['settings'],
    data() {

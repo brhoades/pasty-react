@@ -3,7 +3,7 @@
     <div class="action-box">
       <a
           class="clipboard icon--link icon--action"
-          :data-clipboard-text=getShortURL(params)
+          :data-clipboard-text=getShortURL(this.$route.params)
           alt="Copy shortened link to this page"
           title="Copy shortened link to this page">
         <i class="icon-clipboard icon--scaling"></i>
@@ -29,40 +29,48 @@
 </template>
 
 
-<script>
+<script lang="ts">
+ import {Vue, Component, Watch, Lifecycle} from 'av-ts'
+
+ import * as client from '../js/client';
+ import CodeFile from '../js/codefile';
+ import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers'
  import Spinner from './spinner.vue'
+ import Settings from '../js/settings'
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
- import Clipboard from 'clipboard'
- const client = require("../js/client.ts");
- import Settings from '../js/settings.ts'
- import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers.ts'
+ declare var $: any;
+ declare var require: any;
 
- new Clipboard('.clipboard');
+ type PasteT = {
+   files: CodeFile[],
+ }
 
- export default {
+ // let Clipboard = require('clipboard');
+ // new Clipboard('.clipboard');
+
+ @Component({
+   name: 'view',
    components: {
-     'Spinner': Spinner,
-     'ViewUploadedFile': ViewUploadedFile,
-     'ViewCodeFiles': ViewCodeFiles
-   },
-   watch: {
-     '$route': 'fetchData'
-   },
-   data () {
+     Spinner,
+     ViewUploadedFile,
+     ViewCodeFiles
+   }
+ })
+ export default class View extends Vue {
+   paste: null | PasteT = null;
+   loading: boolean = true;
+   error: string | null = null;
+   message: string = "Initializing...";
+
+   @Lifecycle
+   mounted() {
      let settings = new Settings($);
 
      $("#hljs-theme").attr("href", `dist/assets/hljs-themes/${settings.theme}`);
+   }
 
-     return {
-       loading: true,
-       paste: null,
-       error: null,
-       message: "Initializing...",
-       getShortURL: client.getShortURL,
-       params: this.$route.params
-     };
-   },
+   @Lifecycle
    created() {
      const params = this.$route.params;
 
@@ -96,24 +104,30 @@
      };
 
      client.view(params.file, params.key, state);
-   },
-   methods: {
-     fetchData(to, from) {
-     },
-     updateURL() {
-       const highlightedlines = this.paste.files.map((e) => {
-         return serializeLineNumbers(e.highlighted);
-       }).join(";");
+   }
 
-       this.$router.replace({
-         name: highlightedlines ? 'view-options': 'view',
-         params: {
-           options: highlightedlines,
-           key: this.$route.params.key,
-           file: this.$route.params.file
-         }
-       });
-     }
+   @Watch('$route')
+   fetchData(to, from) {
+     // todo: react to changes--- refresh page or something
+   }
+
+   updateURL() {
+     const highlightedlines = this.paste.files.map((e) => {
+       return serializeLineNumbers(e.highlighted);
+     }).join(";");
+
+     this.$router.replace({
+       name: highlightedlines ? 'view-options': 'view',
+       params: {
+         options: highlightedlines,
+         key: this.$route.params.key,
+         file: this.$route.params.file
+       }
+     });
+   }
+
+   getShortURL(params: any): string {
+     return client.getShortURL(params);
    }
  }
 </script>

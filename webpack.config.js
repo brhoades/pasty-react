@@ -23,23 +23,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          extractCSS: true
-        }
-      },
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [ path.join(__dirname, './src') ],
-        query: {
-          presets: ['es2015']
-        }
       },
       {
         test: /\.css$/,
@@ -55,9 +47,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js', '.vue'],
+    extensions: ['.ts', '.js'],
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
+      'vue$': 'vue/dist/vue.esm.js',
       $: "zepto-webpack"
     }
   },

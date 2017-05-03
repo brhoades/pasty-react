@@ -23,10 +23,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
  import SecuritySettings from './SecuritySettings.vue'
  import GeneralSettings from './GeneralSettings.vue'
- import Settings from '../js/settings.ts'
+ import Settings from '../js/settings'
+ declare var $: any;
 
  export default {
    components: {

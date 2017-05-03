@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
  export default {
    data() {
      return {
@@ -13,7 +13,6 @@
    props: ['paste'],
    methods: {
      canDisplay(paste) {
-       console.log(paste.mime);
        return /^image/.test(paste.mime);
      }
    }

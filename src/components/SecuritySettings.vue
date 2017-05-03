@@ -13,7 +13,7 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
  export default {
    props: ['settings'],
    data() {

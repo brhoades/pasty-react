@@ -2,8 +2,7 @@
   "compilerOptions": {
     "module": "es2015",
     "target": "es5",
-    "noImplicitAny": false,
-    "sourceMap": false,
+    "experimentalDecorators": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "lib": [

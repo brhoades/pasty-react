@@ -9,8 +9,9 @@
   </div>
 </template>
 
-<script>
- import * as helpers from '../js/code-helpers.ts'
+<script lang="ts">
+ import * as helpers from '../js/code-helpers'
+ declare var $: any, hljs: any;
 
  export default {
    props: ['file'],
@@ -34,8 +35,9 @@
    },
    methods: {
      updateLines(event) {
-       this.file.highlighted = Array.from($(this.$refs.code).find(".cv--highlighted").map((i, e) => {
-         return parseInt($(e).attr("line"));
+       this.file.highlighted = (<any>Array).from(
+         $(this.$refs.code).find(".cv--highlighted").map((i, e) => {
+           return parseInt($(e).attr("line"));
        }));
 
        // tell view

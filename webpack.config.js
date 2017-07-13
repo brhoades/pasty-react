@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     build: './src/main.ts',
     libs: [
-      'crypto-js',
+      'pasty-core',
       'vue',
       'vue-clip',
       'vue-router',

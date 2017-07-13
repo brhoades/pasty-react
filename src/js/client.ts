@@ -3,7 +3,7 @@ declare var $: any;
 var promise = require("./vendor/promise.js");
 
 import { randomPassword } from "./util"
-import { crypto } from "./crypto"
+import { encryptFile, decryptFile } from "pasty-core"
 import config from "./config"
 import UploadedFile from "./uploadedfile"
 import CodeFile from "./codefile"
@@ -49,7 +49,7 @@ export function uploadFileHook(file: any, state: any): void {
       type: "file"
     };
 
-    uploadFile(crypto.encryptFile(JSON.stringify(data), settings.security.keysize),
+    uploadFile(encryptFile(JSON.stringify(data), settings.security.keysize),
                state, (res, key) => {
       if (res && res.error) {
         state.message(`Error uploading: ${res.error}`);
@@ -72,7 +72,7 @@ export function uploadCodeFiles(files: [CodeFile], state: any): void {
   };
   let settings: Settings = new Settings($);
 
-  uploadFile(crypto.encryptFile(JSON.stringify(data), settings.security.keysize), state, (res, key) => {
+  uploadFile(encryptFile(JSON.stringify(data), settings.security.keysize), state, (res, key) => {
     if (res && res.error) {
       state.message(`Error uploading: ${res.error}`);
       console.log(res.error);
@@ -85,7 +85,7 @@ export function uploadCodeFiles(files: [CodeFile], state: any): void {
 export function view(file: string, key: string, state: any): void {
   getFile(file, (response) => {
     state.message("Decrypting...");
-    const dataBlob: any = JSON.parse(crypto.decryptFile(response, key));
+    const dataBlob: any = JSON.parse(decryptFile(response, key));
 
     if(dataBlob.type == "file") {
       const data : UploadedFile = new UploadedFile(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);

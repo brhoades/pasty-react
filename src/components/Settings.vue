@@ -26,7 +26,7 @@
 <script lang="ts">
  import SecuritySettings from './SecuritySettings.vue'
  import GeneralSettings from './GeneralSettings.vue'
- import Settings from '../js/settings'
+ import Settings from '../ts/settings'
  declare var $: any;
 
  export default {

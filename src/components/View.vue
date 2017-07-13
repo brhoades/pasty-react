@@ -32,11 +32,11 @@
 <script lang="ts">
  import {Vue, Component, Watch, Lifecycle} from 'av-ts'
 
- import * as client from '../js/client';
- import CodeFile from '../js/codefile';
- import {serializeLineNumbers, unserializeLineNumbers} from '../js/code-helpers'
+ import * as client from '../ts/client';
+ import CodeFile from '../ts/codefile';
+ import {serializeLineNumbers, unserializeLineNumbers} from '../ts/code-helpers'
  import Spinner from './spinner.vue'
- import Settings from '../js/settings'
+ import Settings from '../ts/settings'
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFiles from './ViewCodeFiles.vue'
  declare var $: any;

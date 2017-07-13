@@ -19,7 +19,7 @@
 
 <script lang="ts">
  import Spinner from './spinner.vue'
- import * as client from '../js/client'
+ import * as client from '../ts/client'
 
  export default {
    components: {

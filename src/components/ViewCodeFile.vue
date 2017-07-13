@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
- import * as helpers from '../js/code-helpers'
+ import * as helpers from '../ts/code-helpers'
  declare var $: any, hljs: any;
 
  export default {

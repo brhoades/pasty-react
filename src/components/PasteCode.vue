@@ -20,8 +20,8 @@
 
 
 <script lang="ts">
- import * as client from "../js/client"
- import CodeFile from "../js/codefile"
+ import * as client from "../ts/client"
+ import CodeFile from "../ts/codefile"
  import CodeFileInput from "./CodeFileInput.vue"
 
  export default {

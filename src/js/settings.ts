@@ -1,4 +1,4 @@
-import { populateDefaults } from './util'
+import { populateDefaults } from 'pasty-core'
 import _ from 'lodash'
 
 type SecuritySettingsT = {

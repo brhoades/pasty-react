@@ -2,12 +2,11 @@ declare var require: any;
 declare var $: any;
 var promise = require("./vendor/promise.js");
 
-import { randomPassword } from "./util"
-import { encryptFile, decryptFile } from "pasty-core"
-import config from "./config"
-import UploadedFile from "./uploadedfile"
-import CodeFile from "./codefile"
-import Settings from "./settings"
+import { randomPassword, encryptFile, decryptFile } from "pasty-core";
+import config from "./config";
+import UploadedFile from "./uploadedfile";
+import CodeFile from "./codefile";
+import Settings from "./settings";
 
 function uploadFile(crypted_data, state, cb) {
   state.message("Uploading...");

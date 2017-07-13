@@ -1,5 +1,5 @@
-import configuration from "../../config"
-import { populateDefaults } from './util'
+import configuration from '../../config';
+import { populateDefaults } from 'pasty-core';
 
 type ConfigT = {
   paste: string,

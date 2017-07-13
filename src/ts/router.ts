@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import View from '../components/View.vue';
 import UploadFile from '../components/UploadFile.vue';
 import PasteCode from '../components/PasteCode.vue';
+import About from '../components/About.vue';
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/settings',
     component: require("../components/Settings.vue")
+  },
+  {
+    path: '/about',
+    component: About
   },
 ];
 

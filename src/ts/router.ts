@@ -1,7 +1,8 @@
 declare function require(path: string): any;
-import VueRouter from 'vue-router'
-let View = require('../components/View.vue');
-let Upload = require('../components/Upload.vue');
+import VueRouter from 'vue-router';
+import View from '../components/View.vue';
+import UploadFile from '../components/UploadFile.vue';
+import PasteCode from '../components/PasteCode.vue';
 
 const routes = [
   {
@@ -15,12 +16,16 @@ const routes = [
     component: View
   },
   {
-    path: '/up/:type',
-    component: Upload
+    path: '/up/paste',
+    component: PasteCode
+  },
+  {
+    path: '/up/file',
+    component: UploadFile
   },
   {
     path: '/',
-    component: Upload
+    component: PasteCode
   },
   {
     path: '/settings',

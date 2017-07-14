@@ -1,7 +1,7 @@
 <template>
   <div id="upload-file">
     <vue-clip :options="options" v-if="waiting">
-      <template slot="clip-uploader-action">
+      <template slot="clip-uploader-action" scope="params">
         <div v-bind:class="{'is-dragging': params.dragging}" class="upload-action">
           <div class="dz-message"><h2>Click or drag and drop files here to upload</h2></div>
         </div>
@@ -25,6 +25,7 @@
    components: {
      'spinner': Spinner
    },
+   params: ['dragging'],
    data() {
      return {
        message: "",
@@ -53,9 +54,6 @@
            return false;
          },
          uploadMultiple: false
-       },
-       params: {
-         dragging: false
        }
      }
    }
@@ -63,7 +61,25 @@
 </script>
 
 <style>
-  #upload-file {
-    text-align: center;
-  }
+ #upload-file {
+   text-align: center;
+ }
+
+ .is-dragging {
+   background-color: #aaafb1;
+   transition: background .25s linear;
+   -moz-transition: background .25s linear;
+   -webkit-transition: background .25s linear;
+
+   border-radius: 10px;
+ }
+
+ .upload-action {
+   height: 80vh; /* Relative height on #upload-file fails */
+   padding-top: 3vh;
+
+   transition: background .25s linear;
+   -moz-transition: background .25s linear;
+   -webkit-transition: background .25s linear;
+ }
 </style>

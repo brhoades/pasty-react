@@ -21,7 +21,7 @@ const routes = [
     component: PasteCode
   },
   {
-    path: '/up/file',
+    path: '/up/file/:options',
     component: UploadFile
   },
   {

@@ -6,10 +6,6 @@
 
 <script lang="ts">
  export default {
-   data() {
-     return {
-     };
-   },
    props: ['paste'],
    methods: {
      canDisplay(paste) {

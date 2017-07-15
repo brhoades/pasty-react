@@ -9,7 +9,8 @@
 * Removed "Pasty" prefix to file names for view file.
 * App marigns are now equal on the left/right side.
 * Displayed images are centered.
-* TODO: Download and view raw links now look less out of place.
+* Moved download link to the action box.
+* Fixed copy to clipboard for view directly.
 
 ## 0.0.3
 * Fixed transitions for upload file vs upload paste.

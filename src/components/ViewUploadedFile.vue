@@ -3,9 +3,8 @@
     <h1>{{ paste.real_filename }}</h1>
 
     <br />
-    <a :href=paste.base64String()>View Raw</a>
+    <a :href=paste.base64String()>View Directly</a>
     <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
-    <a :download=paste.real_filename :href=paste.base64DownloadString()>Download</a>
 
     <DisplayImage :paste=paste />
   </div>

@@ -5,9 +5,20 @@
           class="clipboard icon--link icon--action"
           :data-clipboard-text=getShortURL(this.$route.params)
           alt="Copy shortened link to this page"
-          title="Copy shortened link to this page">
+          title="Copy shortened link to this page"
+      >
         <i class="icon-clipboard icon--scaling"></i>
-      </a><br />
+      </a>
+      <a
+          class="icon--link icon--action"
+          v-if="paste.type == 'file'"
+          alt="Download this file"
+          title="Download this file"
+          :download=paste.real_filename
+          :href=paste.base64DownloadString()
+      >
+        <i class="icon-download-cloud icon--scaling"></i>
+      </a>
     </div>
     <div class="vertical-center-parent" v-if="loading">
       <div class="vertical-center-child">
@@ -167,7 +178,6 @@
 .action-box {
   width: auto;
   float: right;
-  // border-style: solid;
   border-color: #c2c2c2;
   padding: 1px 1px 1px 1px;
 

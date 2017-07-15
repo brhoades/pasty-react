@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
-    "upload": "yarn build && s3-upload",
+    "upload": "yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --cache --debug",
     "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
     "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json"

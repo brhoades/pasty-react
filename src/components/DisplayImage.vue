@@ -22,6 +22,7 @@
 <style>
  .viewimage > img {
    padding-top: 25px;
+   margin: auto;
 
    width: 95%;
    height: auto;

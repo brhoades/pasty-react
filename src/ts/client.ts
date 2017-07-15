@@ -48,8 +48,9 @@ export function uploadFileHook(file: any, state: any): void {
       type: "file"
     };
 
-    uploadFile(encryptFile(JSON.stringify(data), settings.security.keysize),
-               state, (res, key) => {
+    const encryptedFile: any = encryptFile(JSON.stringify(data), settings.security.keysize);
+
+    uploadFile(encryptedFile, state, (res, key) => {
       if (res && res.error) {
         state.message(`Error uploading: ${res.error}`);
         console.log(res.error);

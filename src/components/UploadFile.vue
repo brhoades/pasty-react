@@ -10,7 +10,7 @@
 
     <div class="vertical-center-parent" v-else-if="uploading">
       <div class="vertical-center-child">
-        <spinner v-bind:message="message"></spinner>
+        <Spinner v-bind:message="message" />
       </div>
     </div>
   </div>
@@ -23,9 +23,9 @@
 
  export default {
    components: {
-     'spinner': Spinner
+     Spinner
    },
-   params: ['dragging'],
+   params: ['dragging', 'message'],
    data() {
      return {
        message: "",
@@ -37,10 +37,11 @@
          accept: (file, done) => {
            this.waiting = false;
            this.uploading = true;
+           this.message = "Encrypting...";
 
            let state = {
              message: (msg) => {
-               this.loading = msg;
+               this.message = msg;
              },
              waiting: (status) => {
                this.waiting = status;

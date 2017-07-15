@@ -78,7 +78,7 @@
    mounted() {
      let settings = new Settings($);
 
-     $("#hljs-theme").attr("href", `dist/assets/hljs-themes/${settings.theme}`);
+     $("#hljs-theme").attr("href", `assets/hljs-themes/${settings.theme}`);
    }
 
    @Lifecycle

@@ -116,7 +116,7 @@ if __name__ == "__main__":
    },
    methods: {
      updateTheme() {
-       $("#hljs-theme").attr("href", `dist/assets/hljs-themes/${this.settings.theme}`);
+       $("#hljs-theme").attr("href", `assets/hljs-themes/${this.settings.theme}`);
      }
    }
  }

@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Pasty - {{ paste.real_filename }}</h1>
+    <h1>{{ paste.real_filename }}</h1>
 
+    <br />
     <a :href=paste.base64String()>View Raw</a>
     <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
     <a :download=paste.real_filename :href=paste.base64DownloadString()>Download</a>
@@ -12,14 +13,8 @@
 
 <script lang="ts">
  import DisplayImage from './DisplayImage.vue'
- // import Clipboard from "clipboard"
- // new Clipboard('.clipboard');
 
  export default {
-   data() {
-     return {
-     };
-   },
    components: {
      'DisplayImage': DisplayImage
    },
@@ -35,3 +30,10 @@
    props: ['paste']
  }
 </script>
+
+<style>
+ h1 {
+   display: inline-block;
+   margin-top: 0;
+ }
+</style>

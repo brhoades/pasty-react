@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1
+* Added hashes to filenames for cache busting.
+
 ## 0.1.0
 * Box to drop files / click to open the upload dialog is now larger.
 * "Encrypting" message now shows up when uploading larger files.

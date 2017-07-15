@@ -1,6 +1,7 @@
-const path = require('path')
-const webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -16,8 +17,8 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: '[name].js'
   },
   module: {
@@ -86,8 +87,12 @@ module.exports = {
         from: "node_modules/highlight.js/styles/*",
         to: "assets/hljs-themes/[name].[ext]"
       }
-    ])
-  ]
+    ]),
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      hash: true
+    })
+  ],
 }
 
 if (process.env.NODE_ENV === 'production') {

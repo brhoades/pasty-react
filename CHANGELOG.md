@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+* s3-upload uploaded files under dist, now it does not
+* hljs themes now load from the correct path
+
 ## 0.1.1
 * Added hashes to filenames for cache busting.
 

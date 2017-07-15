@@ -3,7 +3,11 @@
 ## NEXT RELEASE
 * Box to drop files / click to open the upload dialog is now larger.
 * "Encrypting" message now shows up when uploading larger files.
-* TODO: paste's clipboard icon now copies to clipboard again.
+* Paste's clipboard icon:
+  * Copies to clipboard again (regression)
+  * TODO: does not jump around as the page loads.
+* TODO: Removed "Pasty" prefix to file names for view file.
+* TODO: Download and view raw links now look less out of place.
 
 ## 0.0.3
 * Fixed transitions for upload file vs upload paste.

@@ -46,8 +46,8 @@
    files: CodeFile[],
  }
 
- // let Clipboard = require('clipboard');
- // new Clipboard('.clipboard');
+ let Clipboard = require('clipboard');
+ new Clipboard('.clipboard');
 
  @Component({
    name: 'view',

@@ -16,7 +16,11 @@
  export default {
    props: ['file'],
    mounted() {
-     hljs.highlightBlock(this.$refs.code);
+     if(this.file.type != 'plain') {
+       hljs.highlightBlock(this.$refs.code);
+     } else {
+       $(this.$refs.code).addClass('hljs');
+     }
      helpers.splitWithLineNumbers(this.$refs.code);
 
      let bgcolor = $(this.$refs.code).css('background-color');

@@ -22,6 +22,7 @@
       <label for="filetype">File type</label>
       <select id="filetype" v-model="data.type">
         <option value="auto" selected="">--auto--</option>
+        <option value="plain" selected="">--plain--</option>
         <option v-for="option in options" :value="option">
           {{ option }}
         </option>
@@ -55,7 +56,7 @@
      },
      checkType() {
        // things get slow when it gets larger
-       if(this.$refs.code.value.length > 1000) {
+       if(this.$refs.code.value.length > 1000 || this.data.type == 'plain') {
          return;
        }
 

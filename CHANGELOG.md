@@ -6,7 +6,8 @@
 * Downloading / decrypting now appears again.
 * Empty pastes show something (instead of erroring).
 * TODO: Clicking on a menu entry in mobile closes the menu.
-* TODO: Plain / no highlighting options.
+* Plain / no highlighting option for pasting.
+* TODO: User set highlighting types should not change.
 * TODO: IRC highlighting options.
 
 ## 0.1.2

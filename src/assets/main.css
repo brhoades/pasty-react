@@ -21,8 +21,7 @@ body, html {
 
 #content {
   margin: auto;
-  width: 60%;
-  max-width: 1200px;
+  max-width: 1024px;
   display: block;
   min-height: 100%;
   border-style: solid;
@@ -39,7 +38,7 @@ body, html {
   text-align: left;
 }
 
-@media(max-width: 62em) {
+@media(max-width: 768px) {
   #app {
     padding: 1em 0.5em 1em 0.5em;
   }

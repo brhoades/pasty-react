@@ -5,8 +5,11 @@
 * Plain / no highlighting option for pasting.
 * User set highlighting types no longer change / detect.
 * Wording changes in about page.
+* Updated purecss to 1.0.
+  * Settings two column collapses to one in smaller windows.
+  * Settings menu no longer disappears on mobile.
+  * Remove key size / step size constraints from settings.
 * TODO: Mobile menu scaling.
-* TODO: Settings two column collapses to one in smaller windows.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
 * TODO: IRC highlighting options.

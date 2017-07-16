@@ -3,7 +3,7 @@
     <fieldset>
       <legend>General Settings</legend>
       <div class="pure-g">
-        <div class="pure-u-2-5">
+        <div class="pure-u-md-2-5 pure-u-1">
           <label for="hljs-theme">Code Theme</label>
           <select id="hljs-theme" v-model="settings.theme" @input="updateTheme();">
             <option value="agate.css">agate</option>
@@ -85,7 +85,7 @@
             <option value="zenburn.css">zenburn</option>
           </select>
         </div>
-        <div class="pure-u-3-5">
+        <div class="pure-u-md-3-5 pure-u-1">
           <label for="preview">Preview theme</label>
           <pre id="preview"><code ref="code" class="hljs python">import json
 

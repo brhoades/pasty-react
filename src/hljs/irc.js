@@ -55,26 +55,26 @@ export default function(hljs) {
         },
         // message
         {
-          className: 'built_in',
+          className: 'keyword',
           begin: ' <', end: /$/,
           endsParent: true,
           contains: [
             {
               // someone's handle
               // a special symbol, like op/halfop
-              className: 'symbol',
+              className: 'literal',
               begin: /[~@%+]{1}/, end: '.',
               returnBegin: true,
               relevance: 5,
             },
             {
               // their name
-              className: 'built_in',
+              className: 'keyword',
               begin: /[^~@%+\ ]/, end: '>',
             },
             {
               // message
-              className: 'subst',
+              className: 'built_in',
               begin: ' ', end: /$/,
               relevance: 10,
               endsParent: true,

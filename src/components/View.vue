@@ -11,7 +11,7 @@
       </a>
       <a
           class="icon--link icon--action"
-          v-if="paste.type == 'file'"
+          v-if="paste && paste.type == 'file'"
           alt="Download this file"
           title="Download this file"
           :download=paste.real_filename

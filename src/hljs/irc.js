@@ -88,7 +88,8 @@ export default function(hljs) {
                   className: 'link',
                   begin: /(https?|ftp):\/\/[^\s\/$.?#].[^\s]*/,
                   end: '.',
-                  returnEnd: true
+                  returnEnd: true,
+                  endsParent: true
                 }
               ],
             },

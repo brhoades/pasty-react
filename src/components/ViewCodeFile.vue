@@ -24,6 +24,10 @@
 
      helpers.splitWithLineNumbers(this.$refs.code);
 
+     $('.hljs-link').each((i, e) => {
+       $(e).wrap(`<a href='${$(e).text()}'></a>`);
+     });
+
      const bgcolor = $(this.$refs.code).css('background-color');
      $(this.$refs.code).find('tr').css('background', bgcolor);
      $(this.$refs.code).css('background', 'transparent');

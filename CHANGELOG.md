@@ -4,7 +4,9 @@
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
-* Minor IRC color changes.
+* IRC Highlighter
+  * Minor color changes.
+  * URLs are now highlighted / clickable.
 
 ## 0.2.2
 * Theme selection box no longer clips theme names.

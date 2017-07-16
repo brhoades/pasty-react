@@ -84,6 +84,12 @@ export default function(hljs) {
                   className: 'meta',
                   begin: /\[/, end: /\]/
                 },
+                {
+                  className: 'link',
+                  begin: /(https?|ftp):\/\/[^\s\/$.?#].[^\s]*/,
+                  end: '.',
+                  returnEnd: true
+                }
               ],
             },
 

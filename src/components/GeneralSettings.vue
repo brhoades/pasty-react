@@ -5,7 +5,7 @@
       <div class="pure-g">
         <div class="pure-u-md-2-5 pure-u-1">
           <label for="hljs-theme">Code Theme</label>
-          <select id="hljs-theme" class="larger-form" v-model="settings.theme" @input="updateTheme();">
+          <select id="hljs-theme" class="larger-form" v-model="theme">
             <option value="agate.css">agate</option>
             <option value="androidstudio.css">androidstudio</option>
             <option value="arduino-light.css">arduino-light</option>
@@ -54,8 +54,8 @@
             <option value="hybrid.css">hybrid</option>
             <option value="idea.css">idea</option>
             <option value="ir-black.css">ir-black</option>
-            <option value="kimbie.css">kimbie</option>.dark
-            <option value="kimbie.css">kimbie</option>.light
+            <option value="kimbie.dark.css">kimbie dark</option>
+            <option value="kimbie.light.css">kimbie light</option>
             <option value="magula.css">magula</option>
             <option value="mono-blue.css">mono-blue</option>
             <option value="monokai.css">monokai</option>
@@ -66,8 +66,8 @@
             <option value="paraiso-light.css">paraiso-light</option>
             <option value="pojoaque.css">pojoaque</option>
             <option value="purebasic.css">purebasic</option>
-            <option value="qtcreator.css">qtcreator</option>_dark
-            <option value="qtcreator.css">qtcreator</option>_light
+            <option value="qtcreator_dark.css">qtcreator</option>
+            <option value="qtcreator_light.css">qtcreator</option>
             <option value="railscasts.css">railscasts</option>
             <option value="rainbow.css">rainbow</option>
             <option value="school-book.css">school-book</option>
@@ -108,15 +108,23 @@ if __name__ == "__main__":
  export default {
    props: ['settings'],
    data() {
+     this.updateTheme(this.settings.theme);
      return {
+       theme: this.settings.theme
+     }
+   },
+   watch: {
+     theme(value: string) {
+       this.updateTheme(value);
      }
    },
    mounted() {
      hljs.highlightBlock(this.$refs.code);
    },
    methods: {
-     updateTheme() {
-       $("#hljs-theme").attr("href", `assets/hljs-themes/${this.settings.theme}`);
+     updateTheme(value: string) {
+       this.settings.theme = value;
+       $("#hljs-theme").attr("href", `assets/hljs-themes/${value}`);
      }
    }
  }

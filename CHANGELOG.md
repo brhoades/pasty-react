@@ -6,6 +6,7 @@
 * TODO: File size is checked and errors out before uploading.
 * Theme selection box no longer clips theme names.
   * Purecss forms now included on all pages
+* Theme selection only loaded the last selected theme, now it keeps up to date.
 
 ## 0.2.1
 * IRC highlighting now more robust.

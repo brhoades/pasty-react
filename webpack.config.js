@@ -18,7 +18,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].js'
   },
   module: {
@@ -61,7 +61,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#source-map',
+  devtool: 'cheap-eval-source-map',
   plugins: [
     new webpack.ProvidePlugin({
       "hljs": "highlight.js",
@@ -88,10 +88,6 @@ module.exports = {
         to: "assets/hljs-themes/[name].[ext]"
       }
     ]),
-    new HtmlWebpackPlugin({
-      template: 'src/index.ejs',
-      hash: true
-    })
   ],
 }
 
@@ -114,6 +110,17 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      hash: true
     })
   ])
+} else {
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      cache: false
+    })
+  ]);
 }

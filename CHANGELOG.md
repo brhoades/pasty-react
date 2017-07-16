@@ -1,4 +1,13 @@
 # Changelog
+## NEXT RELEASE
+* Mobile menu scaling.
+* Settings two column collapses to one in smaller windows.
+* File size is checked and errors out before uploading.
+* Downloading / decrypting now appears again.
+* Clicking on a menu entry in mobile closes the menu.
+* Empty pastes show something (instead of erroring).
+* Plain / no highlighting options.
+* IRC highlighting options.
 
 ## 0.1.2
 * s3-upload uploaded files under dist, now it does not

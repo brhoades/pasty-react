@@ -5,7 +5,7 @@
       <div class="pure-g">
         <div class="pure-u-md-2-5 pure-u-1">
           <label for="hljs-theme">Code Theme</label>
-          <select id="hljs-theme" v-model="settings.theme" @input="updateTheme();">
+          <select id="hljs-theme" class="larger-form" v-model="settings.theme" @input="updateTheme();">
             <option value="agate.css">agate</option>
             <option value="androidstudio.css">androidstudio</option>
             <option value="arduino-light.css">arduino-light</option>
@@ -81,7 +81,7 @@
             <option value="tomorrow-night-eighties.css">tomorrow-night-eighties</option>
             <option value="vs.css">vs</option>
             <option value="xcode.css">xcode</option>
-            <option value="xt.css">xt</option>256
+            <option value="xt.css">xt</option>
             <option value="zenburn.css">zenburn</option>
           </select>
         </div>
@@ -121,3 +121,9 @@ if __name__ == "__main__":
    }
  }
 </script>
+
+<style>
+  select.larger-form {
+    height: 40px;
+  }
+</style>

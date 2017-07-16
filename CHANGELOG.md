@@ -9,10 +9,11 @@
   * Settings two column collapses to one in smaller windows.
   * Settings menu no longer disappears on mobile.
   * Remove key size / step size constraints from settings.
+* Content width is no longer relative, now max-width.
+* IRC highlighting options.
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
-* TODO: IRC highlighting options.
 
 ## 0.1.2
 * s3-upload uploaded files under dist, now it does not

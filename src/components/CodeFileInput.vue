@@ -34,9 +34,11 @@
 
 <script lang="ts">
  declare var hljs: any;
+ import { registerLanguage } from '../ts/code-helpers'
 
  export default {
    data() {
+     registerLanguage(hljs);
      let options = hljs.listLanguages();
 
      return {

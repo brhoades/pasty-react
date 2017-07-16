@@ -35,6 +35,8 @@
      helpers.highlightLines($(this.$refs.code), this.file.highlighted);
    },
    data() {
+     helpers.registerLanguage(hljs);
+
      return {
      };
    },

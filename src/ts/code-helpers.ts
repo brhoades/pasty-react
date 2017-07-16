@@ -1,5 +1,6 @@
 declare var $: any;
 import _ from "lodash/util"
+import irchljs from '../hljs/irc'
 
 // helpers to use when displaying code
 
@@ -111,4 +112,8 @@ export function highlightLines(scope, highlighted) {
   scope.find('tr').filter((i) => {
     return highlighted.indexOf(i + 1) >= 0;
   }).addClass('cv--highlighted');
+}
+
+export function registerLanguage(hljs) {
+  hljs.registerLanguage('irc', irchljs);
 }

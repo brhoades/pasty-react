@@ -4,9 +4,12 @@
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
+
+## 0.2.2
 * Theme selection box no longer clips theme names.
   * Purecss forms now included on all pages
 * Theme selection only loaded the last selected theme, now it keeps up to date.
+* IRC paste detection is now more aggressive.
 
 ## 0.2.1
 * IRC highlighting now more robust.

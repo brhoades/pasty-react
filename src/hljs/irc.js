@@ -16,12 +16,13 @@ export default function(hljs) {
     {
       className: 'meta',
       begin: /^\[?[0-9]{2}:[0-9]{2}:[0-9]{2}\]?/, end: /$/,
-      relevance: 8,
+      relevance: 3,
       contains: [
         // Channel info
         {
           className: 'title',
           begin: '-- ', end: /$/,
+          relevance: 10,
           endsParent: true,
         },
         // Action
@@ -34,6 +35,7 @@ export default function(hljs) {
               // their name
               className: 'built_in',
               begin: /\w+/,
+              relevance: 10,
               beginEnds: true,
             },
             {
@@ -74,6 +76,7 @@ export default function(hljs) {
               // message
               className: 'subst',
               begin: ' ', end: /$/,
+              relevance: 10,
               endsParent: true,
               contains: [
                 // timestamp

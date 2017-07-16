@@ -21,9 +21,10 @@
      } else {
        $(this.$refs.code).addClass('hljs');
      }
+
      helpers.splitWithLineNumbers(this.$refs.code);
 
-     let bgcolor = $(this.$refs.code).css('background-color');
+     const bgcolor = $(this.$refs.code).css('background-color');
      $(this.$refs.code).find('tr').css('background', bgcolor);
      $(this.$refs.code).css('background', 'transparent');
 

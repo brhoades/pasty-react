@@ -7,8 +7,9 @@
 * Empty pastes show something (instead of erroring).
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * Plain / no highlighting option for pasting.
-* TODO: User set highlighting types should not change.
+* User set highlighting types no longer change / detect.
 * TODO: IRC highlighting options.
+* TODO: Wording changes in about page.
 
 ## 0.1.2
 * s3-upload uploaded files under dist, now it does not

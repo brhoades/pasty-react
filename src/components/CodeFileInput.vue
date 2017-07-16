@@ -20,9 +20,9 @@
       </textarea>
       <br />
       <label for="filetype">File type</label>
-      <select id="filetype" v-model="data.type">
+      <select id="filetype" v-model="data.type" v-on:click="setManualType()">
         <option value="auto" selected="">--auto--</option>
-        <option value="plain" selected="">--plain--</option>
+        <option value="plain">--plain--</option>
         <option v-for="option in options" :value="option">
           {{ option }}
         </option>
@@ -40,7 +40,8 @@
      let options = hljs.listLanguages();
 
      return {
-       options: options
+       options: options,
+       manualType: false
      }
    },
    methods: {
@@ -56,13 +57,19 @@
      },
      checkType() {
        // things get slow when it gets larger
-       if(this.$refs.code.value.length > 1000 || this.data.type == 'plain') {
+       if(this.$refs.code.value.length > 1000 || this.data.type == 'plain'
+          || this.manualType) {
          return;
        }
 
        let res = hljs.highlightAuto(this.$refs.code.value);
 
        this.data.type = res.language;
+     },
+     setManualType() {
+       // if the type is user set to something other than auto, do not automatically set
+       // the type.
+       this.manualType = this.data.type != 'auto';
      }
    },
    props: ['data']

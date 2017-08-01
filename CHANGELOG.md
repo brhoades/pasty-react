@@ -5,6 +5,9 @@
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
 
+## 0.2.4
+* Images no longer stretch to fill the page.
+
 ## 0.2.3
 * IRC Highlighter
   * Minor color changes.

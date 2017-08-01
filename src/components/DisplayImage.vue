@@ -16,11 +16,15 @@
 </script>
 
 <style>
+ .viewimage {
+   overflow: none;
+ }
+
  .viewimage > img {
    padding-top: 25px;
    margin: auto;
 
-   width: 95%;
+   max-width: 95%;
    height: auto;
    resize: both;
  }

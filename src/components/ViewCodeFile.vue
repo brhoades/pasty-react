@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2>{{ file.name || `unnamed-file-${file.id}` }}</h2>
+    <h2>{{ file.getName() }}</h2>
 
-    <a :download=file.name :href=file.base64DownloadString()>Download</a>
+    <a :download=file.getName() :href=file.base64DownloadString()>Download</a>
     <pre v-if="!file.type || file.type == 'auto'"><code ref="code">{{ file.contents }}</code></pre>
 
     <pre v-else><code :class=file.type ref="code">{{ file.contents }}</code></pre>
@@ -25,6 +25,7 @@
      helpers.splitWithLineNumbers(this.$refs.code);
 
      $('.hljs-link').each((i, e) => {
+       console.log($(e).text());
        $(e).wrap(`<a href='${$(e).text()}'></a>`);
      });
 

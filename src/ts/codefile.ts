@@ -1,3 +1,5 @@
+import { encode } from 'utf8';
+
 export default class CodeFile {
   id: number;
   type: string;
@@ -33,6 +35,14 @@ export default class CodeFile {
 
   // base64 string for forcing a file download.
   base64DownloadString(): string {
-    return `data:application/octet-stream;base64,${btoa(this.contents)}`;
+    return `data:application/octet-stream;base64,${btoa(encode(this.contents))}`;
+  }
+
+  getName(): string {
+    if (!this.name) {
+      return `file-${this.id}`;
+    }
+
+    return this.name;
   }
 }

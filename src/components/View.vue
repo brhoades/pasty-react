@@ -44,7 +44,7 @@
  import {Vue, Component, Watch, Lifecycle} from 'av-ts'
 
  import * as client from '../ts/client';
- import CodeFile from '../ts/codefile';
+ import { CodeFile } from 'pasty-core';
  import {serializeLineNumbers, unserializeLineNumbers} from '../ts/code-helpers'
  import Spinner from './spinner.vue'
  import Settings from '../ts/settings'

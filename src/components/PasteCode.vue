@@ -20,8 +20,8 @@
 
 
 <script lang="ts">
+ import { CodeFile } from "pasty-core"
  import * as client from "../ts/client"
- import CodeFile from "../ts/codefile"
  import CodeFileInput from "./CodeFileInput.vue"
 
  export default {

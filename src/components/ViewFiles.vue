@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="file in paste.files">
+    <div v-for="file in paste.files" class="file-spaced">
       <ViewCodeFile
         v-if="file.isReadable()"
         @highlightupdate="updateURL()"
@@ -67,6 +67,9 @@
  }
 </script>
 
-
 <style>
+ .file-spaced {
+   padding-top: 1em;
+   padding-bottom: 1em;
+ }
 </style>

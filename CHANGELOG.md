@@ -8,6 +8,8 @@
 
 # 0.3.1
 * Now supporting viewing "code" files with different mimes than text/plain.
+* Fixed line highlighting for code files.
+
 # 0.3.0
 * Moved codefile to pasty-core.
 * Now using pasty-core serializers.

@@ -61,7 +61,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: 'cheap-eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.ProvidePlugin({
       "hljs": "highlight.js",

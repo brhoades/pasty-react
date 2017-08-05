@@ -1,6 +1,6 @@
 {
   "name": "pasty-http-client",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
     "upload": "yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
@@ -12,7 +12,7 @@
     "av-ts": "^0.7.1",
     "clipboard": "^1.6.1",
     "highlight.js": "^9.11.0",
-    "pasty-core": "^0.0.6",
+    "pasty-core": "^0.1.0",
     "pgwcookie": "^1.4.0",
     "purecss": "^1.0.0",
     "spinkit": "^1.2.5",

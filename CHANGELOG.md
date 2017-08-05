@@ -5,6 +5,8 @@
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
 * TODO: Implement common uploadfile logic.
+
+# 0.3.0
 * Moved codefile to pasty-core.
 * Now using pasty-core serializers.
 * Now using paste api v2.

@@ -114,17 +114,6 @@
 
 
 <style>
-.vertical-center-parent {
-  display: table;
-  width: 100%;
-  height: 100%;
-}
-
-.vertical-center-child {
-  display: table-cell;
-  vertical-align: middle;
-}
-
 .spinner-message {
   text-align: center;
 }

@@ -6,8 +6,11 @@
 * TODO: File size is checked and errors out before uploading.
 * TODO: Implement common uploadfile logic.
 
+## 0.3.4
+* Code file input now shows the loading spinner while uploading.
+
 ## 0.3.3
-Encoding fixes for pasty-cli, pasty-core 0.1.2 use
+* Encoding fixes for pasty-cli, pasty-core 0.1.2 use
 
 ## 0.3.2
 * Fix for highlighting race condition where theme loads too slowly.

@@ -22,7 +22,7 @@
 
  export default {
    components: {
-     'DisplayImage': DisplayImage
+     DisplayImage,
    },
    props: ['file']
  }

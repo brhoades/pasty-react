@@ -17,7 +17,6 @@
     "purecss": "^1.0.0",
     "spinkit": "^1.2.5",
     "vue": "^2.2.1",
-    "vue-clip": "^1.0.0",
     "vue-router": "^2.2.1",
     "zepto-webpack": "^1.2.1"
   },

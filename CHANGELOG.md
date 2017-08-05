@@ -4,7 +4,10 @@
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
-* TODO: Implement common uploadfile logic.
+* Removed separate view for uploading files.
+* Files and code can be uploaded on the same paste.
+* Code files can be uploaded from your machine.
+* TODO: drag and drop zone.
 
 ## 0.3.4
 * Code file input now shows the loading spinner while uploading.

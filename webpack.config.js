@@ -9,7 +9,6 @@ module.exports = {
     libs: [
       'pasty-core',
       'vue',
-      'vue-clip',
       'vue-router',
       'highlight.js',
       'zepto-webpack',

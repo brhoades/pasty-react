@@ -2,7 +2,7 @@ declare var require: any;
 declare var $: any;
 var promise = require("./vendor/promise.js");
 
-import { CodeFile, randomPassword, encryptFile, decryptFile, PasteParser, Paste } from "pasty-core";
+import { CodeFile, randomPassword, encryptFile, decryptFile, PasteParser, Paste, PasteFile } from "pasty-core";
 import config from "./config";
 import UploadedFile from "./uploadedfile";
 import Settings from "./settings";
@@ -40,14 +40,11 @@ export function uploadFileHook(file: any, state: any): void {
   reader.addEventListener("load", () => {
     const mimeString: string = reader.result.split(',')[0].split(':')[1].split(';')[0]
     const byteString: string = reader.result.split(',')[1];
-    const data = {
-      name: file.name,
-      data: byteString,
-      mime: mimeString,
-      type: "file"
-    };
+    const paste: Paste = Paste.empty();
+    const pasteFile: PasteFile = new PasteFile(0, file.name, byteString, mimeString);
+    paste.files.push(pasteFile);
 
-    const encryptedFile: any = encryptFile(JSON.stringify(data), settings.security.keysize);
+    const encryptedFile: any = encryptFile(paste.serialize(), settings.security.keysize);
 
     uploadFile(encryptedFile, state, (res, key) => {
       if (res && res.error) {

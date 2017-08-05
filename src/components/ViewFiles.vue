@@ -2,7 +2,7 @@
   <div>
     <div v-for="file in paste.files">
       <ViewCodeFile
-          v-if="file.meta.highlight !== undefined"
+          v-if="file.meta.mime === 'text/plain'"
           @highlightupdate="updateURL()"
           :file="file"
       />

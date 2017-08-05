@@ -29,13 +29,13 @@
      "CodeFileInput": CodeFileInput
    },
    methods: {
-     defaultFile() {
+     defaultFile(): CodeFile {
        return CodeFile.empty();
      },
-     addFile() {
+     addFile(): void {
        this.paste.files.push(this.defaultFile());
      },
-     deleteFile(index) {
+     deleteFile(index): void {
        this.paste.files.splice(index, 1);
      }
    },
@@ -45,7 +45,7 @@
          this.addFile();
        },
        submit: () => {
-         // TODO: Implement submit here.
+         // TODO: Implement submit state logic here.
          let state = {
            message: () => {}
          };

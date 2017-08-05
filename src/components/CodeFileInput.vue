@@ -14,13 +14,13 @@
           id="code"
           v-on:blur="checkContent(); checkType();"
           v-on:focus="checkContent();"
-          v-model="data.contents"
+          v-model="data.data"
           placeholder="puts 'Hello World'"
       >
       </textarea>
       <br />
       <label for="filetype">File type</label>
-      <select id="filetype" v-model="data.type" v-on:click="setManualType()">
+      <select id="filetype" v-model="data.meta.highlight" v-on:click="setManualType()">
         <option value="auto" selected="">--auto--</option>
         <option value="plain">--plain--</option>
         <option v-for="option in options" :value="option">
@@ -53,25 +53,25 @@
        // our model
        let code = this.$refs.code;
 
-       if(this.data.contents != code.value) {
+       if(this.data.data != code.value) {
          code.dispatchEvent(new Event('input'));
        }
      },
      checkType() {
        // things get slow when it gets larger
-       if(this.$refs.code.value.length > 1000 || this.data.type == 'plain'
+       if(this.$refs.code.value.length > 1000 || this.data.meta.highlight == 'plain'
           || this.manualType) {
          return;
        }
 
        let res = hljs.highlightAuto(this.$refs.code.value);
 
-       this.data.type = res.language;
+       this.data.meta.highlight = res.language;
      },
      setManualType() {
        // if the type is user set to something other than auto, do not automatically set
        // the type.
-       this.manualType = this.data.type != 'auto';
+       this.manualType = this.data.meta.highlight != 'auto';
      }
    },
    props: ['data']

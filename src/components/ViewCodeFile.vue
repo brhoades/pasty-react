@@ -10,8 +10,8 @@
     >
       <i class="icon-download-cloud icon--scaling"></i>
     </a>
-    <pre v-if="!file.type || file.type == 'auto'"><code ref="code">{{ file.data }}</code></pre>
-    <pre v-else><code :class=file.type ref="code">{{ file.data }}</code></pre>
+    <pre v-if="!file.meta.highlight || file.meta.highlight === 'auto'"><code ref="code">{{ file.data }}</code></pre>
+    <pre v-else><code :class=file.meta.highlight ref="code">{{ file.data }}</code></pre>
   </div>
 </template>
 
@@ -22,7 +22,7 @@
  export default {
    props: ['file'],
    mounted() {
-     if(this.file.type != 'plain') {
+     if(this.file.meta.highlight != 'plain') {
        hljs.highlightBlock(this.$refs.code);
      } else {
        $(this.$refs.code).addClass('hljs');
@@ -36,7 +36,7 @@
 
      const bgcolor = $(this.$refs.code).css('background-color');
      $(this.$refs.code).find('tr').css('background', bgcolor);
-     $(this.$refs.code).css('background', 'transparent');
+     // $(this.$refs.code).css('background', 'transparent');
 
      helpers.registerClickHandlers($(this.$refs.code));
 
@@ -125,5 +125,9 @@
 
  .cv--table, .cv--row {
    width: 100%;
+ }
+
+ h1 {
+   display: inline-block;
  }
 </style>

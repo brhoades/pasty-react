@@ -76,9 +76,6 @@
          this.message = message;
        },
        data: (paste: Paste) => {
-         console.log("HELLOOOOO PASTE DATA");
-         console.dir(paste);
-         console.dir(paste.files[0]);
          this.paste = paste;
          this.loading = false;
 

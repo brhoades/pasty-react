@@ -1,6 +1,6 @@
 <template>
   <div id="paste-file">
-    <div id="content-paste-file">
+    <div id="content-paste-file" v-if="waiting">
       <form class="pure-form pure-form-stacked">
         <div v-for="(file, i) in paste.files">
           <CodeFileInput
@@ -15,6 +15,11 @@
         <button class="pure-button" v-on:click="submit();">Paste</button>
       </form>
     </div>
+    <div class="vertical-center-parent" v-else-if="uploading">
+      <div class="vertical-center-child">
+        <Spinner v-bind:message="message" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,10 +28,12 @@
  import { Paste, CodeFile } from "pasty-core"
  import * as client from "../ts/client"
  import CodeFileInput from "./CodeFileInput.vue"
+ import Spinner from './spinner.vue';
 
  export default {
    components: {
-     "CodeFileInput": CodeFileInput
+     CodeFileInput,
+     Spinner,
    },
    methods: {
      defaultFile(): CodeFile {
@@ -45,14 +52,21 @@
          this.addFile();
        },
        submit: () => {
-         // TODO: Implement submit state logic here.
-         let state = {
-           message: () => {}
+         this.uploading = true;
+         this.waiting = false;
+
+         const state = {
+           message: (message: string) => {
+             this.message = message;
+           }
          };
 
          client.uploadCodeFiles(this.paste, state);
        },
        paste: Paste.empty(),
+       waiting: true,
+       uploading: false,
+       message: 'Encrypting...'
      };
 
      data.paste.files.push(this.defaultFile());

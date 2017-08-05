@@ -9,16 +9,6 @@
       >
         <i class="icon-clipboard icon--scaling"></i>
       </a>
-      <a
-          class="icon--link icon--action"
-          v-if="paste && paste.type == 'file'"
-          alt="Download this file"
-          title="Download this file"
-          :download=paste.real_filename
-          :href=paste.base64DownloadString()
-      >
-        <i class="icon-download-cloud icon--scaling"></i>
-      </a>
     </div>
     <div class="vertical-center-parent" v-if="loading">
       <div class="vertical-center-child">
@@ -26,36 +16,32 @@
       </div>
     </div>
 
+    <div v-else-if="paste == null">
+      Unknown error
+    </div>
+
     <div v-else-if="error">
       {{ error }}
     </div>
 
-    <div v-else-if="paste.type == 'file'">
-      <ViewUploadedFile :paste="paste"/>
-    </div>
-    <div v-else-if="paste.type == 'code'">
-      <ViewCodeFiles v-on:highlightupdate="updateURL()" :files="paste.files"/>
+    <div v-else>
+      <ViewFiles :paste="paste" />
     </div>
   </div>
 </template>
 
 
 <script lang="ts">
- import {Vue, Component, Watch, Lifecycle} from 'av-ts'
+ import { Vue, Component, Watch, Lifecycle } from 'av-ts'
 
  import * as client from '../ts/client';
- import { CodeFile } from 'pasty-core';
- import {serializeLineNumbers, unserializeLineNumbers} from '../ts/code-helpers'
- import Spinner from './spinner.vue'
- import Settings from '../ts/settings'
- import ViewUploadedFile from './ViewUploadedFile.vue'
- import ViewCodeFiles from './ViewCodeFiles.vue'
+ import { CodeFile, Paste } from 'pasty-core';
+ import { serializeLineNumbers, unserializeLineNumbers } from '../ts/code-helpers';
+ import ViewFiles from './ViewFiles.vue';
+ import Spinner from './spinner.vue';
+ import Settings from '../ts/settings';
  declare var $: any;
  declare var require: any;
-
- type PasteT = {
-   files: CodeFile[],
- }
 
  let Clipboard = require('clipboard');
  new Clipboard('.clipboard');
@@ -64,22 +50,14 @@
    name: 'view',
    components: {
      Spinner,
-     ViewUploadedFile,
-     ViewCodeFiles
+     ViewFiles,
    }
  })
  export default class View extends Vue {
-   paste: null | PasteT = null;
+   paste: null | Paste = null;
    loading: boolean = true;
    error: string | null = null;
    message: string = "Initializing...";
-
-   @Lifecycle
-   mounted() {
-     let settings = new Settings($);
-
-     $("#hljs-theme").attr("href", `assets/hljs-themes/${settings.theme}`);
-   }
 
    @Lifecycle
    created() {
@@ -97,44 +75,31 @@
        message: (message) => {
          this.message = message;
        },
-       data: (data) => {
-         this.paste = data;
+       data: (paste: Paste) => {
+         console.log("HELLOOOOO PASTE DATA");
+         console.dir(paste);
+         console.dir(paste.files[0]);
+         this.paste = paste;
          this.loading = false;
 
          // attach highlighted lines to corresponding files
-         if(params.options && data && data.type == "code") {
-           const highlights = params.options.split(";");
+         if (params.options && paste) {
+           const highlights: string[] = params.options.split(";");
 
-           if(highlights.length == data.files.length) {
-             for(let i=0; i<highlights.length; i++) {
-               data.files[i].highlighted = unserializeLineNumbers(highlights[i]);
-             }
+           if (highlights.length == paste.files.length) {
+             highlights.map((hl, i) => {
+               if (paste.files[i] instanceof CodeFile) {
+                 (<CodeFile>paste.files[i]).highlighted = unserializeLineNumbers(hl);
+               } else {
+                 throw new Error(`File ${i} is not a code file.`);
+               }
+             });
            }
          }
        }
      };
 
      client.view(params.file, params.key, state);
-   }
-
-   @Watch('$route')
-   fetchData(to, from) {
-     // todo: react to changes--- refresh page or something
-   }
-
-   updateURL() {
-     const highlightedlines = this.paste.files.map((e) => {
-       return serializeLineNumbers(e.highlighted);
-     }).join(";");
-
-     this.$router.replace({
-       name: highlightedlines ? 'view-options': 'view',
-       params: {
-         options: highlightedlines,
-         key: this.$route.params.key,
-         file: this.$route.params.file
-       }
-     });
    }
 
    getShortURL(params: any): string {

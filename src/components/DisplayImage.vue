@@ -1,15 +1,15 @@
 <template>
-  <div class="viewimage" v-if="canDisplay(paste)">
-    <img class="pure-img" :src=paste.base64String() />
+  <div class="viewimage" v-if="canDisplay(file)">
+    <img class="pure-img" :src=file.base64ViewString() />
   </div>
 </template>
 
 <script lang="ts">
  export default {
-   props: ['paste'],
+   props: ['file'],
    methods: {
-     canDisplay(paste) {
-       return /^image/.test(paste.mime);
+     canDisplay(file) {
+       return /^image/.test(file.meta.mime);
      }
    }
  };

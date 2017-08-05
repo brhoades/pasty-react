@@ -2,7 +2,7 @@ declare var require: any;
 declare var $: any;
 var promise = require("./vendor/promise.js");
 
-import { CodeFile, randomPassword, encryptFile, decryptFile } from "pasty-core";
+import { CodeFile, randomPassword, encryptFile, decryptFile, PasteParser, Paste } from "pasty-core";
 import config from "./config";
 import UploadedFile from "./uploadedfile";
 import Settings from "./settings";
@@ -64,14 +64,10 @@ export function uploadFileHook(file: any, state: any): void {
   }
 }
 
-export function uploadCodeFiles(files: [CodeFile], state: any): void {
-  let data = {
-    files: files.map((f) => f.rawObject()),
-    type: "code"
-  };
+export function uploadCodeFiles(paste: Paste, state: any): void {
   let settings: Settings = new Settings($);
 
-  uploadFile(encryptFile(JSON.stringify(data), settings.security.keysize), state, (res, key) => {
+  uploadFile(encryptFile(paste.serialize(), settings.security.keysize), state, (res, key) => {
     if (res && res.error) {
       state.message(`Error uploading: ${res.error}`);
       console.log(res.error);
@@ -84,18 +80,10 @@ export function uploadCodeFiles(files: [CodeFile], state: any): void {
 export function view(file: string, key: string, state: any): void {
   getFile(file, (response) => {
     state.message("Decrypting...");
-    const dataBlob: any = JSON.parse(decryptFile(response, key));
+    const dataBlob: string = decryptFile(response, key);
+    const paste: Paste = PasteParser.parse(file, key, dataBlob);
 
-    if(dataBlob.type == "file") {
-      const data : UploadedFile = new UploadedFile(dataBlob.data, dataBlob.mime, file, dataBlob.name, key);
-      state.data(data);
-    } else {
-      let data = dataBlob;
-      data.files = data.files.map((f) => new CodeFile(f.id, f.name, f.contents, f.type));
-
-      state.data(data);
-    }
-
+    state.data(paste);
     state.message("Displaying...");
   });
 }

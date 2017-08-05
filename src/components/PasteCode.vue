@@ -2,7 +2,7 @@
   <div id="paste-file">
     <div id="content-paste-file">
       <form class="pure-form pure-form-stacked">
-        <div v-for="(file, i) in files">
+        <div v-for="(file, i) in paste.files">
           <CodeFileInput
             :data="file"
             v-on:delete="deleteFile(i);"
@@ -20,7 +20,7 @@
 
 
 <script lang="ts">
- import { CodeFile } from "pasty-core"
+ import { Paste, CodeFile } from "pasty-core"
  import * as client from "../ts/client"
  import CodeFileInput from "./CodeFileInput.vue"
 
@@ -30,35 +30,34 @@
    },
    methods: {
      defaultFile() {
-       return new CodeFile(0, "", "", "auto");
+       return CodeFile.empty();
      },
      addFile() {
-       this.files.push(this.defaultFile().rawObject());
+       this.paste.files.push(this.defaultFile());
      },
      deleteFile(index) {
-       this.files.splice(index, 1);
+       this.paste.files.splice(index, 1);
      }
    },
    data() {
-     return {
+     let data = {
        addEmptyFile: () => {
          this.addFile();
        },
        submit: () => {
-         const files = this.files.map((f) => {
-           return new CodeFile(f.id, f.name, f.contents, f.type);
-         });
-
+         // TODO: Implement submit here.
          let state = {
            message: () => {}
          };
 
-         client.uploadCodeFiles(files, state);
+         client.uploadCodeFiles(this.paste, state);
        },
-       files: [
-         (this.defaultFile()).rawObject()
-       ]
-     }
+       paste: Paste.empty(),
+     };
+
+     data.paste.files.push(this.defaultFile());
+
+     return data;
    }
  }
 </script>

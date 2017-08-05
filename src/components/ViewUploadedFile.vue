@@ -1,12 +1,19 @@
 <template>
   <div>
-    <h1>{{ paste.real_filename }}</h1>
-
+    <h1>{{ file.getName() }}</h1>
+    <a
+        class="icon--link"
+        alt="Download this file"
+        title="Download this file"
+        :download=file.name
+        :href=file.base64DownloadString()
+    >
+      <i class="icon-download-cloud icon--scaling"></i>
+    </a>
     <br />
-    <a :href=paste.base64String()>View Directly</a>
-    <a class="clipboard" :data-clipboard-text=paste.getRawURL()>[clip]</a><br />
+    <a :href=file.base64ViewString()>View Directly</a>
 
-    <DisplayImage :paste=paste />
+    <DisplayImage :file="file" />
   </div>
 </template>
 
@@ -17,16 +24,7 @@
    components: {
      'DisplayImage': DisplayImage
    },
-   created() {
-     const params = this.$route.params;
-
-     if(params.options && params.options == "raw") {
-       // go to the primary URL so if back is hit, we don't redirect to raw
-       window.location.href = this.paste.getURL();
-       window.location.href = this.paste.base64String();
-     }
-   },
-   props: ['paste']
+   props: ['file']
  }
 </script>
 

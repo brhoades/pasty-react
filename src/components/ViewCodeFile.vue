@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h2>{{ file.getName() }}</h2>
-
-    <a :download=file.getName() :href=file.base64DownloadString()>Download</a>
-    <pre v-if="!file.type || file.type == 'auto'"><code ref="code">{{ file.contents }}</code></pre>
-
-    <pre v-else><code :class=file.type ref="code">{{ file.contents }}</code></pre>
+    <h1>{{ file.getName() }}</h1>
+    <a
+        class="icon--link"
+        alt="Download this file"
+        title="Download this file"
+        :download=file.name
+        :href=file.base64DownloadString()
+    >
+      <i class="icon-download-cloud icon--scaling"></i>
+    </a>
+    <pre v-if="!file.type || file.type == 'auto'"><code ref="code">{{ file.data }}</code></pre>
+    <pre v-else><code :class=file.type ref="code">{{ file.data }}</code></pre>
   </div>
 </template>
 
@@ -25,7 +31,6 @@
      helpers.splitWithLineNumbers(this.$refs.code);
 
      $('.hljs-link').each((i, e) => {
-       console.log($(e).text());
        $(e).wrap(`<a href='${$(e).text()}'></a>`);
      });
 

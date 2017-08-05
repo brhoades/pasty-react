@@ -10,7 +10,7 @@
     >
       <i class="icon-download-cloud icon--scaling"></i>
     </a>
-    <pre><code :class=file.meta.highlight ref="code">{{ file.data }}</code></pre>
+    <pre><code ref="code">{{ file.data }}</code></pre>
   </div>
 </template>
 
@@ -21,8 +21,13 @@
  export default {
    props: ['file'],
    mounted() {
-     hljs.highlightBlock(this.$refs.code);
-     $(this.$refs.code).addClass('hljs');
+     if(this.file.meta.highlight != 'plain') {
+       $(this.$refs.code).addClass(this.file.meta.highlight);
+       hljs.highlightBlock(this.$refs.code);
+     } else {
+       $(this.$refs.code).addClass('hljs');
+     }
+
      helpers.splitWithLineNumbers(this.$refs.code);
 
      $('.hljs-link').each((i, e) => {

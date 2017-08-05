@@ -19,10 +19,8 @@
  import { CodeFile, Paste } from 'pasty-core'
  import {serializeLineNumbers, unserializeLineNumbers} from '../ts/code-helpers'
  import Spinner from './spinner.vue'
- import Settings from '../ts/settings'
  import ViewUploadedFile from './ViewUploadedFile.vue'
  import ViewCodeFile from './ViewCodeFile.vue'
- declare var $: any;
  declare var require: any;
 
  let Clipboard = require('clipboard');
@@ -38,13 +36,6 @@
  })
  export default class ViewFiles extends Vue {
    paste: Paste;
-
-   @Lifecycle
-   mounted() {
-     let settings = new Settings($);
-
-     $("#hljs-theme").attr("href", `assets/hljs-themes/${settings.theme}`);
-   }
 
    updateURL() {
      const highlightedlines = this.paste.files.map((e) => {

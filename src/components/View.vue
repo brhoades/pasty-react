@@ -60,6 +60,13 @@
    message: string = "Initializing...";
 
    @Lifecycle
+   mounted() {
+     let settings = new Settings($);
+
+     $("#hljs-theme").attr("href", `assets/hljs-themes/${settings.theme}`);
+   }
+
+   @Lifecycle
    created() {
      const params = this.$route.params;
 

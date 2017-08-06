@@ -1,42 +1,46 @@
 <template>
   <div class="code-file-input container">
-    <fieldset>
-      <label for="filename">
-        Filename
-      </label>
-      <input id="filename" v-model="data.name" placeholder="helloworld.rb" type="text"></input>
-      <div v-on:click="$emit('delete')" class="icon-delete">
-        <i class="icon-minus"></i>
-      </div>
-      <br />
-      <textarea
-          ref="code"
-          id="code"
-          v-on:blur="checkContent(); checkType();"
-          v-on:focus="checkContent();"
-          v-model="data.data"
-          placeholder="puts 'Hello World'"
-      >
-      </textarea>
-      <br />
-      <label for="filetype">File type</label>
-      <select id="filetype" v-model="data.meta.highlight" v-on:click="setManualType()">
-        <option value="auto" selected="">--auto--</option>
-        <option value="plain">--plain--</option>
-        <option v-for="option in options" :value="option">
-          {{ option }}
-        </option>
-      </select>
-    </fieldset>
+    <Card @delete="$emit('delete')" :file="data">
+      <fieldset>
+        <div class="left-input">
+          <label for="filename">
+            Filename
+          </label>
+          <input id="filename" v-model="data.name" :placeholder="data.getName()" type="text"></input>
+        </div>
+        <div class="right-input">
+          <label for="filetype">File type</label>
+          <select id="filetype" v-model="data.meta.highlight" v-on:click="setManualType()">
+            <option value="auto" selected="">--auto--</option>
+            <option value="plain">--plain--</option>
+            <option v-for="option in options" :value="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+        <textarea
+            ref="code"
+            id="code"
+            v-on:blur="checkContent(); checkType();"
+            v-on:focus="checkContent();"
+            v-model="data.data"
+            placeholder="puts 'Hello World'"
+        >
+        </textarea>
+      </fieldset>
+    </Card>
   </div>
 </template>
 
-
 <script lang="ts">
  declare var hljs: any;
- import { registerLanguage } from '../ts/code-helpers'
+ import Card from './Card.vue';
+ import { registerLanguage } from '../ts/code-helpers';
 
  export default {
+   components: {
+     Card,
+   },
    data() {
      registerLanguage(hljs);
      let options = hljs.listLanguages();
@@ -79,28 +83,30 @@
 </script>
 
 <style>
- .icon-delete {
-   color: red;
-   display: inline;
-   padding: 2px;
-   cursor: pointer;
- }
-
  #filename {
    display: inline-block;
  }
 
  #code {
    font-family: "Sans Mono", "Consolas", "Courier", monospace;
-   width: 90%;
-   heigth: auto;
+   width: 100%;
+   height: auto;
    min-height: 60vh;
  }
 
  @media (max-width: 62em) {
    #code {
-     width: 90%;
+     width: 100%;
      min-width: 300px;
    }
+ }
+
+ .left-input {
+   display: inline-block;
+ }
+
+ .right-input {
+   display: inline-block;
+   float: right;
  }
 </style>

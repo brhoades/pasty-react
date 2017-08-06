@@ -14,8 +14,9 @@
 * Files and code can be uploaded on the same paste.
 * Code files can be uploaded from your machine.
 * Added a drag and drop zone that appears when dragging a file over a paste.
-* TODO: collapse / expand files to only show names.
-* TODO: uploaded files are automatically collapsed.
+* Files being pasted are now cards.
+  * Cards can be expanded/collapsed.
+  * TODO: uploaded files are automatically collapsed.
 * TODO: Change delete to trash can icon.
 
 ## 0.3.4

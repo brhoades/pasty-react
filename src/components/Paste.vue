@@ -95,7 +95,10 @@
    },
    methods: {
      addCodeFile(): void {
-       this.paste.files.push(CodeFile.empty());
+       let file: CodeFile = CodeFile.empty();
+       file.id = this.paste.files.length;
+
+       this.paste.files.push(file);
      },
      deleteFile(index): void {
        this.paste.files.splice(index, 1);
@@ -193,11 +196,6 @@
 </script>
 
 <style>
- .file-spaced {
-   padding-top: 1em;
-   padding-bottom: 1em;
- }
-
  .dragging {
    border-radius: 5px;
    border-style: dashed;

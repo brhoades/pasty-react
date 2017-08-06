@@ -16,10 +16,6 @@ const routes = [
     component: View
   },
   {
-    path: '/up/paste',
-    component: Paste
-  },
-  {
     path: '/',
     component: Paste
   },

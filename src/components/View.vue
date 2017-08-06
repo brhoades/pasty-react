@@ -7,7 +7,7 @@
           alt="Copy shortened link to this page"
           title="Copy shortened link to this page"
       >
-        <i class="icon-clipboard icon--scaling"></i>
+        <i class="icon-docs icon--scaling"></i>
       </a>
     </div>
     <div class="vertical-center-parent" v-if="loading">

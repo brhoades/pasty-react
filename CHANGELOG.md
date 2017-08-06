@@ -10,6 +10,9 @@
 * TODO: uploaded files are automatically collapsed.
 * TODO: Dynamically generate href on click to reduce page render time/size.
 
+## 0.4.1
+* Copy shortened link to clipboard is back.
+
 ## 0.4.0
 * Removed separate view for uploading files.
 * Files and code can be uploaded on the same paste.

@@ -164,6 +164,13 @@
          const state = {
            message: (message: string) => {
              this.message = message;
+           },
+           error: (message: string) => {
+             this.message = message;
+             setTimeout(() => {
+               this.uploading = false;
+               this.waiting = true;
+             }, 3000);
            }
          };
 

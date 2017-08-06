@@ -26,7 +26,7 @@ function uploadPayload(crypted_data, state, cb) {
   }).then((error: boolean, text: string, xhr) => {
     if(error) {
       console.dir(xhr);
-      return state.message(`Error uploading: ${xhr}`);
+      return state.error(`Error uploading: ${xhr}`);
     }
 
     cb(JSON.parse(text), crypted_data.key);

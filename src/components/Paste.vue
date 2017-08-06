@@ -37,10 +37,10 @@
           <button class="pure-button" :disabled="!canPaste()" v-on:click="submit();">Paste</button>
         </form>
       </div>
-      <div class="vertical-center-parent" v-else-if="uploading">
-        <div class="vertical-center-child">
-          <Spinner v-bind:message="message" />
-        </div>
+    </div>
+    <div class="vertical-center-parent" v-else-if="uploading">
+      <div class="vertical-center-child">
+        <Spinner v-bind:message="message" />
       </div>
     </div>
   </div>

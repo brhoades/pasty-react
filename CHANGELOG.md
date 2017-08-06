@@ -12,6 +12,7 @@
 
 ## 0.4.1
 * Copy shortened link to clipboard is back.
+* Loading spinner now appears again for pasting.
 
 ## 0.4.0
 * Removed separate view for uploading files.

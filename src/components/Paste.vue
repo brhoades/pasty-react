@@ -167,7 +167,7 @@
            }
          };
 
-         client.uploadCodeFiles(this.paste, state);
+         client.upload(this.paste, state);
        },
        paste: Paste.empty(),
        waiting: true,

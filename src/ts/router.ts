@@ -1,7 +1,7 @@
 declare function require(path: string): any;
 import VueRouter from 'vue-router';
 import View from '../components/View.vue';
-import PasteCode from '../components/PasteCode.vue';
+import Paste from '../components/Paste.vue';
 import About from '../components/About.vue';
 
 const routes = [
@@ -17,11 +17,11 @@ const routes = [
   },
   {
     path: '/up/paste',
-    component: PasteCode
+    component: Paste
   },
   {
     path: '/',
-    component: PasteCode
+    component: Paste
   },
   {
     path: '/settings',

@@ -4,10 +4,19 @@
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
+
+## 0.4.x
+* TODO: Download all files in a tarball.
+* Dynamically generate href on click to reduce page render time/size.
+
+## 0.4.0
 * Removed separate view for uploading files.
 * Files and code can be uploaded on the same paste.
 * Code files can be uploaded from your machine.
-* TODO: drag and drop zone.
+* Added a drag and drop zone that appears when dragging a file over a paste.
+* TODO: collapse / expand files to only show names.
+* TODO: uploaded files are automatically collapsed.
+* TODO: Change delete to trash can icon.
 
 ## 0.3.4
 * Code file input now shows the loading spinner while uploading.

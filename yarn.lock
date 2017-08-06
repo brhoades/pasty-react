@@ -1511,6 +1511,10 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dropzone@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-5.1.1.tgz#9f5b02fc4aa84e6466e046ba770bc82776ea49de"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"

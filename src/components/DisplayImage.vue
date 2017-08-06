@@ -21,7 +21,6 @@
  }
 
  .viewimage > img {
-   padding-top: 25px;
    margin: auto;
 
    max-width: 95%;

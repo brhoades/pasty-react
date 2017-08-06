@@ -7,7 +7,8 @@
 
 ## 0.4.x
 * TODO: Download all files in a tarball.
-* Dynamically generate href on click to reduce page render time/size.
+* TODO: uploaded files are automatically collapsed.
+* TODO: Dynamically generate href on click to reduce page render time/size.
 
 ## 0.4.0
 * Removed separate view for uploading files.
@@ -16,8 +17,8 @@
 * Added a drag and drop zone that appears when dragging a file over a paste.
 * Files being pasted are now cards.
   * Cards can be expanded/collapsed.
-  * TODO: uploaded files are automatically collapsed.
-* TODO: Change delete to trash can icon.
+* Change delete to trash can icon.
+* Changed GH icon, added others.
 
 ## 0.3.4
 * Code file input now shows the loading spinner while uploading.

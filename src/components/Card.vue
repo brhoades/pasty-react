@@ -10,7 +10,7 @@
       </div>
       <div class="card-action">
         <div v-on:click="$emit('delete')" class="icon icon-delete">
-          <i class="icon-minus"></i>
+          <i class="icon-trash"></i>
         </div>
       </div>
     </div>
@@ -49,14 +49,16 @@
    padding: 2px;
    cursor: pointer;
    font-size: normal;
+   color: black;
+   font-weight: normal;
  }
 
  .icon--pr {
    padding-right: 10px;
  }
 
- .icon-delete {
-   color: red;
+ .icon-delete:hover {
+   color: darkred;
  }
 
  .card {

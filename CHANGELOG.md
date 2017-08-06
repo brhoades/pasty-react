@@ -19,6 +19,7 @@
   * Cards can be expanded/collapsed.
 * Change delete to trash can icon.
 * Changed GH icon, added others.
+* Can no longer add pastes with no files / only empty files.
 
 ## 0.3.4
 * Code file input now shows the loading spinner while uploading.

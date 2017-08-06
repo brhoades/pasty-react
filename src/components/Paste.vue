@@ -34,7 +34,7 @@
             <i class="icon-plus"></i>
             Add Files
           </button>
-          <button class="pure-button" v-if="paste.files.length > 0" v-on:click="submit();">Paste</button>
+          <button class="pure-button" :disabled="!canPaste()" v-on:click="submit();">Paste</button>
         </form>
       </div>
       <div class="vertical-center-parent" v-else-if="uploading">
@@ -143,6 +143,17 @@
          }
        }
      },
+     canPaste() {
+       if (this.paste.files.length == 0) {
+         return false;
+       }
+
+       if(this.paste.files.reduce((acc: number, f: File) => acc += f.data.length, 0) == 0) {
+         return false;
+       }
+
+       return true;
+     }
    },
    data() {
      return {

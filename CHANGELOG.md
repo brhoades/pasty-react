@@ -10,6 +10,11 @@
 * TODO: uploaded files are automatically collapsed.
 * TODO: Dynamically generate href on click to reduce page render time/size.
 
+## 0.4.2
+* Added error handling to pastes that fail. Shows the error for 3s then goes back to the paste.
+* Now only using common hljs languages.
+ * Language list stored in settings.
+
 ## 0.4.1
 * Copy shortened link to clipboard is back.
 * Loading spinner now appears again for pasting.

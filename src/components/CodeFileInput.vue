@@ -10,13 +10,11 @@
         </div>
         <div class="right-input">
           <label for="filetype">File type</label>
-          <select id="filetype" v-model="data.meta.highlight" v-on:click="setManualType()">
-            <option value="auto" selected="">--auto--</option>
-            <option value="plain">--plain--</option>
-            <option v-for="option in options" :value="option">
-              {{ option }}
-            </option>
-          </select>
+          <LanguageSelector
+             @change="value => {highlight = value}"
+            :highlight="data.meta.highlight"
+            :languages="languages"
+          />
         </div>
         <textarea
             ref="code"
@@ -34,20 +32,27 @@
 
 <script lang="ts">
  declare var hljs: any;
+ declare var $: any;
  import Card from './Card.vue';
+ import LanguageSelector from './LanguageSelector.vue';
+ import Settings from '../ts/settings';
  import { registerLanguage } from '../ts/code-helpers';
 
  export default {
    components: {
      Card,
+     LanguageSelector,
    },
    data() {
+     let settings: Settings = new Settings($);
      registerLanguage(hljs);
-     let options = hljs.listLanguages();
+     hljs.configure({
+       languages: settings.languages
+     });
 
      return {
-       options: options,
-       manualType: false
+       manualType: false,
+       languages: settings.languages,
      }
    },
    methods: {
@@ -69,8 +74,11 @@
        }
 
        let res = hljs.highlightAuto(this.$refs.code.value);
-
-       this.data.meta.highlight = res.language;
+       if (res.language) {
+         this.data.meta.highlight = res.language;
+       } else {
+         this.data.meta.highlight = "auto";
+       }
      },
      setManualType() {
        // if the type is user set to something other than auto, do not automatically set

@@ -7,14 +7,67 @@ type SecuritySettingsT = {
 
 type SettingsT = {
   theme: string,
-  security: SecuritySettingsT
+  security: SecuritySettingsT,
+  languages: string[],
 };
 
 const defaults: SettingsT = {
   theme: 'obsidian.css',
   security: {
     keysize: 32
-  }
+  },
+  languages: [
+    "bash",
+    "clojure",
+    "cmake",
+    "coffeescript",
+    "cpp",
+    "css",
+    "diff",
+    "d",
+    "dockerfile",
+    "elm",
+    "erlang",
+    "go",
+    "haml",
+    "haskell",
+    "ini",
+    "irc",
+    "java",
+    "javascript",
+    "julia",
+    "less",
+    "lisp",
+    "lua",
+    "makefile",
+    "markdown",
+    "matlab",
+    "nix",
+    "objectivec",
+    "ocaml",
+    "perl",
+    "php",
+    "powershell",
+    "prolog",
+    "python",
+    "r",
+    "ruby",
+    "rust",
+    "scala",
+    "scheme",
+    "scss",
+    "shell",
+    "sql",
+    "swift",
+    "tex",
+    "typescript",
+    "vbnet",
+    "vbscript",
+    "vim",
+    "x86asm",
+    "xml",
+    "yaml"
+  ],
 };
 
 class SecuritySettings {
@@ -56,7 +109,7 @@ export default class Settings {
       });
     }, 250, { trailing: true });
 
-    if(!cookie) {
+    if (!cookie) {
       this._settings = (<any>Object).assign({}, defaults);
       this._write();
     } else {
@@ -77,5 +130,11 @@ export default class Settings {
   public set theme(value: string) {
     this._settings.theme = value;
     this._write();
+  }
+
+  public get languages(): string[] {
+    return Object.keys(this._settings.languages).map((i) => {
+      return this._settings.languages[i];
+    });
   }
 }

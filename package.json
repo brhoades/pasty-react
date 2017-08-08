@@ -1,6 +1,6 @@
 {
   "name": "pasty-http-client",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Anonymous, encrypted pastebin for files.",
   "scripts": {
     "upload": "yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",

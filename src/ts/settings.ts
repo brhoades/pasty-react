@@ -92,6 +92,7 @@ class SecuritySettings {
 export default class Settings {
   private _settings: SettingsT;
   private _security: SecuritySettings;
+  private write: () => void;
   private _write: () => void;
 
   constructor($: any) {
@@ -100,13 +101,17 @@ export default class Settings {
       'json': true
     });
 
-    // debounce calls to prevent sliders from setting the cookie hundreds of times
-    this._write = _.debounce(() => {
+    this.write = () => {
       $.pgwCookie({
         'name': 'settings',
         'value': this._settings,
         'json': true
       });
+    };
+
+    // debounce calls to prevent sliders from setting the cookie hundreds of times
+    this._write = _.debounce(() => {
+      this.write();
     }, 250, { trailing: true });
 
     if (!cookie) {
@@ -136,5 +141,27 @@ export default class Settings {
     return Object.keys(this._settings.languages).map((i) => {
       return this._settings.languages[i];
     });
+  }
+
+  public enableLanguage(language: string): void {
+    if (!(language in this.languages)) {
+      this._settings.languages = [
+        ...this.languages,
+        language
+      ];
+
+      this.write();
+    }
+  }
+
+  public disableLanguage(language: string): void {
+    const index: number = this.languages.indexOf(language);
+    if (index >= 0) {
+      const languages: string[] = this.languages;
+
+      languages.splice(index, 1);
+      this._settings.languages = languages;
+      this.write()
+    }
   }
 }

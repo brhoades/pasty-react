@@ -97,6 +97,21 @@ if __name__ == "__main__":
     print(helloworld(["Hello", "World"]))</code></pre>
           </div>
       </div>
+      <legend>Language Options</legend>
+      <div class="pure-g">
+        <div v-for="lang in allLanguages" class="pure-u-lg-1-8 pure-u-md-1-6 pure-u-sm-1-4 pure-u-1">
+          <label :for="'option-'+lang" class="pure-checkbox">
+            <input
+                :id="'option-'+lang"
+                type="checkbox"
+                :value="lang"
+                :checked="languages.includes(lang)"
+                @change="setLanguage(lang, !languages.includes(lang))"
+            />
+            {{ lang }}
+          </label>
+        </div>
+      </div>
     </fieldset>
   </form>
 </template>
@@ -110,13 +125,15 @@ if __name__ == "__main__":
    data() {
      this.updateTheme(this.settings.theme);
      return {
-       theme: this.settings.theme
+       theme: this.settings.theme,
+       allLanguages: hljs.listLanguages().sort(),
+       languages: this.settings.languages,
      }
    },
    watch: {
      theme(value: string) {
        this.updateTheme(value);
-     }
+     },
    },
    mounted() {
      hljs.highlightBlock(this.$refs.code);
@@ -125,6 +142,16 @@ if __name__ == "__main__":
      updateTheme(value: string) {
        this.settings.theme = value;
        $("#hljs-theme").attr("href", `assets/hljs-themes/${value}`);
+     },
+     $,
+     setLanguage(language: string, value: boolean): void {
+       if (value) {
+         this.settings.enableLanguage(language);
+       } else {
+         this.settings.disableLanguage(language);
+       }
+
+       this.languages = this.settings.languages;
      }
    }
  }

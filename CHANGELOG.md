@@ -9,11 +9,11 @@
 * TODO: Download all files in a tarball.
 * TODO: uploaded files are automatically collapsed.
 * TODO: Dynamically generate href on click to reduce page render time/size.
-
 ## 0.4.2
 * Added error handling to pastes that fail. Shows the error for 3s then goes back to the paste.
 * Now only using common hljs languages.
  * Language list stored in settings.
+ * Can choose languages on the list.
 
 ## 0.4.1
 * Copy shortened link to clipboard is back.

@@ -15,6 +15,7 @@
     "pgwcookie": "^1.4.0",
     "purecss": "^1.0.0",
     "react": "^15.6.1",
+    "react-router": "^4.1.2",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "spinkit": "^1.2.5",

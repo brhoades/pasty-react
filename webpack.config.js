@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    build: './src/main.ts',
+    build: './src/router.tsx',
     libs: [
       'pasty-core',
       'highlight.js',
@@ -38,7 +38,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.tsx'],
     alias: {
       $: "zepto-webpack"
     }

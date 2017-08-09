@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
+
+
 import { Reducer } from '../reducers/index'
-import { returntypeof } from 'react-redux-typescript';
+import { getPaste } from '../actions/creators'
 
+export interface ViewPasteStateProps {
+}
 
-const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps) => ({
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Reducer>) => ({
-});
-
-const stateProps = returntypeof(mapStateToProps);
-const dispatchProps = returntypeof(mapDispatchToProps);
+export interface ViewPasteDispatchProps {
+  getPasteAction: (id: string, key: string) => void
+}
 
 export interface ViewPasteProps {
   match: {
@@ -22,9 +21,13 @@ export interface ViewPasteProps {
   }
 }
 
-type PropsType = typeof stateProps & typeof dispatchProps & ViewPasteProps;
+type PropsType = ViewPasteStateProps & ViewPasteDispatchProps & ViewPasteProps;
 
 export class ViewPaste extends React.Component<PropsType, undefined> {
+  componentWillMount() {
+    this.props.getPasteAction(this.props.match.params.id, this.props.match.params.key);
+  }
+
   render() {
     return (
       <div>
@@ -33,4 +36,12 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
   }
 }
 
+const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps): ViewPasteStateProps => ({
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<Reducer>): ViewPasteDispatchProps => ({
+  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key))
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPaste);
+

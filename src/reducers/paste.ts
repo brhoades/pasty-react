@@ -4,6 +4,7 @@ import {
   DECRYPT_PASTE,
   SET_DECRYPTED_PASTE,
   GET_PASTE_FROM_URL,
+  CLEAR_PASTE
 } from '../actions/types'
 
 export enum STATE {
@@ -36,6 +37,15 @@ const paste = (state: PasteReducer = initial, action) => {
         id: action.id,
         key: action.key,
         paste: null
+      };
+
+    case CLEAR_PASTE:
+      return {
+        ...state,
+        paste: null,
+        downloadState: STATE.WAITING,
+        id: '',
+        key: ''
       };
 
     case SET_DECRYPTED_PASTE:

@@ -3,7 +3,8 @@ import { connect, Dispatch } from 'react-redux'
 import { File } from 'pasty-core'
 
 import { Reducer } from '../reducers/index'
-import DisplayImage from '../components/displayimage'
+import DisplayImage from './displayimage'
+import DisplayCodeFile from './displaycodefile'
 
 
 export interface DisplayFileProps {
@@ -32,6 +33,13 @@ class DisplayFile extends React.Component<PropsType, undefined> {
               mime={this.props.file.meta.mime}
             />
           )
+        }
+        {
+          this.props.file.isReadable() &&
+          <DisplayCodeFile
+            text={this.props.file.data}
+            language={this.props.file.meta.highlight}
+          />
         }
       </div>
     );

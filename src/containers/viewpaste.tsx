@@ -6,7 +6,7 @@ import DisplayFile from '../components/displayfile'
 
 import { STATE } from '../reducers/paste'
 import { Reducer } from '../reducers/index'
-import { getPaste } from '../actions/creators'
+import { getPaste, clearPaste } from '../actions/creators'
 
 export interface ViewPasteStateProps {
   state: STATE,
@@ -14,10 +14,14 @@ export interface ViewPasteStateProps {
 }
 
 export interface ViewPasteDispatchProps {
-  getPasteAction: (id: string, key: string) => void
+  getPasteAction: (id: string, key: string) => void,
+  clearPasteAction: (id: string) => void
 }
 
 export interface ViewPasteProps {
+  location: {
+    pathname: string,
+  },
   match: {
     params: {
       id: string,
@@ -29,8 +33,15 @@ export interface ViewPasteProps {
 type PropsType = ViewPasteStateProps & ViewPasteDispatchProps & ViewPasteProps;
 
 export class ViewPaste extends React.Component<PropsType, undefined> {
-  componentWillMount() {
-    this.props.getPasteAction(this.props.match.params.id, this.props.match.params.key);
+  componentWillReceiveProps(newProps) {
+    if (this.props.match.params.id != newProps.match.params.id
+        || this.props.match.params.key != newProps.match.params.key) {
+      this.props.getPasteAction(newProps.match.params.id, newProps.match.params.key);
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.clearPasteAction(this.props.match.params.id);
   }
 
   render() {
@@ -62,7 +73,8 @@ const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps): ViewPasteSta
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Reducer>): ViewPasteDispatchProps => ({
-  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`))
+  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`)),
+  clearPasteAction: (id: string) => dispatch(clearPaste(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPaste);

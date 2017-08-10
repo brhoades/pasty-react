@@ -40,7 +40,7 @@ const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps): ViewPasteSta
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Reducer>): ViewPasteDispatchProps => ({
-  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key))
+  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPaste);

@@ -1,11 +1,16 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
+import { Paste } from 'pasty-core'
 
+import DisplayFile from '../components/displayfile'
 
+import { STATE } from '../reducers/paste'
 import { Reducer } from '../reducers/index'
 import { getPaste } from '../actions/creators'
 
 export interface ViewPasteStateProps {
+  state: STATE,
+  paste: Paste | null,
 }
 
 export interface ViewPasteDispatchProps {
@@ -29,14 +34,31 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   render() {
+    if (this.props.state != STATE.VIEWING) {
+      return null;
+    }
+
     return (
       <div>
+        <h2>{this.props.paste.name}</h2>
+        {
+          this.props.paste.files.map((f, index) => {
+            return (
+              <DisplayFile
+                key={f.id}
+                index={index}
+              />
+            );
+          })
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps): ViewPasteStateProps => ({
+  state: state.paste.downloadState,
+  paste: state.paste.paste,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Reducer>): ViewPasteDispatchProps => ({

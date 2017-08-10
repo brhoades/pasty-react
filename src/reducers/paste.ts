@@ -6,7 +6,7 @@ import {
   GET_PASTE_FROM_URL,
 } from '../actions/types'
 
-enum STATE {
+export enum STATE {
   WAITING,
   DOWNLOADING,
   DECRYPTING,
@@ -42,7 +42,7 @@ const paste = (state: PasteReducer = initial, action) => {
       return {
         ...state,
         paste: action.paste,
-        downloadedState: STATE.VIEWING
+        downloadState: STATE.VIEWING
       };
 
     case DECRYPT_PASTE:

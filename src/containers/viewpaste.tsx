@@ -33,6 +33,12 @@ export interface ViewPasteProps {
 type PropsType = ViewPasteStateProps & ViewPasteDispatchProps & ViewPasteProps;
 
 export class ViewPaste extends React.Component<PropsType, undefined> {
+  constructor(props) {
+    super(props);
+
+    this.props.getPasteAction(this.props.match.params.id, this.props.match.params.key);
+  }
+
   componentWillReceiveProps(newProps) {
     if (this.props.match.params.id != newProps.match.params.id
         || this.props.match.params.key != newProps.match.params.key) {
@@ -42,6 +48,7 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
 
   componentWillUnmount() {
     this.props.clearPasteAction(this.props.match.params.id);
+    console.log("UNMOUNT");
   }
 
   render() {

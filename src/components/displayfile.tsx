@@ -15,13 +15,23 @@ export interface DisplayFileDispatchProps {
 }
 
 export interface DisplayFileStateProps {
-  file: File
+  file: File | null
 }
 
 type PropsType = DisplayFileStateProps & DisplayFileDispatchProps & DisplayFileProps;
 
 class DisplayFile extends React.Component<PropsType, undefined> {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    // Keep a flag true for our initial file. If we unmount
+    // we flip this value and stop rendering.
+    if (this.props.file == null) {
+      return null;
+    }
+
     return (
       <div>
         <h3>{this.props.file.name}</h3>
@@ -36,19 +46,29 @@ class DisplayFile extends React.Component<PropsType, undefined> {
         }
         {
           this.props.file.isReadable() &&
-          <DisplayCodeFile
-            text={this.props.file.data}
-            language={this.props.file.meta.highlight}
-          />
+          (
+            <DisplayCodeFile
+              index={this.props.index}
+            />
+          )
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: Reducer, ownProps: DisplayFileProps): DisplayFileStateProps => ({
-  file: state.paste.paste.files[ownProps.index]
-});
+const mapStateToProps = (state: Reducer, ownProps: DisplayFileProps): DisplayFileStateProps => {
+  if (state.paste.paste != null) {
+    return {
+      file: state.paste.paste.files[ownProps.index]
+    }
+  }
+
+  return {
+    file: null
+  }
+};
+
 
 const mapDispatchToProps = (dispatch: Dispatch<Reducer>): DisplayFileDispatchProps => ({
 });

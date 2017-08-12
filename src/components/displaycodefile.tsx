@@ -3,6 +3,7 @@ import { connect, Dispatch } from 'react-redux'
 import { CodeFile } from 'pasty-core'
 
 import { Reducer } from '../reducers/index'
+declare var hljs: any, $: any;
 
 
 export interface DisplayCodeFileProps {
@@ -19,10 +20,21 @@ export interface DisplayCodeFileStateProps {
 type PropsType = DisplayCodeFileStateProps & DisplayCodeFileDispatchProps & DisplayCodeFileProps;
 
 class DisplayCodeFile extends React.Component<PropsType, undefined> {
+  private code: HTMLElement;
+
+  componentDidMount() {
+    if (this.props.file.meta.highlight != 'plain') {
+      $(this.code).addClass(this.props.file.meta.highlight);
+      hljs.highlightBlock(this.code);
+    } else {
+      $(this.code).addClass('hljs');
+    }
+  }
+
   render() {
     return (
       <pre>
-        <code>
+        <code ref={(code) => { this.code = code; }}>
           {this.props.file.data}
         </code>
       </pre>

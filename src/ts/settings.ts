@@ -1,17 +1,17 @@
 import { populateDefaults } from 'pasty-core'
 import _ from 'lodash'
 
-type SecuritySettingsT = {
+export type SecuritySettingsT = {
   keysize: number
 };
 
-type SettingsT = {
+export type SettingsT = {
   theme: string,
   security: SecuritySettingsT,
   languages: string[],
 };
 
-const defaults: SettingsT = {
+export const defaults: SettingsT = {
   theme: 'obsidian.css',
   security: {
     keysize: 32

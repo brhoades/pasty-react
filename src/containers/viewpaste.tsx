@@ -1,36 +1,36 @@
-import * as React from 'react'
-import { connect, Dispatch } from 'react-redux'
-import { Paste } from 'pasty-core'
+import { Paste } from "pasty-core";
+import * as React from "react";
+import { connect, Dispatch } from "react-redux";
 
-import DisplayFile from '../components/displayfile'
+import DisplayFile from "../components/displayfile";
 
-import { STATE } from '../reducers/paste'
-import { Reducer } from '../reducers/index'
-import { getPaste, clearPaste } from '../actions/creators'
+import { clearPaste, getPaste } from "../actions/creators";
+import { Reducer } from "../reducers/index";
+import { STATE } from "../reducers/paste";
 
-export interface ViewPasteStateProps {
-  state: STATE,
-  paste: Paste | null,
+export interface IViewPasteStateProps {
+  state: STATE;
+  paste: Paste | null;
 }
 
-export interface ViewPasteDispatchProps {
-  getPasteAction: (id: string, key: string) => void,
-  clearPasteAction: (id: string) => void
+export interface IViewPasteDispatchProps {
+  getPasteAction: (id: string, key: string) => void;
+  clearPasteAction: (id: string) => void;
 }
 
-export interface ViewPasteProps {
+export interface IViewPasteProps {
   location: {
     pathname: string,
-  },
+  };
   match: {
     params: {
       id: string,
       key: string,
-    }
-  }
+    },
+  };
 }
 
-type PropsType = ViewPasteStateProps & ViewPasteDispatchProps & ViewPasteProps;
+type PropsType = IViewPasteStateProps & IViewPasteDispatchProps & IViewPasteProps;
 
 export class ViewPaste extends React.Component<PropsType, undefined> {
   constructor(props) {
@@ -39,49 +39,50 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
     this.props.getPasteAction(this.props.match.params.id, this.props.match.params.key);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (this.props.match.params.id != newProps.match.params.id
-        || this.props.match.params.key != newProps.match.params.key) {
+  public componentWillReceiveProps(newProps) {
+    if (this.props.match.params.id !== newProps.match.params.id
+        || this.props.match.params.key !== newProps.match.params.key) {
       this.props.getPasteAction(newProps.match.params.id, newProps.match.params.key);
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this.props.clearPasteAction(this.props.match.params.id);
-    console.log("UNMOUNT");
   }
 
-  render() {
-    if (this.props.state != STATE.VIEWING) {
+  public render() {
+    if (this.props.state !== STATE.VIEWING) {
       return null;
     }
 
     return (
       <div>
         <h2>{this.props.paste.name}</h2>
-        {
-          this.props.paste.files.map((f, index) => {
-            return (
-              <DisplayFile
-                key={f.id}
-                index={index}
-              />
-            );
-          })
-        }
+        {this.renderPastes()}
       </div>
     );
   }
+
+  private renderPastes() {
+    return this.props.paste.files.map((f, index) => {
+      return (
+        <DisplayFile
+            key={f.id}
+            index={index}
+        />
+      );
+    });
+  }
 }
 
-const mapStateToProps = (state: Reducer, ownProps: ViewPasteProps): ViewPasteStateProps => ({
-  state: state.paste.downloadState,
+const mapStateToProps = (state: Reducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
   paste: state.paste.paste,
+  state: state.paste.downloadState,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Reducer>): ViewPasteDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<Reducer>): IViewPasteDispatchProps => ({
+  clearPasteAction: (id: string) => dispatch(clearPaste(id)),
   getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`)),
-  clearPasteAction: (id: string) => dispatch(clearPaste(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPaste);

@@ -1,11 +1,11 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { HashRouter, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { HashRouter, Route } from "react-router-dom";
 
-import ViewPaste from './containers/viewpaste'
-import CreatePaste from './containers/createpaste'
-import createStore from './store'
+import CreatePaste from "./containers/createpaste";
+import ViewPaste from "./containers/viewpaste";
+import createStore from "./store";
 
 
 ReactDOM.render((
@@ -17,4 +17,4 @@ ReactDOM.render((
       </div>
     </HashRouter>
   </Provider>
-), document.getElementById('app'))
+), document.getElementById("app"));

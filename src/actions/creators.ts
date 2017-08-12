@@ -1,34 +1,34 @@
-import { Paste } from 'pasty-core'
+import { Paste } from "pasty-core";
 
 import {
-  GET_PASTE_FROM_URL,
   CLEAR_PASTE,
   DECRYPT_PASTE,
+  GET_PASTE_FROM_URL,
   SET_DECRYPTED_PASTE,
-} from './types'
+} from "./types";
 
 
 export const getPaste = (id: string, key: string, url: string) => ({
-  type: GET_PASTE_FROM_URL,
-  key,
   id,
+  key,
+  type: GET_PASTE_FROM_URL,
   url,
 });
 
 export const clearPaste = (id: string) => ({
-  type: CLEAR_PASTE,
   id,
+  type: CLEAR_PASTE,
 });
 
 export const decryptPaste = (id: string, key: string, data: string) => ({
-  type: DECRYPT_PASTE,
+  data,
   id,
   key,
-  data
+  type: DECRYPT_PASTE,
 });
 
 export const setDecryptedPaste = (id: string, paste: Paste) => ({
-  type: SET_DECRYPTED_PASTE,
   id,
-  paste
+  paste,
+  type: SET_DECRYPTED_PASTE,
 });

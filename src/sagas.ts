@@ -1,32 +1,30 @@
-import { eventChannel, END } from 'redux-saga'
-import { call, take, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { SagaIterator } from 'redux-saga'
+import { decryptFile, Paste, PasteParser } from "pasty-core";
+import { END, eventChannel } from "redux-saga";
+import { SagaIterator } from "redux-saga";
+import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
-import { decryptFile, PasteParser, Paste } from "pasty-core";
-import { decryptPaste, setDecryptedPaste } from './actions/creators'
+import { decryptPaste, setDecryptedPaste } from "./actions/creators";
 import {
-  GET_PASTE_FROM_URL,
   DECRYPT_PASTE,
-} from './actions/types';
+  GET_PASTE_FROM_URL,
+} from "./actions/types";
 
 
 function createXHRChannel(action) {
-  return eventChannel(emitter => {
+  return eventChannel((emitter) => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', action.url, true);
+    xhr.open("GET", action.url, true);
 
     xhr.onload = (e) => {
-      emitter((<any>e).target.response);
+      emitter((e as any).target.response);
       emitter(END);
     };
 
-    xhr.onprogress = (e) => {
-      console.log("PROGRESS");
-    };
+    // xhr.onprogress = (e) => {
+    // };
 
-    xhr.onerror = (e) => {
-      console.log("ERROR");
-    };
+    // xhr.onerror = (e) => {
+    // };
 
     xhr.send();
 
@@ -48,9 +46,9 @@ function* download(action) {
 
   try {
     while (true) {
-      let response = yield take(xhr);
+      const response = yield take(xhr);
       yield put(decryptPaste(action.id, action.key, response));
-    } 
+    }
   } finally {
     // nada
   }

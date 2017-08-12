@@ -1,58 +1,61 @@
-import * as React from 'react'
-import { connect, Dispatch } from 'react-redux'
-import { File } from 'pasty-core'
+import { File } from "pasty-core";
+import * as React from "react";
+import { connect, Dispatch } from "react-redux";
 
-import { Reducer } from '../reducers/index'
-import DisplayImage from './displayimage'
-import DisplayCodeFile from './displaycodefile'
+import { Reducer } from "../reducers/index";
+import DisplayCodeFile from "./displaycodefile";
+import DisplayImage from "./displayimage";
 
 
-export interface DisplayFileProps {
-  index: number
+export interface IDisplayFileProps {
+  index: number;
 }
 
-export interface DisplayFileDispatchProps {
+export interface IDisplayFileDispatchProps {
 }
 
-export interface DisplayFileStateProps {
-  file: File | null
+export interface IDisplayFileStateProps {
+  file: File | null;
 }
 
-type PropsType = DisplayFileStateProps & DisplayFileDispatchProps & DisplayFileProps;
+type PropsType = IDisplayFileStateProps & IDisplayFileDispatchProps & IDisplayFileProps;
 
 class DisplayFile extends React.Component<PropsType, undefined> {
   constructor(props) {
     super(props);
   }
 
-  render() {
+  public render() {
     // Keep a flag true for our initial file. If we unmount
     // we flip this value and stop rendering.
-    if (this.props.file == null) {
+    if (this.props.file === null) {
       return null;
     }
 
     return (
       <div>
         <h3>{this.props.file.name}</h3>
-        {
-          /^image\//.test(this.props.file.meta.mime) &&
-          (
-            <DisplayImage
-              data={this.props.file.data}
-              mime={this.props.file.meta.mime}
-            />
-          )
-        }
-        {
-          this.props.file.isReadable() &&
-          (
-            <DisplayCodeFile
-              index={this.props.index}
-            />
-          )
-        }
+        {/^image\//.test(this.props.file.meta.mime) && this.renderImage()}
+
+        {this.props.file.isReadable() && this.renderCodeFile()}
       </div>
+    );
+  }
+
+  private renderImage() {
+    return (
+      <DisplayImage
+          data={this.props.file.data}
+          mime={this.props.file.meta.mime}
+      />
+    );
+  }
+
+  private renderCodeFile() {
+    return (
+      <DisplayCodeFile
+          index={this.props.index}
+      />
     );
   }
 }

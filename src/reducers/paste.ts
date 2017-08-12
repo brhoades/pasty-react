@@ -1,34 +1,34 @@
-import { Paste } from 'pasty-core'
+import { Paste } from "pasty-core";
 
 import {
+  CLEAR_PASTE,
   DECRYPT_PASTE,
-  SET_DECRYPTED_PASTE,
   GET_PASTE_FROM_URL,
-  CLEAR_PASTE
-} from '../actions/types'
+  SET_DECRYPTED_PASTE,
+} from "../actions/types";
 
 export enum STATE {
   WAITING,
   DOWNLOADING,
   DECRYPTING,
-  VIEWING
+  VIEWING,
 }
 
-export interface PasteReducer {
-  downloadState: STATE,
-  id: string,
-  key: string,
-  paste: Paste | null
+export interface IPasteReducer {
+  downloadState: STATE;
+  id: string;
+  key: string;
+  paste: Paste | null;
 }
 
-const initial: PasteReducer = {
+const initial: IPasteReducer = {
   downloadState: STATE.WAITING,
-  id: '',
-  key: '',
-  paste: null
+  id: "",
+  key: "",
+  paste: null,
 };
 
-const paste = (state: PasteReducer = initial, action) => {
+const paste = (state: IPasteReducer = initial, action) => {
   switch (action.type) {
     case GET_PASTE_FROM_URL:
       return {
@@ -36,34 +36,34 @@ const paste = (state: PasteReducer = initial, action) => {
         downloadState: STATE.DOWNLOADING,
         id: action.id,
         key: action.key,
-        paste: null
+        paste: null,
       };
 
     case CLEAR_PASTE:
       return {
         ...state,
-        paste: null,
         downloadState: STATE.WAITING,
-        id: '',
-        key: ''
+        id: "",
+        key: "",
+        paste: null,
       };
 
     case SET_DECRYPTED_PASTE:
       return {
         ...state,
+        downloadState: STATE.VIEWING,
         paste: action.paste,
-        downloadState: STATE.VIEWING
       };
 
     case DECRYPT_PASTE:
       return {
         ...state,
-        downloadState: STATE.DECRYPTING
+        downloadState: STATE.DECRYPTING,
       };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default paste;

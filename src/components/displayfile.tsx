@@ -2,7 +2,7 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
-import { Reducer } from "../reducers/index";
+import { IReducer } from "../reducers/index";
 import DisplayCodeFile from "./displaycodefile";
 import DisplayImage from "./displayimage";
 
@@ -60,20 +60,20 @@ class DisplayFile extends React.Component<PropsType, undefined> {
   }
 }
 
-const mapStateToProps = (state: Reducer, ownProps: DisplayFileProps): DisplayFileStateProps => {
+const mapStateToProps = (state: IReducer, ownProps: IDisplayFileProps): IDisplayFileStateProps => {
   if (state.paste.paste != null) {
     return {
-      file: state.paste.paste.files[ownProps.index]
-    }
+      file: state.paste.paste.files[ownProps.index],
+    };
   }
 
   return {
-    file: null
-  }
+    file: null,
+  };
 };
 
 
-const mapDispatchToProps = (dispatch: Dispatch<Reducer>): DisplayFileDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IDisplayFileDispatchProps => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayFile);

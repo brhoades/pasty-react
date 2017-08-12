@@ -2,7 +2,7 @@ import { CodeFile } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
-import { Reducer } from "../reducers/index";
+import { IReducer } from "../reducers/index";
 
 declare var hljs: any;
 declare var $: any;
@@ -44,13 +44,13 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
   }
 }
 
-const mapStateToProps = (state: Reducer, ownProps: IDisplayCodeFileProps): IDisplayCodeFileStateProps => {
+const mapStateToProps = (state: IReducer, ownProps: IDisplayCodeFileProps): IDisplayCodeFileStateProps => {
   return {
     file: state.paste.paste.files[ownProps.index] as CodeFile,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Reducer>): IDisplayCodeFileDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IDisplayCodeFileDispatchProps => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayCodeFile);

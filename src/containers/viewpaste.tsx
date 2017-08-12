@@ -5,7 +5,7 @@ import { connect, Dispatch } from "react-redux";
 import DisplayFile from "../components/displayfile";
 
 import { clearPaste, getPaste } from "../actions/creators";
-import { Reducer } from "../reducers/index";
+import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
 
 export interface IViewPasteStateProps {
@@ -75,12 +75,12 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
   }
 }
 
-const mapStateToProps = (state: Reducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
+const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
   paste: state.paste.paste,
   state: state.paste.downloadState,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Reducer>): IViewPasteDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({
   clearPasteAction: (id: string) => dispatch(clearPaste(id)),
   getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`)),
 });

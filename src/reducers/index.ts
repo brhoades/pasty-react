@@ -1,13 +1,17 @@
-import { combineReducers } from 'redux'
-import paste, { PasteReducer } from './paste'
-
-export interface Reducer {
-  paste: PasteReducer
-};
+import { combineReducers } from "redux";
+import paste, { IPasteReducer } from "./paste";
+import settings, { ISettings } from "./settings";
 
 
-const pasty = combineReducers<Reducer>({
+export interface IReducer {
+  paste: IPasteReducer;
+  settings: ISettings;
+}
+
+
+const pasty = combineReducers<IReducer>({
   paste,
+  settings,
 });
 
 

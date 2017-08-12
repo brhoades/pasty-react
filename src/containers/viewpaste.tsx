@@ -5,12 +5,13 @@ import { connect, Dispatch } from "react-redux";
 import DisplayFile from "../components/displayfile";
 
 import { clearPaste, getPaste } from "../actions/creators";
+import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
 
 export interface IViewPasteStateProps {
   state: STATE;
-  paste: Paste | null;
+  paste: Maybe<Paste>;
 }
 
 export interface IViewPasteDispatchProps {
@@ -57,14 +58,14 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
 
     return (
       <div>
-        <h2>{this.props.paste.name}</h2>
+        <h2>{this.props.paste.getData().name}</h2>
         {this.renderPastes()}
       </div>
     );
   }
 
   private renderPastes() {
-    return this.props.paste.files.map((f, index) => {
+    return this.props.paste.getData().files.map((f, index) => {
       return (
         <DisplayFile
             key={f.id}

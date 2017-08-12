@@ -3,11 +3,14 @@ import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
-import { decryptPaste, setDecryptedPaste } from "./actions/creators";
+import { decryptPaste, setDecryptedPaste, setSettings } from "./actions/creators";
 import {
   DECRYPT_PASTE,
   GET_PASTE_FROM_URL,
+  READ_SETTINGS,
 } from "./actions/types";
+
+declare var $: any;
 
 
 function createXHRChannel(action) {
@@ -54,9 +57,23 @@ function* download(action) {
   }
 }
 
+function* readSettings(action) {
+  let cookie = $.pgwCookie({
+    name: 'settings',
+    json: true,
+  });
+
+  if (cookie === undefined) {
+    cookie = {};
+  }
+
+  yield put(setSettings(cookie));
+}
+
 function* saga(): SagaIterator {
-  yield takeEvery(GET_PASTE_FROM_URL, download);
-  yield takeEvery(DECRYPT_PASTE, decryptPasteSaga);
+  yield takeLatest(GET_PASTE_FROM_URL, download);
+  yield takeLatest(DECRYPT_PASTE, decryptPasteSaga);
+  yield takeLatest(READ_SETTINGS, readSettings);
 }
 
 export default saga;

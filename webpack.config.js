@@ -5,9 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    build: './src/router.tsx',
+    build: './src/app.tsx',
     libs: [
-      'pasty-core',
       'highlight.js',
       'zepto-webpack',
       'pgwcookie'
@@ -39,9 +38,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
-    alias: {
-      $: "zepto-webpack"
-    }
   },
   devServer: {
     historyApiFallback: true,
@@ -53,7 +49,8 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new webpack.ProvidePlugin({
-      "hljs": "highlight.js",
+      hljs: "highlight.js",
+      $: "zepto-webpack"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "libs",

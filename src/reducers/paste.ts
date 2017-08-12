@@ -6,6 +6,7 @@ import {
   GET_PASTE_FROM_URL,
   SET_DECRYPTED_PASTE,
 } from "../actions/types";
+import Maybe from "../monads/maybe";
 
 export enum STATE {
   WAITING,
@@ -18,7 +19,7 @@ export interface IPasteReducer {
   downloadState: STATE;
   id: string;
   key: string;
-  paste: Paste | null;
+  paste: Maybe<Paste>;
 }
 
 const initial: IPasteReducer = {
@@ -36,7 +37,7 @@ const paste = (state: IPasteReducer = initial, action) => {
         downloadState: STATE.DOWNLOADING,
         id: action.id,
         key: action.key,
-        paste: null,
+        paste: new Maybe<Paste>(null),
       };
 
     case CLEAR_PASTE:
@@ -45,14 +46,13 @@ const paste = (state: IPasteReducer = initial, action) => {
         downloadState: STATE.WAITING,
         id: "",
         key: "",
-        paste: null,
+        paste: new Maybe<Paste>(null),
       };
-
     case SET_DECRYPTED_PASTE:
       return {
         ...state,
         downloadState: STATE.VIEWING,
-        paste: action.paste,
+        paste: new Maybe<Paste>(action.paste),
       };
 
     case DECRYPT_PASTE:

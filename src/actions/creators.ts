@@ -1,10 +1,13 @@
 import { Paste } from "pasty-core";
+import { ISettings } from "../reducers/settings";
 
 import {
   CLEAR_PASTE,
   DECRYPT_PASTE,
   GET_PASTE_FROM_URL,
+  READ_SETTINGS,
   SET_DECRYPTED_PASTE,
+  SET_SETTINGS,
 } from "./types";
 
 
@@ -31,4 +34,13 @@ export const setDecryptedPaste = (id: string, paste: Paste) => ({
   id,
   paste,
   type: SET_DECRYPTED_PASTE,
+});
+
+export const readSettings = () => ({
+  type: READ_SETTINGS,
+});
+
+export const setSettings = (settings: ISettings) => ({
+  settings,
+  type: SET_SETTINGS,
 });

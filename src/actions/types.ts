@@ -5,3 +5,5 @@ export const SET_DECRYPTED_PASTE = "SET_DECRYPTED_PASTE";
 
 export const READ_SETTINGS = "READ_SETTINGS";
 export const SET_SETTINGS = "SET_SETTINGS";
+export const LOAD_THEME = "LOAD_THEME";
+export const SET_THEME = "SET_THEME";

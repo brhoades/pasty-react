@@ -5,9 +5,11 @@ import {
   CLEAR_PASTE,
   DECRYPT_PASTE,
   GET_PASTE_FROM_URL,
+  LOAD_THEME,
   READ_SETTINGS,
   SET_DECRYPTED_PASTE,
   SET_SETTINGS,
+  SET_THEME,
 } from "./types";
 
 
@@ -43,4 +45,14 @@ export const readSettings = () => ({
 export const setSettings = (settings: ISettings) => ({
   settings,
   type: SET_SETTINGS,
+});
+
+export const setTheme = (theme: string) => ({
+  theme,
+  type: SET_THEME,
+});
+
+export const loadTheme = (theme: string) => ({
+  theme,
+  type: LOAD_THEME,
 });

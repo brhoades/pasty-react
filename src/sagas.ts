@@ -7,6 +7,7 @@ import { decryptPaste, setDecryptedPaste, setSettings } from "./actions/creators
 import {
   DECRYPT_PASTE,
   GET_PASTE_FROM_URL,
+  LOAD_THEME,
   READ_SETTINGS,
 } from "./actions/types";
 
@@ -70,10 +71,20 @@ function* readSettings(action) {
   yield put(setSettings(cookie));
 }
 
+function* loadTheme(action) {
+  const themeName = `assets/hljs-themes/${action.theme}`;
+
+  // TODO use a dynamic CSS loader to get themes.
+  if ($("#hljs-theme").attr("href") !== themeName) {
+    yield call(() => { $("#hljs-theme").attr("href", themeName); });
+  }
+}
+
 function* saga(): SagaIterator {
   yield takeLatest(GET_PASTE_FROM_URL, download);
   yield takeLatest(DECRYPT_PASTE, decryptPasteSaga);
   yield takeLatest(READ_SETTINGS, readSettings);
+  yield takeLatest(LOAD_THEME, loadTheme);
 }
 
 export default saga;

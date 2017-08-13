@@ -94,7 +94,15 @@ class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
     return (
       <table>
         <tbody>
+          <tr>
+            <td />
+            <td />
+          </tr>
           {innerTable}
+          <tr>
+            <td />
+            <td />
+          </tr>
         </tbody>
       </table>
     );

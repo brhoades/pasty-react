@@ -1,24 +1,18 @@
-import { range, uniq } from "lodash";
 import { CodeFile, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
+import {
+  addHighlightedLine,
+  addHighlightedLines,
+  setHighlightedLines,
+} from "../actions/creators";
 import Maybe from "../monads/maybe";
+import { rangedSelection } from "../reducers/highlight";
 import { IReducer } from "../reducers/index";
 import { registerClickHandlers } from "../ts/code-helpers";
 
 const style = require("css/displaycode.css");
-
-
-const rangedSelection = (original: number[], lhs: number, rhs: number): number[] => {
-  const newRange: number[] = (lhs > rhs) ? range(rhs, lhs + 1) : range(lhs, rhs + 1);
-  // Reverse the input before calling uniq. Uniq keeps the first occurrance and
-  // removes any more. This allows the last clicked (last element) element to remain last.
-  return uniq([
-    ...original,
-    ...newRange,
-  ].reverse()).reverse();
-};
 
 
 export interface IDisplayCodeFileProps {
@@ -26,19 +20,19 @@ export interface IDisplayCodeFileProps {
 }
 
 export interface IDisplayCodeFileDispatchProps {
+  addHighlightedLine: (line: number) => void;
+  addHighlightedLines: (lhs: number, rhs: number) => void;
+  setHighlightedLines: (lines: number[]) => void;
 }
 
 export interface IDisplayCodeFileStateProps {
+  highlight: number[];
   file: Maybe<CodeFile>;
-}
-
-export interface IDisplayCodeState {
-  lines: number[],
 }
 
 type PropsType = IDisplayCodeFileStateProps & IDisplayCodeFileDispatchProps & IDisplayCodeFileProps;
 
-class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
+class DisplayCodeFile extends React.Component<PropsType, undefined> {
   private code: HTMLElement;
 
   public componentDidMount() {
@@ -82,7 +76,7 @@ class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
       return (
         <tr
           key={i}
-          className={`${style.line} ${this.state && this.state.lines.includes(i) && style.highlighted}`}
+          className={`${style.line} ${this.props.highlight.includes(i) && style.highlighted}`}
           onClick={this.createHandleClick(i)}
         >
           <td className={style.linenumber}>{i+1}</td>
@@ -111,30 +105,21 @@ class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
   private createHandleClick(index: number): (e: React.MouseEvent<undefined>) => void {
     // TODO: Probably don't need to make N new event handlers on every draw.
     return ((e: React.MouseEvent<undefined>): void => {
+      const lastIndex: number = this.props.highlight.length > 0 ?
+                                this.props.highlight[this.props.highlight.length - 1]
+                                : 0;
+
       if (e.ctrlKey) {
-        if (e.shiftKey && this.state.lines.length > 0) {
-          // Highlighting everything between the last line
-          // and this one. Selections can be reversed.
-          const lastIndex: number = this.state.lines[this.state.lines.length - 1];
-          this.setState({
-            lines: rangedSelection(this.state.lines, index, lastIndex),
-          });
+        if (e.shiftKey && this.props.highlight.length > 0) {
+          this.props.addHighlightedLines(lastIndex, index);
         } else {
-          this.setState({
-            lines: [...this.state.lines, index],
-          });
+          this.props.addHighlightedLine(index);
         }
       } else {
-        if (e.shiftKey && this.state.lines.length > 0) {
-          const lastIndex: number = this.state.lines[this.state.lines.length - 1];
-
-          this.setState({
-            lines: rangedSelection([], index, lastIndex),
-          });
+        if (e.shiftKey && this.props.highlight.length > 0) {
+          this.props.setHighlightedLines(rangedSelection([], index, lastIndex));
         } else {
-          this.setState({
-            lines: [index],
-          });
+          this.props.setHighlightedLines([index]);
         }
       }
     });
@@ -154,10 +139,15 @@ const mapStateToProps = (state: IReducer, ownProps: IDisplayCodeFileProps): IDis
 
   return {
     file,
+    highlight: state.highlight.files[ownProps.index],
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IDisplayCodeFileDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>, ownProps: IDisplayCodeFileProps):
+                           IDisplayCodeFileDispatchProps => ({
+  addHighlightedLine: (line: number) => dispatch(addHighlightedLine(ownProps.index, line)),
+  addHighlightedLines: (rhs: number, lhs: number) => dispatch(addHighlightedLines(ownProps.index, rhs, lhs)),
+  setHighlightedLines: (lines: number[]) => dispatch(setHighlightedLines(ownProps.index, lines)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayCodeFile);

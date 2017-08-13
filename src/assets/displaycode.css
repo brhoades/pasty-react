@@ -1,0 +1,65 @@
+.viewcode {
+  font-family: "Sans Mono", "Consolas", "Courier", monospace;
+  overflow: hidden;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.viewcode .code {
+  padding-left: 1em;
+  border-style: solid;
+  border-width: 0px 0px 0px 1px;
+  border-color: #525252;
+  padding-right: 1em;
+
+  user-select: none; /* CSS3 (little to no support) */
+  -ms-user-select: none; /* IE 10+ */
+  -moz-user-select: none; /* Gecko (Firefox) */
+  -webkit-user-select: none; /* Webkit (Safari, Chrome) */
+}
+
+.viewcode .linenumber {
+  padding-right: 0.5em;
+  padding-left: 1em;
+  cursor: pointer;
+  width: 1%;
+
+  user-select: none; /* CSS3 (little to no support) */
+  -ms-user-select: none; /* IE 10+ */
+  -moz-user-select: none; /* Gecko (Firefox) */
+  -webkit-user-select: none; /* Webkit (Safari, Chrome) */
+}
+
+@keyframes highlight {
+  0% {
+    filter: grayscale(0) opacity(1) saturate(0);
+  }
+  100% {
+    filter: grayscale(0.3) opacity(0.9) saturate(9);
+  }
+}
+
+.viewcode .highlighted {
+  animation-name: highlight;
+  animation-duration: 0.25s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0s;
+}
+
+.viewcode tr:first-child > * {
+  padding-top: 1.25em !important;
+}
+
+.viewcode tr:last-child > * {
+  padding-bottom: 1.25em !important;
+}
+
+.viewcode > table, .viewcode > table > tbody, .viewcode tr {
+  width: 100%;
+}

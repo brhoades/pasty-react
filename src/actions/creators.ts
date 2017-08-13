@@ -10,6 +10,9 @@ import {
   SET_DECRYPTED_PASTE,
   SET_SETTINGS,
   SET_THEME,
+  SET_HIGHLIGHTED_LINES,
+  ADD_HIGHLIGHTED_LINE,
+  ADD_HIGHLIGHTED_LINES,
 } from "./types";
 
 
@@ -38,6 +41,10 @@ export const setDecryptedPaste = (id: string, paste: Paste) => ({
   type: SET_DECRYPTED_PASTE,
 });
 
+//
+// SETTINGS
+//
+
 export const readSettings = () => ({
   type: READ_SETTINGS,
 });
@@ -55,4 +62,27 @@ export const setTheme = (theme: string) => ({
 export const loadTheme = (theme: string) => ({
   theme,
   type: LOAD_THEME,
+});
+
+//
+// HIGHLIGHTING
+//
+
+export const setHighlightedLines = (index: number, lines: number[]) => ({
+  index,
+  lines,
+  type: SET_HIGHLIGHTED_LINES,
+});
+
+export const addHighlightedLines = (index: number, lhs: number, rhs: number) => ({
+  index,
+  lhs,
+  rhs,
+  type: ADD_HIGHLIGHTED_LINES,
+});
+
+export const addHighlightedLine = (index: number, line: number) => ({
+  index,
+  line,
+  type: ADD_HIGHLIGHTED_LINE,
 });

@@ -27,6 +27,7 @@ export interface IViewPasteProps {
     params: {
       id: string,
       key: string,
+      extra?: string,
     },
   };
 }

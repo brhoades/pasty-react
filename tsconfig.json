@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES5",
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",

@@ -9,7 +9,7 @@ const Router = () => (
   <HashRouter>
     <div>
       <Route exact path="/" component={CreatePaste}/>
-      <Route exact path="/view/:id/:key" component={ViewPaste}/>
+      <Route path="/view/:id/:key/:extra?" component={ViewPaste}/>
     </div>
   </HashRouter>
 );

@@ -2,11 +2,11 @@ import { CodeFile, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
+import { registerClickHandlers } from "../ts/code-helpers";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 
-declare var hljs: any;
-declare var $: any;
+const style = require("css/displaycode.css");
 
 
 export interface IDisplayCodeFileProps {
@@ -23,29 +23,58 @@ export interface IDisplayCodeFileStateProps {
 type PropsType = IDisplayCodeFileStateProps & IDisplayCodeFileDispatchProps & IDisplayCodeFileProps;
 
 class DisplayCodeFile extends React.Component<PropsType, undefined> {
-  private code: HTMLElement;
-
   public componentDidMount() {
-    const file: CodeFile = this.props.file.getData();
-
-    if (file.meta.highlight !== "plain") {
-      $(this.code).addClass(file.meta.highlight);
-      hljs.highlightBlock(this.code);
-    } else {
-      $(this.code).addClass("hljs");
-    }
   }
 
   public render() {
     const file: CodeFile = this.props.file.getData();
+    let value: string = file.data;
+
+    if (file.meta.highlight !== "plain") {
+      value = hljs.highlight(file.meta.highlight, file.data, true).value;
+    }
+
+    const code: JSX.Element = this.addLineNumbers(value);
 
     return (
       <pre>
-        <code ref={(code) => { this.code = code; }}>
-          {file.data}
+        <code
+          className={`${file.meta.highlight !== "plain" && file.meta.highlight} hljs ${style.viewcode}`}
+        >
+          {code}
         </code>
       </pre>
     );
+  }
+
+  private addLineNumbers(code: string) {
+    const innerTable: JSX.Element[] = code.split("\n").map((e: string, i: number) => {
+      return (
+        <tr
+          key={i}
+          data-line={i+1}
+          className={style.line}
+          onClick={this.registerClickHandler(i+1)}
+        >
+          <td className="number">{i+1}</td>
+          <td className="code" dangerouslySetInnerHTML={{__html: e}} />
+        </tr>
+      );
+    });
+
+    return (
+      <table>
+        <tbody>
+          {innerTable}
+        </tbody>
+      </table>
+    );
+  }
+
+  private registerClickHandler(line: number) {
+    return (e: Event) => {
+      $(e.target);
+    };
   }
 }
 

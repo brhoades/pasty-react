@@ -22,22 +22,36 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-      },
-      {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
+        exclude: /node_modules/,
         options: {
-          name: '[name].[ext]?[hash]'
-        }
+          name: '[name].[ext]?[hash]',
+        },
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
       },
     ]
   },
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
+    alias: {
+      css: path.resolve(__dirname, "src/assets"),
+    },
   },
   devServer: {
     historyApiFallback: true,

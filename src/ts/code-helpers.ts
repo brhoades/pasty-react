@@ -3,65 +3,54 @@ import _ from "lodash/util"
 import irchljs from '../hljs/irc'
 
 // helpers to use when displaying code
-
-// Take some the contents of pre > code with line endings
 //
-// Return contents for a div with a table for displaying code
-// with line numbers.
-export function splitWithLineNumbers(code: any): void {
-  let inner: string[] = code.innerHTML.split("\n").map((e, i) => {
-    return `<tr class="cv--row" line="${i+1}"><td class="cv--line-number">${i+1}</td><td class="cv--code">${e}</td></tr>`;
-  });
-
-  code.innerHTML = `<table class="cv--table"><tbody class="cv--tbody">${inner.join("\n")}</tbody></table>`;
-}
-
 // todo: modularize and cleanup
-export function registerClickHandlers(scope: any): void {
-  scope.find('.cv--line-number').on("click", (e) => {
+export function registerClickHandlers(scope: any, lineclass: string, highlightclass: string): void {
+  scope.find(lineclass).on("click", (e) => {
+    console.log("REGISTER");
     // shift highlights code between this line and the last-clicked
-    if(e.shiftKey && $(".cv--last-clicked").length) {
-      let last = $(".cv--last-clicked");
-      scope.find(".cv--last-clicked").removeClass("cv--last-clicked");
+    if(e.shiftKey && $(".last-clicked").length) {
+      let last = $(".last-clicked");
+      scope.find(".last-clicked").removeClass("last-clicked");
 
       if(!e.ctrlKey) {
         // remove all other highlights
-        scope.find(".cv--highlighted").removeClass("cv--highlighted");
-        last.addClass("cv--highlighted");
-        $(e.target).parent('tr').addClass("cv--highlighted");
+        scope.find().removeClass(highlightclass);
+        last.addClass(highlightclass);
+        $(e.target).addClass(highlightclass);
       }
 
-      let lastLine: number = parseInt(last.attr("line"));
-      let currentLine: number = parseInt($(e.target).parent('tr').attr("line"));
+      let lastLine: number = parseInt(last.attr("data-line"));
+      let currentLine: number = parseInt($(e.target).attr("data-line"));
 
       last.parent('tbody').children().forEach((e) => {
-        let eLine: number = parseInt($(e).attr("line"));
+        let eLine: number = parseInt($(e).attr("data-line"));
         // highlight top-down, then try bottom-up
         if(currentLine < lastLine && eLine > currentLine && eLine <= lastLine) {
-          $(e).addClass("cv--highlighted");
+          $(e).addClass(highlightclass);
         } else if(currentLine >= lastLine && eLine < currentLine && eLine >= lastLine) {
-          $(e).addClass("cv--highlighted");
+          $(e).addClass(highlightclass);
         }
 
       });
     } else {
       // If shift isn't held, handle individual lines.
-      let tr = $(e.target).parent('tr');
+      let tr = $(e.target);
 
-      scope.find(".cv--last-clicked").removeClass("cv--last-clicked");
-      if(tr.hasClass("cv--highlighted")) {
-        tr.removeClass("cv--highlighted");
+      scope.find(".last-clicked").removeClass("last-clicked");
+      if(tr.hasClass(highlightclass)) {
+        tr.removeClass(highlightclass);
 
         if(!e.ctrlKey) {
-          scope.find(".cv--highlighted").removeClass("cv--highlighted");
+          scope.find(highlightclass).removeClass(highlightclass);
         }
       } else {
         if(!e.ctrlKey) {
-          scope.find(".cv--highlighted").removeClass("cv--highlighted");
+          scope.find(highlightclass).removeClass(highlightclass);
         }
 
-        tr.addClass("cv--highlighted");
-        tr.addClass("cv--last-clicked");
+        tr.addClass(highlightclass);
+        tr.addClass("last-clicked");
       }
     }
 
@@ -111,7 +100,7 @@ export function unserializeLineNumbers(lines: string): number[] {
 export function highlightLines(scope, highlighted) {
   scope.find('tr').filter((i) => {
     return highlighted.indexOf(i + 1) >= 0;
-  }).addClass('cv--highlighted');
+  }).addClass('viewcode-highlighted');
 }
 
 export function registerLanguage(hljs) {

@@ -33,6 +33,7 @@
     "zepto-webpack": "^1.2.1"
   },
   "devDependencies": {
+    "@types/node": "^8.0.20",
     "@types/react": "^16.0.1",
     "@types/react-dom": "^15.5.2",
     "@types/react-redux": "^4.4.47",

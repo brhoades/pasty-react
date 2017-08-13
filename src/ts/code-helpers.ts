@@ -7,7 +7,6 @@ import irchljs from '../hljs/irc'
 // todo: modularize and cleanup
 export function registerClickHandlers(scope: any, lineclass: string, highlightclass: string): void {
   scope.find(lineclass).on("click", (e) => {
-    console.log("REGISTER");
     // shift highlights code between this line and the last-clicked
     if(e.shiftKey && $(".last-clicked").length) {
       let last = $(".last-clicked");

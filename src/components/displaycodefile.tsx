@@ -1,13 +1,24 @@
+import { range, uniq } from "lodash";
 import { CodeFile, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { range } from "lodash/util";
 
-import { registerClickHandlers } from "../ts/code-helpers";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
+import { registerClickHandlers } from "../ts/code-helpers";
 
 const style = require("css/displaycode.css");
+
+
+const rangedSelection = (original: number[], lhs: number, rhs: number): number[] => {
+  const newRange: number[] = (lhs > rhs) ? range(rhs, lhs + 1) : range(lhs, rhs + 1);
+  // Reverse the input before calling uniq. Uniq keeps the first occurrance and
+  // removes any more. This allows the last clicked (last element) element to remain last.
+  return uniq([
+    ...original,
+    ...newRange,
+  ].reverse()).reverse();
+};
 
 
 export interface IDisplayCodeFileProps {
@@ -94,8 +105,11 @@ class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
     return ((e: React.MouseEvent<undefined>): void => {
       if (e.ctrlKey) {
         if (e.shiftKey && this.state.lines.length > 0) {
+          // Highlighting everything between the last line
+          // and this one. Selections can be reversed.
+          const lastIndex: number = this.state.lines[this.state.lines.length - 1];
           this.setState({
-            lines: [...this.state.lines, range(this.state.lines[this.state.lines.length-1], index)],
+            lines: rangedSelection(this.state.lines, index, lastIndex),
           });
         } else {
           this.setState({
@@ -103,9 +117,17 @@ class DisplayCodeFile extends React.Component<PropsType, IDisplayCodeState> {
           });
         }
       } else {
-        this.setState({
-          lines: [index],
-        });
+        if (e.shiftKey && this.state.lines.length > 0) {
+          const lastIndex: number = this.state.lines[this.state.lines.length - 1];
+
+          this.setState({
+            lines: rangedSelection([], index, lastIndex),
+          });
+        } else {
+          this.setState({
+            lines: [index],
+          });
+        }
       }
     });
   }

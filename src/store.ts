@@ -7,6 +7,7 @@ import { applyMiddleware, createStore as createReduxStore, Store } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
+import highlightMiddleware from "./middleware/highlight";
 import themeMiddleware from "./middleware/theme";
 import reducer, { IReducer } from "./reducers/index";
 import saga from "./sagas";
@@ -20,7 +21,12 @@ const store = (history: History): Store<IReducer> => {
   const composeEnhancers = composeWithDevTools({});
   const reduxStore: Store<IReducer> = createReduxStore(
     reducer,
-    composeEnhancers(applyMiddleware(themeMiddleware, sagaMiddleware, routerMiddleware)),
+    composeEnhancers(applyMiddleware(
+      themeMiddleware,
+      sagaMiddleware,
+      routerMiddleware,
+      highlightMiddleware,
+    )),
   );
 
   sagaMiddleware.run(saga);

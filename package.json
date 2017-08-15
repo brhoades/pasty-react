@@ -9,10 +9,10 @@
     "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json"
   },
   "dependencies": {
-    "@types/react-router-dom": "^4.0.7",
     "awesome-typescript-loader": "^3.2.2",
     "clipboard": "^1.6.1",
     "highlight.js": "^9.11.0",
+    "history": "^4.6.3",
     "pasty-core": "^0.1.2",
     "pgwcookie": "^1.4.0",
     "purecss": "^1.0.0",
@@ -22,6 +22,7 @@
     "react-redux-typescript": "^2.3.0",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
+    "react-router-redux": "next",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.0.3",
@@ -33,11 +34,14 @@
     "zepto-webpack": "^1.2.1"
   },
   "devDependencies": {
+    "@types/history": "^4.6.0",
     "@types/node": "^8.0.20",
     "@types/react": "^16.0.1",
     "@types/react-dom": "^15.5.2",
     "@types/react-redux": "^4.4.47",
     "@types/react-router": "^4.0.14",
+    "@types/react-router-dom": "^4.0.7",
+    "@types/react-router-redux": "next",
     "@types/redux": "^3.6.0",
     "@types/redux-form": "^7.0.2",
     "@types/redux-saga": "^0.10.5",

@@ -30,10 +30,10 @@ export function serializeLineNumbers(lines: number[]): string {
     return [...acc, [e]];
   }, []).reduce((acc: string[], e: number[]) => {
     if (e.length > 1) {
-      return [...acc, `${e[0]+1}-${e[e.length - 1]+1}`];
+      return [...acc, `${e[0] + 1}-${e[e.length - 1] + 1}`];
     }
 
-    return [...acc, `${e[0]+1}`];
+    return [...acc, `${e[0] + 1}`];
   }, []).join(",");
 }
 
@@ -46,7 +46,9 @@ export function generatePasteURL(reducer: IReducer): string {
     return `/view/${id}/${key}`;
   }
 
-  const ranges: string = reducer.highlight.files.map(serializeLineNumbers).join(";");
+  const ranges: string = reducer.highlight.files.map(
+    (f) => [...f].sort((a, b) => b - a),
+  ).map(serializeLineNumbers).join(";");
 
   return `/view/${id}/${key}/${ranges}`;
 }

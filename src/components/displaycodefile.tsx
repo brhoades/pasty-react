@@ -38,12 +38,12 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
   public componentDidMount() {
     // Cheap workaround to allow themes to have custom looking highlighted line background
     // colors
-    const bgcolor: string = getComputedStyle(this.code).getPropertyValue('background-color');
+    const bgcolor: string = getComputedStyle(this.code).getPropertyValue("background-color");
     this.code.style.backgroundColor = "transparent";
 
     // Set this propety on all trs so that their click transition works.
     const rows: HTMLCollection = this.code.children[0].children[0].children;
-    for (let i=0; i<rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
       (rows[i] as HTMLElement).style.backgroundColor = bgcolor;
     }
   }

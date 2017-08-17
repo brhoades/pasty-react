@@ -1,12 +1,15 @@
 import { File, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Card, Icon } from "semantic-ui-react";
+import { Divider, Segment, Header, Icon } from "semantic-ui-react";
 
+import FileActionsContainer from "../containers/fileactionscontainer";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import DisplayCodeFile from "./displaycodefile";
 import DisplayImage from "./displayimage";
+
+const style = require("css/displayfile.css");
 
 
 export interface IDisplayFileProps {
@@ -22,11 +25,7 @@ export interface IDisplayFileStateProps {
 
 type PropsType = IDisplayFileStateProps & IDisplayFileDispatchProps & IDisplayFileProps;
 
-class DisplayFile extends React.Component<PropsType, undefined> {
-  constructor(props) {
-    super(props);
-  }
-
+class DisplayFile extends React.PureComponent<PropsType> {
   public render() {
     if (this.props.file.isNothing()) {
       return null;
@@ -34,24 +33,18 @@ class DisplayFile extends React.Component<PropsType, undefined> {
 
     return (
       <div>
-        <Card fluid={true}>
-          <Card.Content>
-            <Card.Header>{this.props.file.getData().name}</Card.Header>
-            <Card.Description>
-              <a
-                href={this.props.file.getData().base64DownloadString()}
-                download={this.props.file.getData().name}
-              >
-                <Icon name="download" link={true} />
-              </a>
-            </Card.Description>
-          </Card.Content>
-          <Card.Content>
-            {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
+        <Segment>
+          <Header>
+            {this.props.file.getData().name}
+            <FileActionsContainer
+              index={this.props.index}
+            />
+          </Header>
+          <Divider />
+          {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
 
-            {this.props.file.getData().isReadable() && this.renderCodeFile()}
-          </Card.Content>
-        </Card>
+          {this.props.file.getData().isReadable() && this.renderCodeFile()}
+        </Segment>
       </div>
     );
   }

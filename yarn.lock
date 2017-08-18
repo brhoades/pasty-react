@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/clipboard@^1.5.34":
+  version "1.5.34"
+  resolved "https://registry.yarnpkg.com/@types/clipboard/-/clipboard-1.5.34.tgz#ee56c752a233dbf539656c22a54d06dfabaaf7ee"
+
 "@types/history@*", "@types/history@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.0.tgz#093d67ed780d889c9543f6dca24ebee0b6b9fc45"

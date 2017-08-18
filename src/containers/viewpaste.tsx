@@ -1,9 +1,10 @@
-import { range } from "lodash/util"
+import { range } from "lodash/util";
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
 import DisplayFile from "../components/displayfile";
+import CopyShortLinkIcon from "../components/icons/copyshortlinkicon";
 
 import { clearPaste, getPaste, setHighlightedLines } from "../actions/creators";
 import Maybe from "../monads/maybe";
@@ -64,7 +65,22 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
 
     return (
       <div>
-        <h2>{this.props.paste.getData().name}</h2>
+        <h2
+          style={{
+            display: "inline-block",
+            paddingBottom: "1em",
+          }}
+        >
+          {this.props.paste.getData().name}
+        </h2>
+        <div
+          style={{
+            float: "right",
+          }}
+        >
+          <CopyShortLinkIcon />
+        </div>
+
         {this.renderPastes()}
       </div>
     );

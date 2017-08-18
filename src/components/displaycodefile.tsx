@@ -32,7 +32,7 @@ export interface IDisplayCodeFileStateProps {
 
 type PropsType = IDisplayCodeFileStateProps & IDisplayCodeFileDispatchProps & IDisplayCodeFileProps;
 
-class DisplayCodeFile extends React.PureComponent<PropsType> {
+class DisplayCodeFile extends React.Component<PropsType, undefined> {
   private code: HTMLElement;
 
   public componentDidMount() {

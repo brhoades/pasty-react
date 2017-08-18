@@ -25,7 +25,7 @@ export interface IDisplayFileStateProps {
 
 type PropsType = IDisplayFileStateProps & IDisplayFileDispatchProps & IDisplayFileProps;
 
-class DisplayFile extends React.PureComponent<PropsType> {
+class DisplayFile extends React.Component<PropsType, undefined> {
   public render() {
     if (this.props.file.isNothing()) {
       return null;

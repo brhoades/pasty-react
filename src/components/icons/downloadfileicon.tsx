@@ -6,7 +6,7 @@ import { getFileByIndexDefault, IFileByIndexPropsType } from "../../helpers/file
 import { IReducer } from "../../reducers/index";
 
 
-class DownloadFileIcon extends React.PureComponent<IFileByIndexPropsType> {
+class DownloadFileIcon extends React.Component<IFileByIndexPropsType, undefined> {
   public render() {
     if (this.props.file.isNothing()) {
       return null;

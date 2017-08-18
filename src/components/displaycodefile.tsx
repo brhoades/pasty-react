@@ -77,9 +77,13 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
         <tr
           key={i}
           className={`${style.line} ${this.props.highlight.includes(i) && style.highlighted}`}
-          onClick={this.createHandleClick(i)}
         >
-          <td className={style.linenumber}>{i+1}</td>
+          <td
+            onClick={this.createHandleClick(i)}
+            className={style.linenumber}
+          >
+            {i+1}
+          </td>
           <td className={style.code} dangerouslySetInnerHTML={{__html: e}} />
         </tr>
       );

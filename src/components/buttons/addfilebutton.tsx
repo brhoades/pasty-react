@@ -15,7 +15,7 @@ type PropsType = IAddFileButtonDispatchProps;
 class AddFileButton extends React.Component<PropsType, {}> {
   public render() {
     return (
-      <Button onClick={this.props.addCodeFile} secondary={true}>
+      <Button onClick={this.props.addCodeFile} secondary={true} type="button">
         Upload File
       </Button>
     );

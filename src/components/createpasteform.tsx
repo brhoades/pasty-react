@@ -2,12 +2,12 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { WrappedFieldArrayProps, FieldArray, GenericFieldArray } from "redux-form";
+import { Form } from "semantic-ui-react";
 
 import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 
 import AddTextFileField from "./addtextfilefield";
-
 
 export interface ICreatePasteFormDispatchProps {
 }
@@ -18,7 +18,8 @@ export interface ICreatePasteFormStateProps {
 
 type PropsType = ICreatePasteFormStateProps;
 
-class CreatePasteForm extends React.Component<PropsType, {}> {
+class CreatePasteForm extends React.Component<PropsType, undefined> {
+
   public render() {
     return (
       <div>

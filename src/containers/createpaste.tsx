@@ -1,7 +1,7 @@
 import { File } from "pasty-core";
 import * as React from "react";
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { Button, Grid } from "semantic-ui-react";
+import { Button, Form, Grid } from "semantic-ui-react";
 
 import { IPasteFormData } from "../reducers/form";
 
@@ -12,31 +12,53 @@ import CreatePasteForm from "../components/createpasteform";
 
 type CreatePasteProps = InjectedFormProps<IPasteFormData>;
 
-class CreatePaste extends React.Component<CreatePasteProps, undefined> {
+export interface ICreatePasteState {
+  loading: boolean;
+}
+
+class CreatePaste extends React.Component<CreatePasteProps, ICreatePasteState> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: false,
+    };
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   public render() {
     return (
       <div>
-        <div
-          style={{
-            marginBottom: '2em',
-          }}
-        >
-        <CreatePasteForm
-        />
-        </div>
-        <Grid>
-          <Grid.Column width={8}>
-            <Button.Group>
-              <AddTextButton />
-              <AddFileButton />
-            </Button.Group>
-          </Grid.Column>
-          <Grid.Column width={8} textAlign="right">
-            <PasteButton />
-          </Grid.Column>
-        </Grid>
+        <Form onSubmit={this.onSubmit} loading={this.state.loading}>
+          <div
+            style={{
+              marginBottom: '2em',
+            }}
+          >
+            <CreatePasteForm
+            />
+          </div>
+          <Grid>
+            <Grid.Column width={8}>
+              <Button.Group>
+                <AddTextButton />
+                <AddFileButton />
+              </Button.Group>
+            </Grid.Column>
+            <Grid.Column width={8} textAlign="right">
+              <PasteButton />
+            </Grid.Column>
+          </Grid>
+        </Form>
       </div>
     );
+  }
+
+  private onSubmit() {
+    this.setState({
+      loading: true,
+    });
   }
 }
 

@@ -16,7 +16,7 @@ type PropsType = IAddTextButtonDispatchProps;
 class AddTextButton extends React.Component<PropsType, {}> {
   public render() {
     return (
-      <Button onClick={this.props.addCodeFile} secondary={true}>
+      <Button onClick={this.props.addCodeFile} secondary={true} type="button">
         Add Text
       </Button>
     );

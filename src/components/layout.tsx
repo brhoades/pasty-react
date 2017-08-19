@@ -10,6 +10,9 @@ const Layout = ({ children }) =>
     <Menu fixed="top" inverted={true}>
       <Container>
         <Menu.Item href="#/about" as="a" header={true}>PASTY</Menu.Item>
+        <Menu.Item href="#/" as="a">
+          Paste
+        </Menu.Item>
         <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" as="a">
           View Image
         </Menu.Item>

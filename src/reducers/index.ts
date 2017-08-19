@@ -1,5 +1,6 @@
 import { routerReducer as router } from "react-router-redux";
 import { combineReducers, Reducer } from "redux";
+import { reducer as reduxFormReducer } from "redux-form";
 
 import highlight, { IHighlightReducer } from "./highlight";
 import paste, { IPasteReducer } from "./paste";
@@ -15,6 +16,7 @@ export interface IReducer {
 
 
 const pasty = combineReducers<IReducer>({
+  form: reduxFormReducer,
   highlight,
   paste,
   router,

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Icon } from "semantic-ui-react";
 
 import DownloadFileIcon from "../components/icons/downloadfileicon";
 

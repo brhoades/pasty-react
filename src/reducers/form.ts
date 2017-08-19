@@ -8,6 +8,7 @@ export enum PasteFileTypes {
 
 export interface IPartialPasteFile {
   type: PasteFileTypes;
+  filename: string;
   content: string;
 
   meta: MetaData;

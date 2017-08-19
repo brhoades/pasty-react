@@ -3,6 +3,7 @@ import { connect, Dispatch } from "react-redux";
 import { arrayPush } from "redux-form";
 import { Button } from "semantic-ui-react";
 
+import { PasteFileTypes } from "../../reducers/form";
 import { IReducer } from "../../reducers/index";
 
 
@@ -26,7 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IAddTextButtonDispatc
   addCodeFile: () => dispatch(arrayPush("createpaste", "files", {
     content: "",
     meta: {},
-    type: "auto",
+    type: PasteFileTypes.CODE,
   })),
 });
 

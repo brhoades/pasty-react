@@ -1,10 +1,12 @@
 import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { FieldArray } from "redux-form";
+import { WrappedFieldArrayProps, FieldArray, GenericFieldArray } from "redux-form";
 
-import { IPartialPasteFile } from "../reducers/form";
+import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
+
+import AddTextFileField from "./addtextfilefield";
 
 
 export interface ICreatePasteFormDispatchProps {
@@ -30,12 +32,13 @@ class CreatePasteForm extends React.Component<PropsType, {}> {
   }
 
   private renderForm() {
-    return (
-      <FieldArray
-        name="files"
-        component={(props): React.ReactElement<any> => (<input {...props } /> )}
-      />
-    );
+    return this.props.files.map((file: IPartialPasteFile, index: number) => {
+      if (file.type === PasteFileTypes.CODE) {
+        return (<AddTextFileField key={index} index={index} />);
+      }
+
+      return (<input key={index} type="text" />);
+    });
   }
 
   private renderPlaceholder() {

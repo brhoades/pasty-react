@@ -1,13 +1,13 @@
 import { File, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Divider, Header, Segment } from "semantic-ui-react";
 
 import FileActionsContainer from "../containers/fileactionscontainer";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import DisplayCodeFile from "./displaycodefile";
 import DisplayImage from "./displayimage";
+import FileCard from "./filecard";
 
 const style = require("css/displayfile.css");
 
@@ -33,18 +33,18 @@ class DisplayFile extends React.Component<PropsType, undefined> {
 
     return (
       <div>
-        <Segment>
-          <Header>
-            {this.props.file.getData().name}
+        <FileCard
+          header={this.props.file.getData().name}
+          actionbar={
             <FileActionsContainer
               index={this.props.index}
             />
-          </Header>
-          <Divider />
+          }
+        >
           {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
 
           {this.props.file.getData().isReadable() && this.renderCodeFile()}
-        </Segment>
+        </FileCard>
       </div>
     );
   }

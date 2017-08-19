@@ -13,7 +13,7 @@
     "clipboard": "^1.6.1",
     "highlight.js": "^9.11.0",
     "history": "^4.6.3",
-    "pasty-core": "^0.1.2",
+    "pasty-core": "^0.1.4",
     "pgwcookie": "^1.4.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

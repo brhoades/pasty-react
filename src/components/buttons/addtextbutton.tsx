@@ -1,13 +1,33 @@
 import * as React from "react";
+import { connect, Dispatch } from "react-redux";
+import { arrayPush } from "redux-form";
 import { Button } from "semantic-ui-react";
 
+import { IReducer } from "../../reducers/index";
 
-export default class AddTextButton extends React.PureComponent<{}> {
+
+export interface IAddTextButtonDispatchProps {
+  addCodeFile: () => void;
+}
+
+type PropsType = IAddTextButtonDispatchProps;
+
+class AddTextButton extends React.Component<PropsType, {}> {
   public render() {
     return (
-      <Button secondary={true}>
+      <Button onClick={this.props.addCodeFile} secondary={true}>
         Add Text
       </Button>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IAddTextButtonDispatchProps => ({
+  addCodeFile: () => dispatch(arrayPush("createpaste", "files", {
+    content: "",
+    meta: {},
+    type: "auto",
+  })),
+});
+
+export default connect(() => ({}), mapDispatchToProps)(AddTextButton);

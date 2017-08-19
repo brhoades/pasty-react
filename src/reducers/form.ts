@@ -1,6 +1,27 @@
-import { File } from "pasty-core";
+import { MetaData } from "pasty-core";
 
 
-export interface IFormData {
-  files: File[];
+export enum PasteFileTypes {
+  FILE,
+  CODE,
+}
+
+export interface IPartialPasteFile {
+  type: PasteFileTypes;
+  content: string;
+
+  meta: MetaData;
+}
+
+export interface IPasteFormData {
+  files: IPartialPasteFile[];
+}
+
+export interface IReduxFormReducerData<T> {
+  values?: T;
+  initialValues?: T;
+}
+
+export interface IPasteReduxFormReducer {
+  createpaste: IReduxFormReducerData<IPasteFormData>;
 }

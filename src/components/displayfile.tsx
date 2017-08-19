@@ -1,7 +1,7 @@
 import { File, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Divider, Segment, Header, Icon } from "semantic-ui-react";
+import { Divider, Header, Segment } from "semantic-ui-react";
 
 import FileActionsContainer from "../containers/fileactionscontainer";
 import Maybe from "../monads/maybe";

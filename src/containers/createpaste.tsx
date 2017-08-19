@@ -1,21 +1,29 @@
+import { File } from "pasty-core";
 import * as React from "react";
-import { reduxForm, InjectedFormProps } from "redux-form";
+import { InjectedFormProps, reduxForm } from "redux-form";
 import { Button, Grid } from "semantic-ui-react";
 
-import { IFormData } from "../reducers/form";
+import { IPasteFormData } from "../reducers/form";
 
 import AddFileButton from "../components/buttons/addfilebutton";
 import AddTextButton from "../components/buttons/addtextbutton";
 import PasteButton from "../components/buttons/pastebutton";
 import CreatePasteForm from "../components/createpasteform";
 
-type CreatePasteProps = InjectedFormProps<IFormData>;
+type CreatePasteProps = InjectedFormProps<IPasteFormData>;
 
 class CreatePaste extends React.Component<CreatePasteProps, undefined> {
   public render() {
     return (
       <div>
-        <CreatePasteForm />
+        <div
+          style={{
+            marginBottom: '2em',
+          }}
+        >
+        <CreatePasteForm
+        />
+        </div>
         <Grid>
           <Grid.Column width={8}>
             <Button.Group>
@@ -32,6 +40,9 @@ class CreatePaste extends React.Component<CreatePasteProps, undefined> {
   }
 }
 
-export default reduxForm<IFormData>({
+export default reduxForm<IPasteFormData>({
   form: "createpaste",
+  initialValues: {
+    files: [],
+  },
 })(CreatePaste);

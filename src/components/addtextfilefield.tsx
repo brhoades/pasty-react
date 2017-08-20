@@ -40,7 +40,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
               <div>
                 <div style={{float: "left"}}>
                 <Field
-                  name="filename"
+                  name="name"
                   type="text"
                   component={(props: any) => (
                     <Form.Input
@@ -61,6 +61,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
               component={(props: any) => (
                 <Form.TextArea
                   {...props.input}
+                  onChange={(ev, data) => props.input.onChange(data.value)}
                   rows="20"
                   placeholder="puts 'Hello World!'"
                   label="File Contents"

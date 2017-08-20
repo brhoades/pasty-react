@@ -18,10 +18,28 @@ export default class FileCard extends React.Component<PropsType, {}> {
         }}
       >
         <Segment>
-          <Header>
-            {this.props.header}
-            {this.props.actionbar}
-          </Header>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div
+              style={{
+                display: "inline-flex",
+                flexGrow: 1,
+              }}
+            >
+              <h3>{this.props.header}</h3>
+            </div>
+            <div
+              style={{
+                display: "inline-flex",
+                flexGrow: 0,
+              }}
+            >
+              {this.props.actionbar}
+            </div>
+          </div>
 
           <Divider />
 

@@ -7,9 +7,10 @@ export enum PasteFileTypes {
 }
 
 export interface IPartialPasteFile {
+  id: number;
   type: PasteFileTypes;
-  filename: string;
-  content: string;
+  name: string;
+  data: string;
 
   meta: MetaData;
 }
@@ -20,7 +21,7 @@ export interface IPasteFormData {
 
 export interface IReduxFormReducerData<T> {
   values?: T;
-  initialValues?: T;
+  initial?: T;
 }
 
 export interface IPasteReduxFormReducer {

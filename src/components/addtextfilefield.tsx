@@ -5,6 +5,7 @@ import { connect, Dispatch } from "react-redux";
 import { Field, FormSection } from "redux-form";
 import { Form } from "semantic-ui-react";
 
+import LanguageDropdownButton from "./buttons/languagedropdownbutton";
 import AddTextFileActionsContainer from "../containers/addtextfileactionscontainer";
 import { IPartialPasteFile } from "../reducers/form";
 import { IReducer } from "../reducers/index";
@@ -14,46 +15,55 @@ export interface IAddTextFileFieldProps {
 }
 
 export interface IAddTextFileFieldStateProps {
-  content: string;
-  filename: string;
-  languages: string[];
+  data: string;
+  name: string;
 }
 
 type PropsType = IAddTextFileFieldProps & IAddTextFileFieldStateProps;
 
-class AddTextFileField extends React.Component<PropsType, {}> {
-  public shouldComponentUpdate(nextProps) {
-    return false;
+class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      highlight: props.highlight,
+    };
   }
 
   public render() {
     const baseName = `files[${this.props.index}]`;
     return (
       <div>
-        <Form>
-          <FormSection name={baseName}>
-            <FileCard
-              header={
+        <FormSection name={baseName}>
+          <FileCard
+            header={
+              <div>
+                <div style={{float: "left"}}>
                 <Field
                   name="filename"
                   type="text"
                   component={(props: any) => (
-                      <Form.Input {...props.input} label="Filename" size="small" width="8"/>
+                    <Form.Input
+                      {...props.input}
+                      placeholder="hello_world.rb"
+                      size="small"
+                    />
                   )}
-                  defaultValue={this.props.filename}
+                  defaultValue={this.props.name}
                 />
-              }
-              actionbar={<AddTextFileActionsContainer index={this.props.index} />}
-            >
-              <Field
-                name="content"
-                type="text"
-                component={(props: any) => <Form.TextArea {...props.input} rows="20" label="File Contents" />}
-                defaultValue={this.props.content}
-              />
-            </FileCard>
-          </FormSection>
-        </Form>
+                </div>
+              </div>
+            }
+            actionbar={<AddTextFileActionsContainer index={this.props.index} />}
+          >
+            <Field
+              name="content"
+              type="text"
+              component={(props: any) => <Form.TextArea {...props.input} rows="20" label="File Contents" />}
+              defaultValue={this.props.data}
+            />
+          </FileCard>
+        </FormSection>
       </div>
     );
   }
@@ -63,12 +73,9 @@ const mapStateToProps = (state: IReducer, ownProps: IAddTextFileFieldProps): IAd
   const thisFile = state.form.createpaste.values.files[ownProps.index];
 
   return {
-    content: thisFile.content,
-    filename: thisFile.filename,
-    languages: state.settings.languages,
+    data: thisFile.data,
+    name: thisFile.name,
   };
 };
-
-
 
 export default connect(mapStateToProps, () => ({}))(AddTextFileField);

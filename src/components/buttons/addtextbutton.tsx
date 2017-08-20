@@ -1,3 +1,4 @@
+import { CodeFile } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { arrayPush } from "redux-form";
@@ -24,11 +25,12 @@ class AddTextButton extends React.Component<PropsType, {}> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IAddTextButtonDispatchProps => ({
-  addCodeFile: () => dispatch(arrayPush("createpaste", "files", {
-    content: "",
-    meta: {},
-    type: PasteFileTypes.CODE,
-  })),
+  addCodeFile: () => dispatch(arrayPush(
+    "createpaste", "files", {
+      ...CodeFile.empty().rawObject(),
+      type: PasteFileTypes.CODE,
+    },
+  )),
 });
 
 export default connect(() => ({}), mapDispatchToProps)(AddTextButton);

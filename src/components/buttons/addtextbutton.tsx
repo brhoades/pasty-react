@@ -14,15 +14,11 @@ export interface IAddTextButtonDispatchProps {
 
 type PropsType = IAddTextButtonDispatchProps;
 
-class AddTextButton extends React.Component<PropsType, {}> {
-  public render() {
-    return (
-      <Button onClick={this.props.addCodeFile} secondary={true} type="button">
-        Add Text
-      </Button>
-    );
-  }
-}
+const AddTextButton = (props: PropsType) => (
+  <Button onClick={props.addCodeFile} secondary={true} type="button">
+    Add Text
+  </Button>
+);
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IAddTextButtonDispatchProps => ({
   addCodeFile: () => dispatch(arrayPush(

@@ -44,9 +44,8 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
                   type="text"
                   component={(props: any) => (
                     <Form.Input
-                      {...props.input}
                       placeholder="hello_world.rb"
-                      size="small"
+                      {...props.input}
                     />
                   )}
                   defaultValue={this.props.name}
@@ -59,7 +58,14 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
             <Field
               name="content"
               type="text"
-              component={(props: any) => <Form.TextArea {...props.input} rows="20" label="File Contents" />}
+              component={(props: any) => (
+                <Form.TextArea
+                  {...props.input}
+                  rows="20"
+                  placeholder="puts 'Hello World!'"
+                  label="File Contents"
+                />
+              )}
               defaultValue={this.props.data}
             />
           </FileCard>

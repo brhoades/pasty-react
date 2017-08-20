@@ -27,7 +27,7 @@ const LanguageDropdownButton = (props: PropsType) => (
   <Dropdown
     search={true}
     button={true}
-    onChange={(ev, data) => { console.dir(data); props.change(data.value)}}
+    onChange={(ev, data) => props.change(data.value)}
     defaultValue={props.highlight}
     options={[
       {
@@ -44,7 +44,7 @@ const LanguageDropdownButton = (props: PropsType) => (
         key: lang,
         text: lang,
         value: lang,
-      }),
+      }))
     ]}
   />
 );

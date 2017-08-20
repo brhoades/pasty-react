@@ -29,7 +29,7 @@ export default class FileCard extends React.Component<PropsType, {}> {
                 flexGrow: 1,
               }}
             >
-              <h3>{this.props.header}</h3>
+              {this.props.header}
             </div>
             <div
               style={{

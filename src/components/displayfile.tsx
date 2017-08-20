@@ -34,7 +34,7 @@ class DisplayFile extends React.Component<PropsType, undefined> {
     return (
       <div>
         <FileCard
-          header={this.props.file.getData().name}
+          header={<h2>{this.props.file.getData().name}</h2>}
           actionbar={
             <FileActionsContainer
               index={this.props.index}

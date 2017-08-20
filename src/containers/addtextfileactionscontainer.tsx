@@ -14,7 +14,7 @@ const AddTextFileActionsContainer = (props: IAddTextActionsProps) => (
   }}
   >
     <Button.Group labeled={true}>
-      <Button type="button" icon={<RemoveFileIcon index={props.index} />} />
+      <RemoveFileIcon index={props.index} />
       <LanguageDropdownButton index={props.index} />
     </Button.Group>
   </div>

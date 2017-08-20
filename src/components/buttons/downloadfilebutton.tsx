@@ -1,12 +1,12 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Icon, Popup } from "semantic-ui-react";
+import { Button, Popup } from "semantic-ui-react";
 
 import { getFileByIndexDefault, IFileByIndexPropsType } from "../../helpers/fileprops";
 import { IReducer } from "../../reducers/index";
 
 
-class DownloadFileIcon extends React.Component<IFileByIndexPropsType, undefined> {
+class DownloadFileButton extends React.Component<IFileByIndexPropsType, undefined> {
   public render() {
     if (this.props.file.isNothing()) {
       return null;
@@ -21,7 +21,7 @@ class DownloadFileIcon extends React.Component<IFileByIndexPropsType, undefined>
             href={this.props.file.getData().base64DownloadString()}
             download={this.props.file.getData().name}
           >
-            <Icon name="download" link={true} />
+            <Button icon="download" link={true} />
           </a>
           }
           content="Download this file"
@@ -31,4 +31,4 @@ class DownloadFileIcon extends React.Component<IFileByIndexPropsType, undefined>
   }
 }
 
-export default connect(getFileByIndexDefault, () => ({}))(DownloadFileIcon);
+export default connect(getFileByIndexDefault, () => ({}))(DownloadFileButton);

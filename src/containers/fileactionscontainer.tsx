@@ -1,6 +1,7 @@
 import * as React from "react";
+import { Button } from "semantic-ui-react";
 
-import DownloadFileIcon from "../components/icons/downloadfileicon";
+import DownloadFileButton from "../components/buttons/downloadfilebutton";
 
 export interface IFileActionsProps {
   index: number;
@@ -11,7 +12,9 @@ const FileActionsContainer = (props: IFileActionsProps) => (
     float: "right",
   }}
   >
-    <DownloadFileIcon index={props.index} />
+    <Button.Group>
+      <DownloadFileButton index={props.index} />
+    </Button.Group>
   </div>
 );
 

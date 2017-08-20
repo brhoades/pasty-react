@@ -36,8 +36,7 @@ class CreatePaste extends React.Component<CreatePasteProps, ICreatePasteState> {
               marginBottom: '2em',
             }}
           >
-            <CreatePasteForm
-            />
+            <CreatePasteForm />
           </div>
           <Grid>
             <Grid.Column width={8}>

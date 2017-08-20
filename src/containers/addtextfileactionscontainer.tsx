@@ -13,7 +13,7 @@ const AddTextFileActionsContainer = (props: IAddTextActionsProps) => (
     display: "inline-block",
   }}
   >
-    <Button.Group labeled={true}>
+    <Button.Group>
       <RemoveFileIcon index={props.index} />
       <LanguageDropdownButton index={props.index} />
     </Button.Group>

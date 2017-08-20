@@ -56,7 +56,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
             actionbar={<AddTextFileActionsContainer index={this.props.index} />}
           >
             <Field
-              name="content"
+              name="data"
               type="text"
               component={(props: any) => (
                 <Form.TextArea

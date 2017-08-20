@@ -25,8 +25,8 @@ type PropsType = ILanguageDropdownButtonDispatchProps & ILanguageDropdownButtonP
 // Hacky... but looks nice.
 const LanguageDropdownButton = (props: PropsType) => (
   <Dropdown
-    search={true}
     button={true}
+    search={true}
     onChange={(ev, data) => props.change(data.value)}
     defaultValue={props.highlight}
     options={[

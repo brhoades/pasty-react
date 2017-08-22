@@ -9,6 +9,7 @@ export type SettingsT = {
   theme: string,
   security: SecuritySettingsT,
   languages: string[],
+  server: string,
 };
 
 export const defaults: SettingsT = {
@@ -68,6 +69,7 @@ export const defaults: SettingsT = {
     "xml",
     "yaml"
   ],
+  server: "https://pasty.brod.es",
 };
 
 class SecuritySettings {

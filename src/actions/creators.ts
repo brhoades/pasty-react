@@ -2,17 +2,20 @@ import { Paste } from "pasty-core";
 import { ISettings } from "../reducers/settings";
 
 import {
-  CLEAR_PASTE,
-  DECRYPT_PASTE,
-  GET_PASTE_FROM_URL,
-  LOAD_THEME,
-  READ_SETTINGS,
-  SET_DECRYPTED_PASTE,
-  SET_SETTINGS,
-  SET_THEME,
-  SET_HIGHLIGHTED_LINES,
   ADD_HIGHLIGHTED_LINE,
   ADD_HIGHLIGHTED_LINES,
+  CLEAR_PASTE,
+  DECRYPT_PASTE,
+  ENCRYPT_THEN_SUBMIT_PASTE,
+  GET_PASTE_FROM_URL,
+  LOAD_THEME,
+  POST_PASTE_TO_URL,
+  READ_SETTINGS,
+  REDIRECT_TO_SUBMITTED_PASTE,
+  SET_DECRYPTED_PASTE,
+  SET_HIGHLIGHTED_LINES,
+  SET_SETTINGS,
+  SET_THEME,
 } from "./types";
 
 
@@ -85,4 +88,26 @@ export const addHighlightedLine = (index: number, line: number) => ({
   index,
   line,
   type: ADD_HIGHLIGHTED_LINE,
+});
+
+//
+// SUBMIT PASTES
+//
+export const encryptThenSubmitPaste = (paste: string) => ({
+  paste,
+  type: ENCRYPT_THEN_SUBMIT_PASTE,
+});
+
+export const postPasteToUrl = (url: string, paste: string, data: string) => ({
+  data,
+  paste,
+  type: POST_PASTE_TO_URL,
+  url,
+});
+
+export const redirectToSubmittedPaste = (id: string, key: string, paste: string) => ({
+  id,
+  key,
+  paste,
+  type: REDIRECT_TO_SUBMITTED_PASTE,
 });

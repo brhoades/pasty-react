@@ -12,7 +12,7 @@ import {
   POST_PASTE_TO_URL,
   READ_SETTINGS,
 } from "./actions/types";
-import { encryptPaste } from "./sagas/submission";
+import { encryptPaste, uploadPaste } from "./sagas/submission";
 
 declare var $: any;
 
@@ -28,7 +28,7 @@ function createXHRChannel(action) {
     };
 
     // xhr.onprogress = (e) => {
-  
+
   // };
 
     // xhr.onerror = (e) => {
@@ -90,6 +90,7 @@ function* saga(): SagaIterator {
   yield takeLatest(READ_SETTINGS, readSettings);
   yield takeLatest(LOAD_THEME, loadTheme);
   yield takeLatest(ENCRYPT_THEN_SUBMIT_PASTE, encryptPaste);
+  yield takeLatest(POST_PASTE_TO_URL, uploadPaste);
 }
 
 export default saga;

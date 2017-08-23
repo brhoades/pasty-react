@@ -93,7 +93,7 @@ export const addHighlightedLine = (index: number, line: number) => ({
 //
 // SUBMIT PASTES
 //
-export const encryptThenSubmitPaste = (paste: string) => ({
+export const encryptThenSubmitPaste = (paste: Paste) => ({
   paste,
   type: ENCRYPT_THEN_SUBMIT_PASTE,
 });
@@ -106,7 +106,7 @@ export const postPasteToUrl = (url: string, paste: Paste, data: string, key: str
   url,
 });
 
-export const redirectToSubmittedPaste = (id: string, key: string, paste: string) => ({
+export const redirectToSubmittedPaste = (id: string, key: string, paste: Paste) => ({
   id,
   key,
   paste,

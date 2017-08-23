@@ -61,7 +61,7 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: I
     return new CodeFile(i, f.name, f.data, f.meta.highlight, f.meta.mime);
   });
 
-  dispatch(encryptThenSubmitPaste(paste.serialize()));
+  dispatch(encryptThenSubmitPaste(paste));
 };
 
 const validate = (values: IPasteFormData) => {

@@ -1,15 +1,18 @@
 import { decryptFile, Paste, PasteParser } from "pasty-core";
 import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
-import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
 import { decryptPaste, setDecryptedPaste, setSettings } from "./actions/creators";
 import {
   DECRYPT_PASTE,
+  ENCRYPT_THEN_SUBMIT_PASTE,
   GET_PASTE_FROM_URL,
   LOAD_THEME,
+  POST_PASTE_TO_URL,
   READ_SETTINGS,
 } from "./actions/types";
+import { encryptPaste } from "./sagas/submission";
 
 declare var $: any;
 
@@ -25,7 +28,8 @@ function createXHRChannel(action) {
     };
 
     // xhr.onprogress = (e) => {
-    // };
+  
+  // };
 
     // xhr.onerror = (e) => {
     // };
@@ -85,6 +89,7 @@ function* saga(): SagaIterator {
   yield takeLatest(DECRYPT_PASTE, decryptPasteSaga);
   yield takeLatest(READ_SETTINGS, readSettings);
   yield takeLatest(LOAD_THEME, loadTheme);
+  yield takeLatest(ENCRYPT_THEN_SUBMIT_PASTE, encryptPaste);
 }
 
 export default saga;

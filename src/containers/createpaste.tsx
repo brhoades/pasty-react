@@ -26,10 +26,9 @@ type InjectedCreatePasteProps = InjectedFormProps<IPasteFormData> & ICreatePaste
 const CreatePaste: React.StatelessComponent<InjectedCreatePasteProps> = (props: InjectedCreatePasteProps) => (
   <div>
     <Form
-      onSubmit={props.handleSubmit}
+      onSubmit={props.handleSubmit(onSubmit)}
       loading={props.submitting}
     >
-      {console.dir(props)}
       {props.error && <Message error={true} content="An unknown error has occurred when submitting your paste." />}
       <div
         style={{
@@ -66,10 +65,12 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: I
 };
 
 const validate = (values: IPasteFormData) => {
-  let errors = {};
+  let errors = {
+    files: {},
+  };
 
   if (values.files.length === 0) {
-    errors["files"] = {_error: "Must submit at least one file."};
+    errors.files["_error"] = "Must submit at least one file.";
     return errors;
   }
 
@@ -85,13 +86,13 @@ const validate = (values: IPasteFormData) => {
 
   console.dir(errors);
   return errors;
-}
+};
 
 export default reduxForm<IPasteFormData, {}>({
-    form: "createpaste",
-    initialValues: {
-      files: [],
-    },
-    onSubmit,
-    validate,
+  form: "createpaste",
+  initialValues: {
+    files: [],
+  },
+  onSubmit,
+  validate,
 })(CreatePaste);

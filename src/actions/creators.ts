@@ -98,8 +98,9 @@ export const encryptThenSubmitPaste = (paste: string) => ({
   type: ENCRYPT_THEN_SUBMIT_PASTE,
 });
 
-export const postPasteToUrl = (url: string, paste: string, data: string) => ({
+export const postPasteToUrl = (url: string, paste: Paste, data: string, key: string) => ({
   data,
+  key,
   paste,
   type: POST_PASTE_TO_URL,
   url,

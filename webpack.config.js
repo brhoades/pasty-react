@@ -50,7 +50,13 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
     alias: {
+      actions: path.resolve(__dirname, "src/actions"),
       css: path.resolve(__dirname, "src/assets"),
+      sagas: path.resolve(__dirname, "src/sagas"),
+      components: path.resolve(__dirname, "src/components"),
+      containers: path.resolve(__dirname, "src/containers"),
+      helpers: path.resolve(__dirname, "src/helpers"),
+      reducers: path.resolve(__dirname, "src/reducers"),
     },
   },
   devServer: {

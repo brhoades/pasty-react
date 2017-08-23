@@ -11,6 +11,16 @@
       "es2015",
       "scripthost"
     ],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "actions": ["./src/actions"],
+      "css": ["./src/assets"],
+      "sagas": ["./src/sagas"],
+      "components": ["./src/components"],
+      "containers": ["./src/containers"],
+      "helpers": ["./src/helpers"],
+      "reducers": ["./src/reducers"]
+    }
   }
 }

@@ -54,7 +54,7 @@ function createUploadPasteXHR(action) {
     // xhr.onprogress = (e) => {
     // };
 
-    xhr.send(`data=${action.data.replace(/%20/g, "+")}`);
+    xhr.send(`data=${action.data}`);
 
     return () => {
       xhr.abort();
@@ -92,6 +92,5 @@ export function* uploadPaste(action) {
     }
   } finally {
     // nada
-    // error?
   }
 }

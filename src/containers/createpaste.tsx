@@ -44,28 +44,29 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: P
     return new CodeFile(i, f.name, f.data, f.meta.highlight, f.meta.mime);
   });
 
-  console.log("DISPATCH");
   dispatch(encryptThenSubmitPaste(paste));
 };
 
-const validate = (values: IPasteFormData) => {
+const validate = (values: IPasteFormData, props: PropsType) => {
   if (values.files.length === 0) {
     return {
       files: "Must submit at least one file.",
     };
   }
 
-  const errors = {
-    files: values.files.map((f, i) => {
-      if (!f.data || f.data.length === 0) {
-        return "Files cannot be empty.";
-      }
+  const errors = values.files.map((f, i) => {
+    if (!f.data || f.data.length === 0) {
+      return "Files cannot be empty.";
+    }
 
-      return undefined;
-    }),
-  };
+    return undefined;
+  }).filter((e: string | undefined) => e !== undefined);
 
-  return errors.files.length ? errors : {};
+  if (errors.length > 0) {
+    return { files: errors[0] };
+  }
+
+  return {};
 };
 
 export default reduxForm<IPasteFormData, {}>({

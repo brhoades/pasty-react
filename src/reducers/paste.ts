@@ -3,7 +3,9 @@ import { Paste } from "pasty-core";
 import {
   CLEAR_PASTE,
   DECRYPT_PASTE,
+  ENCRYPT_THEN_SUBMIT_PASTE,
   GET_PASTE_FROM_URL,
+  POST_PASTE_TO_URL,
   SET_DECRYPTED_PASTE,
 } from "../actions/types";
 import Maybe from "../monads/maybe";
@@ -28,7 +30,7 @@ const initial: IPasteReducer = {
   state: STATE.WAITING,
   id: "",
   key: "",
-  paste: null,
+  paste: new Maybe<Paste>(null),
 };
 
 const paste = (state: IPasteReducer = initial, action) => {
@@ -42,19 +44,29 @@ const paste = (state: IPasteReducer = initial, action) => {
         paste: new Maybe<Paste>(null),
       };
 
+    case POST_PASTE_TO_URL:
+      return {
+        ...initial,
+        state: STATE.UPLOADING,
+      };
+
     case CLEAR_PASTE:
       return {
-        ...state,
+        ...initial,
         state: STATE.WAITING,
-        id: "",
-        key: "",
-        paste: new Maybe<Paste>(null),
       };
+
     case SET_DECRYPTED_PASTE:
       return {
         ...state,
         state: STATE.VIEWING,
         paste: new Maybe<Paste>(action.paste),
+      };
+
+    case ENCRYPT_THEN_SUBMIT_PASTE:
+      return {
+        ...initial,
+        state: STATE.ENCRYPTING,
       };
 
     case DECRYPT_PASTE:

@@ -8,51 +8,34 @@ import { encryptThenSubmitPaste } from "../actions/creators";
 import { IPartialPasteFile, IPasteFormData, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 
-import AddFileButton from "../components/buttons/addfilebutton";
-import AddTextButton from "../components/buttons/addtextbutton";
-import PasteButton from "../components/buttons/pastebutton";
 import CreatePasteForm from "../components/createpasteform";
 
+
 export interface ICreatePasteFormProps {
-  submitting: boolean;
-  handleSubmit: (cb) => (any);
-  error: string;
-  dirty: boolean;
-  valid: boolean;
 }
 
-type InjectedCreatePasteProps = InjectedFormProps<IPasteFormData> & ICreatePasteFormProps;
+export interface ICreatePasteStateProps {
+  submitting: boolean;
+}
 
-const CreatePaste: React.StatelessComponent<InjectedCreatePasteProps> = (props: InjectedCreatePasteProps) => (
+type BasePropsType = ICreatePasteStateProps & ICreatePasteFormProps;
+
+type PropsType = InjectedFormProps<IPasteFormData> & BasePropsType;
+
+const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
   <div>
-    <Form
-      onSubmit={props.handleSubmit(onSubmit)}
-      loading={props.submitting}
-    >
-      {props.error && <Message error={true} content="An unknown error has occurred when submitting your paste." />}
-      <div
-        style={{
-          marginBottom: '2em',
-        }}
-      >
-        <CreatePasteForm />
-      </div>
-      <Grid>
-        <Grid.Column width={8}>
-          <Button.Group>
-            <AddTextButton />
-            <AddFileButton />
-          </Button.Group>
-        </Grid.Column>
-        <Grid.Column width={8} textAlign="right">
-          <PasteButton valid={props.valid && props.dirty} />
-        </Grid.Column>
-      </Grid>
-    </Form>
+    <CreatePasteForm
+      valid={props.valid}
+      dirty={props.dirty}
+      onSubmit={props.handleSubmit}
+      error={props.error}
+    />
   </div>
 );
 
-const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: InjectedCreatePasteProps) => {
+// Todo clean this mess up. I think I need a few more components to separate this from
+// the store cleanly.
+const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: PropsType) => {
   const paste: Paste = Paste.empty();
   paste.files = values.files.map((f, i) => {
     if (f.type === PasteFileTypes.FILE) {
@@ -61,20 +44,18 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: I
     return new CodeFile(i, f.name, f.data, f.meta.highlight, f.meta.mime);
   });
 
+  console.log("DISPATCH");
   dispatch(encryptThenSubmitPaste(paste));
 };
 
 const validate = (values: IPasteFormData) => {
-  let errors = {
-    files: {},
-  };
-
   if (values.files.length === 0) {
-    errors.files["_error"] = "Must submit at least one file.";
-    return errors;
+    return {
+      files: "Must submit at least one file.",
+    };
   }
 
-  errors = {
+  const errors = {
     files: values.files.map((f, i) => {
       if (!f.data || f.data.length === 0) {
         return "Files cannot be empty.";
@@ -84,8 +65,7 @@ const validate = (values: IPasteFormData) => {
     }),
   };
 
-  console.dir(errors);
-  return errors;
+  return errors.files.length ? errors : {};
 };
 
 export default reduxForm<IPasteFormData, {}>({

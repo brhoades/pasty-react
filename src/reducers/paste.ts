@@ -10,20 +10,22 @@ import Maybe from "../monads/maybe";
 
 export enum STATE {
   WAITING,
-  DOWNLOADING,
+  ENCRYPTING,
   DECRYPTING,
+  UPLOADING,
+  DOWNLOADING,
   VIEWING,
 }
 
 export interface IPasteReducer {
-  downloadState: STATE;
+  state: STATE;
   id: string;
   key: string;
   paste: Maybe<Paste>;
 }
 
 const initial: IPasteReducer = {
-  downloadState: STATE.WAITING,
+  state: STATE.WAITING,
   id: "",
   key: "",
   paste: null,
@@ -34,7 +36,7 @@ const paste = (state: IPasteReducer = initial, action) => {
     case GET_PASTE_FROM_URL:
       return {
         ...state,
-        downloadState: STATE.DOWNLOADING,
+        state: STATE.DOWNLOADING,
         id: action.id,
         key: action.key,
         paste: new Maybe<Paste>(null),
@@ -43,7 +45,7 @@ const paste = (state: IPasteReducer = initial, action) => {
     case CLEAR_PASTE:
       return {
         ...state,
-        downloadState: STATE.WAITING,
+        state: STATE.WAITING,
         id: "",
         key: "",
         paste: new Maybe<Paste>(null),
@@ -51,14 +53,14 @@ const paste = (state: IPasteReducer = initial, action) => {
     case SET_DECRYPTED_PASTE:
       return {
         ...state,
-        downloadState: STATE.VIEWING,
+        state: STATE.VIEWING,
         paste: new Maybe<Paste>(action.paste),
       };
 
     case DECRYPT_PASTE:
       return {
         ...state,
-        downloadState: STATE.DECRYPTING,
+        state: STATE.DECRYPTING,
       };
 
     default:

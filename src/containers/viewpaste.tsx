@@ -90,8 +90,8 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
     props.getPasteAction(props.match.params.id, props.match.params.key);
     if (props.match.params.extra) {
       props.match.params.extra.split(";")
-          .map(this.unserializeLineNumbers)
-          .map((f, i) => props.setHighlightedLines(i, f));
+           .map(this.unserializeLineNumbers)
+           .map((f, i) => props.setHighlightedLines(i, f));
     }
   }
 
@@ -111,8 +111,8 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
     return this.props.paste.getData().files.map((f, index) => {
       return (
         <DisplayFile
-            key={f.id}
-            index={index}
+          key={f.id}
+          index={index}
         />
       );
     });
@@ -121,7 +121,7 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
 
 const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
   paste: state.paste.paste,
-  state: state.paste.downloadState,
+  state: state.paste.state,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({

@@ -31,11 +31,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
   }
 
   public shouldComponentUpdate(newProps: PropsType) {
-    if (this.props.data !== newProps.data || this.props.name !== newProps.name) {
-      return false;
-    }
-
-    return true;
+    return !(this.props.data !== newProps.data || this.props.name !== newProps.name);
   }
 
   public render() {

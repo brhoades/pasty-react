@@ -3,6 +3,7 @@ import { combineReducers, Reducer } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
 
 import { IPasteReduxFormReducer } from "./form";
+import messages, { IMessagesReducer } from "./messages";
 import highlight, { IHighlightReducer } from "./highlight";
 import paste, { IPasteReducer } from "./paste";
 import settings, { ISettings } from "./settings";
@@ -11,6 +12,7 @@ import settings, { ISettings } from "./settings";
 export interface IReducer {
   form: IPasteReduxFormReducer;
   highlight: IHighlightReducer;
+  messages: IMessagesReducer;
   paste: IPasteReducer;
   settings: ISettings;
   routing: Reducer<any>;
@@ -20,6 +22,7 @@ export interface IReducer {
 const pasty = combineReducers<IReducer>({
   form: reduxFormReducer,
   highlight,
+  messages,
   paste,
   router,
   settings,

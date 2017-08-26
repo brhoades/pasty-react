@@ -3,7 +3,7 @@ import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
-import { decryptPaste, setDecryptedPaste, setSettings } from "./actions/creators";
+import { decryptPaste, setDecryptedPaste, setGeneralError, setSettings } from "./actions/creators";
 import {
   DECRYPT_PASTE,
   ENCRYPT_THEN_SUBMIT_PASTE,
@@ -43,10 +43,17 @@ function createXHRChannel(action) {
 }
 
 function* decryptPasteSaga(action) {
-  const dataBlob: string = decryptFile(action.data, action.key);
-  const paste: Paste = PasteParser.parse(action.id, action.key, dataBlob);
+  try {
+    const dataBlob: string = decryptFile(action.data, action.key);
+    const paste: Paste = PasteParser.parse(action.id, action.key, dataBlob);
 
-  yield put(setDecryptedPaste(action.id, paste));
+    yield put(setDecryptedPaste(action.id, paste));
+  } catch (e) {
+    yield put(setGeneralError(
+      `Error when decrypting the paste "${action.id}".`,
+      e.message,
+    ));
+  }
 }
 
 function* download(action) {

@@ -13,6 +13,7 @@ import {
   READ_SETTINGS,
   REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
+  SET_GENERAL_ERROR,
   SET_HIGHLIGHTED_LINES,
   SET_SETTINGS,
   SET_THEME,
@@ -111,4 +112,13 @@ export const redirectToSubmittedPaste = (id: string, key: string, paste: Paste) 
   key,
   paste,
   type: REDIRECT_TO_SUBMITTED_PASTE,
+});
+
+//
+// Errors
+//
+export const setGeneralError = (header: string, error: string) => ({
+  header,
+  error,
+  type: SET_GENERAL_ERROR,
 });

@@ -5,6 +5,8 @@ import {
   Menu,
 } from "semantic-ui-react";
 
+import GeneralErrorMessage from "./generalerrormessage";
+
 const Layout = ({ children }) =>
   <div>
     <Menu fixed="top" inverted={true}>
@@ -19,6 +21,9 @@ const Layout = ({ children }) =>
         <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE">
           Test View Code
         </Menu.Item>
+        <Menu.Item href="#/view/okPGs0oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-">
+          Test View Bad File
+        </Menu.Item>
         <Menu.Item href="#/settings">
           Settings
         </Menu.Item>
@@ -26,6 +31,7 @@ const Layout = ({ children }) =>
     </Menu>
 
     <Container style={{ marginTop: "4em" }}>
+      <GeneralErrorMessage key="generalerrrormessage" />
       {...children}
     </Container>
   </div>;

@@ -54,7 +54,6 @@ function createUploadPasteXHR(action) {
     // xhr.onprogress = (e) => {
     // };
 
-    console.log("action data: " + action.data);
     xhr.send(`data=${encodeURIComponent(action.data)}`);
 
     return () => {

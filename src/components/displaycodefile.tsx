@@ -52,8 +52,10 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
     const file: CodeFile = this.props.file.getData();
     let value: string = file.data;
 
-    if (file.meta.highlight !== "plain") {
+    if (file.meta.highlight !== "plain" && file.meta.highlight !== "auto") {
       value = hljs.highlight(file.meta.highlight, file.data, true).value;
+    } else if(file.meta.highlight === "auto") {
+      value = hljs.highlightAuto(file.data).value;
     }
 
     // probably want to optimize this so we don't highlight over and over for every line selection.

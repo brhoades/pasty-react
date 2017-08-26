@@ -1,4 +1,5 @@
 import { MetaData } from "pasty-core";
+import { WrappedFieldProps } from "redux-form";
 
 
 export enum PasteFileTypes {
@@ -13,6 +14,14 @@ export interface IPartialPasteFile {
   data: string;
 
   meta: MetaData;
+}
+
+export interface IPartialPasteFileForm {
+  type: WrappedFieldProps;
+  name: WrappedFieldProps;
+  data: WrappedFieldProps;
+
+  meta: WrappedFieldProps;
 }
 
 export interface IPasteFormData {

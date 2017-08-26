@@ -3,20 +3,20 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { Field, FormSection } from "redux-form";
-import { Form } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 
 import LanguageDropdownButton from "./buttons/languagedropdownbutton";
 import AddTextFileActionsContainer from "../containers/addtextfileactionscontainer";
-import { IPartialPasteFile } from "../reducers/form";
+import { IPartialPasteFile, IPartialPasteFileForm } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 
 export interface IAddTextFileFieldProps {
   index: number;
+  name: string;
+  fields: IPartialPasteFileForm;
 }
 
 export interface IAddTextFileFieldStateProps {
-  data: string;
-  name: string;
 }
 
 type PropsType = IAddTextFileFieldProps & IAddTextFileFieldStateProps;
@@ -26,67 +26,56 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
     super(props);
 
     this.state = {
-      highlight: props.highlight,
+      highlight: props.fields.meta.input.value.highlight,
     };
   }
 
   public shouldComponentUpdate(newProps: PropsType) {
-    return !(this.props.data !== newProps.data || this.props.name !== newProps.name);
+    const fields = this.props.fields;
+
+    return true;
   }
 
   public render() {
-    const baseName = `files[${this.props.index}]`;
+    const {name, data} = this.props.fields;
+
     return (
       <div>
-        <FormSection name={baseName}>
-          <FileCard
-            header={
-              <div>
-                <div style={{float: "left"}}>
-                <Field
-                  name="name"
-                  type="text"
-                  component={(props: any) => (
-                    <Form.Input
-                      placeholder="hello_world.rb"
-                      {...props.input}
-                    />
-                  )}
-                  defaultValue={this.props.name}
+        <FileCard
+          header={
+            <div>
+              <div style={{float: "left"}}>
+                <Form.Input
+                  placeholder="hello_world.rb"
+                  onChange={(ev, data) => name.input.onChange(data.value)}
+                  error={name.meta.error !== undefined}
                 />
-                </div>
               </div>
-            }
-            actionbar={<AddTextFileActionsContainer index={this.props.index} />}
-          >
-            <Field
-              name="data"
-              type="text"
-              component={(props: any) => (
-                <Form.TextArea
-                  {...props.input}
-                  onChange={(ev, data) => props.input.onChange(data.value)}
-                  rows="20"
-                  placeholder="puts 'Hello World!'"
-                  label="File Contents"
-                />
-              )}
-              defaultValue={this.props.data}
+            </div>
+          }
+          attached={data.meta.submitFailed && data.meta.error}
+          actionbar={<AddTextFileActionsContainer index={this.props.index} />}
+        >
+          <div>
+            <Form.TextArea
+              onChange={(ev, inputData) => data.input.onChange(inputData.value)}
+              error={data.meta.submitFailed && data.meta.error !== undefined}
+              rows="20"
+              placeholder="puts 'Hello World!'"
+              label="File Contents"
             />
-          </FileCard>
-        </FormSection>
+          </div>
+        </FileCard>
+        <Message
+          error={true}
+          attached="bottom"
+          visible={data.meta.submitFailed && data.meta.error}
+          header="There was an error when processing this file."
+          content={data.meta.error}
+        />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: IReducer, ownProps: IAddTextFileFieldProps): IAddTextFileFieldStateProps => {
-  const thisFile = state.form.createpaste.values.files[ownProps.index];
-
-  return {
-    data: thisFile.data,
-    name: thisFile.name,
-  };
-};
-
-export default connect(mapStateToProps, () => ({}))(AddTextFileField);
+export default AddTextFileField;

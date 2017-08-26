@@ -2,15 +2,15 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { WrappedFieldArrayProps, FieldArray, GenericFieldArray } from "redux-form";
-import { Button, Form, Grid, Message } from "semantic-ui-react";
+import { Button, Form, Grid } from "semantic-ui-react";
 
 import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
 
-import AddFileButton from "../components/buttons/addfilebutton";
-import AddTextFileField from "./addtextfilefield";
+import PasteFileForms from "../components/pastefileforms";
 import AddTextButton from "../components/buttons/addtextbutton";
+import AddFileButton from "../components/buttons/addfilebutton";
 import PasteButton from "../components/buttons/pastebutton";
 
 export interface ICreatePasteFormDispatchProps {
@@ -19,7 +19,6 @@ export interface ICreatePasteFormDispatchProps {
 export interface ICreatePasteFormProps {
   onSubmit: (ev: any) => void;
   valid: boolean;
-  error: string;
   dirty: boolean;
 }
 
@@ -35,13 +34,9 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
     return (
       <div>
         <Form
-          onSubmit={this.props.onSubmit.bind(this)}
+          onSubmit={this.props.onSubmit}
           loading={this.props.submitting}
         >
-          {
-            this.props.error &&
-            <Message error={true} content="An unknown error has occurred when submitting your paste." />
-          }
 
           <div
             style={{
@@ -62,7 +57,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
               </Button.Group>
             </Grid.Column>
             <Grid.Column width={8} textAlign="right">
-              <PasteButton valid={this.props.valid && this.props.dirty} />
+              <PasteButton valid={this.props.dirty} />
             </Grid.Column>
           </Grid>
         </Form>
@@ -71,13 +66,14 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
   }
 
   private renderForm() {
-    return this.props.files.map((file: IPartialPasteFile, index: number) => {
-      if (file.type === PasteFileTypes.CODE) {
-        return (<AddTextFileField key={index} index={index} />);
-      }
+    return (
+      <FieldArray
+        name="files"
+        component={PasteFileForms}
+        rerenderOnEveryChange={false}
+      />
+    );
 
-      return (<input key={index} type="text" />);
-    });
   }
 
   private renderPlaceholder() {

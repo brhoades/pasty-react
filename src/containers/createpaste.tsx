@@ -2,7 +2,7 @@ import { CodeFile, File, Paste, PasteFile } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { Button, Form, Grid, Message } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 
 import { encryptThenSubmitPaste } from "../actions/creators";
 import { IPartialPasteFile, IPasteFormData, PasteFileTypes } from "../reducers/form";
@@ -20,15 +20,18 @@ export interface ICreatePasteStateProps {
 
 type BasePropsType = ICreatePasteStateProps & ICreatePasteFormProps;
 
-type PropsType = InjectedFormProps<IPasteFormData> & BasePropsType;
+type PropsType = InjectedFormProps<IPasteFormData, BasePropsType>;
 
 const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
   <div>
+    {
+      props.error &&
+      <Message error={true} content="An unknown error has occurred when submitting your paste." />
+    }
     <CreatePasteForm
       valid={props.valid}
       dirty={props.dirty}
       onSubmit={props.handleSubmit}
-      error={props.error}
     />
   </div>
 );
@@ -47,29 +50,29 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: P
   dispatch(encryptThenSubmitPaste(paste));
 };
 
-const validate = (values: IPasteFormData, props: PropsType) => {
+const validate = (values: IPasteFormData, props: BasePropsType) => {
+  console.log("VALIDATE");
+  const errors = {
+    files: {},
+  };
+
   if (values.files.length === 0) {
-    return {
-      files: "Must submit at least one file.",
-    };
+    errors.files = "Must submit at least one file.";
   }
 
-  const errors = values.files.map((f, i) => {
+  values.files.forEach((f, i) => {
     if (!f.data || f.data.length === 0) {
-      return "Files cannot be empty.";
+      errors.files[i] = {
+        data: "Files cannot be empty.",
+      };
     }
+  });
 
-    return undefined;
-  }).filter((e: string | undefined) => e !== undefined);
-
-  if (errors.length > 0) {
-    return { files: errors[0] };
-  }
-
-  return {};
+  console.dir(errors);
+  return errors;
 };
 
-export default reduxForm<IPasteFormData, {}>({
+export default reduxForm<IPasteFormData, BasePropsType>({
   form: "createpaste",
   initialValues: {
     files: [],

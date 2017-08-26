@@ -27,10 +27,10 @@ export interface IPasteReducer {
 }
 
 const initial: IPasteReducer = {
-  state: STATE.WAITING,
   id: "",
   key: "",
   paste: new Maybe<Paste>(null),
+  state: STATE.WAITING,
 };
 
 const paste = (state: IPasteReducer = initial, action) => {
@@ -38,10 +38,10 @@ const paste = (state: IPasteReducer = initial, action) => {
     case GET_PASTE_FROM_URL:
       return {
         ...state,
-        state: STATE.DOWNLOADING,
         id: action.id,
         key: action.key,
         paste: new Maybe<Paste>(null),
+        state: STATE.DOWNLOADING,
       };
 
     case POST_PASTE_TO_URL:
@@ -59,8 +59,8 @@ const paste = (state: IPasteReducer = initial, action) => {
     case SET_DECRYPTED_PASTE:
       return {
         ...state,
-        state: STATE.VIEWING,
         paste: new Maybe<Paste>(action.paste),
+        state: STATE.VIEWING,
       };
 
     case ENCRYPT_THEN_SUBMIT_PASTE:

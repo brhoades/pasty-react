@@ -6,6 +6,7 @@ import {
   ENCRYPT_THEN_SUBMIT_PASTE,
   GET_PASTE_FROM_URL,
   POST_PASTE_TO_URL,
+  REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
 } from "../actions/types";
 import Maybe from "../monads/maybe";
@@ -36,6 +37,12 @@ const initial: IPasteReducer = {
 const paste = (state: IPasteReducer = initial, action) => {
   switch (action.type) {
     case GET_PASTE_FROM_URL:
+      if (state.id === action.id && state.key === action.key && state.state === STATE.VIEWING) {
+        return {
+          ...state
+        };
+      }
+
       return {
         ...state,
         id: action.id,
@@ -73,6 +80,15 @@ const paste = (state: IPasteReducer = initial, action) => {
       return {
         ...state,
         state: STATE.DECRYPTING,
+      };
+
+    case REDIRECT_TO_SUBMITTED_PASTE:
+      return {
+        ...state,
+        id: action.id,
+        key: action.key,
+        paste: new Maybe<Paste>(action.paste),
+        state: STATE.VIEWING,
       };
 
     default:

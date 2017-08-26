@@ -8,6 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
 import highlightMiddleware from "./middleware/highlight";
+import redirectToNewPasteMiddleware from "./middleware/redirectToNewPaste";
 import themeMiddleware from "./middleware/theme";
 import reducer, { IReducer } from "./reducers/index";
 import saga from "./sagas";
@@ -24,6 +25,7 @@ const store = (history: History): Store<IReducer> => {
     composeEnhancers(applyMiddleware(
       themeMiddleware,
       sagaMiddleware,
+      redirectToNewPasteMiddleware,
       routerMiddleware,
       highlightMiddleware,
     )),

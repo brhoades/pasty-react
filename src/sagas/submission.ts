@@ -38,7 +38,7 @@ function createUploadPasteXHR(action) {
   return eventChannel((emitter) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", action.url, true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onload = (e) => {
       if ((e as any).target.status !== 200) {
@@ -54,7 +54,8 @@ function createUploadPasteXHR(action) {
     // xhr.onprogress = (e) => {
     // };
 
-    xhr.send(`data=${action.data}`);
+    console.log("action data: " + action.data);
+    xhr.send(`data=${encodeURIComponent(action.data)}`);
 
     return () => {
       xhr.abort();
@@ -87,8 +88,9 @@ export function* uploadPaste(action) {
   try {
     while (true) {
       const response = yield take(xhr);
+      const data = JSON.parse(response.response);
 
-      yield put(redirectToSubmittedPaste(response.filename, action.key, action.paste));
+      yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
     }
   } finally {
     // nada

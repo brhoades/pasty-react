@@ -48,7 +48,8 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
                 <Form.Input
                   placeholder="hello_world.rb"
                   error={name.meta.error !== undefined}
-                  onChange={(ev, data) => name.input.onChange(data.value)}
+                  onChange={(ev, inputData) => name.input.onChange(inputData.value)}
+                  defaultValue={name.input.value}
                 />
               </div>
             </div>
@@ -63,6 +64,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
               placeholder="puts 'Hello World!'"
               label="File Contents"
               onChange={(ev, inputData) => data.input.onChange(inputData.value)}
+              defaultValue={data.input.value}
             />
           </div>
         </FileCard>

@@ -38,6 +38,7 @@ export function serializeLineNumbers(lines: number[]): string {
 }
 
 // Generate a paste url from reducers
+// TODO: SELECTOR
 export function generatePasteURL(reducer: IReducer): string {
   const id: string = reducer.paste.id;
   const key: string = reducer.paste.key;

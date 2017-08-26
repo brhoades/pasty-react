@@ -4,11 +4,14 @@ import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { Icon, Popup } from "semantic-ui-react";
 
+import configuration from "../../../config";
+import { generatePasteURL } from "../../middleware/highlight";
 import Maybe from "../../monads/maybe";
 import { IReducer } from "../../reducers/index";
 
 export interface ICopyShortLinkIconState {
   paste: Maybe<Paste>;
+  urlParams: string;
 }
 
 class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefined> {
@@ -26,16 +29,14 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
         <Popup
           basic={true}
           trigger={this.getIcon()}
-          content="Copy to your clipboard a shorter link to this paste. TODO w/ server settings."
+          content="Copy to your clipboard a shorter link to this paste"
         />
       </div>
     );
   }
 
   private getShortURL() {
-    // TODO: actually make this read from server settings. For now, just
-    // copy the URL.
-    return window.location.href;
+    return `${configuration.shortURL}#${this.props.urlParams}`;
   }
 
   private getIcon() {
@@ -52,6 +53,8 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
 
 const mapStateToProps = (state: IReducer, ownProps: {}): ICopyShortLinkIconState => ({
   paste: state.paste.paste,
+  // TODO: selector
+  urlParams: generatePasteURL(state),
 });
 
 export default connect(mapStateToProps, () => ({}))(CopyShortLinkIcon);

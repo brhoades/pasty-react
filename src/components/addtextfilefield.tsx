@@ -47,8 +47,8 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
               <div style={{float: "left"}}>
                 <Form.Input
                   placeholder="hello_world.rb"
-                  onChange={(ev, data) => name.input.onChange(data.value)}
                   error={name.meta.error !== undefined}
+                  onChange={(ev, data) => name.input.onChange(data.value)}
                 />
               </div>
             </div>
@@ -58,11 +58,11 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
         >
           <div>
             <Form.TextArea
-              onChange={(ev, inputData) => data.input.onChange(inputData.value)}
               error={data.meta.submitFailed && data.meta.error !== undefined}
               rows="20"
               placeholder="puts 'Hello World!'"
               label="File Contents"
+              onChange={(ev, inputData) => data.input.onChange(inputData.value)}
             />
           </div>
         </FileCard>
@@ -70,7 +70,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
           error={true}
           attached="bottom"
           visible={data.meta.submitFailed && data.meta.error}
-          header="There was an error when processing this file."
+          header="Error when processing this file"
           content={data.meta.error}
         />
       </div>

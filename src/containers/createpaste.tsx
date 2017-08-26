@@ -51,7 +51,6 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: P
 };
 
 const validate = (values: IPasteFormData, props: BasePropsType) => {
-  console.log("VALIDATE");
   const errors = {
     files: {},
   };
@@ -63,12 +62,11 @@ const validate = (values: IPasteFormData, props: BasePropsType) => {
   values.files.forEach((f, i) => {
     if (!f.data || f.data.length === 0) {
       errors.files[i] = {
-        data: "Files cannot be empty.",
+        data: "Empty files are not allowed.",
       };
     }
   });
 
-  console.dir(errors);
   return errors;
 };
 

@@ -32,7 +32,7 @@ export interface IDisplayCodeFileStateProps {
 
 type PropsType = IDisplayCodeFileStateProps & IDisplayCodeFileDispatchProps & IDisplayCodeFileProps;
 
-class DisplayCodeFile extends React.Component<PropsType, undefined> {
+class DisplayCodeFile extends React.Component<PropsType> {
   private code: HTMLElement;
 
   public componentDidMount() {
@@ -99,7 +99,7 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
             onClick={this.createHandleClick(i)}
             className={style.linenumber}
           >
-            {i+1}
+            {i + 1}
           </td>
           <td className={style.code} dangerouslySetInnerHTML={{__html: e}} />
         </tr>

@@ -71,8 +71,8 @@ function* download(action) {
 
 function* readSettings(action) {
   let cookie = $.pgwCookie({
-    name: 'settings',
     json: true,
+    name: 'settings',
   });
 
   if (cookie === undefined) {

@@ -12,7 +12,6 @@ const redirectToNewPaste = ((store: MiddlewareAPI<any>) =>
                             (action) => {
   switch (action.type) {
     case REDIRECT_TO_SUBMITTED_PASTE:
-      // run after the action
       const result = next(action);
 
       store.dispatch(replace(`/view/${encodeURI(action.id)}/${encodeURI(action.key)}`));

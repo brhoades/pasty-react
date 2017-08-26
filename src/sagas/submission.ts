@@ -7,6 +7,7 @@ import Configuration from "../../config";
 import {
   postPasteToUrl,
   redirectToSubmittedPaste,
+  setGeneralError,
 } from "../actions/creators";
 import {
   ENCRYPT_THEN_SUBMIT_PASTE,
@@ -76,6 +77,11 @@ export function* encryptPaste(action) {
         payload.key,
       ));
     }
+  } catch (e) {
+    yield put(setGeneralError(
+      `Error when encrypting a paste for submission.`,
+      e.message,
+    ));
   } finally {
     // nada
   }
@@ -91,6 +97,11 @@ export function* uploadPaste(action) {
 
       yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
     }
+  } catch (e) {
+    yield put(setGeneralError(
+      `Error when uploading a new paste.`,
+      e.message,
+    ));
   } finally {
     // nada
   }

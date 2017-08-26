@@ -37,12 +37,6 @@ const initial: IPasteReducer = {
 const paste = (state: IPasteReducer = initial, action) => {
   switch (action.type) {
     case GET_PASTE_FROM_URL:
-      if (state.id === action.id && state.key === action.key && state.state === STATE.VIEWING) {
-        return {
-          ...state
-        };
-      }
-
       return {
         ...state,
         id: action.id,
@@ -84,7 +78,6 @@ const paste = (state: IPasteReducer = initial, action) => {
 
     case REDIRECT_TO_SUBMITTED_PASTE:
       return {
-        ...state,
         id: action.id,
         key: action.key,
         paste: new Maybe<Paste>(action.paste),

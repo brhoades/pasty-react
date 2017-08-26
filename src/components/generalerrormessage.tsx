@@ -13,11 +13,12 @@ export interface IGeneralErrorMessageStateProps {
 type PropsType = IGeneralErrorMessageStateProps;
 
 const GeneralErrorMessage = (props: PropsType) => (
-  <Message
-    {...props}
-    error={true}
-    hidden={props.content === ""}
-  />
+  props.content !== "" ? (
+    <Message
+      {...props}
+      error={true}
+    />
+  ) : null
 );
 
 const mapStateToProps = (state: IReducer, ownProps: {}): IGeneralErrorMessageStateProps => ({

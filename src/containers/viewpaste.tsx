@@ -87,6 +87,12 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   private updatePaste(props: PropsType) {
+    // If we're redirecting from a submitted paste, don't redownload.
+    if (!props.paste.isNothing() && props.paste.getData().name === props.match.params.id
+        && props.paste.getData().key === props.match.params.key) {
+      return;
+    }
+
     props.getPasteAction(props.match.params.id, props.match.params.key);
     if (props.match.params.extra) {
       props.match.params.extra.split(";")

@@ -49,17 +49,8 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
   }
 
   public render() {
-    const file: CodeFile = this.props.file.getData();
-    let value: string = file.data;
-
-    if (file.meta.highlight !== "plain" && file.meta.highlight !== "auto") {
-      value = hljs.highlight(file.meta.highlight, file.data, true).value;
-    } else if(file.meta.highlight === "auto") {
-      value = hljs.highlightAuto(file.data).value;
-    }
-
-    // probably want to optimize this so we don't highlight over and over for every line selection.
-    const code: JSX.Element = this.addLineNumbers(value);
+    const code = this.getHighlightedContent();
+    const file = this.props.file.getData();
 
     return (
       <pre>
@@ -71,6 +62,30 @@ class DisplayCodeFile extends React.Component<PropsType, undefined> {
         </code>
       </pre>
     );
+  }
+
+  private getHighlightedContent() {
+    const file: CodeFile = this.props.file.getData();
+    let value: string = file.data;
+
+    try {
+      if (file.meta.highlight !== "plain" && file.meta.highlight !== "auto") {
+        value = hljs.highlight(file.meta.highlight, file.data, true).value;
+      } else if (file.meta.highlight === "auto") {
+        value = hljs.highlightAuto(file.data).value;
+      }
+    } catch (e) {
+      console.log(e);
+      return (<div>file.data</div>);
+    }
+
+    try {
+      // probably want to optimize this so we don't highlight over and over for every line selection.
+      return this.addLineNumbers(value);
+    } catch (e) {
+      console.log(e);
+      return value;
+    }
   }
 
   private addLineNumbers(code: string) {

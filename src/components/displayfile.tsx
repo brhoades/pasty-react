@@ -43,12 +43,22 @@ class DisplayFile extends React.Component<PropsType, undefined> {
             />
           }
         >
-          {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
-
-          {this.props.file.getData().isReadable() && this.renderCodeFile()}
+          {this.showFile()}
         </FileCard>
       </div>
     );
+  }
+
+  private showFile() {
+    const file: File = this.props.file.getData();
+
+    if (file.isReadable()) {
+      return this.renderCodeFile();
+    } else if (/^image\//.test(file.meta.mime)) {
+      return this.renderImage();
+    }
+
+    return null;
   }
 
   private renderImage() {

@@ -21,7 +21,7 @@ class DownloadFileButton extends React.Component<IFileByIndexPropsType, undefine
             href={this.props.file.getData().base64DownloadString()}
             download={this.props.file.getData().name}
           >
-            <Button icon="download" link={true} />
+            <Button icon="download" />
           </a>
           }
           content="Download this file"

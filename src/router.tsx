@@ -3,9 +3,10 @@ import { HashRouter, Route } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 
 import AboutPasty from "./components/aboutpasty";
+import Layout from "./components/layout";
 import CreatePaste from "./containers/createpaste";
+import SettingsForm from "./containers/settingsform";
 import ViewPaste from "./containers/viewpaste";
-import Layout from "./components/layout"
 
 
 const Router = ({ history }) => (
@@ -19,6 +20,10 @@ const Router = ({ history }) => (
       <Route
         path="/view/:id/:key/:extra?"
         component={ViewPaste}
+      />
+      <Route
+        path="/settings"
+        component={SettingsForm}
       />
     </Layout>
   </ConnectedRouter>

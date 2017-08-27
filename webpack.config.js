@@ -6,16 +6,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     build: './src/app.tsx',
-    libs: [
+    react: [
+      'react',
+      'react-router',
+      'react-redux',
+      'react-router-redux',
+      'react-router-dom',
+      'react-dom',
+    ],
+    redux: [
+      'redux',
+      'redux-form',
+      'redux-saga',
+    ],
+    semantic: [
+      'semantic-ui-react',
+    ],
+    vendor: [
+      'buffer',
+      'clipboard',
       'highlight.js',
+      'pgwcookie',
       'zepto-webpack',
-      'pgwcookie'
-    ]
+    ],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: '[name].[hash:8].js',
+    chunkFilename: "[name].[hash:8].js",
   },
   module: {
     rules: [
@@ -73,8 +92,13 @@ module.exports = {
       $: "zepto-webpack"
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "libs",
-      minChunks: Infinity,
+      names: [
+        "react",
+        "redux",
+        "semantic",
+        "vendor",
+      ],
+      minChunks: 2,
     }),
     new CopyWebpackPlugin([
       {

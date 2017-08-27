@@ -9,7 +9,6 @@
     "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json"
   },
   "dependencies": {
-    "add": "^2.0.6",
     "buffer": "^5.0.7",
     "clipboard": "^1.6.1",
     "highlight.js": "^9.11.0",
@@ -27,7 +26,6 @@
     "redux-form": "^7.0.3",
     "redux-saga": "^0.15.6",
     "semantic-ui-react": "^0.71.4",
-    "spinkit": "^1.2.5",
     "ts-loader": "^2.3.2",
     "typed-css-modules": "^0.3.0",
     "typings-for-css-modules-loader": "^1.5.0",

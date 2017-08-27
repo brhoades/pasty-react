@@ -23,16 +23,13 @@ function createXHRChannel(action) {
     xhr.open("GET", action.url, true);
 
     xhr.onload = (e) => {
-      emitter((e as any).target.response);
+      emitter((e as any).target);
       emitter(END);
     };
 
     // xhr.onprogress = (e) => {
 
   // };
-
-    // xhr.onerror = (e) => {
-    // };
 
     xhr.send();
 
@@ -50,7 +47,7 @@ function* decryptPasteSaga(action) {
     yield put(setDecryptedPaste(action.id, paste));
   } catch (e) {
     yield put(setGeneralError(
-      `Error when decrypting the paste "${action.id}".`,
+      `Error when decrypting the paste "${action.id}"`,
       e.message,
     ));
   }
@@ -62,7 +59,16 @@ function* download(action) {
   try {
     while (true) {
       const response = yield take(xhr);
-      yield put(decryptPaste(action.id, action.key, response));
+      const code = response.status;
+
+      if (code >= 200 && code <= 400) {
+        yield put(decryptPaste(action.id, action.key, response.response));
+      } else {
+        yield put(setGeneralError(
+          `Error when downloading the paste "${action.id}"`,
+          `${code} ${response.statusText}`,
+        ));
+      }
     }
   } finally {
     // nada

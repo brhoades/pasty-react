@@ -4,15 +4,15 @@ import {
 
 export interface IMessagesReducer {
   general: {
-    header: string;
     content: string;
+    header: string;
   };
 }
 
 const initial: IMessagesReducer = {
   general: {
-    header: "",
     content: "",
+    header: "",
   },
 };
 

@@ -76,15 +76,12 @@ function* download(action) {
 
 function* readSettings(action) {
   let cookie = Cookies.get("settings");
-  console.dir(cookie);
 
   if (cookie === undefined) {
     cookie = {};
   } else {
     cookie = JSON.parse(cookie);
   }
-
-  console.dir(cookie);
 
   yield put(setSettings(cookie));
 }

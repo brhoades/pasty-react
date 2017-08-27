@@ -2,22 +2,16 @@ import * as React from "react";
 import { Button } from "semantic-ui-react";
 
 import LanguageDropdownButton from "../components/buttons/languagedropdownbutton";
-import RemoveFileIcon from "../components/icons/removefileicon";
+import AddFileActionsContainer from "./addfileactionscontainer";
 
-export interface IAddTextActionsProps {
+export interface IAddTextFileActionsProps {
   index: number;
 }
 
-const AddTextFileActionsContainer = (props: IAddTextActionsProps) => (
-  <div style={{
-    display: "inline-block",
-  }}
-  >
-    <Button.Group>
-      <RemoveFileIcon index={props.index} />
-      <LanguageDropdownButton index={props.index} />
-    </Button.Group>
-  </div>
+const AddTextFileActionsContainer = (props: IAddTextFileActionsProps) => (
+  <AddFileActionsContainer index={props.index}>
+    <LanguageDropdownButton index={props.index} />
+  </AddFileActionsContainer>
 );
 
 export default AddTextFileActionsContainer;

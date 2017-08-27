@@ -19,13 +19,19 @@ const Layout = ({ children }) =>
           View Image
         </Menu.Item>
         <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE">
-          Test View Code File
+          Test Code File
         </Menu.Item>
         <Menu.Item href="#/view/KnsiyfKF/cydhwk6K2xv20aHiPm3oI39dPbxJjeND">
-          Test View Plain File
+          Test Plain File
         </Menu.Item>
         <Menu.Item href="#/view/okPGs0oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-">
-          Test View Bad File
+          Test Bad File
+        </Menu.Item>
+        <Menu.Item href="#/view/okPGs0oN/r6ziq--vD_27-">
+          Test Bad Key
+        </Menu.Item>
+        <Menu.Item href="#/view/oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-">
+          Test Missing File
         </Menu.Item>
         <Menu.Item href="#/settings">
           Settings

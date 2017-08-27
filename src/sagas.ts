@@ -14,8 +14,6 @@ import {
 } from "./actions/types";
 import { encryptPaste, uploadPaste } from "./sagas/submission";
 
-declare var $: any;
-
 
 function createXHRChannel(action) {
   return eventChannel((emitter) => {
@@ -48,7 +46,7 @@ function* decryptPasteSaga(action) {
   } catch (e) {
     yield put(setGeneralError(
       `Error when decrypting the paste "${action.id}"`,
-      e.message,
+      `${e.message}. The provided key may be incorrect.`,
     ));
   }
 }
@@ -78,7 +76,7 @@ function* download(action) {
 function* readSettings(action) {
   let cookie = $.pgwCookie({
     json: true,
-    name: 'settings',
+    name: "settings",
   });
 
   if (cookie === undefined) {

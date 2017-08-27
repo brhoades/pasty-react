@@ -3,6 +3,7 @@ import { WrappedFieldProps } from "redux-form";
 
 import { IPartialPasteFile, PasteFileTypes, IPartialPasteFileForm } from "../reducers/form";
 import AddTextFileField from "./addtextfilefield";
+import AddFileField from "./addfilefield";
 
 
 interface IPasteFileFormProps {
@@ -21,7 +22,7 @@ const PasteFileForm = (props: IPasteFileFormProps) => {
   return (
     (fields.type.input.value === PasteFileTypes.CODE
       ? (<AddTextFileField key={props.name} fields={fields} index={props.index} name={props.name} />)
-      : (<input key={props.name} type="text" {...props} />)
+      : (<AddFileField key={props.name} fields={fields} index={props.index} name={props.name} />)
     )
   );
 };

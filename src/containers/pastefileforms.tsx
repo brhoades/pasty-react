@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Fields, FieldsProps, FieldArrayMetaProps } from "redux-form";
+import { Fields } from "redux-form";
 
+import AddTextFileField from "../components/addtextfilefield";
+import PasteFileForm from "../components/pastefileform";
 import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
-import AddTextFileField from "./addtextfilefield";
-import PasteFileForm from "./pastefileform";
 
 
 // Can't get types to work here.

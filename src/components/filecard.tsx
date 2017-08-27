@@ -42,9 +42,7 @@ export default class FileCard extends React.Component<PropsType, {}> {
           </div>
         </div>
 
-        <Divider />
-
-        {this.props.children}
+        {this.props.children && (<div><Divider /> {this.props.children}</div>)}
       </Segment>
     );
   }

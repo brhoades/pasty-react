@@ -1,3 +1,4 @@
+import * as Cookies from "js-cookie";
 import { decryptFile, Paste, PasteParser } from "pasty-core";
 import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
@@ -74,24 +75,27 @@ function* download(action) {
 }
 
 function* readSettings(action) {
-  let cookie = $.pgwCookie({
-    json: true,
-    name: "settings",
-  });
+  let cookie = Cookies.get("settings");
+  console.dir(cookie);
 
   if (cookie === undefined) {
     cookie = {};
+  } else {
+    cookie = JSON.parse(cookie);
   }
+
+  console.dir(cookie);
 
   yield put(setSettings(cookie));
 }
 
 function* loadTheme(action) {
   const themeName = `assets/hljs-themes/${action.theme}`;
+  const theme = document.getElementById("hljs-theme");
 
   // TODO use a dynamic CSS loader to get themes.
-  if ($("#hljs-theme").attr("href") !== themeName) {
-    yield call(() => { $("#hljs-theme").attr("href", themeName); });
+  if (theme.attributes["href"] !== themeName) {
+    yield call(() => { theme.setAttribute("href", themeName); });
   }
 }
 

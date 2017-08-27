@@ -26,8 +26,7 @@ module.exports = {
       'buffer',
       'clipboard',
       'highlight.js',
-      'pgwcookie',
-      'zepto-webpack',
+      'js-cookie',
     ],
   },
   output: {
@@ -98,7 +97,7 @@ module.exports = {
         "semantic",
         "vendor",
       ],
-      minChunks: 2,
+      minChunks: Infinity,
     }),
     new CopyWebpackPlugin([
       {

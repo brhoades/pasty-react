@@ -3,6 +3,7 @@ import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
+import PasteLoading from "../components/pasteloading";
 import DisplayFile from "../components/displayfile";
 import CopyShortLinkIcon from "../components/icons/copyshortlinkicon";
 
@@ -37,7 +38,7 @@ export interface IViewPasteProps {
 
 type PropsType = IViewPasteStateProps & IViewPasteDispatchProps & IViewPasteProps;
 
-export class ViewPaste extends React.Component<PropsType, undefined> {
+class ViewPaste extends React.Component<PropsType, undefined> {
   constructor(props) {
     super(props);
 
@@ -60,7 +61,7 @@ export class ViewPaste extends React.Component<PropsType, undefined> {
 
   public render() {
     if (this.props.state !== STATE.VIEWING) {
-      return null;
+      return (<PasteLoading />);
     }
 
     return (

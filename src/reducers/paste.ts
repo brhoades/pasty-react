@@ -20,11 +20,21 @@ export enum STATE {
   VIEWING,
 }
 
+export enum STATE_MESSAGES {
+  "",
+  "Encrypting",
+  "Decrypting",
+  "Uploading",
+  "Downloading",
+  " ",
+}
+
 export interface IPasteReducer {
   state: STATE;
   id: string;
   key: string;
   paste: Maybe<Paste>;
+  stateMessage: string;
 }
 
 const initial: IPasteReducer = {
@@ -32,6 +42,7 @@ const initial: IPasteReducer = {
   key: "",
   paste: new Maybe<Paste>(null),
   state: STATE.WAITING,
+  stateMessage: STATE_MESSAGES[STATE.WAITING],
 };
 
 const paste = (state: IPasteReducer = initial, action) => {
@@ -43,18 +54,21 @@ const paste = (state: IPasteReducer = initial, action) => {
         key: action.key,
         paste: new Maybe<Paste>(null),
         state: STATE.DOWNLOADING,
+        stateMessage: STATE_MESSAGES[STATE.DOWNLOADING],
       };
 
     case POST_PASTE_TO_URL:
       return {
         ...initial,
         state: STATE.UPLOADING,
+        stateMessage: STATE_MESSAGES[STATE.UPLOADING],
       };
 
     case CLEAR_PASTE:
       return {
         ...initial,
         state: STATE.WAITING,
+        stateMessage: STATE_MESSAGES[STATE.WAITING],
       };
 
     case SET_DECRYPTED_PASTE:
@@ -62,18 +76,21 @@ const paste = (state: IPasteReducer = initial, action) => {
         ...state,
         paste: new Maybe<Paste>(action.paste),
         state: STATE.VIEWING,
+        stateMessage: STATE_MESSAGES[STATE.VIEWING],
       };
 
     case ENCRYPT_THEN_SUBMIT_PASTE:
       return {
         ...initial,
         state: STATE.ENCRYPTING,
+        stateMessage: STATE_MESSAGES[STATE.ENCRYPTING],
       };
 
     case DECRYPT_PASTE:
       return {
         ...state,
         state: STATE.DECRYPTING,
+        stateMessage: STATE_MESSAGES[STATE.DECRYPTING],
       };
 
     case REDIRECT_TO_SUBMITTED_PASTE:
@@ -82,6 +99,7 @@ const paste = (state: IPasteReducer = initial, action) => {
         key: action.key,
         paste: new Maybe<Paste>(action.paste),
         state: STATE.VIEWING,
+        stateMessage: STATE_MESSAGES[STATE.VIEWING],
       };
 
     default:

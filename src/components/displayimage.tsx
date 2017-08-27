@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Image } from "semantic-ui-react";
 
 
 interface IDisplayImageProps {
@@ -8,7 +9,13 @@ interface IDisplayImageProps {
 
 const DisplayImage = (props: IDisplayImageProps) => {
   return (
-    <img src={`data:${props.mime};base64,${props.data}`} />
+    <Image
+      src={`data:${props.mime};base64,${props.data}`}
+      centered={true}
+      style={{
+        maxWidth: "100%",
+      }}
+    />
   );
 };
 

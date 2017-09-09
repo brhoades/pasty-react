@@ -52,17 +52,11 @@ const ThemeSettings = (props: {}) => (
     <Header dividing={true}>
       Text Theme
     </Header>
-    <Grid columns={2} stackable={true}>
-      <Grid.Column>
-        <Field
-          name="theme"
-          component={ThemeDropdownConnected}
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <ThemePreview />
-      </Grid.Column>
-    </Grid>
+    <Field
+      name="theme"
+      component={ThemeDropdownConnected}
+    />
+    <ThemePreview />
   </div>
 );
 

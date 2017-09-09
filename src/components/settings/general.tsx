@@ -11,6 +11,7 @@ export interface IGeneralSettings {
 const GeneralSettings = (props: IGeneralSettings) => (
   <Form>
     <ThemeSettings />
+    <br />
     <LanguageSettings />
   </Form>
 );

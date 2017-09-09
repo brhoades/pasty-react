@@ -1,12 +1,20 @@
 import * as React from "react";
-import { Tab } from "semantic-ui-react";
+import { Field, WrappedFieldProps } from "redux-form";
+import { Form, Label } from "semantic-ui-react";
+
+import KeySizeInput from "./keysizeinput";
+
 
 export interface ISecuritySettings {
 }
 
 const SecuritySettings = (props: ISecuritySettings) => (
   <div>
-    Security Settings
+    <label>Key Size</label>
+    <Field
+      name="keysize"
+      component={KeySizeInput}
+    />
   </div>
 );
 

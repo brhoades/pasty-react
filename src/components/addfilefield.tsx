@@ -36,15 +36,13 @@ class AddFileField extends React.Component<PropsType> {
       <div>
         <FileCard
           header={
-            <div>
-              <div style={{float: "left"}}>
-                <Form.Input
-                  placeholder="dogpic.jpg"
-                  error={name.meta.error !== undefined}
-                  onChange={(ev, inputData) => name.input.onChange(inputData.value)}
-                  defaultValue={name.input.value}
-                />
-              </div>
+            <div style={{float: "left"}}>
+              <Form.Input
+                placeholder="dogpic.jpg"
+                error={name.meta.error !== undefined}
+                onChange={(ev, inputData) => name.input.onChange(inputData.value)}
+                defaultValue={name.input.value}
+              />
             </div>
           }
           attached={data.meta.submitFailed && data.meta.error}
@@ -66,8 +64,8 @@ class AddFileField extends React.Component<PropsType> {
   private renderImage() {
     return (
       <DisplayImage
-          data={this.props.fields.data.input.value}
-          mime={this.props.fields.meta.input.value.mime}
+        data={this.props.fields.data.input.value}
+        mime={this.props.fields.meta.input.value.mime}
       />
     );
   }

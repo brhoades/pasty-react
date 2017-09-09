@@ -1,13 +1,18 @@
 import * as React from "react";
-import { Tab } from "semantic-ui-react";
+import { Form, Grid } from "semantic-ui-react";
+
+import ThemeSettings from "./theme";
+import LanguageSettings from "./language";
+
 
 export interface IGeneralSettings {
 }
 
 const GeneralSettings = (props: IGeneralSettings) => (
-  <div>
-    General Settings
-  </div>
+  <Form>
+    <ThemeSettings />
+    <LanguageSettings />
+  </Form>
 );
 
 export default GeneralSettings;

@@ -43,11 +43,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
               marginBottom: '2em',
             }}
           >
-            {
-              this.props.files.length === 0 ?
-              this.renderPlaceholder() :
-              this.renderForm()
-            }
+            {this.props.files.length === 0 ? this.renderPlaceholder() : this.renderForm()}
           </div>
           <Grid>
             <Grid.Column width={8}>

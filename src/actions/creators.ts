@@ -12,6 +12,7 @@ import {
   POST_PASTE_TO_URL,
   READ_SETTINGS,
   REDIRECT_TO_SUBMITTED_PASTE,
+  SET_AND_SAVE_SETTINGS,
   SET_DECRYPTED_PASTE,
   SET_GENERAL_ERROR,
   SET_HIGHLIGHTED_LINES,
@@ -53,9 +54,14 @@ export const readSettings = () => ({
   type: READ_SETTINGS,
 });
 
-export const setSettings = (settings: ISettings) => ({
+export const setSettings = (settings: Partial<ISettings>) => ({
   settings,
   type: SET_SETTINGS,
+});
+
+export const setAndSaveSettings = (settings: Partial<ISettings>) => ({
+  settings,
+  type: SET_AND_SAVE_SETTINGS,
 });
 
 export const setTheme = (theme: string) => ({

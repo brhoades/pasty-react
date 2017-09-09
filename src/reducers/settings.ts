@@ -1,7 +1,9 @@
 import {
   READ_SETTINGS,
+  SET_AND_SAVE_SETTINGS,
   SET_SETTINGS,
 } from "../actions/types";
+
 
 export interface ISecuritySettings {
   keysize: number;
@@ -32,6 +34,7 @@ const initial: ISettings = {
 
 const settings = (state: ISettings = initial, action) => {
   switch (action.type) {
+    case SET_AND_SAVE_SETTINGS:
     case SET_SETTINGS:
       return {
         ...state,

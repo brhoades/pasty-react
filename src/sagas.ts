@@ -12,6 +12,7 @@ import {
   LOAD_THEME,
   POST_PASTE_TO_URL,
   READ_SETTINGS,
+  SET_AND_SAVE_SETTINGS,
 } from "./actions/types";
 import { encryptPaste, uploadPaste } from "./sagas/submission";
 
@@ -86,6 +87,10 @@ function* readSettings(action) {
   yield put(setSettings(cookie));
 }
 
+function* saveSettings(action) {
+  Cookies.set("settings", JSON.stringify(action.settings));
+}
+
 function* loadTheme(action) {
   const themeName = `assets/hljs-themes/${action.theme}`;
   const theme = document.getElementById("hljs-theme");
@@ -103,6 +108,7 @@ function* saga(): SagaIterator {
   yield takeLatest(LOAD_THEME, loadTheme);
   yield takeLatest(ENCRYPT_THEN_SUBMIT_PASTE, encryptPaste);
   yield takeLatest(POST_PASTE_TO_URL, uploadPaste);
+  yield takeLatest(SET_AND_SAVE_SETTINGS, saveSettings);
 }
 
 export default saga;

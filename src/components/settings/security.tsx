@@ -12,7 +12,7 @@ const SecuritySettings = (props: ISecuritySettings) => (
   <div>
     <label>Key Size</label>
     <Field
-      name="keysize"
+      name="security.keysize"
       component={KeySizeInput}
     />
   </div>

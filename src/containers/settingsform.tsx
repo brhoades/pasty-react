@@ -1,12 +1,13 @@
 import * as React from "react";
-import { Tab } from "semantic-ui-react";
 import { connect, Dispatch } from "react-redux";
-import { reduxForm, InjectedFormProps } from "redux-form";
+import { InjectedFormProps, reduxForm } from "redux-form";
+import { Tab } from "semantic-ui-react";
 
-import { IReducer } from "../reducers/index";
-import { ISettings } from "../reducers/settings";
+import { setAndSaveSettings } from "../actions/creators";
 import GeneralSettings from "../components/settings/general";
 import SecuritySettings from "../components/settings/security";
+import { IReducer } from "../reducers/index";
+import { ISettings } from "../reducers/settings";
 
 
 export interface ISettingsFormProps {
@@ -16,9 +17,13 @@ export interface ISettingsFormStateProps {
   initialValues: ISettings;
 }
 
-type PropsType = ISettingsFormProps & ISettingsFormStateProps;
+type PropsType = ISettingsFormProps;
 
 type InjectedPropsType = InjectedFormProps<PropsType>;
+
+const onChange = (values: ISettings, dispatch: Dispatch<IReducer>, props: InjectedPropsType) => {
+  return dispatch(setAndSaveSettings(values));
+};
 
 const tabs = [
   {
@@ -49,8 +54,10 @@ const mapStateToProps = (state: IReducer, ownProps: InjectedFormProps): any => (
 });
 
 
-const reduxFormWrapped = reduxForm({
+const reduxFormWrapped = reduxForm<ISettings>({
   form: "settings",
+  onChange,
+  // TODO: Validate
 })(SettingsForm);
 
 export default connect(mapStateToProps, () => ({}))(reduxFormWrapped);

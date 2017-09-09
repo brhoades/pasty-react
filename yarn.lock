@@ -4196,6 +4196,10 @@ request@^2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
+require-css@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/require-css/-/require-css-0.1.10.tgz#f1db8c6cfb2ad2a3a7409166cc6cf99b0d3f4502"
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"

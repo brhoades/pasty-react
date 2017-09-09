@@ -1,25 +1,13 @@
 import * as React from "react";
 import { Field, InjectedFormProps, reduxForm, WrappedFieldProps } from "redux-form";
-import { connect, Dispatch } from "react-redux";
-
-import { Dropdown, Header, Grid } from "semantic-ui-react";
+import { Dropdown, Header } from "semantic-ui-react";
 
 
 export interface ILanguageSettingsProps {
 }
 
-export interface ILanguageSettingsDispatchProps {
-}
-
-export interface ILanguageSettingsStateProps {
-  
-}
-
-type PropsType = ILanguageSettingsProps & ILanguageSettingsStateProps & ILanguageSettingsDispatchProps;
-
-const LanguageDropdown = (props) => {
-  console.dir(props.input.value);
-  return (
+// TODO: InjectFormProps doesn't cut it
+const LanguageDropdown = (props) => (
   <Dropdown
     fluid={true}
     multiple={true}
@@ -36,9 +24,6 @@ const LanguageDropdown = (props) => {
     onChange={(ev, data) => props.input.onChange(data.value)}
   />
 );
-}
-
-const getAllLanguages = () => hljs.listLanguages();
 
 const LanguageSettings = (props: ILanguageSettingsProps) => (
   <div>

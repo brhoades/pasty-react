@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Container,
   Header,
+  Icon,
   Menu,
 } from "semantic-ui-react";
 
@@ -31,7 +32,7 @@ const debugItems = () => ([
 // We render extra menu items when we debug locally.
 const getMenuItems = () => {
   let menu: JSX.Element[] = [
-    <Menu.Item href="#/about" as="a" header={true} key="about">PASTY</Menu.Item>,
+    <Menu.Item href="#/about" as="a" header={true} key="about" postion="left">PASTY</Menu.Item>,
     <Menu.Item href="#/" as="a" key="home">Paste</Menu.Item>,
   ];
 
@@ -41,7 +42,10 @@ const getMenuItems = () => {
 
   return [
     ...menu,
-    <Menu.Item href="#/settings" key="settings">Settings</Menu.Item>,
+    <Menu.Item href="#/settings" key="settings" position="right">
+      <Icon name="setting" inverted={true} />
+      Settings
+    </Menu.Item>,
   ];
 }
 

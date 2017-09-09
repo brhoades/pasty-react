@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Form, Grid } from "semantic-ui-react";
 
-import ThemeSettings from "./theme";
 import LanguageSettings from "./language";
+import ThemeSettings from "./theme";
 
 
 export interface IGeneralSettings {

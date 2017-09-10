@@ -10,7 +10,6 @@ import {
 import Maybe from "../monads/maybe";
 import { rangedSelection } from "../reducers/highlight";
 import { IReducer } from "../reducers/index";
-import { registerClickHandlers } from "../ts/code-helpers";
 
 const style = require("css/displaycode.css");
 

@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Field, reduxForm, WrappedFieldProps } from "redux-form";
 import { connect, Dispatch } from "react-redux";
-import { Dropdown, Header, Grid } from "semantic-ui-react";
+import { Field, reduxForm, WrappedFieldProps } from "redux-form";
+import Grid from "semantic-ui-react/dist/es/collections/Grid";
+import Header from "semantic-ui-react/dist/es/elements/Header";
+import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 import { loadTheme } from "../../actions/creators";
 import { IReducer } from "../../reducers/index";

@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Container, Header, Icon } from "semantic-ui-react";
+import Container from "semantic-ui-react/dist/es/elements/Container";
+import Header from "semantic-ui-react/dist/es/elements/Header";
+import Icon from "semantic-ui-react/dist/es/elements/Icon";
 
 
 const AboutPasty = () => (

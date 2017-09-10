@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Button, Popup } from "semantic-ui-react";
+import Button from "semantic-ui-react/dist/es/elements/Button";
+import Popup from "semantic-ui-react/dist/es/modules/Popup";
 
 import { getFileByIndexDefault, IFileByIndexPropsType } from "../../helpers/fileprops";
 import { IReducer } from "../../reducers/index";

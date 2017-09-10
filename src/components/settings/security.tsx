@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Field, WrappedFieldProps } from "redux-form";
-import { Form, Label } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
+import Label from "semantic-ui-react/dist/es/elements/Label";
 
 import KeySizeInput from "./keysizeinput";
 

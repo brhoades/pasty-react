@@ -2,7 +2,9 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { FieldArray, GenericFieldArray, WrappedFieldArrayProps } from "redux-form";
-import { Button, Form, Grid } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
+import Grid from "semantic-ui-react/dist/es/collections/Grid";
+import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
@@ -12,6 +14,7 @@ import PasteFileForms from "../containers/pastefileforms";
 import AddFileButton from "./buttons/addfilebutton";
 import AddTextButton from "./buttons/addtextbutton";
 import PasteButton from "./buttons/pastebutton";
+
 
 export interface ICreatePasteFormDispatchProps {
 }

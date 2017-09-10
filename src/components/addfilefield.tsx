@@ -2,7 +2,8 @@ import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { Field } from "redux-form";
-import { Form, Message } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
+import Message from "semantic-ui-react/dist/es/collections/Message";
 
 import AddFileActionsContainer from "../containers/addfileactionscontainer";
 import { IPartialPasteFileForm } from "../reducers/form";

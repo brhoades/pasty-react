@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { change } from "redux-form";
-import { Dropdown } from "semantic-ui-react";
+import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 import { IReducer } from "../../reducers/index";
 

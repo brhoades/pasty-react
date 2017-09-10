@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Button } from "semantic-ui-react";
+import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import LanguageDropdownButton from "../components/buttons/languagedropdownbutton";
 import RemoveFileIcon from "../components/icons/removefileicon";
+
 
 export interface IAddFileActionsProps {
   index: number;

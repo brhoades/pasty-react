@@ -1,14 +1,16 @@
-import FileCard from "./filecard";
 import { File } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { Field } from "redux-form";
-import { Form, Message } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
+import Message from "semantic-ui-react/dist/es/collections/Message";
 
-import LanguageDropdownButton from "./buttons/languagedropdownbutton";
 import AddTextFileActionsContainer from "../containers/addtextfileactionscontainer";
 import { IPartialPasteFile, IPartialPasteFileForm } from "../reducers/form";
 import { IReducer } from "../reducers/index";
+import LanguageDropdownButton from "./buttons/languagedropdownbutton";
+import FileCard from "./filecard";
+
 
 export interface IAddTextFileFieldProps {
   index: number;

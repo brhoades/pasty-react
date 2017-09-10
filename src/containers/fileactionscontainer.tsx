@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Button } from "semantic-ui-react";
+import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import DownloadFileButton from "../components/buttons/downloadfilebutton";
+
 
 export interface IFileActionsProps {
   index: number;

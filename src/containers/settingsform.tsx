@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { Tab } from "semantic-ui-react";
+import Tab from "semantic-ui-react/dist/es/modules/Tab";
 
 import { setAndSaveSettings } from "../actions/creators";
 import GeneralSettings from "../components/settings/general";

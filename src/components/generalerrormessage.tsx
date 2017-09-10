@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
+import Message from "semantic-ui-react/dist/es/collections/Message";
 
-import { Message } from "semantic-ui-react";
 import { IReducer } from "../reducers/index";
 
 

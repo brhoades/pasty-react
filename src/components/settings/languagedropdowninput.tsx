@@ -1,6 +1,6 @@
 import * as React from "react";
 import { WrappedFieldProps } from "redux-form";
-import { Dropdown } from "semantic-ui-react";
+import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 
 export interface ILanguageDropdownProps {

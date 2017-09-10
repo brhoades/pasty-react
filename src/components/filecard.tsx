@@ -1,5 +1,9 @@
 import * as React from "react";
-import { Divider, Form, Header, Popup, Segment } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
+import Divider from "semantic-ui-react/dist/es/elements/Divider";
+import Segment from "semantic-ui-react/dist/es/elements/Segment";
+import Popup from "semantic-ui-react/dist/es/modules/Popup";
+
 
 export interface IFileCardProps {
   actionbar?: React.ReactElement<any>;

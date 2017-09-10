@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form } from "semantic-ui-react";
+import Form from "semantic-ui-react/dist/es/collections/Form";
 
 
 const PasteButton = (props: {valid: boolean}) => (

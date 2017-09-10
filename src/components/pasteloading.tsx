@@ -1,11 +1,13 @@
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { Container, Loader } from "semantic-ui-react";
+import Container from "semantic-ui-react/dist/es/elements/Container";
+import Loader from "semantic-ui-react/dist/es/elements/Loader";
 
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
+
 
 export interface IPasteLoadingStateProps {
   error: boolean;

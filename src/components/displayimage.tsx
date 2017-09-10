@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image } from "semantic-ui-react";
+import Image from "semantic-ui-react/dist/es/elements/Image";
 
 
 interface IDisplayImageProps {

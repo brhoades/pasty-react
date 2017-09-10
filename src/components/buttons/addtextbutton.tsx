@@ -2,7 +2,7 @@ import { CodeFile } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { arrayPush } from "redux-form";
-import { Button } from "semantic-ui-react";
+import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import { PasteFileTypes } from "../../reducers/form";
 import { IReducer } from "../../reducers/index";

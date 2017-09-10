@@ -2,7 +2,7 @@ import { CodeFile, File, Paste, PasteFile } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { InjectedFormProps, reduxForm } from "redux-form";
-import { Message } from "semantic-ui-react";
+import Message from "semantic-ui-react/dist/es/collections/Message";
 
 import { encryptThenSubmitPaste } from "../actions/creators";
 import { IPartialPasteFile, IPasteFormData, PasteFileTypes } from "../reducers/form";

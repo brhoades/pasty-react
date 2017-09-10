@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Field, reduxForm, WrappedFieldProps } from "redux-form";
-import { Dropdown, Header } from "semantic-ui-react";
+import Header from "semantic-ui-react/dist/es/elements/Header";
+import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 import LanguageDropdownInput from "./languagedropdowninput";
 

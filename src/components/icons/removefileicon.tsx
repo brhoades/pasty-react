@@ -1,7 +1,9 @@
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { arrayRemove } from "redux-form";
-import { Button, Icon, Popup } from "semantic-ui-react";
+import Button from "semantic-ui-react/dist/es/elements/Button";
+import Icon from "semantic-ui-react/dist/es/elements/Icon";
+import Popup from "semantic-ui-react/dist/es/modules/Popup";
 
 import { getFileFormByIndexDefault, IFileFormByIndexPropsType } from "../../helpers/fileformprops";
 import { IReducer } from "../../reducers/index";

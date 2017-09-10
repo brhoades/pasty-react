@@ -3,14 +3,15 @@ import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
-import PasteLoading from "../components/pasteloading";
 import DisplayFile from "../components/displayfile";
 import CopyShortLinkIcon from "../components/icons/copyshortlinkicon";
+import PasteLoading from "../components/pasteloading";
 
 import { clearPaste, getPaste, setHighlightedLines } from "../actions/creators";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
+
 
 export interface IViewPasteStateProps {
   state: STATE;

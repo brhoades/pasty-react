@@ -47,7 +47,7 @@ module.exports = {
         loader: 'file-loader',
         exclude: /node_modules/,
         options: {
-          name: '[name].[ext]?[hash]',
+          name: '[name].[ext]',
         },
       },
       {

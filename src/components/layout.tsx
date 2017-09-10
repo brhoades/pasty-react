@@ -51,7 +51,7 @@ const getMenuItems = () => {
 
 const Layout = ({ children }) =>
   <div>
-    <Menu fixed="top" inverted={true}>
+    <Menu inverted={true}>
       <Container>
         {...getMenuItems()}
       </Container>

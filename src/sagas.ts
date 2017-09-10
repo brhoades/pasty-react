@@ -84,7 +84,8 @@ function* readSettings(action) {
     cookie = JSON.parse(cookie);
 
     // Check for old format cookies or corrupted cookies.
-    if (cookie.languages === undefined || cookie.keysize === undefined) {
+    if (cookie === undefined || cookie.languages === undefined
+        || cookie.security === undefined) {
       cookie = {};
     }
   }

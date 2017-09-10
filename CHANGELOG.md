@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+* Removed query hashes since most files now have hashes in their name.
+* The top menu is no longer fixed to the window. This fixes some buttons being hidden.
+* TODO: Use keysize config.
+
 ## 1.0.1
 * Old cookies were serialized by pgwcookie in a way that couldn't be read consistently. They're now cleared.
 

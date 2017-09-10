@@ -9,7 +9,7 @@ import {
 import GeneralErrorMessage from "./generalerrormessage";
 
 const debugItems = () => ([
-  <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" as="a" key="viewimage">
+  <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" key="viewimage">
     View Image
   </Menu.Item>,
   <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE" key="codefile">
@@ -32,8 +32,8 @@ const debugItems = () => ([
 // We render extra menu items when we debug locally.
 const getMenuItems = () => {
   let menu: JSX.Element[] = [
-    <Menu.Item href="#/about" as="a" header={true} key="about" postion="left">PASTY</Menu.Item>,
-    <Menu.Item href="#/" as="a" key="home">Paste</Menu.Item>,
+    <Menu.Item href="#/about" header={true} key="about" postion="left">PASTY</Menu.Item>,
+    <Menu.Item href="#/" key="home">Paste</Menu.Item>,
   ];
 
   if (process.env.NODE_ENV !== "production") {

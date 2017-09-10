@@ -32,6 +32,7 @@ class AddFileButton extends React.Component<PropsType, {}> {
           type="file"
           hidden={true}
           ref={(input) => this.input = input}
+          multiple={true}
           onChange={this.handleClick}
         />
         <Button onClick={this.uploadFile} secondary={true} type="button">

@@ -82,6 +82,11 @@ function* readSettings(action) {
     cookie = {};
   } else {
     cookie = JSON.parse(cookie);
+
+    // Check for old format cookies or corrupted cookies.
+    if (cookie.languages === undefined || cookie.keysize === undefined) {
+      cookie = {};
+    }
   }
 
   yield put(setSettings(cookie));

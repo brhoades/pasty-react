@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.1
+* Old cookies were serialized by pgwcookie in a way that couldn't be read consistently. They're now cleared.
+
 ## 1.0.0
 * pasty-core v0.1.4 consumption for common logic.
 * Rewrite and uplift from Vue and PureCSS to:

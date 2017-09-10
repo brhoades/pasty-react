@@ -1,4 +1,4 @@
-import { range } from "lodash/util";
+import range from "lodash/range";
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";

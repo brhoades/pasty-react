@@ -1,4 +1,5 @@
-import { range, uniq } from "lodash";
+import range from "lodash/range";
+import uniq from "lodash/uniq";
 
 import {
   ADD_HIGHLIGHTED_LINE,
@@ -15,6 +16,7 @@ export interface IHighlightReducer {
 const initial: IHighlightReducer = {
   files: [],
 };
+
 
 const highlight = (state: IHighlightReducer = initial, action) => {
   switch (action.type) {

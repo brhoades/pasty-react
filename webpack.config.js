@@ -8,8 +8,6 @@ module.exports = {
     build: './src/main.ts',
     libs: [
       'pasty-core',
-      'vue',
-      'vue-router',
       'highlight.js',
       'zepto-webpack',
       'pgwcookie'
@@ -25,13 +23,6 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
       },
       {
         test: /\.css$/,
@@ -49,7 +40,6 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
       $: "zepto-webpack"
     }
   },
@@ -93,7 +83,6 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   module.exports.output.publicPath = './'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {

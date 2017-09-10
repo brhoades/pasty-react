@@ -1,0 +1,1 @@
+export const GET_PASTE_FROM_URL = "GET_PASTE_FROM_URL";

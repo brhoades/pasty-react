@@ -1,17 +1,17 @@
 export interface ICaseOf<T> {
-  readonly just: (T) => void;
-  readonly nothing: () => void;
+  readonly just: (T) => any;
+  readonly nothing: () => any;
 }
 
 export default class Maybe<T> {
   constructor(private readonly data: T | null) {
   }
 
-  public caseOf(caseOf: ICaseOf<T>): void {
+  public caseOf(caseOf: ICaseOf<T>): any {
     if (this.data === null) {
-      caseOf.nothing();
+      return caseOf.nothing();
     } else {
-      caseOf.just(this.data);
+      return caseOf.just(this.data);
     }
   }
 

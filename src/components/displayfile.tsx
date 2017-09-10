@@ -1,6 +1,7 @@
 import { File, Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
+import { Card, Icon } from "semantic-ui-react";
 
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
@@ -33,10 +34,24 @@ class DisplayFile extends React.Component<PropsType, undefined> {
 
     return (
       <div>
-        <h3>{this.props.file.getData().name}</h3>
-        {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
+        <Card fluid={true}>
+          <Card.Content>
+            <Card.Header>{this.props.file.getData().name}</Card.Header>
+            <Card.Description>
+              <a
+                href={this.props.file.getData().base64DownloadString()}
+                download={this.props.file.getData().name}
+              >
+                <Icon name="download" link={true} />
+              </a>
+            </Card.Description>
+          </Card.Content>
+          <Card.Content>
+            {/^image\//.test(this.props.file.getData().meta.mime) && this.renderImage()}
 
-        {this.props.file.getData().isReadable() && this.renderCodeFile()}
+            {this.props.file.getData().isReadable() && this.renderCodeFile()}
+          </Card.Content>
+        </Card>
       </div>
     );
   }

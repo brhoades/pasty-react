@@ -4,11 +4,14 @@
 * TODO: Mobile menu scaling.
 * TODO: Clicking on a menu entry in mobile closes the menu.
 * TODO: File size is checked and errors out before uploading.
+* TODO: Implement common uploadfile logic.
+* TODO: less files are separate.
 
 ## 0.4.x
 * TODO: Download all files in a tarball.
 * TODO: uploaded files are automatically collapsed.
 * TODO: Dynamically generate href on click to reduce page render time/size.
+
 ## 0.4.2
 * Added error handling to pastes that fail. Shows the error for 3s then goes back to the paste.
 * Now only using common hljs languages.

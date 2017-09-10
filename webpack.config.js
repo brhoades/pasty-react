@@ -45,7 +45,7 @@ module.exports = {
           },
         ],
       },
-    ]
+    ],
   },
   resolve: {
     extensions: ['.ts', '.js', '.tsx'],
@@ -78,10 +78,6 @@ module.exports = {
       {
         from: "src/assets/font/*",
         to: "assets/font/[name].[ext]"
-      },
-      {
-        from: "node_modules/purecss/build/*",
-        to: "assets/purecss/[name].[ext]"
       },
       {
         from: "node_modules/highlight.js/styles/*",

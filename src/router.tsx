@@ -1,20 +1,21 @@
 import * as React from "react";
 import { HashRouter, Route } from "react-router-dom";
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter } from "react-router-redux";
 
 import CreatePaste from "./containers/createpaste";
 import ViewPaste from "./containers/viewpaste";
+import Layout from "./components/layout"
 
 
 const Router = ({ history }) => (
   <ConnectedRouter history={history}>
-    <div>
+    <Layout>
       <Route exact path="/" component={CreatePaste}/>
       <Route
         path="/view/:id/:key/:extra?"
         component={ViewPaste}
       />
-    </div>
+    </Layout>
   </ConnectedRouter>
 );
 

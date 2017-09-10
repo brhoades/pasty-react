@@ -1,7 +1,7 @@
 {
   "name": "pasty-http-client",
-  "version": "0.5.0",
-  "description": "Anonymous, encrypted pastebin for files.",
+  "version": "1.0.0",
+  "description": "Anonymous, encrypted and sharable small file storage.",
   "scripts": {
     "upload": "yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --cache --debug",
@@ -25,11 +25,8 @@
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-saga": "^0.15.6",
-    "require-css": "^0.1.10",
     "semantic-ui-react": "^0.71.4",
-    "ts-loader": "^2.3.2",
-    "typed-css-modules": "^0.3.0",
-    "typings-for-css-modules-loader": "^1.5.0"
+    "ts-loader": "^2.3.2"
   },
   "devDependencies": {
     "@types/clipboard": "^1.5.34",
@@ -54,6 +51,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.0",
+    "eslint": "^4.6.1",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-typescript": "^0.5.0",

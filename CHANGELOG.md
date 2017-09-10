@@ -1,11 +1,13 @@
 # Changelog
 
-## NEXT RELEASE
-* TODO: Mobile menu scaling.
-* TODO: Clicking on a menu entry in mobile closes the menu.
-* TODO: File size is checked and errors out before uploading.
-* TODO: Implement common uploadfile logic.
-* TODO: less files are separate.
+## 1.0.0
+* pasty-core v0.1.4 consumption for common logic.
+* Rewrite and uplift from Vue and PureCSS to:
+  * react 15.6.1 (with router)
+  * redux 3.7.2 (with saga / form)
+  * semantic-ui
+* Most logic is now typed.
+* Removed zepto / Vue.
 
 ## 0.4.x
 * TODO: Download all files in a tarball.

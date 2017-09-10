@@ -1,6 +1,6 @@
 module.exports = {
   credentials: "../aws-credentials.json",
-  bucketName: "p2.brod.es",
+  bucketName: "p.brod.es",
   patterns:[
     "config/*.json",
     "assets/*",

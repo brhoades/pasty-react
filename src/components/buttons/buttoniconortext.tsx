@@ -22,17 +22,26 @@ export interface IButtonIconOrTextStateProps {
 
 type PropsType = IButtonIconOrTextProps & IButtonIconOrTextStateProps;
 
-const ButtonIconOrText = (props: PropsType) => (
-  <Button
-    compact={props.compact}
-    onClick={props.onClick}
-  >
-    <IconOrText
-      icon={props.icon}
-      text={props.text}
-    />
-  </Button>
-);
+const ButtonIconOrText = (props: PropsType) => {
+  if (props.fonticons) {
+    return (
+      <Button
+        compact={props.compact}
+        onClick={props.onClick}
+        icon={props.icon}
+      />
+    );
+  }
+
+  return (
+    <Button
+      compact={props.compact}
+      onClick={props.onClick}
+    >
+      {props.text}
+    </Button>
+  );
+};
 
 const mapStateToProps = (state: IReducer, ownProps: IButtonIconOrTextProps): IButtonIconOrTextStateProps => ({
   fonticons: state.settings.fonticons,

@@ -2,11 +2,11 @@ import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import { arrayRemove } from "redux-form";
 import Button from "semantic-ui-react/dist/es/elements/Button";
-import Icon from "semantic-ui-react/dist/es/elements/Icon";
 import Popup from "semantic-ui-react/dist/es/modules/Popup";
 
 import { getFileFormByIndexDefault, IFileFormByIndexPropsType } from "../../helpers/fileformprops";
 import { IReducer } from "../../reducers/index";
+import ButtonIconOrText from "../buttons/buttoniconortext";
 
 interface IRemoveFileIconProps {
   index: number;
@@ -25,9 +25,9 @@ class RemoveFileIcon extends React.Component<PropsType, undefined> {
         <Popup
           basic={true}
           trigger={
-            <Button
-              type="button"
+            <ButtonIconOrText
               icon="trash"
+              text="Remove file"
               onClick={this.props.removeFile}
             />
           }

@@ -5,6 +5,7 @@ import Header from "semantic-ui-react/dist/es/elements/Header";
 import Icon from "semantic-ui-react/dist/es/elements/Icon";
 
 import GeneralErrorMessage from "./generalerrormessage";
+import IconOrText from "./icons/iconortext";
 
 
 const debugItems = () => ([
@@ -42,7 +43,11 @@ const getMenuItems = () => {
   return [
     ...menu,
     <Menu.Item href="#/settings" key="settings" position="right">
-      <Icon name="setting" inverted={true} />
+      <IconOrText
+        icon="setting"
+        inverted={true}
+        text=""
+      />
       Settings
     </Menu.Item>,
   ];

@@ -4,6 +4,7 @@ import Grid from "semantic-ui-react/dist/es/collections/Grid";
 
 import LanguageSettings from "./language";
 import ThemeSettings from "./theme";
+import FontIconSettings from "./fonticon";
 
 
 export interface IGeneralSettings {
@@ -14,6 +15,8 @@ const GeneralSettings = (props: IGeneralSettings) => (
     <ThemeSettings />
     <br />
     <LanguageSettings />
+    <br />
+    <FontIconSettings />
   </Form>
 );
 

@@ -2,13 +2,13 @@ import * as Clipboard from "clipboard";
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import Icon from "semantic-ui-react/dist/es/elements/Icon";
 import Popup from "semantic-ui-react/dist/es/modules/Popup";
 
 import configuration from "../../../config";
 import { generatePasteURL } from "../../middleware/highlight";
 import Maybe from "../../monads/maybe";
 import { IReducer } from "../../reducers/index";
+import IconOrText from "./iconortext";
 
 export interface ICopyShortLinkIconState {
   paste: Maybe<Paste>;
@@ -46,7 +46,12 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
         className="clipboard"
         data-clipboard-text={this.getShortURL()}
       >
-        <Icon name="copy" size="large" link={true} />
+        <IconOrText
+          icon="copy"
+          text="Copy Short Link"
+          size="large"
+          link={true}
+        />
       </a>
     );
   }

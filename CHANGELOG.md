@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+* Added settings option to disable font icons.
+
 ## 1.0.2
 * Removed query hashes since most files now have hashes in their name.
 * The top menu is no longer fixed to the window. This fixes some buttons being hidden.

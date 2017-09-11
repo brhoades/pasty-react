@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1
+* Added an "appearance" section to general settings.
+
 ## 1.1.0
 * Added settings option to disable font icons.
 

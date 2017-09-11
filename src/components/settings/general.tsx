@@ -1,4 +1,5 @@
 import * as React from "react";
+import Header from "semantic-ui-react/dist/es/elements/Header";
 import Form from "semantic-ui-react/dist/es/collections/Form";
 import Grid from "semantic-ui-react/dist/es/collections/Grid";
 
@@ -16,6 +17,9 @@ const GeneralSettings = (props: IGeneralSettings) => (
     <br />
     <LanguageSettings />
     <br />
+    <Header dividing={true}>
+      Appearance
+    </Header>
     <FontIconSettings />
   </Form>
 );

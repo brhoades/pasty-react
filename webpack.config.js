@@ -1,62 +1,70 @@
-const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
-    build: './src/app.tsx',
+    build: "./src/app.tsx",
+    hljs: "highlight.js",
     react: [
-      'react',
-      'react-router',
-      'react-redux',
-      'react-router-redux',
-      'react-router-dom',
-      'react-dom',
+      "react",
+      "react-router",
+      "react-redux",
+      "react-router-redux",
+      "react-router-dom",
+      "react-dom",
     ],
     redux: [
-      'redux',
-      'redux-form',
-      'redux-saga',
+      "redux",
+      "redux-form",
+      "redux-saga",
     ],
-    semantic: [
-      'semantic-ui-react',
-    ],
+    semantic: "semantic-ui-react",
     vendor: [
-      'buffer',
-      'clipboard',
-      'highlight.js',
-      'js-cookie',
+      "buffer",
+      "clipboard",
+      "js-cookie",
+      "lodash",
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
-    filename: '[name].[hash:8].js',
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "[name].[hash:8].js",
     chunkFilename: "[name].[hash:8].js",
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
+        loader: [
+          {
+            loader: "babel-loader",
+            options: {
+              "cacheDirectory": "./.babel_cache",
+            },
+          },
+          "ts-loader",
+        ],
+        exclude: /node_modules|dist/,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
+        loader: "file-loader",
         exclude: /node_modules/,
         options: {
-          name: '[name].[ext]',
+          name: "[name].[ext]",
         },
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: true,
             },
@@ -66,7 +74,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx'],
+    extensions: [".ts", ".js", ".tsx"],
     alias: {
       actions: path.resolve(__dirname, "src/actions"),
       css: path.resolve(__dirname, "src/assets"),
@@ -79,25 +87,21 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
   },
-  performance: {
-    hints: false
-  },
-  devtool: 'source-map',
+  devtool: "source-map",
   plugins: [
     new webpack.ProvidePlugin({
       hljs: "highlight.js",
-      $: "zepto-webpack"
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: [
+        "hljs",
         "react",
         "redux",
         "semantic",
         "vendor",
       ],
-      minChunks: Infinity,
     }),
     new CopyWebpackPlugin([
       {
@@ -111,41 +115,37 @@ module.exports = {
       {
         from: "node_modules/highlight.js/styles/*",
         to: "assets/hljs-themes/[name].[ext]"
-      }
+      },
     ]),
+    new HtmlWebpackPlugin({
+      template: "src/index.ejs",
+    })
   ],
-}
+};
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  module.exports.output.publicPath = './'
+if (process.env.NODE_ENV === "production") {
+  module.exports.devtool = "#source-map";
+  module.exports.output.publicPath = "./";
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: "\"production\"",
-      }
+      },
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
+      cache: true,
       minimize: true,
+      parallel: true,
+      sourceMap: true,
+      warnings: false,
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true,
       debug: false,
+      minimize: true,
     }),
-    new HtmlWebpackPlugin({
-      template: "src/index.ejs",
-      hash: true,
-    })
   ])
 } else {
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new HtmlWebpackPlugin({
-      template: "src/index.ejs",
-      cache: false,
-    })
+    new BundleAnalyzerPlugin(),
   ]);
 }

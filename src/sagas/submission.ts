@@ -1,7 +1,7 @@
 import { encryptFile } from "pasty-core";
 import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
-import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, select, take, takeEvery, takeLatest } from "redux-saga/effects";
 
 import Configuration from "../../config";
 import {
@@ -13,9 +13,10 @@ import {
   ENCRYPT_THEN_SUBMIT_PASTE,
   POST_PASTE_TO_URL,
 } from "../actions/types";
+import { IReducer } from "../reducers/index";
 
 
-function encryptPasteAsync(action) {
+function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
 
     // todo
@@ -25,7 +26,7 @@ function encryptPasteAsync(action) {
     // });
     // todo keysize
     setTimeout(() => {
-      emitter(encryptFile(action.paste.serialize()))
+      emitter(encryptFile(paste.serialize(), keysize))
       emitter(END);
     }, 0);
 
@@ -64,7 +65,8 @@ function createUploadPasteXHR(action) {
 }
 
 export function* encryptPaste(action) {
-  const emitter = yield call(encryptPasteAsync, action);
+  const keysize = yield select((state: IReducer) => state.settings.security.keysize);
+  const emitter = yield call(encryptPasteAsync, action.paste, keysize);
 
   try {
     while (true) {

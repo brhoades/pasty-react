@@ -56,7 +56,7 @@ const Layout = ({ children }) =>
       </Container>
     </Menu>
 
-    <Container style={{ marginTop: "4em" }}>
+    <Container>
       <GeneralErrorMessage key="generalerrrormessage" />
       {...children}
     </Container>

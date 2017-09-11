@@ -11,16 +11,7 @@ import { IReducer } from "../reducers/index";
 import CreatePasteForm from "../components/createpasteform";
 
 
-export interface ICreatePasteFormProps {
-}
-
-export interface ICreatePasteStateProps {
-  submitting: boolean;
-}
-
-type BasePropsType = ICreatePasteStateProps & ICreatePasteFormProps;
-
-type PropsType = InjectedFormProps<IPasteFormData, BasePropsType>;
+type PropsType = InjectedFormProps<IPasteFormData>;
 
 const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
   <div>
@@ -50,7 +41,7 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: P
   dispatch(encryptThenSubmitPaste(paste));
 };
 
-const validate = (values: IPasteFormData, props: BasePropsType) => {
+const validate = (values: IPasteFormData, props: {}) => {
   const errors = {
     files: {},
   };
@@ -70,7 +61,7 @@ const validate = (values: IPasteFormData, props: BasePropsType) => {
   return errors;
 };
 
-export default reduxForm<IPasteFormData, BasePropsType>({
+export default reduxForm<IPasteFormData>({
   form: "createpaste",
   initialValues: {
     files: [],

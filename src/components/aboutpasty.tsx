@@ -1,7 +1,8 @@
 import * as React from "react";
 import Container from "semantic-ui-react/dist/es/elements/Container";
 import Header from "semantic-ui-react/dist/es/elements/Header";
-import Icon from "semantic-ui-react/dist/es/elements/Icon";
+
+import IconOrText from "./icons/iconortext";
 
 
 const AboutPasty = () => (
@@ -28,13 +29,13 @@ const AboutPasty = () => (
       retained.
     </p>
 
-    <Icon name="github" />
+    <IconOrText icon="github" text="" />
     <a href="https://github.com/brhoades/pasty-core">Pasty Core</a><br />
-    <Icon name="github" />
+    <IconOrText icon="github" text="" />
     <a href="https://github.com/brhoades/pasty-http-client">Pasty HTTP Client</a><br />
-    <Icon name="github" />
+    <IconOrText icon="github" text="" />
     <a href="https://github.com/brhoades/pasty-cli">Pasty CLI</a><br />
-    <Icon name="github" />
+    <IconOrText icon="github" text="" />
     <a href="https://github.com/brhoades/pasty-server">Pasty Server</a><br />
   </Container>
 );

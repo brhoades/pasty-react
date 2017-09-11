@@ -46,7 +46,7 @@ const getMenuItems = () => {
       <IconOrText
         icon="setting"
         inverted={true}
-        text=""
+        text="⚙&nbsp;"
       />
       Settings
     </Menu.Item>,

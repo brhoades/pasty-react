@@ -6,7 +6,6 @@ import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import { PasteFileTypes } from "../../reducers/form";
 import { IReducer } from "../../reducers/index";
-import IconOrText from "../icons/iconortext";
 
 
 export interface IButtonIconOrTextProps {
@@ -14,6 +13,7 @@ export interface IButtonIconOrTextProps {
   text: string;
   onClick?: () => any;
   compact?: boolean;
+  style?: any;
 }
 
 export interface IButtonIconOrTextStateProps {
@@ -29,6 +29,7 @@ const ButtonIconOrText = (props: PropsType) => {
         compact={props.compact}
         onClick={props.onClick}
         icon={props.icon}
+        style={props.style}
       />
     );
   }
@@ -37,6 +38,7 @@ const ButtonIconOrText = (props: PropsType) => {
     <Button
       compact={props.compact}
       onClick={props.onClick}
+      style={props.style}
     >
       {props.text}
     </Button>

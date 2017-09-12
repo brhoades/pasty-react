@@ -2,8 +2,7 @@ import * as React from "react";
 import { Field, WrappedFieldProps } from "redux-form";
 import Radio from "semantic-ui-react/dist/es/addons/Radio";
 
-import Button from "semantic-ui-react/dist/es/elements/Button";
-import IconOrText from "../icons/iconortext";
+import ButtonIconOrText from "../buttons/buttoniconortext";
 
 
 interface IUseFontIconsToggle {
@@ -25,17 +24,13 @@ const FontIconsSettings = () => (
       component={UseFontIconsToggle}
     />
 
-    <Button
+    <ButtonIconOrText
+      icon="download"
+      text="Download this file"
       style={{
-        marginLeft: "2em",
+        marginLeft: "5em",
       }}
-      compact={true}
-    >
-      <IconOrText
-        icon="download"
-        text="Download this file"
-      />
-    </Button>
+    />
   </div>
 );
 

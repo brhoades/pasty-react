@@ -1,5 +1,8 @@
 # Changelog
 
+# 1.1.2
+* Plain highlighting type now escapes HTML in pastes (doesn't parse it as part of the page).
+
 ## 1.1.1
 * Added an "appearance" section to general settings.
 * Icon buttons now leverage semantic-ui's Button directly.

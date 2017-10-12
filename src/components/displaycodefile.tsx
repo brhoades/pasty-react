@@ -72,6 +72,9 @@ class DisplayCodeFile extends React.Component<PropsType> {
         value = hljs.highlight(file.meta.highlight, file.data, true).value;
       } else if (file.meta.highlight === "auto") {
         value = hljs.highlightAuto(file.data).value;
+      } else {
+        // Escape plain highlighting HTML so we can't execute html in pages.
+        value = this.escapeHTMLCharacters(value);
       }
     } catch (e) {
       console.log(e);
@@ -143,6 +146,16 @@ class DisplayCodeFile extends React.Component<PropsType> {
         }
       }
     });
+  }
+
+  // https://stackoverflow.com/questions/6234773/can-i-escape-html-special-chars-in-javascript
+  private escapeHTMLCharacters(unsafe: string): string {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 }
 

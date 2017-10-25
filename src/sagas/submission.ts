@@ -97,6 +97,15 @@ export function* uploadPaste(action) {
       const response = yield take(xhr);
       const data = JSON.parse(response.response);
 
+      if (data.error) {
+        yield put(setGeneralError(
+          `Error when uploading a new paste.`,
+          data.error,
+        ));
+
+        return;
+      }
+
       yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
     }
   } catch (e) {

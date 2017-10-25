@@ -1,6 +1,9 @@
 # Changelog
 
-# 1.1.2
+## 1.1.3
+* An error when uploading now displays instead of redirecting to a 404.
+
+## 1.1.2
 * Plain highlighting type now escapes HTML in pastes (doesn't parse it as part of the page).
 
 ## 1.1.1

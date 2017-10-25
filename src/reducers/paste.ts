@@ -8,6 +8,7 @@ import {
   POST_PASTE_TO_URL,
   REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
+  SET_GENERAL_ERROR,
 } from "../actions/types";
 import Maybe from "../monads/maybe";
 
@@ -91,6 +92,12 @@ const paste = (state: IPasteReducer = initial, action) => {
         ...state,
         state: STATE.DECRYPTING,
         stateMessage: STATE_MESSAGES[STATE.DECRYPTING],
+      };
+
+    case SET_GENERAL_ERROR:
+      return {
+        ...state,
+        state: STATE.WAITING,
       };
 
     case REDIRECT_TO_SUBMITTED_PASTE:

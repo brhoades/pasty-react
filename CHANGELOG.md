@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+* Consume pasty-core 0.2.1
+  * Now stores in BSON, files are no longer bloated on upload.
+
 ## 1.1.3
 * An error when uploading now displays instead of redirecting to a 404.
 

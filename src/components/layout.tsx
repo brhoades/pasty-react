@@ -30,8 +30,8 @@ const debugItems = () => ([
   <Menu.Item href="#/view/E2HBEJs3/vBuO83c3FcHqnbh1_BLqd.rAhLnmI_qE" key="v3code">
     V3 Code BSON
   </Menu.Item>,
-  <Menu.Item href="#/view/tJz5y7oc/ooIt-1.CxwAtb_rHIjbantkhDqjEcOGC" key="v3image">
-    V3 Image BSON
+  <Menu.Item href="#/view/BJwRQWIk/puq7oKwfI8d74.FjLb6xJ4j9w_yJ658h" key="v3binary">
+    V3 Binary BSON
   </Menu.Item>
 ]);
 

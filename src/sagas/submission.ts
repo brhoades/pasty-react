@@ -19,14 +19,11 @@ import { IReducer } from "../reducers/index";
 function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
 
-    // todo
-    // encryptFileAsync(action.paste, action.keysize, (payload) => {
-      // emitter(payload);
-      // emitter(END);
-    // });
+    // todo web worker
+
     // todo keysize
     setTimeout(() => {
-      emitter(encryptFile(paste.serialize(), keysize))
+      emitter(encryptFile(paste, keysize));
       emitter(END);
     }, 0);
 
@@ -40,7 +37,7 @@ function createUploadPasteXHR(action) {
   return eventChannel((emitter) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", action.url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-type", "application/octet-stream");
 
     xhr.onload = (e) => {
       if ((e as any).target.status !== 200) {
@@ -53,10 +50,8 @@ function createUploadPasteXHR(action) {
       }
     };
 
-    // xhr.onprogress = (e) => {
-    // };
-
-    xhr.send(`data=${encodeURIComponent(action.data)}`);
+    // send an arraybuffer / blob
+    xhr.send(action.data);
 
     return () => {
       xhr.abort();

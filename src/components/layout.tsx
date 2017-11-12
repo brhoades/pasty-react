@@ -10,22 +10,28 @@ import IconOrText from "./icons/iconortext";
 
 const debugItems = () => ([
   <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" key="viewimage">
-    View Image
+    Image (V2)
   </Menu.Item>,
   <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE" key="codefile">
-    Test Code File
+    Code (V2)
   </Menu.Item>,
   <Menu.Item href="#/view/KnsiyfKF/cydhwk6K2xv20aHiPm3oI39dPbxJjeND" key="plainfile">
-    Test Plain File
+    Plain (V2)
   </Menu.Item>,
   <Menu.Item href="#/view/okPGs0oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="badfile">
-    Test Bad File
+    Bad File
   </Menu.Item>,
   <Menu.Item href="#/view/okPGs0oN/r6ziq--vD_27-" key="badkey">
-    Test Bad Key
+    Bad Key
   </Menu.Item>,
   <Menu.Item href="#/view/oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="missing">
-    Test Missing File
+    404
+  </Menu.Item>,
+  <Menu.Item href="#/view/E2HBEJs3/vBuO83c3FcHqnbh1_BLqd.rAhLnmI_qE" key="v3code">
+    V3 Code BSON
+  </Menu.Item>,
+  <Menu.Item href="#/view/tJz5y7oc/ooIt-1.CxwAtb_rHIjbantkhDqjEcOGC" key="v3image">
+    V3 Image BSON
   </Menu.Item>
 ]);
 

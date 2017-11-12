@@ -1,5 +1,5 @@
 import * as Cookies from "js-cookie";
-import { decryptFile, Paste, PasteParser } from "pasty-core";
+import { BlobParserI, decryptFile, Paste, PasteParser } from "pasty-core";
 import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
@@ -22,15 +22,16 @@ function createXHRChannel(action) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", action.url, true);
 
+
     xhr.onload = (e) => {
-      emitter((e as any).target);
+      emitter(e.target);
       emitter(END);
     };
 
     // xhr.onprogress = (e) => {
+    // };
 
-  // };
-
+    xhr.responseType = "arraybuffer";
     xhr.send();
 
     return () => {
@@ -41,11 +42,12 @@ function createXHRChannel(action) {
 
 function* decryptPasteSaga(action) {
   try {
-    const dataBlob: string = decryptFile(action.data, action.key);
-    const paste: Paste = PasteParser.parse(action.id, action.key, dataBlob);
+    const dataBlob: BlobParserI = decryptFile(action.data, action.id, action.key);
 
+    const paste: Paste = dataBlob.decrypt();
     yield put(setDecryptedPaste(action.id, paste));
   } catch (e) {
+    console.log(e);
     yield put(setGeneralError(
       `Error when decrypting the paste "${action.id}"`,
       `${e.message}. The provided key may be incorrect.`,

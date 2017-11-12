@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.2
+* Miscellaneous minor version updates, fix for Typescript compliation.
+
 ## 1.2.1
 * Consume pasty-core 0.2.2, upgraded packages.
 

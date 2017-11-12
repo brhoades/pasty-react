@@ -12,6 +12,7 @@
       "scripthost"
     ],
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "actions": ["./src/actions"],

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+* Consume pasty-core 0.2.2, upgraded packages.
+
 ## 1.2.0
 * Consume pasty-core 0.2.1
   * Now stores in BSON, files are no longer bloated on upload.

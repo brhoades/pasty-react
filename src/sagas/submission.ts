@@ -15,17 +15,30 @@ import {
 } from "../actions/types";
 import { IReducer } from "../reducers/index";
 
+const CryptoWorker = require("worker-loader!../scripts/crypto");
+
 
 function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
 
     // todo web worker
+    const worker = new CryptoWorker();
+    worker.addEventListener('message', (data) => {
+      console.log("MESSAGE");
+      emitter(data.data.payload);
+    });
 
-    // todo keysize
-    setTimeout(() => {
-      emitter(encryptFile(paste, keysize));
-      emitter(END);
-    }, 0);
+    worker.onmessage = (err) => { console.dir(err)};
+
+    worker.postMessage({
+      payload: {
+        data: paste.serialize().toString('binary'),
+        name: paste.name,
+        keysize,
+        encrypt: true,
+      },
+    });
+    console.log("POSTED");
 
     return () => {
       // no way to abort

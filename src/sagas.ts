@@ -30,9 +30,6 @@ function createXHRChannel(action) {
       emitter(END);
     };
 
-    // xhr.onprogress = (e) => {
-    // };
-
     xhr.responseType = "arraybuffer";
     xhr.send();
 

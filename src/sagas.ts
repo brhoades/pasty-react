@@ -16,6 +16,8 @@ import {
 } from "./actions/types";
 import { encryptPaste, uploadPaste } from "./sagas/submission";
 
+const CryptoWorker = require("worker-loader!./scripts/crypto");
+
 
 function createXHRChannel(action) {
   return eventChannel((emitter) => {
@@ -40,12 +42,52 @@ function createXHRChannel(action) {
   });
 }
 
+function decryptPasteAsync(data, id, key) {
+  return eventChannel((emitter) => {
+    const worker = new CryptoWorker();
+    worker.addEventListener("message", (data) => {
+      if (data.data.error) {
+        emitter({
+          error: true,
+          payload: data.data.error,
+        });
+      } else {
+        emitter({
+          payload: data.data.payload,
+        });
+      }
+    });
+
+    worker.postMessage({
+      payload: {
+        data,
+        encrypt: false,
+        id,
+        key,
+      },
+    });
+
+    return () => {
+      worker.terminate();
+    };
+  });
+}
+
 function* decryptPasteSaga(action) {
   try {
-    const dataBlob: BlobParserI = decryptFile(action.data, action.id, action.key);
+    const emitter = yield call(decryptPasteAsync, action.data, action.id, action.key);
 
-    const paste: Paste = dataBlob.decrypt();
-    yield put(setDecryptedPaste(action.id, paste));
+    while (true) {
+      const event = yield take(emitter);
+      const { payload } = event;
+
+      if (event.error) {
+        throw Error(event.payload);
+      }
+      const paste: Paste = Paste.fromJSON(payload);
+
+      yield put(setDecryptedPaste(action.id, paste));
+    }
   } catch (e) {
     console.log(e);
     yield put(setGeneralError(

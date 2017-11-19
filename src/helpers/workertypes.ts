@@ -1,13 +1,13 @@
-import { Buffer } from 'buffer';
+import { Buffer } from "buffer";
 import { Paste } from "pasty-core";
 
 
 interface IWorkerPostMessage {
-  payload: Buffer | Paste;
+  payload: string;
 }
 
 interface IEncryptPayload {
-  data: Buffer;
+  data: string;
   keysize: number;
   name: string;
 

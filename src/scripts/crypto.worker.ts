@@ -8,27 +8,35 @@ import {
 
 import { IDecryptPayload, IEncryptPayload, isEncrypt } from '../helpers/workertypes';
 
+
 const ctx: Worker = self as any;
 
 ctx.addEventListener("message", (e: { data: { payload: IDecryptPayload | IEncryptPayload } }) => {
-  if (isEncrypt(e.data.payload)) {
-    const data: IEncryptPayload = e.data.payload;
-    // restore from serialized form
-    const paste: Paste = PasteParser.parse(
-      data.name, "", Buffer.from(data.data, 'binary')
-    );
+  try {
+    if (isEncrypt(e.data.payload)) {
+      const data: IEncryptPayload = e.data.payload;
+      // restore from serialized form
+      const paste: Paste = Paste.fromJSON(data.data);
 
-    ctx.postMessage({
-      payload: encryptFile(paste, data.keysize),
-    });
-  } else {
-    console.log('DECRYPT');
-    const data: IDecryptPayload = e.data.payload;
-    const dataBlob: BlobParserI = decryptFile(data.data, data.id, data.key);
+      ctx.postMessage({
+        payload: encryptFile(paste, data.keysize),
+      });
 
-    console.log('DONE');
+      close();
+    } else {
+      const data: IDecryptPayload = e.data.payload;
+      const dataBlob: BlobParserI = decryptFile(data.data, data.id, data.key);
+      const paste: Paste = dataBlob.decrypt();
+
+      ctx.postMessage({
+        payload: paste.json(),
+      });
+
+      close();
+    }
+  } catch (e) {
     ctx.postMessage({
-      payload: dataBlob.decrypt(),
+      error: e.message,
     });
   }
 });

@@ -10,6 +10,7 @@ import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
 
+import PasteLoading from "../components/pasteloading";
 import PasteFileForms from "../containers/pastefileforms";
 import AddFileButton from "./buttons/addfilebutton";
 import AddTextButton from "./buttons/addtextbutton";
@@ -27,18 +28,21 @@ export interface ICreatePasteFormProps {
 
 export interface ICreatePasteFormStateProps {
   files: IPartialPasteFile[];
-  submitting: boolean;
+  state: STATE;
 }
 
 type PropsType = ICreatePasteFormProps & ICreatePasteFormStateProps & ICreatePasteFormDispatchProps;
 
 class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
+    if (this.props.state !== STATE.WAITING) {
+      return (<PasteLoading />);
+    }
+
     return (
       <div>
         <Form
           onSubmit={this.props.onSubmit}
-          loading={this.props.submitting}
         >
 
           <div
@@ -91,7 +95,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
 const mapStateToProps = (state: IReducer, ownProps: ICreatePasteFormProps): ICreatePasteFormStateProps => {
   return {
     files: state.form.createpaste.values.files,
-    submitting: state.paste.state !== STATE.WAITING,
+    state: state.paste.state,
   };
 };
 

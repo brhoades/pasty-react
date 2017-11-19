@@ -20,28 +20,31 @@ const CryptoWorker = require("worker-loader!../scripts/crypto");
 
 function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
-
-    // todo web worker
     const worker = new CryptoWorker();
-    worker.addEventListener('message', (data) => {
-      console.log("MESSAGE");
-      emitter(data.data.payload);
+    worker.addEventListener("message", (data) => {
+      if (data.data.error) {
+        emitter({
+          error: true,
+          payload: data.data.error,
+        });
+      } else {
+        emitter({
+          payload: data.data.payload
+        });
+      }
     });
-
-    worker.onmessage = (err) => { console.dir(err)};
 
     worker.postMessage({
       payload: {
-        data: paste.serialize().toString('binary'),
-        name: paste.name,
-        keysize,
+        data: paste.json(),
         encrypt: true,
+        keysize,
+        name: paste.name,
       },
     });
-    console.log("POSTED");
 
     return () => {
-      // no way to abort
+      worker.terminate();
     };
   });
 }
@@ -78,7 +81,12 @@ export function* encryptPaste(action) {
 
   try {
     while (true) {
-      const payload = yield take(emitter);
+      const event = yield take(emitter);
+      const { payload } = event;
+
+      if (event.error) {
+        throw Error(event.payload);
+      }
 
       yield put(postPasteToUrl(
         Configuration.paste,

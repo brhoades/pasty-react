@@ -16,6 +16,7 @@ import {
   SET_DECRYPTED_PASTE,
   SET_GENERAL_ERROR,
   SET_HIGHLIGHTED_LINES,
+  SET_PASTE_PROGRESS,
   SET_SETTINGS,
   SET_THEME,
 } from "./types";
@@ -44,6 +45,11 @@ export const setDecryptedPaste = (id: string, paste: Paste) => ({
   id,
   paste,
   type: SET_DECRYPTED_PASTE,
+});
+
+export const setPasteProgress = (progress: number) => ({
+  progress,
+  type: SET_PASTE_PROGRESS,
 });
 
 //

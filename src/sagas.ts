@@ -24,7 +24,6 @@ function createXHRChannel(action) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", action.url, true);
 
-
     xhr.onload = (e) => {
       emitter(e.target);
       emitter(END);
@@ -39,7 +38,7 @@ function createXHRChannel(action) {
   });
 }
 
-function decryptPasteAsync(data, id, key) {
+function decryptPasteAsync(action, id, key) {
   return eventChannel((emitter) => {
     const worker = new CryptoWorker();
     worker.addEventListener("message", (data) => {
@@ -57,7 +56,7 @@ function decryptPasteAsync(data, id, key) {
 
     worker.postMessage({
       payload: {
-        data,
+        data: action,
         encrypt: false,
         id,
         key,

@@ -9,6 +9,7 @@ import {
   REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
   SET_GENERAL_ERROR,
+  SET_PASTE_PROGRESS,
 } from "../actions/types";
 import Maybe from "../monads/maybe";
 
@@ -35,6 +36,7 @@ export interface IPasteReducer {
   id: string;
   key: string;
   paste: Maybe<Paste>;
+  progress: number;
   stateMessage: string;
 }
 
@@ -42,6 +44,7 @@ const initial: IPasteReducer = {
   id: "",
   key: "",
   paste: new Maybe<Paste>(null),
+  progress: 0,
   state: STATE.WAITING,
   stateMessage: STATE_MESSAGES[STATE.WAITING],
 };
@@ -54,6 +57,7 @@ const paste = (state: IPasteReducer = initial, action) => {
         id: action.id,
         key: action.key,
         paste: new Maybe<Paste>(null),
+        progress: 0,
         state: STATE.DOWNLOADING,
         stateMessage: STATE_MESSAGES[STATE.DOWNLOADING],
       };
@@ -107,6 +111,12 @@ const paste = (state: IPasteReducer = initial, action) => {
         paste: new Maybe<Paste>(action.paste),
         state: STATE.VIEWING,
         stateMessage: STATE_MESSAGES[STATE.VIEWING],
+      };
+
+    case SET_PASTE_PROGRESS:
+      return {
+        ...state,
+        progress: action.progress,
       };
 
     default:

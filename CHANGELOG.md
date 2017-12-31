@@ -1,5 +1,13 @@
 # Changelog
 
+## Future
+* Buttons remove highlighting after clicking.
+* Generator cleanup.
+
+## Next
+* LICENSE
+* Progress bars for uploading / downloading pastes.
+
 ## 1.3.0
 * Encrypt and decrypt now use web workers. No longer block the UI thread.
 * Encrypt now shows status messages like decrypting.

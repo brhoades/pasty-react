@@ -8,6 +8,7 @@ import {
   postPasteToUrl,
   redirectToSubmittedPaste,
   setGeneralError,
+  setPasteProgress,
 } from "../actions/creators";
 import {
   ENCRYPT_THEN_SUBMIT_PASTE,
@@ -21,6 +22,7 @@ const CryptoWorker = require("worker-loader!../scripts/crypto");
 function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
     const worker = new CryptoWorker();
+    // TODO: generalize generator statuses and formatting
     worker.addEventListener("message", (data) => {
       if (data.data.error) {
         emitter({
@@ -29,7 +31,7 @@ function encryptPasteAsync(paste, keysize) {
         });
       } else {
         emitter({
-          payload: data.data.payload
+          payload: data.data.payload,
         });
       }
     });
@@ -56,14 +58,39 @@ function createUploadPasteXHR(action) {
     xhr.setRequestHeader("Content-type", "application/octet-stream");
 
     xhr.onload = (e) => {
-      if ((e as any).target.status !== 200) {
-        console.dir(e);
-        console.error("ERROR UPLOADING");
-        emitter(END);
+      if ((e.target as any).status !== 200) {
+        let message = "";
+        try {
+          // FIXME: What? Lambda stuff?
+          const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace('\\n', ''));
+          console.dir(data);
+          message = data.error;
+        } catch (e) {
+          console.dir(e);
+          message = `HTTP${(e.target as any).status}: ${(e.target as any).statusText}`;
+        }
+
+        emitter({
+          data: message,
+          type: "error",
+        });
       } else {
-        emitter(e.target);
-        emitter(END);
+        emitter({
+          data: e.target,
+          type: "done",
+        });
       }
+      emitter(END);
+    };
+
+    xhr.upload.onprogress = (event) => {
+      emitter({
+        data: {
+          progress: event.loaded,
+          total: event.total,
+        },
+        type: "status",
+      });
     };
 
     // send an arraybuffer / blob
@@ -110,19 +137,33 @@ export function* uploadPaste(action) {
 
   try {
     while (true) {
-      const response = yield take(xhr);
-      const data = JSON.parse(response.response);
+      const event = yield take(xhr);
+      console.dir(event);
 
-      if (data.error) {
-        yield put(setGeneralError(
-          `Error when uploading a new paste.`,
-          data.error,
-        ));
+      if (event.type === "done") {
+        // TODO: proper statuses
+        const data = JSON.parse(event.data.response);
 
-        return;
+        if (data.error) {
+          yield put(setGeneralError(
+            `Error when uploading a new paste.`,
+            data.error,
+          ));
+
+          return;
+        }
+
+        yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
+      } else if (event.type === "error") {
+          yield put(setGeneralError(
+            `Error when uploading a new paste.`,
+            event.data,
+          ));
+      } else if (event.type === "status") {
+        console.log(`STATUS EVENT POST ${event.data.progress} / ${event.data.total}`);
+        console.log(event.data.progress / event.data.total);
+        yield put(setPasteProgress(event.data.progress / event.data.total));
       }
-
-      yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
     }
   } catch (e) {
     yield put(setGeneralError(

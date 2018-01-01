@@ -4,7 +4,13 @@ import { END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
-import { decryptPaste, setDecryptedPaste, setGeneralError, setSettings } from "./actions/creators";
+import {
+  decryptPaste,
+  setDecryptedPaste,
+  setGeneralError,
+  setPasteProgress,
+  setSettings,
+} from "./actions/creators";
 import {
   DECRYPT_PASTE,
   ENCRYPT_THEN_SUBMIT_PASTE,
@@ -25,8 +31,16 @@ function createXHRChannel(action) {
     xhr.open("GET", action.url, true);
 
     xhr.onload = (e) => {
-      emitter(e.target);
+      emitter({
+        response: e.target,
+      });
       emitter(END);
+    };
+
+    xhr.onprogress = (e) => {
+      emitter({
+        progress: e.loaded / e.total * 100,
+      });
     };
 
     xhr.responseType = "arraybuffer";
@@ -75,20 +89,25 @@ function* decryptPasteSaga(action) {
 
     while (true) {
       const event = yield take(emitter);
-      const { payload } = event;
-
       if (event.error) {
         throw Error(event.payload);
       }
-      const paste: Paste = Paste.fromJSON(payload);
 
-      yield put(setDecryptedPaste(action.id, paste));
+      const { payload } = event;
+
+      if (payload.progress) {
+        yield put(setPasteProgress(payload.progress));
+      } else {
+        const paste: Paste = Paste.fromJSON(payload);
+
+        yield put(setDecryptedPaste(action.id, paste));
+      }
     }
   } catch (e) {
     console.log(e);
     yield put(setGeneralError(
       `Error when decrypting the paste "${action.id}"`,
-      `${e.message}. The provided key may be incorrect.`,
+      `The provided key may be incorrect ("${e.message}")`,
     ));
   }
 }
@@ -98,20 +117,23 @@ function* download(action) {
 
   try {
     while (true) {
-      const response = yield take(xhr);
-      const code = response.status;
-
-      if (code >= 200 && code <= 400) {
-        yield put(decryptPaste(action.id, action.key, response.response));
+      const event = yield take(xhr);
+      if (event.progress) {
+        yield put(setPasteProgress(event.progress));
       } else {
-        yield put(setGeneralError(
-          `Error when downloading the paste "${action.id}"`,
-          `${code} ${response.statusText}`,
-        ));
+        const code = event.response.status;
+
+        if (code >= 200 && code <= 400) {
+          yield put(decryptPaste(action.id, action.key, event.response.response));
+        } else {
+          yield put(setGeneralError(
+            `Error when downloading the paste "${action.id}"`,
+            `${code} ${event.response.statusText}`,
+          ));
+        }
       }
     }
   } finally {
-    // nada
   }
 }
 

@@ -38,16 +38,30 @@ ctx.addEventListener("message", (e: { data: { payload: IDecryptPayload | IEncryp
       });
 
       cryptor.run();
+
+    //
+    // Decrypt
+    //
     } else {
       const data: IDecryptPayload = e.data.payload;
       const dataBlob: BlobParserI = decryptFile(data.data, data.id, data.key);
-      const paste: Paste = dataBlob.decrypt();
 
-      ctx.postMessage({
-        payload: paste.json(),
-      });
+      dataBlob.decryptAsync(
+        (progress: number) => {
+          ctx.postMessage({
+            payload: {
+              progress,
+            },
+          });
+        },
+        (paste: Paste) => {
+          ctx.postMessage({
+            payload: paste.json(),
+          });
 
-      close();
+          close();
+        },
+      );
     }
   } catch (e) {
     ctx.postMessage({

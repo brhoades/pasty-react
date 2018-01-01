@@ -133,7 +133,11 @@ function* download(action) {
         }
       }
     }
-  } finally {
+  } catch (e) {
+    yield put(setGeneralError(
+      `Error when downloading the paste "${action.id}"`,
+      e.message,
+    ));
   }
 }
 

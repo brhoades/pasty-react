@@ -65,7 +65,6 @@ function createUploadPasteXHR(action) {
           const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace('\\n', ''));
           message = data.error;
         } catch (e) {
-          console.dir(e);
           message = `HTTP${(e.target as any).status}: ${(e.target as any).statusText}`;
         }
 
@@ -142,7 +141,6 @@ export function* uploadPaste(action) {
   try {
     while (true) {
       const event = yield take(xhr);
-      console.dir(event);
 
       if (event.type === "done") {
         // TODO: proper statuses

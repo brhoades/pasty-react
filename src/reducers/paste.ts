@@ -94,6 +94,7 @@ const paste = (state: IPasteReducer = initial, action) => {
     case DECRYPT_PASTE:
       return {
         ...state,
+        progress: 0,
         state: STATE.DECRYPTING,
         stateMessage: STATE_MESSAGES[STATE.DECRYPTING],
       };

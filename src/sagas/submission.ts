@@ -90,6 +90,20 @@ function createUploadPasteXHR(action) {
       });
     };
 
+    xhr.onerror = (e) => {
+      if ((e as any).loaded === 0) {
+        emitter({
+          data: "No data transferred from server.",
+          type: "error",
+        });
+      } else {
+        emitter({
+          data: "Unknown error",
+          type: "error",
+        });
+      }
+    };
+
     // send an arraybuffer / blob
     xhr.send(action.data);
 

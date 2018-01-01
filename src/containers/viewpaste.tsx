@@ -15,6 +15,7 @@ import { STATE } from "../reducers/paste";
 
 
 export interface IViewPasteStateProps {
+  error: boolean;
   state: STATE;
   paste: Maybe<Paste>;
 }
@@ -62,6 +63,10 @@ class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   public render() {
+    if (this.props.error) {
+      return (<div />);
+    }
+
     if (this.props.state !== STATE.VIEWING) {
       return (
         <PasteLoading
@@ -136,6 +141,7 @@ class ViewPaste extends React.Component<PropsType, undefined> {
 }
 
 const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
+  error: state.messages.general.header !== "",
   paste: state.paste.paste,
   state: state.paste.state,
 });

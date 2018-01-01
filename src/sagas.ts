@@ -43,6 +43,18 @@ function createXHRChannel(action) {
       });
     };
 
+    xhr.onerror = (e) => {
+      if ((e as any).loaded === 0) {
+        emitter({
+          error: "No data transferred from server.",
+        });
+      } else {
+        emitter({
+          error: "Unknown error",
+        });
+      }
+    };
+
     xhr.responseType = "arraybuffer";
     xhr.send();
 
@@ -118,8 +130,13 @@ function* download(action) {
   try {
     while (true) {
       const event = yield take(xhr);
+
       if (event.progress) {
         yield put(setPasteProgress(event.progress));
+      } else if (event.error) {
+        yield put(setGeneralError(
+          "An error occurred when contacting the server.", event.error,
+        ));
       } else {
         const code = event.response.status;
 

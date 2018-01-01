@@ -35,7 +35,7 @@ const PasteSubmitting = (props: PropsType) => {
     <Dimmer active={!props.error} page={true}>
       <Progress
         percent={encryptProgress}
-        label={"Encrypting"}
+        label={"Encrypt"}
         inverted={true}
         indicating={true}
         error={props.error}
@@ -45,7 +45,7 @@ const PasteSubmitting = (props: PropsType) => {
       />
       <Progress
         percent={uploadProgress}
-        label={"Uploading"}
+        label={"Upload"}
         inverted={true}
         indicating={true}
         error={props.error}

@@ -3,6 +3,7 @@ import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 
+import config from "../../config";
 import DisplayFile from "../components/displayfile";
 import CopyShortLinkIcon from "../components/icons/copyshortlinkicon";
 import PasteLoading from "../components/pasteloading";
@@ -134,7 +135,7 @@ const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IViewPaste
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({
   clearPasteAction: (id: string) => dispatch(clearPaste(id)),
-  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `https://pasty.brod.es/get/${id}`)),
+  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `${config.get}${id}`)),
   setHighlightedLines: (index: number, lines: number[]) => dispatch(setHighlightedLines(index, lines)),
 });
 

@@ -7,6 +7,7 @@
 ## Next
 * LICENSE
 * Progress bars for uploading / downloading pastes.
+* Config is now read for get requests.
 
 ## 1.3.0
 * Encrypt and decrypt now use web workers. No longer block the UI thread.

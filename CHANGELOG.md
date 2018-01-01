@@ -5,7 +5,7 @@
 * Generator cleanup.
 
 ## Next
-* LICENSE
+* AGPLv3'd
 * Progress bars for uploading / downloading pastes.
 * Config is now read for get requests.
 

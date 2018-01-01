@@ -39,7 +39,7 @@ function createXHRChannel(action) {
 
     xhr.onprogress = (e) => {
       emitter({
-        progress: e.loaded / e.total * 100,
+        progress: e.loaded / e.total,
       });
     };
 

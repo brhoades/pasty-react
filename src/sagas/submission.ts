@@ -61,8 +61,7 @@ function createUploadPasteXHR(action) {
       if ((e.target as any).status !== 200) {
         let message = "";
         try {
-          // FIXME: What? Lambda stuff?
-          const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace('\\n', ''));
+          const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace("\\n", ""));
           message = data.error;
         } catch (e) {
           message = `HTTP${(e.target as any).status}: ${(e.target as any).statusText}`;
@@ -129,12 +128,9 @@ export function* encryptPaste(action) {
       `Error when encrypting a paste for submission.`,
       e.message,
     ));
-  } finally {
-    // nada
   }
 }
 
-// Todo generalize and combine with download...
 export function* uploadPaste(action) {
   const xhr = yield call(createUploadPasteXHR, action);
 
@@ -143,7 +139,7 @@ export function* uploadPaste(action) {
       const event = yield take(xhr);
 
       if (event.type === "done") {
-        // TODO: proper statuses
+        // TODO: common communication method with download; proper statuses.
         const data = JSON.parse(event.data.response);
 
         if (data.error) {
@@ -170,7 +166,5 @@ export function* uploadPaste(action) {
       `Error when uploading a new paste.`,
       e.message,
     ));
-  } finally {
-    // nada
   }
 }

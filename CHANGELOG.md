@@ -1,8 +1,7 @@
 # Changelog
 
 ## Future
-* Buttons remove highlighting after clicking.
-* Generator cleanup.
+* Download progress now shows.
 
 ## 1.3.1
 * AGPLv3'd

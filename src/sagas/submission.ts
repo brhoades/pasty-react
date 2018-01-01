@@ -63,7 +63,6 @@ function createUploadPasteXHR(action) {
         try {
           // FIXME: What? Lambda stuff?
           const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace('\\n', ''));
-          console.dir(data);
           message = data.error;
         } catch (e) {
           console.dir(e);
@@ -115,12 +114,16 @@ export function* encryptPaste(action) {
         throw Error(event.payload);
       }
 
-      yield put(postPasteToUrl(
-        Configuration.paste,
-        action.paste,
-        payload.data,
-        payload.key,
-      ));
+      if (payload.progress) {
+        yield put(setPasteProgress(payload.progress));
+      } else {
+        yield put(postPasteToUrl(
+            Configuration.paste,
+            action.paste,
+            payload.data,
+            payload.key,
+        ));
+      }
     }
   } catch (e) {
     yield put(setGeneralError(
@@ -132,6 +135,7 @@ export function* encryptPaste(action) {
   }
 }
 
+// Todo generalize and combine with download...
 export function* uploadPaste(action) {
   const xhr = yield call(createUploadPasteXHR, action);
 
@@ -160,8 +164,6 @@ export function* uploadPaste(action) {
             event.data,
           ));
       } else if (event.type === "status") {
-        console.log(`STATUS EVENT POST ${event.data.progress} / ${event.data.total}`);
-        console.log(event.data.progress / event.data.total);
         yield put(setPasteProgress(event.data.progress / event.data.total));
       }
     }

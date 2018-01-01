@@ -7,7 +7,7 @@ import Progress from "semantic-ui-react/dist/es/modules/Progress";
 
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
-import { STATE } from "../reducers/paste";
+import { STATE, STATE_MESSAGES } from "../reducers/paste";
 
 
 export interface IPasteSubmittingStateProps {
@@ -22,28 +22,46 @@ export interface IPasteSubmittingProps {
 
 type PropsType = IPasteSubmittingStateProps & IPasteSubmittingProps;
 
-const PasteSubmitting = (props: PropsType) => (
-  <Dimmer active={!props.error} page={true}>
-    <Progress
-      percent={props.progress * 100}
-      label={props.message}
-      inverted={true}
-      indicating={true}
-      error={props.error}
-      color="blue"
-      style={{maxWidth: 600, marginRight: "auto", marginLeft: "auto"}}
-    />
-  </Dimmer>
-);
+const PasteSubmitting = (props: PropsType) => {
+  const style = {
+    marginLeft: "auto",
+    marginRight: "auto",
+    maxWidth: 600,
+  };
+  const encryptProgress = props.state === STATE.ENCRYPTING ? props.progress * 100 : 100;
+  const uploadProgress = props.state === STATE.UPLOADING ? props.progress * 100 : 0;
 
-const mapStateToProps = (state: IReducer, ownProps: IPasteSubmittingProps): IPasteSubmittingStateProps => {
-  console.log(state.paste.progress);
-  return ({
-    error: state.messages.general.content !== "",
-    message: state.paste.stateMessage,
-    progress: state.paste.progress,
-    state: state.paste.state,
-  });
+  return (
+    <Dimmer active={!props.error} page={true}>
+      <Progress
+        percent={encryptProgress}
+        label={"Encrypting"}
+        inverted={true}
+        indicating={true}
+        error={props.error}
+        color="blue"
+        style={style}
+        success={encryptProgress >= 100}
+      />
+      <Progress
+        percent={uploadProgress}
+        label={"Uploading"}
+        inverted={true}
+        indicating={true}
+        error={props.error}
+        color="blue"
+        style={style}
+        success={uploadProgress >= 100}
+      />
+    </Dimmer>
+  );
 };
+
+const mapStateToProps = (state: IReducer, ownProps: IPasteSubmittingProps): IPasteSubmittingStateProps => ({
+  error: state.messages.general.content !== "",
+  message: state.paste.stateMessage,
+  progress: state.paste.progress,
+  state: state.paste.state,
+});
 
 export default connect(mapStateToProps, () => ({}))(PasteSubmitting);

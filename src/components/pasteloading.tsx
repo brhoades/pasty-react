@@ -46,16 +46,20 @@ const PasteLoading = (props: PropsType) => {
         color="blue"
         style={style}
         success={topProgress >= 100}
+        progress={true}
+        precision={0}
       />
       <Progress
         percent={bottomProgress}
         label={props.bottomBarLabel}
         inverted={true}
-        indicating={true}
+        indicating={topProgress >= 100}
         error={props.error}
         color="blue"
         style={style}
         success={bottomProgress >= 100}
+        progress={true}
+        precision={0}
       />
     </Dimmer>
   );

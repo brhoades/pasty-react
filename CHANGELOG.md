@@ -4,10 +4,11 @@
 * Buttons remove highlighting after clicking.
 * Generator cleanup.
 
-## Next
+## 1.3.1
 * AGPLv3'd
 * Progress bars for uploading / downloading pastes.
 * Config is now read for get requests.
+* pasty-core 0.4
 
 ## 1.3.0
 * Encrypt and decrypt now use web workers. No longer block the UI thread.

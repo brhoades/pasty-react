@@ -15,7 +15,7 @@
     "history": "^4.6.3",
     "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
-    "pasty-core": "^0.3.0",
+    "pasty-core": "^0.4.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",

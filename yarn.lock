@@ -3855,9 +3855,9 @@ parseurl@~1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
 
-pasty-core@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/pasty-core/-/pasty-core-0.3.0.tgz#2c13d6ce30342a86d7fcb935bb8ecf52b5ec601c"
+pasty-core@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/pasty-core/-/pasty-core-0.4.0.tgz#6dcf15c709139d802f59b3072fc5256888f8140b"
   dependencies:
     bson "^1.0.4"
     buffer "^5.0.7"

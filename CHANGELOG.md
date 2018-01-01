@@ -1,7 +1,9 @@
 # Changelog
 
-## Future
+## 1.3.2
 * Download progress now shows.
+* Small files now show decrypt progress.
+* Error handling for ajax request errors added (eg bad server address).
 
 ## 1.3.1
 * AGPLv3'd

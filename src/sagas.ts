@@ -1,6 +1,6 @@
 import * as Cookies from "js-cookie";
 import { BlobParserI, decryptFile, Paste, PasteParser } from "pasty-core";
-import { END, eventChannel } from "redux-saga";
+import { END, eventChannel, delay } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
@@ -112,6 +112,8 @@ function* decryptPasteSaga(action) {
       } else {
         const paste: Paste = Paste.fromJSON(payload);
 
+        // Stall the generator so the progress bar moves
+        yield delay(100);
         yield put(setDecryptedPaste(action.id, paste));
       }
     }

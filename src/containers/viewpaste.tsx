@@ -63,7 +63,14 @@ class ViewPaste extends React.Component<PropsType, undefined> {
 
   public render() {
     if (this.props.state !== STATE.VIEWING) {
-      return (<PasteLoading />);
+      return (
+        <PasteLoading
+          topBarLabel="Download"
+          bottomBarLabel="Decrypt"
+          topBarKey={STATE.DOWNLOADING}
+          bottomBarKey={STATE.DECRYPTING}
+        />
+      );
     }
 
     return (

@@ -10,7 +10,7 @@ import { IPartialPasteFile, PasteFileTypes } from "../reducers/form";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
 
-import PasteSubmitting from "../components/pastesubmitting";
+import PasteLoading from "../components/pasteloading";
 import PasteFileForms from "../containers/pastefileforms";
 import AddFileButton from "./buttons/addfilebutton";
 import AddTextButton from "./buttons/addtextbutton";
@@ -37,7 +37,14 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
     return (
       <div>
-        {this.props.state !== STATE.WAITING && <PasteSubmitting />}
+        {this.props.state !== STATE.WAITING && (
+           <PasteLoading
+             topBarLabel="Encrypt"
+             bottomBarLabel="Upload"
+             topBarKey={STATE.ENCRYPTING}
+             bottomBarKey={STATE.UPLOADING}
+           />
+        )}
         <Form
           onSubmit={this.props.onSubmit}
         >

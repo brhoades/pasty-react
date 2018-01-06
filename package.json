@@ -6,7 +6,8 @@
     "upload": "rm -rf ./dist && yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --cache --debug",
     "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
-    "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json"
+    "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json",
+    "lint": "tslint -p . -c tslint.json"
   },
   "dependencies": {
     "buffer": "^5.0.7",

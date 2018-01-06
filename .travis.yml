@@ -1,12 +1,10 @@
 language: node_js
 node_js:
-  - 8
-env:
-  - NODE_ENV=production
+  - stable
 cache: yarn
 before_script:
   - yarn install
-  - npm install -g tslint cross-env
+  - cp config.example.ts config.ts
 script:
-  - yarn run build
+  - yarn run devbuild
   - yarn run lint

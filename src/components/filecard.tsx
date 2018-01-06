@@ -18,29 +18,18 @@ export default class FileCard extends React.Component<PropsType, {}> {
     return (
       <Segment
         attached={this.props.attached}
-        style={{
-          paddingBottom: "1em",
-          paddingTop: "1em",
-        }}
+        style={{ paddingBottom: "1em", paddingTop: "1em" }}
       >
         <div
-          style={{
-            display: "flex",
-          }}
+          style={{ display: "flex" }}
         >
           <div
-            style={{
-              display: "inline-flex",
-              flexGrow: 1,
-            }}
+            style={{ display: "inline-flex", flexGrow: 1 }}
           >
             {this.props.header}
           </div>
           <div
-            style={{
-              display: "inline-flex",
-              flexGrow: 0,
-            }}
+            style={{ display: "inline-flex", flexGrow: 0 }}
           >
             {this.props.actionbar}
           </div>

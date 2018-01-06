@@ -19,17 +19,21 @@ interface ILanguageDropdownButtonProps {
   index: number;
 }
 
-type PropsType = ILanguageDropdownButtonDispatchProps & ILanguageDropdownButtonPropsState & ILanguageDropdownButtonProps;
+type PropsType = ILanguageDropdownButtonDispatchProps
+               & ILanguageDropdownButtonPropsState
+               & ILanguageDropdownButtonProps;
 
 // Remotely connects to the active form and sets the highlight language.
 // Hacky... but looks nice.
-const LanguageDropdownButton = (props: PropsType) => (
-  <Dropdown
-    button={true}
-    search={true}
-    onChange={(ev, data) => props.change(data.value)}
-    defaultValue={props.highlight}
-    options={[
+class LanguageDropdownButton extends React.PureComponent<PropsType> {
+  constructor(props) {
+    super(props);
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  public render() {
+    const options = [
       {
         key: "auto",
         text: "Auto Detect",
@@ -40,16 +44,31 @@ const LanguageDropdownButton = (props: PropsType) => (
         text: "Plain",
         value: "plain",
       },
-      ...props.languages.map((lang) => ({
+      ...this.props.languages.map((lang) => ({
         key: lang,
         text: lang,
         value: lang,
-      }))
-    ]}
-  />
-);
+      })),
+    ];
 
-const mapStateToProps = (state: IReducer, ownProps: ILanguageDropdownButtonProps): ILanguageDropdownButtonPropsState => {
+    return (
+      <Dropdown
+        button={true}
+        search={true}
+        onChange={this.onChange}
+        defaultValue={this.props.highlight}
+        options={options}
+      />
+    );
+  }
+
+  private onChange(event, data) {
+    return this.props.change(data.value);
+  }
+}
+
+const mapStateToProps = (state: IReducer, ownProps: ILanguageDropdownButtonProps)
+                      : ILanguageDropdownButtonPropsState => {
   const thisFile = state.form.createpaste.values.files[ownProps.index];
 
   return {
@@ -58,8 +77,9 @@ const mapStateToProps = (state: IReducer, ownProps: ILanguageDropdownButtonProps
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IReducer>, ownProps: ILanguageDropdownButtonProps): ILanguageDropdownButtonDispatchProps => ({
-  change: (lang) => dispatch(change('createpaste', `files[${ownProps.index}].meta.highlight`, lang)),
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>, ownProps: ILanguageDropdownButtonProps)
+                         : ILanguageDropdownButtonDispatchProps => ({
+  change: (lang) => dispatch(change("createpaste", `files[${ownProps.index}].meta.highlight`, lang)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LanguageDropdownButton);

@@ -9,10 +9,7 @@ export interface IFileActionsProps {
 }
 
 const FileActionsContainer = (props: IFileActionsProps) => (
-  <div style={{
-    float: "right",
-  }}
-  >
+  <div style={{ float: "right" }}>
     <Button.Group>
       <DownloadFileButton index={props.index} />
     </Button.Group>

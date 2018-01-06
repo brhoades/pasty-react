@@ -1,14 +1,12 @@
 import * as React from "react";
-import { Field, reduxForm, WrappedFieldProps } from "redux-form";
 import { connect, Dispatch } from "react-redux";
+import { Field, reduxForm, WrappedFieldProps } from "redux-form";
 
-
-export interface IThemeSettings {
-}
 
 const ThemePreview = () => {
   const code = hljs.highlight(
     "python",
+    // tslint:disable-next-line:max-line-length
     "def helloworld(words):\n    return \" \".join(words)\n\nif __name__ == \"__main__\":\n    print(helloworld([\"Hello\", \"World\"]))",
   );
 

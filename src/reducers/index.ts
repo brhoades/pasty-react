@@ -3,8 +3,8 @@ import { combineReducers, Reducer } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
 
 import { IPasteReduxFormReducer } from "./form";
-import messages, { IMessagesReducer } from "./messages";
 import highlight, { IHighlightReducer } from "./highlight";
+import messages, { IMessagesReducer } from "./messages";
 import paste, { IPasteReducer } from "./paste";
 import settings, { ISettings } from "./settings";
 

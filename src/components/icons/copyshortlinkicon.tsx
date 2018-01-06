@@ -25,6 +25,10 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
       return null;
     }
 
+    if (!configuration.shortURL) {
+      return null;
+    }
+
     return (
       <div>
         <Popup

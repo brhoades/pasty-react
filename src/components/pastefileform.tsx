@@ -1,9 +1,9 @@
 import * as React from "react";
 import { WrappedFieldProps } from "redux-form";
 
-import { IPartialPasteFile, PasteFileTypes, IPartialPasteFileForm } from "../reducers/form";
-import AddTextFileField from "./addtextfilefield";
+import { IPartialPasteFile, IPartialPasteFileForm, PasteFileTypes } from "../reducers/form";
 import AddFileField from "./addfilefield";
+import AddTextFileField from "./addtextfilefield";
 
 
 interface IPasteFileFormProps {

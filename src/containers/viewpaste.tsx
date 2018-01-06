@@ -81,17 +81,12 @@ class ViewPaste extends React.Component<PropsType, undefined> {
     return (
       <div>
         <h2
-          style={{
-            display: "inline-block",
-            paddingBottom: "1em",
-          }}
+          style={{ display: "inline-block", paddingBottom: "1em" }}
         >
           {this.props.paste.getData().name}
         </h2>
         <div
-          style={{
-            float: "right",
-          }}
+          style={{ float: "right" }}
         >
           <CopyShortLinkIcon />
         </div>

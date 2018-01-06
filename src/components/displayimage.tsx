@@ -12,9 +12,7 @@ const DisplayImage = (props: IDisplayImageProps) => {
     <Image
       src={`data:${props.mime};base64,${props.data}`}
       centered={true}
-      style={{
-        maxWidth: "100%",
-      }}
+      style={{ maxWidth: "100%" }}
     />
   );
 };

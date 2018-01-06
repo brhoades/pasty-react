@@ -13,21 +13,23 @@ class DownloadFileButton extends React.Component<IFileByIndexPropsType> {
       return null;
     }
 
+    const trigger = (
+      <a
+        href={this.props.file.getData().base64DownloadString()}
+        download={this.props.file.getData().name}
+      >
+        <ButtonIconOrText
+          text="Download File"
+          icon="download"
+        />
+      </a>
+    );
+
     return (
       <div>
         <Popup
           basic={true}
-          trigger={
-          <a
-            href={this.props.file.getData().base64DownloadString()}
-            download={this.props.file.getData().name}
-          >
-            <ButtonIconOrText
-              text="Download File"
-              icon="download"
-            />
-          </a>
-          }
+          trigger={trigger}
           content="Download this file"
         />
       </div>

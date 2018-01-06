@@ -6,15 +6,12 @@ import Label from "semantic-ui-react/dist/es/elements/Label";
 import KeySizeInput from "./keysizeinput";
 
 
-export interface ISecuritySettings {
-}
-
-const SecuritySettings = (props: ISecuritySettings) => (
+const SecuritySettings = (props: {}) => (
   <div>
     <label>Key Size</label>
     <Field
       name="security.keysize"
-      component={KeySizeInput}
+      component={KeySizeInput as any} // redux-form typing issues
     />
   </div>
 );

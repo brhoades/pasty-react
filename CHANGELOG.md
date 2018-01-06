@@ -1,5 +1,8 @@
 # Changelog
 
+## NEXT
+* Lint removal / refactoring to enable it.
+
 ## 1.3.3
 * Renamed to pasty-react
 

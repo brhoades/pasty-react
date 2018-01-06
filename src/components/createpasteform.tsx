@@ -17,9 +17,6 @@ import AddTextButton from "./buttons/addtextbutton";
 import PasteButton from "./buttons/pastebutton";
 
 
-export interface ICreatePasteFormDispatchProps {
-}
-
 export interface ICreatePasteFormProps {
   onSubmit: (ev: any) => void;
   valid: boolean;
@@ -31,28 +28,28 @@ export interface ICreatePasteFormStateProps {
   state: STATE;
 }
 
-type PropsType = ICreatePasteFormProps & ICreatePasteFormStateProps & ICreatePasteFormDispatchProps;
+type PropsType = ICreatePasteFormProps & ICreatePasteFormStateProps;
 
 class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
+    const loadingComponent = this.props.state !== STATE.WAITING && (
+      <PasteLoading
+        topBarLabel="Encrypt"
+        bottomBarLabel="Upload"
+        topBarKey={STATE.ENCRYPTING}
+        bottomBarKey={STATE.UPLOADING}
+      />
+    );
+
     return (
       <div>
-        {this.props.state !== STATE.WAITING && (
-           <PasteLoading
-             topBarLabel="Encrypt"
-             bottomBarLabel="Upload"
-             topBarKey={STATE.ENCRYPTING}
-             bottomBarKey={STATE.UPLOADING}
-           />
-        )}
+        {loadingComponent}
         <Form
           onSubmit={this.props.onSubmit}
         >
 
           <div
-            style={{
-              marginBottom: '2em',
-            }}
+            style={{ marginBottom: "2em" }}
           >
             {this.props.files.length === 0 ? this.renderPlaceholder() : this.renderForm()}
           </div>
@@ -86,9 +83,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
   private renderPlaceholder() {
     return (
       <h2
-        style={{
-          textAlign: "center",
-        }}
+        style={{ textAlign: "center" }}
       >
         Drop files here or click a button to begin.
       </h2>
@@ -104,7 +99,7 @@ const mapStateToProps = (state: IReducer, ownProps: ICreatePasteFormProps): ICre
 };
 
 
-const mapDispatchToProps = (dispatch: Dispatch<IReducer>): ICreatePasteFormDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): {} => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePasteForm);

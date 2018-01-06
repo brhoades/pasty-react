@@ -16,7 +16,7 @@ const Router = ({ history }) => (
         path="/about"
         component={AboutPasty}
       />
-      <Route exact path="/" component={CreatePaste}/>
+      <Route exact={true} path="/" component={CreatePaste}/>
       <Route
         path="/view/:id/:key/:extra?"
         component={ViewPaste}

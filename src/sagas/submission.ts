@@ -23,7 +23,7 @@ function encryptPasteAsync(paste, keysize) {
   return eventChannel((emitter) => {
     const worker = new CryptoWorker();
     // TODO: generalize generator statuses and formatting
-    worker.addEventListener("message", (data) => {
+    worker.addEventListener("message", data => {
       if (data.data.error) {
         emitter({
           error: true,
@@ -52,7 +52,7 @@ function encryptPasteAsync(paste, keysize) {
 }
 
 function createUploadPasteXHR(action) {
-  return eventChannel((emitter) => {
+  return eventChannel(emitter => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", action.url, true);
     xhr.setRequestHeader("Content-type", "application/octet-stream");

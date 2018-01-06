@@ -15,10 +15,7 @@ type PropsType = InjectedFormProps<IPasteFormData>;
 
 const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
   <div>
-    {
-      props.error &&
-      <Message error={true} content="An unknown error has occurred when submitting your paste." />
-    }
+    {props.error && <Message error={true} content="An unknown error has occurred when submitting your paste." />}
     <CreatePasteForm
       valid={props.valid}
       dirty={props.dirty}
@@ -27,7 +24,7 @@ const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
   </div>
 );
 
-// Todo clean this mess up. I think I need a few more components to separate this from
+// TODO clean this mess up. I think I need a few more components to separate this from
 // the store cleanly.
 const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: PropsType) => {
   const paste: Paste = Paste.empty();

@@ -130,7 +130,7 @@ export const redirectToSubmittedPaste = (id: string, key: string, paste: Paste) 
 // Errors
 //
 export const setGeneralError = (header: string, error: string) => ({
-  header,
   error,
+  header,
   type: SET_GENERAL_ERROR,
 });

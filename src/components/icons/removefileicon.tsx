@@ -18,19 +18,21 @@ interface IRemoveFileIconDispatchProps {
 
 type PropsType = IRemoveFileIconProps & IRemoveFileIconDispatchProps;
 
-class RemoveFileIcon extends React.Component<PropsType, undefined> {
+class RemoveFileIcon extends React.Component<PropsType> {
   public render() {
+    const trigger = (
+      <ButtonIconOrText
+        icon="trash"
+        text="Remove file"
+        onClick={this.props.removeFile}
+      />
+    );
+
     return (
       <div>
         <Popup
           basic={true}
-          trigger={
-            <ButtonIconOrText
-              icon="trash"
-              text="Remove file"
-              onClick={this.props.removeFile}
-            />
-          }
+          trigger={trigger}
           content="Remove this file"
         />
       </div>

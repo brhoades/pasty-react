@@ -5,6 +5,7 @@
   "scripts": {
     "upload": "rm -rf ./dist && yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --cache --debug",
+    "devbuild": "cross-env NODE_ENV=development webpack -p --progress --hide-modules",
     "build": "cross-env NODE_ENV=production webpack -p --progress --hide-modules",
     "stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json",
     "lint": "tslint -p . -c tslint.json"
@@ -60,6 +61,7 @@
     "s3-upload": "^0.1.0",
     "style-loader": "^0.16.1",
     "tslint": "^5.8.0",
+    "tslint-react": "^3.3.3",
     "typescript": "^2.2.2",
     "typescript-eslint-parser": "^5.0.1",
     "webpack": "^2.3.2",

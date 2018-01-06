@@ -6,17 +6,14 @@ import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 import LanguageDropdownInput from "./languagedropdowninput";
 
 
-export interface ILanguageSettingsProps {
-}
-
-const LanguageSettings = (props: ILanguageSettingsProps) => (
+const LanguageSettings = (props: {}) => (
   <div>
     <Header dividing={true}>
       Highlight Language Options
     </Header>
     <Field
       name="languages"
-      component={LanguageDropdownInput}
+      component={LanguageDropdownInput as any} // redux-form type madness
     />
   </div>
 );

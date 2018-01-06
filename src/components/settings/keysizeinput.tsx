@@ -4,26 +4,38 @@ import Form from "semantic-ui-react/dist/es/collections/Form";
 import Label from "semantic-ui-react/dist/es/elements/Label";
 
 
-export interface IKeySizeInputProps {
+export default class KeySizeInput extends React.PureComponent<WrappedFieldProps> {
+  constructor(props) {
+    super(props);
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  public render() {
+    const error = (
+      <Label basic={true} color="red" pointing="above">{this.props.meta.error}</Label>
+    );
+
+    const description = (
+      <div>
+        Larger is better; used for <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a>.
+      </div>
+    );
+
+    return (
+      <div>
+        <Form.Input
+          value={this.props.input.value}
+          type="number"
+          onChange={this.onChange}
+          error={this.props.meta.invalid}
+        />
+        {this.props.meta.invalid ? error : description}
+      </div>
+    );
+  }
+
+  private onChange(event, data) {
+    return this.props.input.onChange(data.value);
+  }
 }
-
-const KeySizeInput = (props: WrappedFieldProps & IKeySizeInputProps) => (
-  <div>
-    <Form.Input
-      value={props.input.value}
-      type="number"
-      onChange={(ev, data) => props.input.onChange(data.value)}
-      error={props.meta.invalid}
-    />
-    {
-      props.meta.invalid ?
-        <Label basic={true} color="red" pointing="above">{props.meta.error}</Label>
-      :
-        <div>
-          Larger is better; used for <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a>.
-        </div>
-    }
-  </div>
-);
-
-export default KeySizeInput;

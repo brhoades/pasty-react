@@ -18,10 +18,7 @@ export interface IAddTextFileFieldProps {
   fields: IPartialPasteFileForm;
 }
 
-export interface IAddTextFileFieldStateProps {
-}
-
-type PropsType = IAddTextFileFieldProps & IAddTextFileFieldStateProps;
+type PropsType = IAddTextFileFieldProps;
 
 class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
   constructor(props) {
@@ -30,6 +27,9 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
     this.state = {
       highlight: props.fields.meta.input.value.highlight,
     };
+
+    this.textAreaOnChange = this.textAreaOnChange.bind(this);
+    this.nameOnChange = this.nameOnChange.bind(this);
   }
 
   public shouldComponentUpdate(newProps: PropsType) {
@@ -40,22 +40,23 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
 
   public render() {
     const {name, data} = this.props.fields;
+    const header = (
+      <div>
+        <div style={{float: "left"}}>
+          <Form.Input
+            placeholder="hello_world.rb"
+            error={name.meta.error !== undefined}
+            onChange={this.nameOnChange}
+            defaultValue={name.input.value}
+          />
+        </div>
+      </div>
+    );
 
     return (
       <div>
         <FileCard
-          header={
-            <div>
-              <div style={{float: "left"}}>
-                <Form.Input
-                  placeholder="hello_world.rb"
-                  error={name.meta.error !== undefined}
-                  onChange={(ev, inputData) => name.input.onChange(inputData.value)}
-                  defaultValue={name.input.value}
-                />
-              </div>
-            </div>
-          }
+          header={header}
           attached={data.meta.submitFailed && data.meta.error}
           actionbar={<AddTextFileActionsContainer index={this.props.index} />}
         >
@@ -65,7 +66,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
               rows="20"
               placeholder="puts 'Hello World!'"
               label="File Contents"
-              onChange={(ev, inputData) => data.input.onChange(inputData.value)}
+              onChange={this.textAreaOnChange}
               defaultValue={data.input.value}
             />
           </div>
@@ -79,6 +80,14 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
         />
       </div>
     );
+  }
+
+  private textAreaOnChange(event, inputData) {
+    return this.props.fields.data.input.onChange(inputData.value);
+  }
+
+  private nameOnChange(event, inputData) {
+    return this.props.fields.name.input.onChange(inputData.value);
   }
 }
 

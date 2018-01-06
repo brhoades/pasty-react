@@ -1,5 +1,7 @@
 pasty-react
 ====================
+[![Build Status](https://travis-ci.org/brhoades/pasty-react.svg?branch=master)](https://travis-ci.org/brhoades/pasty-react)
+
 pasty-react is a React app that interfaces with [pasty-server](https://github.com/brhoades/pasty-server)
 to allow anonymous uploading, downloading, and sharing of pastes, collections of files.
 All pastes are encrypted client-side before transmission for storage. Submitted

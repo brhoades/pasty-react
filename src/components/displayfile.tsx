@@ -16,14 +16,11 @@ export interface IDisplayFileProps {
   index: number;
 }
 
-export interface IDisplayFileDispatchProps {
-}
-
 export interface IDisplayFileStateProps {
   file: Maybe<File>;
 }
 
-type PropsType = IDisplayFileStateProps & IDisplayFileDispatchProps & IDisplayFileProps;
+type PropsType = IDisplayFileStateProps & IDisplayFileProps;
 
 class DisplayFile extends React.Component<PropsType, undefined> {
   public render() {
@@ -32,16 +29,10 @@ class DisplayFile extends React.Component<PropsType, undefined> {
     }
 
     return (
-      <div style={{
-        marginBottom: "2em",
-      }}>
+      <div style={{ marginBottom: "2em" }}>
         <FileCard
           header={<h2>{this.props.file.getData().getName()}</h2>}
-          actionbar={
-            <FileActionsContainer
-              index={this.props.index}
-            />
-          }
+          actionbar={<FileActionsContainer index={this.props.index} />}
         >
           {this.showFile()}
         </FileCard>
@@ -86,6 +77,7 @@ const mapStateToProps = (state: IReducer, ownProps: IDisplayFileProps): IDisplay
     just: (p: Paste) => { file = new Maybe<File>(p.files[ownProps.index]); },
     nothing: () => { file = new Maybe<File>(null); },
   });
+
   if (state.paste.paste != null) {
     return {
       file,
@@ -98,7 +90,7 @@ const mapStateToProps = (state: IReducer, ownProps: IDisplayFileProps): IDisplay
 };
 
 
-const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IDisplayFileDispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<IReducer>): {} => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayFile);

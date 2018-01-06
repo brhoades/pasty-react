@@ -1,6 +1,7 @@
-let configuration = {
+const configuration = {
+  get: "http://localhost:3000/get/",
   paste: "http://localhost:3000/paste",
-  get: "http://localhost:3000/get/"
+  shortURL: "",
 };
 
 export default configuration;

@@ -10,16 +10,11 @@ import { IReducer } from "../reducers/index";
 import { ISettings } from "../reducers/settings";
 
 
-export interface ISettingsFormProps {
-}
-
 export interface ISettingsFormStateProps {
   initialValues: ISettings;
 }
 
-type PropsType = ISettingsFormProps;
-
-type InjectedPropsType = InjectedFormProps<PropsType>;
+type InjectedPropsType = InjectedFormProps<{}>;
 
 const onChange = (values: ISettings, dispatch: Dispatch<IReducer>, props: InjectedPropsType) => {
   return dispatch(setAndSaveSettings(values));

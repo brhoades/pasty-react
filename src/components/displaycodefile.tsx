@@ -42,6 +42,8 @@ class DisplayCodeFile extends React.Component<PropsType> {
 
     // Set this propety on all trs so that their click transition works.
     const rows: HTMLCollection = this.code.children[0].children[0].children;
+
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < rows.length; i++) {
       (rows[i] as HTMLElement).style.backgroundColor = bgcolor;
     }

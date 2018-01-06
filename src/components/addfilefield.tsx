@@ -19,12 +19,15 @@ export interface IAddFileFieldProps {
   fields: IPartialPasteFileForm;
 }
 
-export interface IAddFileFieldStateProps {
-}
-
-type PropsType = IAddFileFieldProps & IAddFileFieldStateProps;
+type PropsType = IAddFileFieldProps & {};
 
 class AddFileField extends React.Component<PropsType> {
+  constructor(props) {
+    super(props);
+
+    this.nameOnChange = this.nameOnChange.bind(this);
+  }
+
   public shouldComponentUpdate(newProps: PropsType) {
     const fields = this.props.fields;
 
@@ -34,19 +37,21 @@ class AddFileField extends React.Component<PropsType> {
   public render() {
     const {name, data} = this.props.fields;
 
+    const header = (
+      <div style={{float: "left"}}>
+        <Form.Input
+          placeholder="dogpic.jpg"
+          error={name.meta.error !== undefined}
+          onChange={this.nameOnChange}
+          defaultValue={name.input.value}
+        />
+      </div>
+    );
+
     return (
       <div>
         <FileCard
-          header={
-            <div style={{float: "left"}}>
-              <Form.Input
-                placeholder="dogpic.jpg"
-                error={name.meta.error !== undefined}
-                onChange={(ev, inputData) => name.input.onChange(inputData.value)}
-                defaultValue={name.input.value}
-              />
-            </div>
-          }
+          header={header}
           attached={data.meta.submitFailed && data.meta.error}
           actionbar={<AddFileActionsContainer index={this.props.index} />}
         >
@@ -61,6 +66,10 @@ class AddFileField extends React.Component<PropsType> {
         />
       </div>
     );
+  }
+
+  private nameOnChange(event, inputData) {
+    return this.props.fields.name.input.onChange(inputData.value);
   }
 
   private renderImage() {

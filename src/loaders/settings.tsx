@@ -1,15 +1,12 @@
 import * as React from "react";
 
 import { connect, Dispatch } from "react-redux";
-import { IReducer } from "../reducers/index";
 import { readSettings } from "../actions/creators";
+import { IReducer } from "../reducers/index";
 
 
 export interface ISettingsLoaderDispatchProps {
   readSettingsAction: () => void;
-}
-
-export interface ISettingsLoaderProps {
 }
 
 export class SettingsLoader extends React.Component<ISettingsLoaderDispatchProps, undefined> {
@@ -24,7 +21,7 @@ export class SettingsLoader extends React.Component<ISettingsLoaderDispatchProps
   }
 }
 
-const mapStateToProps = (state: IReducer, ownProps: ISettingsLoaderProps): {}  => ({
+const mapStateToProps = (state: IReducer, ownProps: {}): {}  => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): ISettingsLoaderDispatchProps => ({

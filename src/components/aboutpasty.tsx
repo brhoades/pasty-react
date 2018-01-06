@@ -7,14 +7,11 @@ import IconOrText from "./icons/iconortext";
 
 const AboutPasty = () => (
   <Container text={true}>
-    <Header as='h1'>
+    <Header as="h1">
       <Header.Content>
         Pasty
         <Header.Subheader
-          style={{
-            display: "inline-block",
-            paddingLeft: "0.5em",
-          }}
+          style={{ display: "inline-block", paddingLeft: "0.5em" }}
         >
           React
         </Header.Subheader>

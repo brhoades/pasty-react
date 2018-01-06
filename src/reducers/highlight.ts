@@ -58,7 +58,7 @@ const highlight = (state: IHighlightReducer = initial, action) => {
       newState.files[action.index] = rangedSelection(
         state.files[action.index],
         action.lhs,
-        action.rhs
+        action.rhs,
       );
 
       return newState;

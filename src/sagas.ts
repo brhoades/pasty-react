@@ -1,6 +1,6 @@
 import * as Cookies from "js-cookie";
 import { BlobParserI, decryptFile, Paste, PasteParser } from "pasty-core";
-import { END, eventChannel, delay } from "redux-saga";
+import { delay, END, eventChannel } from "redux-saga";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
@@ -26,7 +26,7 @@ const CryptoWorker = require("worker-loader!./scripts/crypto");
 
 
 function createXHRChannel(action) {
-  return eventChannel((emitter) => {
+  return eventChannel(emitter => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", action.url, true);
 
@@ -65,9 +65,9 @@ function createXHRChannel(action) {
 }
 
 function decryptPasteAsync(action, id, key) {
-  return eventChannel((emitter) => {
+  return eventChannel(emitter => {
     const worker = new CryptoWorker();
-    worker.addEventListener("message", (data) => {
+    worker.addEventListener("message", data => {
       if (data.data.error) {
         emitter({
           error: true,
@@ -187,7 +187,7 @@ function* loadTheme(action) {
   const theme = document.getElementById("hljs-theme");
 
   // TODO use a dynamic CSS loader to get themes.
-  if (theme.attributes["href"] !== themeName) {
+  if ((theme.attributes as any).href !== themeName) {
     yield call(() => { theme.setAttribute("href", themeName); });
   }
 }

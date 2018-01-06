@@ -1,3 +1,4 @@
+/* tslint:disable */
 /*
 Language: irc
 Authors: Swant <hljs@swant.pw>

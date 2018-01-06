@@ -9,30 +9,46 @@ import IconOrText from "./icons/iconortext";
 
 
 const debugItems = () => ([
-  <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" key="viewimage">
+  (
+    <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" key="viewimage">
     Image (V2)
-  </Menu.Item>,
-  <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE" key="codefile">
-    Code (V2)
-  </Menu.Item>,
-  <Menu.Item href="#/view/KnsiyfKF/cydhwk6K2xv20aHiPm3oI39dPbxJjeND" key="plainfile">
-    Plain (V2)
-  </Menu.Item>,
-  <Menu.Item href="#/view/okPGs0oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="badfile">
-    Bad File
-  </Menu.Item>,
-  <Menu.Item href="#/view/okPGs0oN/r6ziq--vD_27-" key="badkey">
-    Bad Key
-  </Menu.Item>,
-  <Menu.Item href="#/view/oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="missing">
-    404
-  </Menu.Item>,
-  <Menu.Item href="#/view/E2HBEJs3/vBuO83c3FcHqnbh1_BLqd.rAhLnmI_qE" key="v3code">
-    V3 Code BSON
-  </Menu.Item>,
-  <Menu.Item href="#/view/BJwRQWIk/puq7oKwfI8d74.FjLb6xJ4j9w_yJ658h" key="v3binary">
-    V3 Binary BSON
-  </Menu.Item>
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE" key="codefile">
+      Code (V2)
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/KnsiyfKF/cydhwk6K2xv20aHiPm3oI39dPbxJjeND" key="plainfile">
+      Plain (V2)
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/okPGs0oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="badfile">
+      Bad File
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/okPGs0oN/r6ziq--vD_27-" key="badkey">
+      Bad Key
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/oN/s5wOrGLoFm9D6gvGs.Hr6ziq--vD_27-" key="missing">
+      404
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/E2HBEJs3/vBuO83c3FcHqnbh1_BLqd.rAhLnmI_qE" key="v3code">
+      V3 Code BSON
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/view/BJwRQWIk/puq7oKwfI8d74.FjLb6xJ4j9w_yJ658h" key="v3binary">
+      V3 Binary BSON
+    </Menu.Item>
+  ),
 ]);
 
 // We render extra menu items when we debug locally.
@@ -48,18 +64,20 @@ const getMenuItems = () => {
 
   return [
     ...menu,
-    <Menu.Item href="#/settings" key="settings" position="right">
-      <IconOrText
-        icon="setting"
-        inverted={true}
-        text="⚙&nbsp;"
-      />
-      Settings
-    </Menu.Item>,
+    (
+      <Menu.Item href="#/settings" key="settings" position="right">
+        <IconOrText
+          icon="setting"
+          inverted={true}
+          text="⚙&nbsp;"
+        />
+        Settings
+      </Menu.Item>
+    ),
   ];
-}
+};
 
-const Layout = ({ children }) =>
+const Layout = ({ children }) => (
   <div>
     <Menu inverted={true}>
       <Container>
@@ -71,6 +89,7 @@ const Layout = ({ children }) =>
       <GeneralErrorMessage key="generalerrrormessage" />
       {...children}
     </Container>
-  </div>;
+  </div>
+);
 
 export default Layout;

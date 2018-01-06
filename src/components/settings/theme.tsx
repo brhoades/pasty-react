@@ -55,7 +55,7 @@ const ThemeSettings = (props: {}) => (
     </Header>
     <Field
       name="theme"
-      component={ThemeDropdownConnected}
+      component={ThemeDropdownConnected as any} // redux-form typing madness
     />
     <ThemePreview />
   </div>

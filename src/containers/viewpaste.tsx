@@ -49,12 +49,10 @@ class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   public componentWillReceiveProps(newProps) {
+    // URL has changed
     if (this.props.match.params.id !== newProps.match.params.id
         || this.props.match.params.key !== newProps.match.params.key) {
-      this.props.getPasteAction(newProps.match.params.id, newProps.match.params.key);
-      if (this.props.match.params.extra) {
         this.updatePaste(newProps);
-      }
     }
   }
 
@@ -97,6 +95,12 @@ class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   private updatePaste(props: PropsType) {
+    if (props.match.params.extra) {
+      props.match.params.extra.split(";")
+           .map(this.unserializeLineNumbers)
+           .map((f, i) => props.setHighlightedLines(i, f));
+    }
+
     // If we're redirecting from a submitted paste, don't redownload.
     if (!props.paste.isNothing() && props.paste.getData().name === props.match.params.id
         && props.paste.getData().key === props.match.params.key) {
@@ -104,11 +108,6 @@ class ViewPaste extends React.Component<PropsType, undefined> {
     }
 
     props.getPasteAction(props.match.params.id, props.match.params.key);
-    if (props.match.params.extra) {
-      props.match.params.extra.split(";")
-           .map(this.unserializeLineNumbers)
-           .map((f, i) => props.setHighlightedLines(i, f));
-    }
   }
 
   private unserializeLineNumbers(lines: string): number[] {

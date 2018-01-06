@@ -165,7 +165,12 @@ export function* uploadPaste(action) {
           return;
         }
 
-        yield put(redirectToSubmittedPaste(data.filename, action.key, action.paste));
+        // update id/key on paste to avoid redownloading
+        const paste = action.paste;
+        paste.name = data.filename;
+        paste.key = action.key;
+
+        yield put(redirectToSubmittedPaste(data.filename, action.key, paste));
       } else if (event.type === "error") {
           yield put(setGeneralError(
             `Error when uploading a new paste.`,

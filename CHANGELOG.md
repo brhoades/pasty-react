@@ -2,6 +2,7 @@
 
 ## NEXT
 * Lint removal / refactoring to enable it.
+* After submitting, you don't download pastes again (bugfix from some pasty-core update).
 
 ## 1.3.3
 * Renamed to pasty-react

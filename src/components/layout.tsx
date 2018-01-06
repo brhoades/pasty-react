@@ -49,12 +49,17 @@ const debugItems = () => ([
       V3 Binary BSON
     </Menu.Item>
   ),
+  (
+    <Menu.Item href="#/view/SkV9ta0Q/Bi__qFjhxua.a31sjyNcogrAEisyK-1r" key="v3mixed">
+      V3 Mixed
+    </Menu.Item>
+  ),
 ]);
 
 // We render extra menu items when we debug locally.
 const getMenuItems = () => {
   let menu: JSX.Element[] = [
-    <Menu.Item href="#/about" header={true} key="about" postion="left">PASTY</Menu.Item>,
+    <Menu.Item href="#/about" header={true} key="about" className="header">PASTY</Menu.Item>,
     <Menu.Item href="#/" key="home">Paste</Menu.Item>,
   ];
 
@@ -65,7 +70,7 @@ const getMenuItems = () => {
   return [
     ...menu,
     (
-      <Menu.Item href="#/settings" key="settings" position="right">
+      <Menu.Item href="#/settings" key="settings" className="right">
         <IconOrText
           icon="setting"
           inverted={true}

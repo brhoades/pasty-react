@@ -24,11 +24,11 @@
     "react-redux-typescript": "^2.3.0",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
-    "react-router-redux": "next",
+    "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-saga": "^0.15.6",
-    "semantic-ui-react": "^0.71.4",
+    "semantic-ui-react": "^0.77.1",
     "ts-loader": "^2.3.2"
   },
   "devDependencies": {

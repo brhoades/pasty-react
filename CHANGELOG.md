@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.3
+* Renamed to pasty-react
+
 ## 1.3.2
 * Download progress now shows.
 * Small files now show decrypt progress.

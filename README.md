@@ -1,7 +1,7 @@
-Pasty HTTP Client
+pasty-react
 ====================
-Pasty HTTP client is a React app for [pasty-server](https://github.com/brhoades/pasty-server)
-that allows the anonymous uploading, downloading, and sharing of pastes (collections of files).
+pasty-react is a React app that interfaces with [pasty-server](https://github.com/brhoades/pasty-server)
+to allow anonymous uploading, downloading, and sharing of pastes, collections of files.
 All pastes are encrypted client-side before transmission for storage. Submitted
 pastes are solely tied to a server-provided identifier and are typically hosted from a public
 S3 bucket. The corresponding AES key to each paste never leaves the client, rendering

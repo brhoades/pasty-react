@@ -40,7 +40,7 @@
   version "16.0.34"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.34.tgz#7a8f795afd8a404a9c4af9539b24c75d3996914e"
 
-"@types/redux-form@^7.0.3":
+"@types/redux-form@^7.0.12":
   version "7.0.12"
   resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-7.0.12.tgz#ff3ec834d0a2436b30c9c6ba7d044cf534069e16"
   dependencies:

@@ -32,7 +32,7 @@ const FontIconsSettings = () => (
   <div>
     <Field
       name="fonticons"
-      component={UseFontIconsToggle as any} // Throws type errors
+      component={UseFontIconsToggle}
     />
 
     <ButtonIconOrText

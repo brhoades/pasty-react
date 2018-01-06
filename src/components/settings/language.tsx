@@ -13,7 +13,7 @@ const LanguageSettings = (props: {}) => (
     </Header>
     <Field
       name="languages"
-      component={LanguageDropdownInput as any} // redux-form type madness
+      component={LanguageDropdownInput}
     />
   </div>
 );

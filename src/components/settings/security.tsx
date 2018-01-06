@@ -11,7 +11,7 @@ const SecuritySettings = (props: {}) => (
     <label>Key Size</label>
     <Field
       name="security.keysize"
-      component={KeySizeInput as any} // redux-form typing issues
+      component={KeySizeInput}
     />
   </div>
 );

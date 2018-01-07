@@ -2,6 +2,7 @@ import range from "lodash/range";
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
+import _ = require("underscore");
 
 import DisplayFile from "../components/displayfile";
 import CopyAndEditIcon from "../components/icons/copyandediticon";
@@ -9,7 +10,7 @@ import CopyShortLinkIcon from "../components/icons/copyshortlinkicon";
 import PasteLoading from "../components/pasteloading";
 
 import config from "../../config";
-import { clearPaste, getPaste, setHighlightedLines, setInitialHighlightedLines } from "../actions/creators";
+import { clearPaste, getPaste, setHighlightedLines } from "../actions/creators";
 import Maybe from "../monads/maybe";
 import { IReducer } from "../reducers/index";
 import { STATE } from "../reducers/paste";
@@ -22,10 +23,9 @@ export interface IViewPasteStateProps {
 }
 
 export interface IViewPasteDispatchProps {
-  getPasteAction: (id: string, key: string) => void;
+  getPasteAction: (id: string, key: string, highlight: number[][]) => void;
   clearPasteAction: (id: string) => void;
   setHighlightedLines: (index: number, lines: number[]) => void;
-  setInitialHighlightedLines: (index: number, lines: number[]) => void;
 }
 
 export interface IViewPasteProps {
@@ -60,15 +60,6 @@ export class ViewPaste extends React.Component<PropsType> {
     if (this.props.match.params.id !== newProps.match.params.id
         || this.props.match.params.key !== newProps.match.params.key) {
         this.updatePaste(newProps);
-    }
-
-    // Once paste loads add highlighted lines.
-    if (newProps.state === STATE.VIEWING && !newProps.paste.isNothing()) {
-      if (newProps.match.params.extra) {
-        newProps.match.params.extra.split(";")
-             .map(this.unserializeLineNumbers)
-             .map((f, i) => newProps.setInitialHighlightedLines(i, f));
-      }
     }
   }
 
@@ -118,7 +109,15 @@ export class ViewPaste extends React.Component<PropsType> {
       return;
     }
 
-    props.getPasteAction(props.match.params.id, props.match.params.key);
+    let lines: number[][] = [[]];
+
+    // Once paste loads add highlighted lines.
+    if (props.match.params.extra) {
+      lines = props.match.params.extra.split(";")
+                   .map(this.unserializeLineNumbers);
+    }
+
+    props.getPasteAction(props.match.params.id, props.match.params.key, lines);
   }
 
   private unserializeLineNumbers(lines: string): number[] {
@@ -126,7 +125,7 @@ export class ViewPaste extends React.Component<PropsType> {
       if (/-/.test(e)) {
         const [lower, upper] = e.split("-");
 
-        return [...acc, ...range(parseInt(lower, 10) - 1, parseInt(upper, 10) - 1)];
+        return [...acc, ..._.range(parseInt(lower, 10) - 1, parseInt(upper, 10) - 1)];
       }
 
       return [...acc, parseInt(e, 10) - 1];
@@ -153,11 +152,10 @@ export const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IVi
 
 export const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({
   clearPasteAction: (id: string) => dispatch(clearPaste(id)),
-  getPasteAction: (id: string, key: string) => dispatch(getPaste(id, key, `${config.get}${id}`)),
-  setHighlightedLines: (index: number, lines: number[]) => dispatch(setHighlightedLines(index, lines)),
-  setInitialHighlightedLines: (index: number, lines: number[]) => (
-    dispatch(setInitialHighlightedLines(index, lines))
+  getPasteAction: (id: string, key: string, highlight: number[][]) => (
+    dispatch(getPaste(id, key, highlight, `${config.get}${id}`))
   ),
+  setHighlightedLines: (index: number, lines: number[]) => dispatch(setHighlightedLines(index, lines)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewPaste);

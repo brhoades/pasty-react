@@ -2,6 +2,9 @@
 
 ## NEXT
 * Can now copy and edit a Paste.
+* Added noscript support.
+* Line highlighting works again (import / logic issue).
+  * Switched from lodash to underscore.
 
 ## 1.3.5
 * Fixed highlight bug where code files won't display properly on the

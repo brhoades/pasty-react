@@ -133,7 +133,6 @@ class DisplayCodeFile extends React.Component<PropsType> {
       const lastIndex: number = this.props.highlight.length > 0 ?
                                 this.props.highlight[this.props.highlight.length - 1]
                                 : 0;
-
       if (e.ctrlKey) {
         if (e.shiftKey && this.props.highlight.length > 0) {
           this.props.addHighlightedLines(lastIndex, index);

@@ -23,7 +23,8 @@ import {
 } from "./types";
 
 
-export const getPaste = (id: string, key: string, url: string) => ({
+export const getPaste = (id: string, key: string, highlight: number[][], url: string) => ({
+  highlight,
   id,
   key,
   type: GET_PASTE_FROM_URL,
@@ -89,13 +90,6 @@ export const setHighlightedLines = (index: number, lines: number[]) => ({
   index,
   lines,
   type: SET_HIGHLIGHTED_LINES,
-});
-
-// excluded from middleware which modifies the path
-export const setInitialHighlightedLines = (index: number, lines: number[]) => ({
-  index,
-  lines,
-  type: SET_INITIAL_HIGHLIGHTED_LINES,
 });
 
 export const addHighlightedLines = (index: number, lhs: number, rhs: number) => ({

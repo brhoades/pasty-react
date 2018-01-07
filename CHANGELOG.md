@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.5
+* Fixed highlight bug where code files won't display properly on the
+  first page load after submission.
+
 ## 1.3.4
 * Lint removal / refactoring to enable it.
 * After submitting, you don't download pastes again (bugfix from some pasty-core update).

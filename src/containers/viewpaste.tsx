@@ -95,16 +95,16 @@ class ViewPaste extends React.Component<PropsType, undefined> {
   }
 
   private updatePaste(props: PropsType) {
-    if (props.match.params.extra) {
-      props.match.params.extra.split(";")
-           .map(this.unserializeLineNumbers)
-           .map((f, i) => props.setHighlightedLines(i, f));
-    }
-
     // If we're redirecting from a submitted paste, don't redownload.
     if (!props.paste.isNothing() && props.paste.getData().name === props.match.params.id
         && props.paste.getData().key === props.match.params.key) {
       return;
+    }
+
+    if (props.match.params.extra) {
+      props.match.params.extra.split(";")
+           .map(this.unserializeLineNumbers)
+           .map((f, i) => props.setHighlightedLines(i, f));
     }
 
     props.getPasteAction(props.match.params.id, props.match.params.key);

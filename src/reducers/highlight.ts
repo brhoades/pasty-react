@@ -5,6 +5,7 @@ import {
   ADD_HIGHLIGHTED_LINE,
   ADD_HIGHLIGHTED_LINES,
   GET_PASTE_FROM_URL,
+  REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
   SET_HIGHLIGHTED_LINES,
 } from "../actions/types";
@@ -25,6 +26,7 @@ const highlight = (state: IHighlightReducer = initial, action) => {
         files: [],
       };
 
+    case REDIRECT_TO_SUBMITTED_PASTE:
     case SET_DECRYPTED_PASTE:
       return {
         files: state.files.length > 0 ? state.files : action.paste.files.map(f => []),

@@ -3,29 +3,41 @@ import { WrappedFieldProps } from "redux-form";
 import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 
-export default class LanguageDropdownInput extends React.PureComponent<WrappedFieldProps> {
+interface ILanguageDropdownInput {
+  style: any;
+}
+
+export default class LanguageDropdownInput extends React.PureComponent<WrappedFieldProps & ILanguageDropdownInput> {
+  private options: Array<{ key: string, text: string, value: string }>;
+
   constructor(props) {
     super(props);
 
     this.onChange = this.onChange.bind(this);
-  }
-  public render() {
-    const options = hljs.listLanguages().map(lang => ({
+    this.options = hljs.listLanguages().map(lang => ({
       key: lang,
       text: lang,
       value: lang,
     }));
+  }
 
+  public render() {
     return (
-      <Dropdown
-        fluid={true}
-        multiple={true}
-        search={true}
-        selection={true}
-        options={options}
-        value={this.props.input.value}
-        onChange={this.onChange}
-      />
+      <div>
+        <label>
+          Available Choices
+        </label>
+        <Dropdown
+          fluid={true}
+          multiple={true}
+          search={true}
+          selection={true}
+          options={this.options}
+          value={this.props.input.value}
+          onChange={this.onChange}
+          style={this.props.style}
+        />
+      </div>
     );
   }
 

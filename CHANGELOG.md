@@ -5,6 +5,9 @@
 * After submitting, you don't download pastes again (bugfix from some pasty-core update).
 * Fixed runtime error with Menu position arguments. Semantic-ui upgrade 0.71 -> 0.77.
 * Miscellaneous package upgrades.
+* Added settings option for the default language choice on a paste. You're no longer forced
+  to choose auto.
+* Added reselect.
 
 ## 1.3.3
 * Renamed to pasty-react

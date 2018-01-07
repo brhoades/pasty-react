@@ -4,6 +4,7 @@ import { change } from "redux-form";
 import Dropdown from "semantic-ui-react/dist/es/modules/Dropdown";
 
 import { IReducer } from "../../reducers/index";
+import { getLanguages } from "../../selectors/languages";
 
 
 interface ILanguageDropdownButtonDispatchProps {
@@ -12,7 +13,7 @@ interface ILanguageDropdownButtonDispatchProps {
 
 interface ILanguageDropdownButtonPropsState {
   highlight: string;
-  languages: string[];
+  languages: Array<{ key: string, text: string, value: string }>;
 }
 
 interface ILanguageDropdownButtonProps {
@@ -33,31 +34,13 @@ class LanguageDropdownButton extends React.PureComponent<PropsType> {
   }
 
   public render() {
-    const options = [
-      {
-        key: "auto",
-        text: "Auto Detect",
-        value: "auto",
-      },
-      {
-        key: "plain",
-        text: "Plain",
-        value: "plain",
-      },
-      ...this.props.languages.map((lang) => ({
-        key: lang,
-        text: lang,
-        value: lang,
-      })),
-    ];
-
     return (
       <Dropdown
         button={true}
         search={true}
         onChange={this.onChange}
         defaultValue={this.props.highlight}
-        options={options}
+        options={this.props.languages}
       />
     );
   }
@@ -72,8 +55,8 @@ const mapStateToProps = (state: IReducer, ownProps: ILanguageDropdownButtonProps
   const thisFile = state.form.createpaste.values.files[ownProps.index];
 
   return {
-    highlight: thisFile.meta.highlight,
-    languages: state.settings.languages,
+    highlight: thisFile.meta.highlight !== "auto" ? thisFile.meta.highlight : state.settings.defaultlanguage,
+    languages: getLanguages(state),
   };
 };
 

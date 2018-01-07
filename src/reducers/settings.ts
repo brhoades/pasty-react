@@ -10,6 +10,7 @@ export interface ISecuritySettings {
 }
 
 export interface ISettings {
+  defaultlanguage: string;
   fonticons: boolean;
   languages: string[];
   loaded: boolean;
@@ -18,6 +19,7 @@ export interface ISettings {
 }
 
 const initial: ISettings = {
+  defaultlanguage: "auto",
   fonticons: true,
   languages: [
     "bash", "clojure", "cmake", "coffeescript", "cpp", "css", "diff", "d", "dockerfile",

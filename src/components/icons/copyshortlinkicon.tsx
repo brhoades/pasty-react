@@ -10,6 +10,7 @@ import Maybe from "../../monads/maybe";
 import { IReducer } from "../../reducers/index";
 import IconOrText from "./iconortext";
 
+
 export interface ICopyShortLinkIconState {
   paste: Maybe<Paste>;
   urlParams: string;
@@ -30,13 +31,11 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
     }
 
     return (
-      <div>
-        <Popup
-          basic={true}
-          trigger={this.getIcon()}
-          content="Copy to your clipboard a shorter link to this paste"
-        />
-      </div>
+      <Popup
+        basic={true}
+        trigger={this.getIcon()}
+        content="Copy to your clipboard a shorter link to this paste"
+      />
     );
   }
 

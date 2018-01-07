@@ -93,6 +93,8 @@ class DisplayCodeFile extends React.Component<PropsType> {
   }
 
   private addLineNumbers(code: string) {
+    console.log("HIGHLIGHTING")
+    console.dir(this.props.highlight);
     const innerTable: JSX.Element[] = code.split("\n").map((e: string, i: number) => {
       return (
         <tr

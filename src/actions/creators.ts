@@ -16,6 +16,7 @@ import {
   SET_DECRYPTED_PASTE,
   SET_GENERAL_ERROR,
   SET_HIGHLIGHTED_LINES,
+  SET_INITIAL_HIGHLIGHTED_LINES,
   SET_PASTE_PROGRESS,
   SET_SETTINGS,
   SET_THEME,
@@ -88,6 +89,13 @@ export const setHighlightedLines = (index: number, lines: number[]) => ({
   index,
   lines,
   type: SET_HIGHLIGHTED_LINES,
+});
+
+// excluded from middleware which modifies the path
+export const setInitialHighlightedLines = (index: number, lines: number[]) => ({
+  index,
+  lines,
+  type: SET_INITIAL_HIGHLIGHTED_LINES,
 });
 
 export const addHighlightedLines = (index: number, lhs: number, rhs: number) => ({

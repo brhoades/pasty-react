@@ -4,6 +4,7 @@ import { ConnectedRouter } from "react-router-redux";
 
 import AboutPasty from "./components/aboutpasty";
 import Layout from "./components/layout";
+import CopyAndEditPaste from "./containers/copyandeditpaste";
 import CreatePaste from "./containers/createpaste";
 import SettingsForm from "./containers/settingsform";
 import ViewPaste from "./containers/viewpaste";
@@ -17,6 +18,11 @@ const Router = ({ history }) => (
         component={AboutPasty}
       />
       <Route exact={true} path="/" component={CreatePaste}/>
+      <Route
+        exact={true}
+        path="/paste/:id/:key"
+        component={CopyAndEditPaste}
+      />
       <Route
         path="/view/:id/:key/:extra?"
         component={ViewPaste}

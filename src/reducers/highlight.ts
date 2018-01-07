@@ -8,6 +8,7 @@ import {
   REDIRECT_TO_SUBMITTED_PASTE,
   SET_DECRYPTED_PASTE,
   SET_HIGHLIGHTED_LINES,
+  SET_INITIAL_HIGHLIGHTED_LINES,
 } from "../actions/types";
 
 export interface IHighlightReducer {
@@ -29,9 +30,10 @@ const highlight = (state: IHighlightReducer = initial, action) => {
     case REDIRECT_TO_SUBMITTED_PASTE:
     case SET_DECRYPTED_PASTE:
       return {
-        files: state.files.length > 0 ? state.files : action.paste.files.map(f => []),
+        files: action.paste.files.map(f => []),
       };
 
+    case SET_INITIAL_HIGHLIGHTED_LINES:
     case SET_HIGHLIGHTED_LINES: {
       const newState = {
         files: [...state.files.map(lines => [...lines])],

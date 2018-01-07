@@ -11,22 +11,40 @@ import { IReducer } from "../reducers/index";
 import CreatePasteForm from "../components/createpasteform";
 
 
-type PropsType = InjectedFormProps<IPasteFormData>;
+export interface ICreatePasteProps {
+  initialValues?: Partial<IPasteFormData>;
+}
 
-const CreatePaste: React.StatelessComponent<PropsType> = (props: PropsType) => (
-  <div>
-    {props.error && <Message error={true} content="An unknown error has occurred when submitting your paste." />}
-    <CreatePasteForm
-      valid={props.valid}
-      dirty={props.dirty}
-      onSubmit={props.handleSubmit}
-    />
-  </div>
-);
+export type PropsType = InjectedFormProps<IPasteFormData & ICreatePasteProps>;
+
+export class CreatePaste extends React.Component<PropsType> {
+  public static defaultProps: Partial<ICreatePasteProps> = {
+    initialValues: {
+      files: [],
+    },
+  };
+
+  public render() {
+    return (
+      <div>
+        {this.props.error && this.errorMessage()}
+        <CreatePasteForm
+          valid={this.props.valid}
+          dirty={this.props.dirty}
+          onSubmit={this.props.handleSubmit}
+        />
+      </div>
+    );
+  }
+
+  private errorMessage() {
+    return <Message error={true} content="An unknown error has occurred when submitting your paste." />;
+  }
+}
 
 // TODO clean this mess up. I think I need a few more components to separate this from
 // the store cleanly.
-const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: PropsType) => {
+export const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: PropsType) => {
   const paste: Paste = Paste.empty();
   paste.files = values.files.map((f, i) => {
     if (f.type === PasteFileTypes.FILE) {
@@ -38,7 +56,7 @@ const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, props: P
   dispatch(encryptThenSubmitPaste(paste));
 };
 
-const validate = (values: IPasteFormData, props: {}) => {
+export const validate = (values: IPasteFormData, props: {}) => {
   const errors = {
     files: {},
   };
@@ -58,11 +76,15 @@ const validate = (values: IPasteFormData, props: {}) => {
   return errors;
 };
 
-export default reduxForm<IPasteFormData>({
-  form: "createpaste",
-  initialValues: {
-    files: [],
-  },
-  onSubmit,
-  validate,
-})(CreatePaste);
+export const customInitialCreatePaste = (initialValues: Partial<IPasteFormData>) => (
+  reduxForm<IPasteFormData>({
+    form: "createpaste",
+    initialValues,
+    onSubmit,
+    validate,
+  })(CreatePaste)
+);
+
+export default customInitialCreatePaste({
+  files: [],
+});

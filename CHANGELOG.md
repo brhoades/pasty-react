@@ -1,5 +1,8 @@
 # Changelog
 
+## NEXT
+* Can now copy and edit a Paste.
+
 ## 1.3.5
 * Fixed highlight bug where code files won't display properly on the
   first page load after submission.

@@ -32,7 +32,7 @@ type PropsType = ICreatePasteFormProps & ICreatePasteFormStateProps;
 
 class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
-    const loadingComponent = this.props.state !== STATE.WAITING && (
+    const loadingComponent = this.props.state !== STATE.WAITING && this.props.state !== STATE.VIEWING && (
       <PasteLoading
         topBarLabel="Encrypt"
         bottomBarLabel="Upload"

@@ -35,6 +35,7 @@ Make sure the linting passes:
     $ yarn lint
 
 Make your change. Test your change. Check linting again. Afterwards, update
-[CHANGELOG](CHANGELOG.md). If a NEXT heading doesn't exist, add one.
+[CHANGELOG](CHANGELOG.md) with a brief summary of your changes under a `## NEXT` heading.
+If a `## NEXT` heading doesn't exist, add one.
 
-Squash your commits and push to your fork, [submit a pull request][https://github.com/brhoades/pasty-react/compare]. Make sure tests pass on your PR; if they do not, fix them before the PR will be considered.
+Squash your commits and push to your fork, [submit a pull request](https://github.com/brhoades/pasty-react/compare). Make sure tests pass on your PR; if they do not, fix them before the PR will be considered.

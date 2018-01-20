@@ -109,7 +109,7 @@ export class ViewPaste extends React.Component<PropsType> {
       return;
     }
 
-    let lines: number[][] = [[]];
+    let lines: number[][] = [];
 
     // Once paste loads add highlighted lines.
     if (props.match.params.extra) {

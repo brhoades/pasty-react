@@ -33,7 +33,7 @@ const highlight = (state: IHighlightReducer = initial, action) => {
 
     case SET_DECRYPTED_PASTE:
       return {
-        files: state.files ? state.files : action.paste.files.map(f => []),
+        files: state.files.length ? state.files : action.paste.files.map(f => []),
       };
 
     case SET_INITIAL_HIGHLIGHTED_LINES:

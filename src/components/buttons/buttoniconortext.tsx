@@ -30,6 +30,7 @@ const ButtonIconOrText = (props: PropsType) => {
         onClick={props.onClick}
         icon={props.icon}
         style={props.style}
+        type="button"
       />
     );
   }
@@ -39,6 +40,7 @@ const ButtonIconOrText = (props: PropsType) => {
       compact={props.compact}
       onClick={props.onClick}
       style={props.style}
+      type="button"
     >
       {props.text}
     </Button>

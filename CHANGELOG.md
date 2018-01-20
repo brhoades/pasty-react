@@ -5,6 +5,7 @@
 * Added noscript support.
 * Line highlighting works again (import / logic issue).
   * Switched from lodash to underscore.
+* Buttons no longer cause random form submission with multiple pastes.
 
 ## 1.3.5
 * Fixed highlight bug where code files won't display properly on the

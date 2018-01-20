@@ -1,6 +1,6 @@
 # Changelog
 
-## NEXT
+## 1.4.0
 * Can now copy and edit a Paste.
 * Added noscript support.
 * Line highlighting works again (import / logic issue).

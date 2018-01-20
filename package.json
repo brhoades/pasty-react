@@ -1,6 +1,6 @@
 {
   "name": "pasty-react",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "description": "Anonymous, encrypted and sharable small file storage.",
   "scripts": {
     "upload": "rm -rf ./dist && yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",

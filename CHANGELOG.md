@@ -1,5 +1,14 @@
 # Changelog
 
+## NEXT
+* webpack 2.3 -> 4.0
+  * ts-loader 2.3 -> 4.0
+  * worker-loader 1.1 -> 1.1.1
+  * style-loader 0.16 -> 0.20
+  * extract-text-webpack-plugin 2.1.2 -> 4 beta0
+  * html-webpack-plugin 2.29.0 -> 3.0.4
+  * copy-webpack-plugin 4.0 -> 4.5
+
 ## 1.4.0
 * Can now copy and edit a Paste.
 * Added noscript support.

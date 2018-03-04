@@ -95,15 +95,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       hljs: "highlight.js",
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: [
-        "hljs",
-        "react",
-        "redux",
-        "semantic",
-        "vendor",
-      ],
-    }),
     new CopyWebpackPlugin([
       {
         from: "src/assets/*",
@@ -149,4 +140,6 @@ if (process.env.NODE_ENV === "production") {
   module.exports.plugins = (module.exports.plugins || []).concat([
     // new BundleAnalyzerPlugin(),
   ]);
+  // https://github.com/webpack/webpack/issues/6642#issuecomment-370222543
+  module.exports.output.globalObject = 'this';
 }

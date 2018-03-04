@@ -1,7 +1,7 @@
 
-import Maybe from "../monads/maybe";
-import { IPartialPasteFile } from "../reducers/form";
-import { IReducer } from "../reducers/index";
+import Maybe from "helpers/maybe";
+import { IPartialPasteFile } from "reducers/form";
+import { IReducer } from "reducers/index";
 import { IHasIndex } from "./fileprops";
 
 

@@ -8,7 +8,7 @@ import {
   SET_DECRYPTED_PASTE,
   SET_HIGHLIGHTED_LINES,
   SET_INITIAL_HIGHLIGHTED_LINES,
-} from "../actions/types";
+} from "actions/types";
 
 export interface IHighlightReducer {
   files: number[][];

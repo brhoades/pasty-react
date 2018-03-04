@@ -10,8 +10,8 @@ import {
   SET_DECRYPTED_PASTE,
   SET_GENERAL_ERROR,
   SET_PASTE_PROGRESS,
-} from "../actions/types";
-import Maybe from "../monads/maybe";
+} from "actions/types";
+import Maybe from "helpers/maybe";
 
 export enum STATE {
   WAITING,

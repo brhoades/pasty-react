@@ -8,6 +8,12 @@
   * extract-text-webpack-plugin 2.1.2 -> 4 beta0
   * html-webpack-plugin 2.29.0 -> 3.0.4
   * copy-webpack-plugin 4.0 -> 4.5
+* Reorganized files:
+  * Created pages src/pages (paste, view, copyandedit, settings, about).
+  * Common components src/components.
+  * Helpers src/helpers (selectors, maybe, types).
+* Now using webpack / TypeScript aliases.
+
 
 ## 1.4.0
 * Can now copy and edit a Paste.

@@ -1,6 +1,6 @@
 import {
   SET_GENERAL_ERROR,
-} from "../actions/types";
+} from "actions/types";
 
 export interface IMessagesReducer {
   general: {

@@ -2,7 +2,7 @@ import {
   READ_SETTINGS,
   SET_AND_SAVE_SETTINGS,
   SET_SETTINGS,
-} from "../actions/types";
+} from "actions/types";
 
 
 export interface ISecuritySettings {

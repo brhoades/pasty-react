@@ -15,13 +15,15 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "actions": ["./src/actions"],
-      "css": ["./src/assets"],
-      "sagas": ["./src/sagas"],
-      "components": ["./src/components"],
-      "containers": ["./src/containers"],
-      "helpers": ["./src/helpers"],
-      "reducers": ["./src/reducers"]
+      "actions/*": ["./src/actions/*"],
+      "css/*": ["./src/assets/*"],
+      "sagas/*": ["./src/sagas/*"],
+      "components/*": ["./src/components/*"],
+      "middleware/*": ["./src/middleware/*"],
+      "helpers/*": ["./src/helpers/*"],
+      "reducers/*": ["./src/reducers/*"],
+      "pages/*": ["./src/pages/*"],
+      "configfile": ["./config"]
     }
   },
   "exclude": [

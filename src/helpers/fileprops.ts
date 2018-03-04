@@ -1,7 +1,7 @@
 import { File, Paste } from "pasty-core";
 
-import Maybe from "../monads/maybe";
-import { IReducer } from "../reducers/index";
+import Maybe from "helpers/maybe";
+import { IReducer } from "reducers/index";
 
 
 // Many components just grab a file from the store. These help those

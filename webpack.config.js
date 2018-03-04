@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 
 module.exports = {
   entry: {
-    build: "./src/app.tsx",
+    build: "./src/App.tsx",
     hljs: "highlight.js",
     react: [
       "react",
@@ -82,8 +82,11 @@ module.exports = {
       sagas: path.resolve(__dirname, "src/sagas"),
       components: path.resolve(__dirname, "src/components"),
       containers: path.resolve(__dirname, "src/containers"),
+      middleware: path.resolve(__dirname, "src/middleware"),
       helpers: path.resolve(__dirname, "src/helpers"),
       reducers: path.resolve(__dirname, "src/reducers"),
+      pages: path.resolve(__dirname, "./src/pages"),
+      configfile: path.resolve(__dirname, "config"),
     },
   },
   devServer: {

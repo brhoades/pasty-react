@@ -8,13 +8,13 @@ import Button from "semantic-ui-react/dist/es/elements/Button";
 
 import { IPartialPasteFile, PasteFileTypes } from "reducers/form";
 import { IReducer } from "reducers/index";
-import { STATE } from "reducers/paste";
+import { STATE } from "../reducer";
 
 import PasteLoading from "components/PasteLoading";
-import PasteFileForms from "./PasteFileForms";
 import AddFileButton from "./buttons/AddFileButton";
 import AddTextButton from "./buttons/AddTextButton";
 import PasteButton from "./buttons/PasteButton";
+import PasteFileForms from "./PasteFileForms";
 
 
 export interface ICreatePasteFormProps {
@@ -32,12 +32,13 @@ type PropsType = ICreatePasteFormProps & ICreatePasteFormStateProps;
 
 class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
-    const loadingComponent = this.props.state !== STATE.WAITING && this.props.state !== STATE.VIEWING && (
+    const loadingComponent = this.props.state !== STATE.WAITING && (
       <PasteLoading
         topBarLabel="Encrypt"
         bottomBarLabel="Upload"
         topBarKey={STATE.ENCRYPTING}
         bottomBarKey={STATE.UPLOADING}
+        type="createPaste"
       />
     );
 
@@ -94,7 +95,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
 const mapStateToProps = (state: IReducer, ownProps: ICreatePasteFormProps): ICreatePasteFormStateProps => {
   return {
     files: state.form.createpaste.values.files,
-    state: state.paste.state,
+    state: state.createPaste.state,
   };
 };
 

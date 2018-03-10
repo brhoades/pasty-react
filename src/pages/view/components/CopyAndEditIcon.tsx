@@ -62,7 +62,7 @@ class CopyAndEditIcon extends React.Component<PropsType> {
 }
 
 const mapStateToProps = (state: IReducer, ownProps: {}): ICopyAndEditIconState => ({
-  paste: state.paste.paste,
+  paste: state.viewPaste.paste,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): ICopyAndEditIconDispatch => ({

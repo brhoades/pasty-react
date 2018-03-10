@@ -13,7 +13,6 @@ import { IReducer } from "reducers/index";
 
 const style = require("css/displaycode.css");
 
-
 export interface IDisplayCodeFileProps {
   index: number;
 }
@@ -163,7 +162,7 @@ class DisplayCodeFile extends React.Component<PropsType> {
 const mapStateToProps = (state: IReducer, ownProps: IDisplayCodeFileProps): IDisplayCodeFileStateProps => {
   let file: Maybe<CodeFile>;
 
-  state.paste.paste.caseOf({
+  state.viewPaste.paste.caseOf({
     just: (p: Paste) => file = new Maybe<CodeFile>(p.files[ownProps.index] as CodeFile),
     nothing: () => {
       console.error("Paste has not loaded yet.");

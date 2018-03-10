@@ -40,8 +40,8 @@ export function serializeLineNumbers(lines: number[]): string {
 // Generate a paste url from reducers
 // TODO: SELECTOR
 export function generatePasteURL(reducer: IReducer): string {
-  const id: string = reducer.paste.id;
-  const key: string = reducer.paste.key;
+  const id: string = reducer.viewPaste.id;
+  const key: string = reducer.viewPaste.key;
 
   if (reducer.highlight.files.filter((f) => f.length > 0).length === 0) {
     return `/view/${id}/${key}`;

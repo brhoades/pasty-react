@@ -6,9 +6,10 @@ import { customInitialCreatePaste } from "pages/paste/CreatePaste";
 import ViewPaste from "pages/view/ViewPaste";
 
 import Maybe from "helpers/maybe";
+import { STATE as CREATE_STATE } from "pages/paste/reducer";
+import { STATE as VIEW_STATE } from "pages/view/reducer";
 import { PasteFileTypes } from "reducers/form";
 import { IReducer } from "reducers/index";
-import { STATE } from "reducers/paste";
 
 
 export interface ICopyAndEditPasteProps {
@@ -25,7 +26,7 @@ export interface ICopyAndEditPasteProps {
 }
 
 export interface ICopyAndEditPasteDispatchProps {
-  state: STATE;
+  state: CREATE_STATE | VIEW_STATE;
   paste: Maybe<Paste>;
 }
 
@@ -57,7 +58,7 @@ export class CopyAndEditPaste extends React.PureComponent<PropsType> {
           location={this.props.location}
           match={this.props.match}
         />
-        {this.props.state === STATE.VIEWING && React.createElement(customInitialCreatePaste(files))}
+        {this.props.state === VIEW_STATE.VIEWING && React.createElement(customInitialCreatePaste(files))}
       </div>
     );
   }
@@ -65,8 +66,8 @@ export class CopyAndEditPaste extends React.PureComponent<PropsType> {
 
 export const mapStateToProps = (state: IReducer, ownProps: ICopyAndEditPasteProps)
                              : ICopyAndEditPasteDispatchProps => ({
-  paste: state.paste.paste,
-  state: state.paste.state,
+  paste: state.viewPaste.paste,
+  state: state.viewPaste.state,
 });
 
 export default connect(mapStateToProps, {})(CopyAndEditPaste);

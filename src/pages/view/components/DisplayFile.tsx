@@ -73,12 +73,12 @@ class DisplayFile extends React.Component<PropsType, undefined> {
 const mapStateToProps = (state: IReducer, ownProps: IDisplayFileProps): IDisplayFileStateProps => {
   let file: Maybe<File>;
 
-  state.paste.paste.caseOf({
+  state.viewPaste.paste.caseOf({
     just: (p: Paste) => { file = new Maybe<File>(p.files[ownProps.index]); },
     nothing: () => { file = new Maybe<File>(null); },
   });
 
-  if (state.paste.paste != null) {
+  if (state.viewPaste.paste != null) {
     return {
       file,
     };

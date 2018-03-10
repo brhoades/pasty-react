@@ -22,7 +22,7 @@ export interface IFileByIndexPropsType {
 
 // Returns file with the index provided if the paste is ready.
 export function getFileByIndex<T>(state: IReducer, props: IHasIndex<T>): IMaybeFileProps<T> {
-  const file: Maybe<File> = state.paste.paste.caseOf({
+  const file: Maybe<File> = state.viewPaste.paste.caseOf({
     just: (p: Paste) => new Maybe<File>(p.files[props.index]),
     nothing: () => new Maybe<File>(null),
   });

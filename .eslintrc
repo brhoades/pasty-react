@@ -10,6 +10,7 @@
   "rules": {
     "extends": [
       "eslint:recommended",
+      "airbnb",
       "plugin:import/errors",
       "plugin:import/warnings"
     ]

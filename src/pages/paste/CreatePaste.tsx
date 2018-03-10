@@ -9,7 +9,6 @@ import { IPartialPasteFile, IPasteFormData, PasteFileTypes } from "reducers/form
 import { IReducer } from "reducers/index";
 import CreatePasteForm from "./components/CreatePasteForm";
 
-
 export interface ICreatePasteProps {
   initialValues?: Partial<IPasteFormData>;
 }

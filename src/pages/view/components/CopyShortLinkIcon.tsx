@@ -61,7 +61,7 @@ class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefin
 }
 
 const mapStateToProps = (state: IReducer, ownProps: {}): ICopyShortLinkIconState => ({
-  paste: state.paste.paste,
+  paste: state.viewPaste.paste,
   // TODO: selector
   urlParams: generatePasteURL(state),
 });

@@ -6,22 +6,24 @@ import Dimmer from "semantic-ui-react/dist/es/modules/Dimmer";
 import Progress from "semantic-ui-react/dist/es/modules/Progress";
 
 import Maybe from "helpers/maybe";
+import { STATE as CREATE_STATE } from "pages/paste/reducer";
+import { STATE as VIEW_STATE } from "pages/view/reducer";
 import { IReducer } from "reducers/index";
-import { STATE, STATE_MESSAGES } from "reducers/paste";
 
 
 export interface IPasteLoadingStateProps {
   error: boolean;
   message: string;
   progress: number;
-  state: STATE;
+  state: CREATE_STATE | VIEW_STATE;
 }
 
 export interface IPasteLoadingProps {
   topBarLabel: string;
   bottomBarLabel: string;
-  topBarKey: STATE;
-  bottomBarKey: STATE;
+  topBarKey: CREATE_STATE | VIEW_STATE;
+  bottomBarKey: CREATE_STATE | VIEW_STATE;
+  type: string;
 }
 
 type PropsType = IPasteLoadingStateProps & IPasteLoadingProps;
@@ -67,9 +69,9 @@ const PasteLoading = (props: PropsType) => {
 
 const mapStateToProps = (state: IReducer, ownProps: IPasteLoadingProps): IPasteLoadingStateProps => ({
   error: state.messages.general.content !== "",
-  message: state.paste.stateMessage,
-  progress: state.paste.progress,
-  state: state.paste.state,
+  message: state[ownProps.type].stateMessage,
+  progress: state[ownProps.type].progress,
+  state: state[ownProps.type].state,
 });
 
 export default connect(mapStateToProps, () => ({}))(PasteLoading);

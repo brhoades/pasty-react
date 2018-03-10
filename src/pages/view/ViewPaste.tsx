@@ -4,17 +4,16 @@ import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import _ = require("underscore");
 
-import PasteLoading from "components/PasteLoading";
-import CopyAndEditIcon from "./components/CopyAndEditIcon";
-import CopyShortLinkIcon from "./components/CopyShortLinkIcon";
-import DisplayFile from "./components/DisplayFile";
-
 import { clearPaste, getPaste, setHighlightedLines } from "actions/creators";
 import config from "configfile";
 import Maybe from "helpers/maybe";
 import { IReducer } from "reducers/index";
-import { STATE } from "reducers/paste";
 
+import PasteLoading from "components/PasteLoading";
+import CopyAndEditIcon from "./components/CopyAndEditIcon";
+import CopyShortLinkIcon from "./components/CopyShortLinkIcon";
+import DisplayFile from "./components/DisplayFile";
+import { STATE } from "./reducer";
 
 export interface IViewPasteStateProps {
   error: boolean;
@@ -75,6 +74,7 @@ export class ViewPaste extends React.Component<PropsType> {
           bottomBarLabel="Decrypt"
           topBarKey={STATE.DOWNLOADING}
           bottomBarKey={STATE.DECRYPTING}
+          type="createPaste"
         />
       );
     }
@@ -144,10 +144,10 @@ export class ViewPaste extends React.Component<PropsType> {
   }
 }
 
-export const mapStateToProps = (state: IReducer, ownProps: IViewPasteProps): IViewPasteStateProps => ({
+export const mapStateToProps = (state, ownProps): IViewPasteStateProps => ({
   error: state.messages.general.header !== "",
-  paste: state.paste.paste,
-  state: state.paste.state,
+  paste: state.viewPaste.paste,
+  state: state.viewPaste.state,
 });
 
 export const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({

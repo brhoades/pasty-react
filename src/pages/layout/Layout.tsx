@@ -50,6 +50,11 @@ const debugItems = () => ([
     </Menu.Item>
   ),
   (
+    <Menu.Item href="#/view/ryIWBy7K/lhCwei6Pk.47__pJ9nq9Aax6wz2fAJxD" key="bigv3">
+      V3 Big
+    </Menu.Item>
+  ),
+  (
     <Menu.Item href="#/view/SkV9ta0Q/Bi__qFjhxua.a31sjyNcogrAEisyK-1r" key="v3mixed">
       V3 Mixed
     </Menu.Item>

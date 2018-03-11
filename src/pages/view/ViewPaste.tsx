@@ -67,7 +67,7 @@ export class ViewPaste extends React.Component<PropsType> {
       return null;
     }
 
-    if (this.props.state === STATE.DOWNLOADING || this.props.state === STATE.DECRYPTING) {
+    if (this.props.state !== STATE.VIEWING) {
       return (
         <PasteLoading
           firstStageLabel="Downloaded"

@@ -40,7 +40,7 @@ const PasteLoading = (props: PropsType) => {
       <div style={style}>
         <Loader
           progress={props.progress * 100 % 100}
-          indeterminateLabel="Loading"
+          indeterminateLabel="LOADING"
           label={`${(props.progress * 100).toFixed(0)}%`}
           subLabel={props.state === props.secondStageKey ? props.secondStageLabel : props.firstStageLabel}
           secondStage={props.state === props.secondStageKey}

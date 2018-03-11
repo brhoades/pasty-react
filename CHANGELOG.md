@@ -1,6 +1,8 @@
 # Changelog
 
 ## NEXT
+* react 15.6 -> 16.0
+  * react-dom 15.6 -> 16.0
 * webpack 2.3 -> 4.0
   * ts-loader 2.3 -> 4.0
   * worker-loader 1.1 -> 1.1.1
@@ -15,6 +17,7 @@
 * Now using webpack / TypeScript aliases.
 * Reorganized paste reducer into separate view / create paste reducers.
 * Added new, custom two-stage loading animation.
+* Cleaned up some unncessary divs, moved others to React.Fragments
 
 
 ## 1.4.0

@@ -88,7 +88,7 @@ const getMenuItems = () => {
 };
 
 const Layout = ({ children }) => (
-  <div>
+  <React.Fragment>
     <Menu inverted={true}>
       <Container>
         {...getMenuItems()}
@@ -99,7 +99,7 @@ const Layout = ({ children }) => (
       <GeneralErrorMessage key="generalerrrormessage" />
       {...children}
     </Container>
-  </div>
+  </React.Fragment>
 );
 
 export default Layout;

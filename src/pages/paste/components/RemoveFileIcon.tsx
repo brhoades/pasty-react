@@ -30,13 +30,11 @@ class RemoveFileIcon extends React.Component<PropsType> {
     );
 
     return (
-      <div>
-        <Popup
-          basic={true}
-          trigger={trigger}
-          content="Remove this file"
-        />
-      </div>
+      <Popup
+        basic={true}
+        trigger={trigger}
+        content="Remove this file"
+      />
     );
   }
 }

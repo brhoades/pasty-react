@@ -29,7 +29,7 @@ class UseFontIconsToggle extends React.PureComponent<WrappedFieldProps & {}> {
 }
 
 const FontIconsSettings = () => (
-  <div>
+  <React.Fragment>
     <Field
       name="fonticons"
       component={UseFontIconsToggle}
@@ -40,7 +40,7 @@ const FontIconsSettings = () => (
       text="Download this file"
       style={{ marginLeft: "5em" }}
     />
-  </div>
+  </React.Fragment>
 );
 
 export default FontIconsSettings;

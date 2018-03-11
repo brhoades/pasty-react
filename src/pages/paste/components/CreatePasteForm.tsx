@@ -43,7 +43,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
     );
 
     return (
-      <div>
+      <React.Fragment>
         {loadingComponent}
         <Form
           onSubmit={this.props.onSubmit}
@@ -66,7 +66,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
             </Grid.Column>
           </Grid>
         </Form>
-      </div>
+      </React.Fragment>
     );
   }
 

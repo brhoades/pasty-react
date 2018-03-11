@@ -38,7 +38,7 @@ const ThemeDropdown = (props: WrappedFieldProps) => {
 
 
 const ThemeSettings = (props: {}) => (
-  <div>
+  <React.Fragment>
     <Header dividing={true}>
       Text Theme
     </Header>
@@ -47,7 +47,7 @@ const ThemeSettings = (props: {}) => (
       component={ThemeDropdown}
     />
     <ThemePreview />
-  </div>
+  </React.Fragment>
 );
 
 export default ThemeSettings;

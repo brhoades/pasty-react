@@ -49,7 +49,7 @@ class AddFileField extends React.Component<PropsType> {
     );
 
     return (
-      <div>
+      <React.Fragment>
         <FileCard
           header={header}
           attached={data.meta.submitFailed && data.meta.error}
@@ -64,7 +64,7 @@ class AddFileField extends React.Component<PropsType> {
           header="Error when processing this file"
           content={data.meta.error}
         />
-      </div>
+      </React.Fragment>
     );
   }
 

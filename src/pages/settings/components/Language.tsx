@@ -8,7 +8,7 @@ import LanguageDropdownInput from "./LanguageDropdownInput";
 
 
 const LanguageSettings = (props: {}) => (
-  <div>
+  <React.Fragment>
     <Header dividing={true}>
       Highlight Languages
     </Header>
@@ -22,7 +22,7 @@ const LanguageSettings = (props: {}) => (
       name="defaultlanguage"
       component={DefaultLanguageInput as any}
     />
-  </div>
+  </React.Fragment>
 );
 
 export default LanguageSettings;

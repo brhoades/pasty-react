@@ -11,11 +11,9 @@ const ThemePreview = () => {
   );
 
   return (
-    <div>
-      <pre>
-        <code className="hljs python" dangerouslySetInnerHTML={{__html: code.value}} />
-      </pre>
-    </div>
+    <pre>
+      <code className="hljs python" dangerouslySetInnerHTML={{__html: code.value}} />
+    </pre>
   );
 };
 

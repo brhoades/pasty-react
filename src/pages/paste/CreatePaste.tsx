@@ -24,14 +24,14 @@ export class CreatePaste extends React.Component<PropsType> {
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         {this.props.error && this.errorMessage()}
         <CreatePasteForm
           valid={this.props.valid}
           dirty={this.props.dirty}
           onSubmit={this.props.handleSubmit}
         />
-      </div>
+      </React.Fragment>
     );
   }
 

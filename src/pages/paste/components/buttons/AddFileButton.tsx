@@ -27,7 +27,7 @@ class AddFileButton extends React.Component<PropsType, {}> {
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         <input
           type="file"
           hidden={true}
@@ -38,7 +38,7 @@ class AddFileButton extends React.Component<PropsType, {}> {
         <Button onClick={this.uploadFile} secondary={true} type="button">
           Upload File
         </Button>
-      </div>
+      </React.Fragment>
     );
   }
 

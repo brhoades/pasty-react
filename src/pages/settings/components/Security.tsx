@@ -7,13 +7,13 @@ import KeySizeInput from "./KeySizeInput";
 
 
 const SecuritySettings = (props: {}) => (
-  <div>
+  <React.Fragment>
     <label>Key Size</label>
     <Field
       name="security.keysize"
       component={KeySizeInput}
     />
-  </div>
+  </React.Fragment>
 );
 
 export default SecuritySettings;

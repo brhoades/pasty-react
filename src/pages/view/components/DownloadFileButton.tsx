@@ -26,13 +26,11 @@ class DownloadFileButton extends React.Component<IFileByIndexPropsType> {
     );
 
     return (
-      <div>
-        <Popup
-          basic={true}
-          trigger={trigger}
-          content="Download this file"
-        />
-      </div>
+      <Popup
+        basic={true}
+        trigger={trigger}
+        content="Download this file"
+      />
     );
   }
 }

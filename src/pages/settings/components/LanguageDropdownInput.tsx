@@ -23,7 +23,7 @@ export default class LanguageDropdownInput extends React.PureComponent<WrappedFi
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         <label>
           Available Choices
         </label>
@@ -37,7 +37,7 @@ export default class LanguageDropdownInput extends React.PureComponent<WrappedFi
           onChange={this.onChange}
           style={this.props.style}
         />
-      </div>
+      </React.Fragment>
     );
   }
 

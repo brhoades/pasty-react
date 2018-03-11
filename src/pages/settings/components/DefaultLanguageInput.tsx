@@ -24,7 +24,7 @@ class DefaultLanguageInput extends React.Component<PropsType> {
 
   public render() {
     return (
-      <div>
+      <React.Fragment>
         <label>
           Default Choice
         </label>
@@ -37,7 +37,7 @@ class DefaultLanguageInput extends React.Component<PropsType> {
           value={this.props.input.value}
           onChange={this.onChange}
         />
-      </div>
+      </React.Fragment>
     );
   }
 

@@ -5,12 +5,12 @@ import FontIconSettings from "./FontIcon";
 
 
 const AppearanceSettings = (props: {}) => (
-  <div>
+  <React.Fragment>
     <Header dividing={true}>
       Appearance
     </Header>
     <FontIconSettings />
-  </div>
+  </React.Fragment>
 );
 
 export default AppearanceSettings;

@@ -17,13 +17,13 @@ export default class KeySizeInput extends React.PureComponent<WrappedFieldProps>
     );
 
     const description = (
-      <div>
+      <React.Fragment>
         Larger is better; used for <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a>.
-      </div>
+      </React.Fragment>
     );
 
     return (
-      <div>
+      <React.Fragment>
         <Form.Input
           value={this.props.input.value}
           type="number"
@@ -31,7 +31,7 @@ export default class KeySizeInput extends React.PureComponent<WrappedFieldProps>
           error={this.props.meta.invalid}
         />
         {this.props.meta.invalid ? error : description}
-      </div>
+      </React.Fragment>
     );
   }
 

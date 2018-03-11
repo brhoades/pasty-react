@@ -18,10 +18,10 @@ const PasteFileForms = (props: any) => {
   ));
 
   return (
-    <div>
+    <React.Fragment>
       {props.meta.error}
       {field}
-    </div>
+    </React.Fragment>
   );
 };
 

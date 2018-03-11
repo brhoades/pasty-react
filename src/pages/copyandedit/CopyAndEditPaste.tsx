@@ -52,14 +52,14 @@ export class CopyAndEditPaste extends React.PureComponent<PropsType> {
 
 
     return (
-      <div>
+      <React.Fragment>
         <ViewPaste
           hidden={true}
           location={this.props.location}
           match={this.props.match}
         />
         {this.props.state === VIEW_STATE.VIEWING && React.createElement(customInitialCreatePaste(files))}
-      </div>
+      </React.Fragment>
     );
   }
 }

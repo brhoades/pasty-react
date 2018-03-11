@@ -41,35 +41,31 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
   public render() {
     const {name, data} = this.props.fields;
     const header = (
-      <div>
-        <div style={{float: "left"}}>
-          <Form.Input
-            placeholder="hello_world.rb"
-            error={name.meta.error !== undefined}
-            onChange={this.nameOnChange}
-            defaultValue={name.input.value}
-          />
-        </div>
+      <div style={{float: "left"}}>
+        <Form.Input
+          placeholder="hello_world.rb"
+          error={name.meta.error !== undefined}
+          onChange={this.nameOnChange}
+          defaultValue={name.input.value}
+        />
       </div>
     );
 
     return (
-      <div>
+      <React.Fragment>
         <FileCard
           header={header}
           attached={data.meta.submitFailed && data.meta.error}
           actionbar={<AddTextFileActionsContainer index={this.props.index} />}
         >
-          <div>
-            <Form.TextArea
-              error={data.meta.submitFailed && data.meta.error !== undefined}
-              rows="20"
-              placeholder="puts 'Hello World!'"
-              label="File Contents"
-              onChange={this.textAreaOnChange}
-              defaultValue={data.input.value}
-            />
-          </div>
+          <Form.TextArea
+            error={data.meta.submitFailed && data.meta.error !== undefined}
+            rows="20"
+            placeholder="puts 'Hello World!'"
+            label="File Contents"
+            onChange={this.textAreaOnChange}
+            defaultValue={data.input.value}
+          />
         </FileCard>
         <Message
           error={true}
@@ -78,7 +74,7 @@ class AddTextFileField extends React.Component<PropsType, {highlight: string}> {
           header="Error when processing this file"
           content={data.meta.error}
         />
-      </div>
+      </React.Fragment>
     );
   }
 

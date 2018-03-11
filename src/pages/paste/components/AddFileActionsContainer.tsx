@@ -12,7 +12,7 @@ export interface IAddFileActionsProps {
 
 const AddFileActionsContainer = (props: IAddFileActionsProps) => (
   <div
-    style={{display: "inline-block"}}
+    style={{ display: "inline-block" }}
   >
     <Button.Group>
       <RemoveFileIcon index={props.index} />

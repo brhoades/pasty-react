@@ -64,7 +64,7 @@ export class ViewPaste extends React.Component<PropsType> {
 
   public render() {
     if (this.props.error) {
-      return (<div />);
+      return null;
     }
 
     if (this.props.state !== STATE.VIEWING) {
@@ -84,7 +84,7 @@ export class ViewPaste extends React.Component<PropsType> {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <h2
           style={{ display: "inline-block", paddingBottom: "1em" }}
         >
@@ -98,7 +98,7 @@ export class ViewPaste extends React.Component<PropsType> {
         </div>
 
         {this.renderPastes()}
-      </div>
+      </React.Fragment>
     );
   }
 

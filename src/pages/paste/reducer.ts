@@ -19,16 +19,10 @@ export enum STATE {
 
 export interface ICreatePasteReducer {
   state: STATE;
-  id: string;
-  key: string;
-  paste: Maybe<Paste>;
   progress: number;
 }
 
 const initial: ICreatePasteReducer = {
-  id: "",
-  key: "",
-  paste: new Maybe<Paste>(null),
   progress: 0,
   state: STATE.WAITING,
 };

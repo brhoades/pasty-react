@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.3
+* Added NonIdealState component with GenericNonIdealState.
+* Implemented React 16 exception catching for view/create and layout.
+
 ## 1.5.2
 * Bugfix for copy-and-edit paste being stuck in loading limbo.
 * Bugfix for refreshing pastes not working properly.

@@ -1,10 +1,10 @@
 import * as React from "react";
 import Menu from "semantic-ui-react/dist/es/collections/Menu";
 import Container from "semantic-ui-react/dist/es/elements/Container";
-import Header from "semantic-ui-react/dist/es/elements/Header";
 import Icon from "semantic-ui-react/dist/es/elements/Icon";
 
 import GeneralErrorMessage from "components/GeneralErrorMessage";
+import GenericNonIdealState from "components/GenericNonIdealState";
 import IconOrText from "components/IconOrText";
 
 
@@ -87,19 +87,51 @@ const getMenuItems = () => {
   ];
 };
 
-const Layout = ({ children }) => (
-  <React.Fragment>
-    <Menu inverted={true}>
-      <Container>
-        {...getMenuItems()}
-      </Container>
-    </Menu>
+interface ILayoutState {
+  error?: Error;
+  errorInfo?: React.ErrorInfo;
+}
 
-    <Container>
-      <GeneralErrorMessage key="generalerrrormessage" />
-      {...children}
-    </Container>
-  </React.Fragment>
-);
+export default class Layout extends React.Component<{}, ILayoutState> {
+  constructor(props) {
+    super(props);
 
-export default Layout;
+    this.state = {};
+  }
+
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    this.setState({
+      error,
+      errorInfo,
+    });
+  }
+
+  public render() {
+    if (this.state.error) {
+      return (
+        <div style={{ marginTop: "50px" }}>
+          <GenericNonIdealState
+            error={this.state.error}
+            errorInfo={this.state.errorInfo}
+            action="rendering the website"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <React.Fragment>
+        <Menu inverted={true}>
+          <Container>
+            {...getMenuItems()}
+          </Container>
+        </Menu>
+
+        <Container>
+          <GeneralErrorMessage key="generalerrormessage" />
+          {this.props.children}
+        </Container>
+      </React.Fragment>
+    );
+  }
+}

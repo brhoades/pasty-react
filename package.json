@@ -5,7 +5,7 @@
   "scripts": {
     "upload": "rm -rf ./dist && yarn build && cp aws-upload.conf.js dist/ && cd dist && s3-upload && rm aws-upload.conf.js",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --mode development -d --hot --progress --cache",
-    "devbuild": "cross-env NODE_ENV=development webpack --mode development -p --progress --hide-modules",
+    "devbuild": "cross-env NODE_ENV=development webpack --mode development -p --progress --hide-modules --devtool sourcemap",
     "build": "cross-env NODE_ENV=production webpack --mode production -p --progress --hide-modules",
     "stats": "cross-env NODE_ENV=production webpack --mode production --profile --json > stats.json",
     "lint": "tslint -p . -c tslint.json"

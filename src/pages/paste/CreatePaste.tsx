@@ -9,20 +9,46 @@ import { IPartialPasteFile, IPasteFormData, PasteFileTypes } from "reducers/form
 import { IReducer } from "reducers/index";
 import CreatePasteForm from "./components/CreatePasteForm";
 
+import GenericNonIdealState from "components/GenericNonIdealState";
+
+export interface ICreatePasteState {
+  error?: Error;
+  errorInfo?: React.ErrorInfo;
+}
+
 export interface ICreatePasteProps {
   initialValues?: Partial<IPasteFormData>;
 }
 
 export type PropsType = InjectedFormProps<IPasteFormData & ICreatePasteProps>;
 
-export class CreatePaste extends React.Component<PropsType> {
+export class CreatePaste extends React.Component<PropsType, ICreatePasteState> {
   public static defaultProps: Partial<ICreatePasteProps> = {
     initialValues: {
       files: [],
     },
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    this.setState({
+      error,
+      errorInfo,
+    });
+  }
+
   public render() {
+    if (this.state.error) {
+      return (
+        <GenericNonIdealState error={this.state.error} errorInfo={this.state.errorInfo} action="creating a paste" />
+      );
+    }
+
     return (
       <React.Fragment>
         {this.props.error && this.errorMessage()}

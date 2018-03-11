@@ -9,11 +9,17 @@ import config from "configfile";
 import Maybe from "helpers/maybe";
 import { IReducer } from "reducers/index";
 
+import GenericNonIdealState from "components/GenericNonIdealState";
 import PasteLoading from "components/PasteLoading";
 import CopyAndEditIcon from "./components/CopyAndEditIcon";
 import CopyShortLinkIcon from "./components/CopyShortLinkIcon";
 import DisplayFile from "./components/DisplayFile";
 import { STATE } from "./reducer";
+
+export interface IViewPasteState {
+  error?: Error;
+  errorInfo?: React.ErrorInfo;
+}
 
 export interface IViewPasteStateProps {
   error: boolean;
@@ -43,7 +49,7 @@ export interface IViewPasteProps {
 
 type PropsType = IViewPasteStateProps & IViewPasteDispatchProps & IViewPasteProps;
 
-export class ViewPaste extends React.Component<PropsType> {
+export class ViewPaste extends React.Component<PropsType, IViewPasteState> {
   public static defaultProps: Partial<IViewPasteProps> = {
     // for loading pastes in the background. Hides the display.
     hidden: false,
@@ -52,7 +58,16 @@ export class ViewPaste extends React.Component<PropsType> {
   constructor(props) {
     super(props);
 
+    this.state = {};
+
     this.updatePaste(this.props);
+  }
+
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    this.setState({
+      error,
+      errorInfo,
+    });
   }
 
   public componentWillReceiveProps(newProps) {
@@ -65,6 +80,12 @@ export class ViewPaste extends React.Component<PropsType> {
   public render() {
     if (this.props.error) {
       return null;
+    }
+
+    if (this.state.error) {
+      return (
+        <GenericNonIdealState error={this.state.error} errorInfo={this.state.errorInfo} action="viewing a paste" />
+      );
     }
 
     if (this.props.state !== STATE.VIEWING) {

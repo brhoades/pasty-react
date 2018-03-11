@@ -70,8 +70,8 @@ export class ViewPaste extends React.Component<PropsType> {
     if (this.props.state !== STATE.VIEWING) {
       return (
         <PasteLoading
-          topBarLabel="Download"
-          bottomBarLabel="Decrypt"
+          topBarLabel="Downloaded"
+          bottomBarLabel="Decrypted"
           topBarKey={STATE.DOWNLOADING}
           bottomBarKey={STATE.DECRYPTING}
           type="viewPaste"

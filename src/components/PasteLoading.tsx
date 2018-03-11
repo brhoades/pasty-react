@@ -13,7 +13,6 @@ import Loader from "components/Loader";
 
 export interface IPasteLoadingStateProps {
   error: boolean;
-  message: string;
   progress: number;
   state: CREATE_STATE | VIEW_STATE;
 }
@@ -44,8 +43,9 @@ const PasteLoading = (props: PropsType) => {
       <div style={style}>
         <Loader
           progress={props.progress * 100 % 100}
-          centerLabel={`${(props.progress * 100).toFixed(0)}%`}
-          upperLabel={props.message}
+          indeterminateLabel="Loading"
+          label={`${(props.progress * 100).toFixed(0)}%`}
+          subLabel={props.state === props.bottomBarKey ? props.bottomBarLabel : props.topBarLabel}
           secondStage={props.state === props.bottomBarKey}
         />
       </div>
@@ -55,7 +55,6 @@ const PasteLoading = (props: PropsType) => {
 
 const mapStateToProps = (state: IReducer, ownProps: IPasteLoadingProps): IPasteLoadingStateProps => ({
   error: state.messages.general.content !== "",
-  message: state[ownProps.type].stateMessage,
   progress: state[ownProps.type].progress,
   state: state[ownProps.type].state,
 });

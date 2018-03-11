@@ -100,6 +100,10 @@
   font-size: 0.5em;
 }
 
+.circle-label-subtext {
+  font-size: 0.25em;
+}
+
 .start-progress-load {
   transform: rotate(-90deg);
   transform-origin: 50px 50px;

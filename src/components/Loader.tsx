@@ -9,8 +9,9 @@ export interface ILoaderState {
 }
 
 export interface ILoaderProps {
-  centerLabel: string;
-  upperLabel: string;
+  label: string;
+  indeterminateLabel: string;
+  subLabel: string;
   progress: number;
   secondStage: boolean;
 }
@@ -86,45 +87,58 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
 
   public render() {
     return (
-      <svg className={style["circular-loader"]} viewBox="25 25 50 50" >
-        <g
-          ref={(container) => this.container = container}
-          id="loader-container"
-          className={style["circular-loader-anim"]}
-        >
-          <circle
-            ref={(outline) => this.outline = outline}
-            className={style["loader-outline"]}
-            cx="50"
-            cy="50"
-            r="20"
-            fill="none"
-            stroke={this.props.secondStage ? this.secondaryColor : this.outlineColor}
-            strokeWidth="2"
-          />
-          <circle
-            ref={(path) => this.path = path}
-            className={`${style["loader-path"]} ${style["loader-path-anim"]}`}
-            cx="50"
-            cy="50"
-            r="20"
-            fill="none"
-            stroke={this.props.secondStage ? this.primaryColor : this.secondaryColor}
-            strokeWidth="2"
-          />
-        </g>
-        <text
-          x="100%"
-          y="100%"
-          dy="0.25em"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-          fill="#fff"
-          className={style["circle-label-text"]}
-        >
-          {!this.state.indeterminate && this.props.centerLabel}
-        </text>
-      </svg>
+      <div>
+        <svg className={style["circular-loader"]} viewBox="25 25 50 50" >
+          <g
+            ref={(container) => this.container = container}
+            id="loader-container"
+            className={style["circular-loader-anim"]}
+          >
+            <circle
+              ref={(outline) => this.outline = outline}
+              className={style["loader-outline"]}
+              cx="50"
+              cy="50"
+              r="20"
+              fill="none"
+              stroke={this.props.secondStage ? this.secondaryColor : this.outlineColor}
+              strokeWidth="2"
+            />
+            <circle
+              ref={(path) => this.path = path}
+              className={`${style["loader-path"]} ${style["loader-path-anim"]}`}
+              cx="50"
+              cy="50"
+              r="20"
+              fill="none"
+              stroke={this.props.secondStage ? this.primaryColor : this.secondaryColor}
+              strokeWidth="2"
+            />
+          </g>
+          <text
+            x="100%"
+            y="100%"
+            dy="0.25em"
+            textAnchor="middle"
+            alignmentBaseline="middle"
+            fill="#fff"
+            className={style["circle-label-text"]}
+          >
+            {this.state.indeterminate ? this.props.indeterminateLabel : this.props.label}
+          </text>
+          <text
+            x="100%"
+            y="100%"
+            dy="1.5em"
+            textAnchor="middle"
+            alignmentBaseline="middle"
+            fill="#fff"
+            className={style["circle-label-subtext"]}
+          >
+            {!this.state.indeterminate && this.props.subLabel}
+          </text>
+        </svg>
+      </div>
     );
   }
 

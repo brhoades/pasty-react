@@ -4,37 +4,17 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: {
     build: "./src/App.tsx",
-    hljs: "highlight.js",
-    react: [
-      "react",
-      "react-router",
-      "react-redux",
-      "react-router-redux",
-      "react-router-dom",
-      "react-dom",
-    ],
-    redux: [
-      "redux",
-      "redux-form",
-      "redux-saga",
-    ],
-    semantic: "semantic-ui-react",
-    vendor: [
-      "buffer",
-      "clipboard",
-      "js-cookie",
-      "lodash",
-    ],
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
     filename: "[name].[hash:8].js",
-    chunkFilename: "[name].[hash:8].js",
+    chunkFilename: "[name].[chunkhash:8].js",
   },
   module: {
     rules: [
@@ -121,27 +101,54 @@ module.exports = {
 if (process.env.NODE_ENV === "production") {
   module.exports.devtool = "#source-map";
   module.exports.output.publicPath = "./";
+  module.exports.optimization = Object.assign((module.exports.optimization || {}), {
+    splitChunks: {
+     chunks: "initial",
+      maxInitialRequests: 8,
+      cacheGroups: {
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        react: {
+          test: /[\\/]node_modules[\\/].*?react.*?[\\/]/,
+          priority: -10,
+        },
+        semantic: {
+          test: /[\\/]node_modules[\\/].*?semantic.*?[\\/]/,
+          priority: -5,
+        },
+        hjs: {
+          test: /[\\/]node_modules[\\/].*?highlight.*?[\\/]/,
+          priority: -5,
+        },
+      },
+    },
+  });
+
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: "\"production\"",
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      cache: true,
-      minimize: true,
-      parallel: true,
-      sourceMap: true,
-      warnings: false,
-    }),
     new webpack.LoaderOptionsPlugin({
       debug: false,
       minimize: true,
     }),
+    new UglifyJsPlugin({
+      cache: true,
+      parallel: 4,
+      sourceMap: true,
+      uglifyOptions: {
+        toplevel: true,
+      },
+    }),
   ])
 } else {
   module.exports.plugins = (module.exports.plugins || []).concat([
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ]);
   // https://github.com/webpack/webpack/issues/6642#issuecomment-370222543
   module.exports.output.globalObject = 'this';

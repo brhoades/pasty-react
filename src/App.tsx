@@ -20,6 +20,7 @@ const App = () => {
   // FIXME: Put this somewhere else?
   hljs.registerLanguage("irc", irc);
 
+
   return (
     <Provider store={store}>
       <div>

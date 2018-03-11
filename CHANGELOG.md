@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.1
+* Added webpack config for splitChunks. Prod was using only a single chunk.
+
 ## 1.5.0
 * react 15.6 -> 16.0
   * react-dom 15.6 -> 16.0

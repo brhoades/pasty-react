@@ -5273,8 +5273,8 @@ pinkie-promise@^2.0.0:
     pinkie "^2.0.0"
 
 pinkie@^2.0.0:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.5.tgz#cfde580832d90abfc5face639fbd2698503d5b87"
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
 pkg-dir@^1.0.0:
   version "1.0.0"

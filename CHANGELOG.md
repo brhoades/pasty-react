@@ -19,7 +19,6 @@
 * Added new, custom two-stage loading animation.
 * Cleaned up some unncessary divs, moved others to React.Fragments
 
-
 ## 1.4.0
 * Can now copy and edit a Paste.
 * Added noscript support.

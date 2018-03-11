@@ -13,6 +13,8 @@
   * Common components src/components.
   * Helpers src/helpers (selectors, maybe, types).
 * Now using webpack / TypeScript aliases.
+* Reorganized paste reducer into separate view / create paste reducers.
+* Added new, custom two-stage loading animation.
 
 
 ## 1.4.0

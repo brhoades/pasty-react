@@ -18,10 +18,10 @@ export interface IPasteLoadingStateProps {
 }
 
 export interface IPasteLoadingProps {
-  topBarLabel: string;
-  bottomBarLabel: string;
-  topBarKey: CREATE_STATE | VIEW_STATE;
-  bottomBarKey: CREATE_STATE | VIEW_STATE;
+  firstStageKey: CREATE_STATE | VIEW_STATE;
+  firstStageLabel: string;
+  secondStageKey: CREATE_STATE | VIEW_STATE;
+  secondStageLabel: string;
   type: string;
 }
 
@@ -34,9 +34,6 @@ const PasteLoading = (props: PropsType) => {
     marginRight: "auto",
     width: "200px",
   };
-  const topProgress = props.state === props.topBarKey ? props.progress * 100 : 100;
-  const bottomProgress = props.state === props.bottomBarKey ? props.progress * 100 : 0;
-  console.log(`${props.state} =?= ${props.bottomBarKey}`);
 
   return (
     <Dimmer active={!props.error} page={true}>
@@ -45,8 +42,8 @@ const PasteLoading = (props: PropsType) => {
           progress={props.progress * 100 % 100}
           indeterminateLabel="Loading"
           label={`${(props.progress * 100).toFixed(0)}%`}
-          subLabel={props.state === props.bottomBarKey ? props.bottomBarLabel : props.topBarLabel}
-          secondStage={props.state === props.bottomBarKey}
+          subLabel={props.state === props.secondStageKey ? props.secondStageLabel : props.firstStageLabel}
+          secondStage={props.state === props.secondStageKey}
         />
       </div>
     </Dimmer>

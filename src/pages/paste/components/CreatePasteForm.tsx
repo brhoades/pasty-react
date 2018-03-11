@@ -34,10 +34,10 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
   public render() {
     const loadingComponent = this.props.state !== STATE.WAITING && (
       <PasteLoading
-        topBarLabel="Encrypted"
-        bottomBarLabel="Uploaded"
-        topBarKey={STATE.ENCRYPTING}
-        bottomBarKey={STATE.UPLOADING}
+        firstStageLabel="Encrypted"
+        secondStageLabel="Uploaded"
+        firstStageKey={STATE.ENCRYPTING}
+        secondStageKey={STATE.UPLOADING}
         type="createPaste"
       />
     );

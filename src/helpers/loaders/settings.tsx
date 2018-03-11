@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { connect, Dispatch } from "react-redux";
 import { readSettings } from "actions/creators";
+import { connect, Dispatch } from "react-redux";
 import { IReducer } from "reducers/index";
 
 

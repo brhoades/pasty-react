@@ -3,8 +3,8 @@ import { HashRouter, Route } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 
 import AboutPasty from "pages/about/AboutPasty";
-import Layout from "pages/layout/Layout";
 import CopyAndEditPaste from "pages/copyandedit/CopyAndEditPaste";
+import Layout from "pages/layout/Layout";
 import CreatePaste from "pages/paste/CreatePaste";
 import SettingsForm from "pages/settings/Settings";
 import ViewPaste from "pages/view/ViewPaste";

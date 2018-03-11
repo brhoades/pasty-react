@@ -37,13 +37,16 @@ const PasteLoading = (props: PropsType) => {
   };
   const topProgress = props.state === props.topBarKey ? props.progress * 100 : 100;
   const bottomProgress = props.state === props.bottomBarKey ? props.progress * 100 : 0;
+  console.log(`${props.state} =?= ${props.bottomBarKey}`);
 
   return (
     <Dimmer active={!props.error} page={true}>
       <div style={style}>
         <Loader
-          progress={(props.progress * 100)}
-          label={`${(props.progress * 100).toFixed(0)}`}
+          progress={props.progress * 100 % 100}
+          centerLabel={`${(props.progress * 100).toFixed(0)}%`}
+          upperLabel={props.message}
+          secondStage={props.state === props.bottomBarKey}
         />
       </div>
     </Dimmer>

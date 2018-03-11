@@ -66,30 +66,22 @@
 }
 @-webkit-keyframes color {
   0% {
-    stroke: #70c542;
   }
   40% {
-    stroke: #70c542;
   }
   66% {
-    stroke: #70c542;
   }
   80%, 90% {
-    stroke: #70c542;
   }
 }
 @keyframes color {
   0% {
-    stroke: #70c542;
   }
   40% {
-    stroke: #70c542;
   }
   66% {
-    stroke: #70c542;
   }
   80%, 90% {
-    stroke: #70c542;
   }
 }
 

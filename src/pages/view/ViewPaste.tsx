@@ -74,7 +74,7 @@ export class ViewPaste extends React.Component<PropsType> {
           bottomBarLabel="Decrypt"
           topBarKey={STATE.DOWNLOADING}
           bottomBarKey={STATE.DECRYPTING}
-          type="createPaste"
+          type="viewPaste"
         />
       );
     }

@@ -5,11 +5,14 @@ const style = require("css/loader.css");
 export interface ILoaderState {
   indeterminate: boolean;
   transitioning: boolean;
+  complete: boolean;
 }
 
 export interface ILoaderProps {
-  label: string;
+  centerLabel: string;
+  upperLabel: string;
   progress: number;
+  secondStage: boolean;
 }
 
 export default class Loader extends React.Component<ILoaderProps, ILoaderState> {
@@ -17,28 +20,31 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
   private container;
   private outline;
 
+  private primaryColor = "#70c542";
+  private secondaryColor = "#2185d0";
+  private outlineColor = "#333";
+
   constructor(props) {
     super(props);
 
     this.state = {
+      complete: false,
       indeterminate: true,
       transitioning: false,
     };
   }
 
   public shouldComponentUpdate(nextProps, nextState) {
-    return true;
+    return !this.state.complete;
   }
 
   public componentWillReceiveProps(nextProps) {
     // Do not allow updates until transition from indetermiante is finished.
-    if (this.state.transitioning) {
-      console.log("Currently transitioning; bailing");
+    if (this.state.transitioning || this.state.complete) {
       return;
     }
 
-    if (this.props.progress === 0 && nextProps.progress !== 0) {
-      console.log("Starting transition");
+    if (this.state.indeterminate && this.props.progress === 0 && nextProps.progress !== 0) {
       // transition to a loading circle from an indeterminate loading circle
       const oneOffTransition = (e) => {
         if (e.currentTarget.dataset.triggered) {
@@ -64,9 +70,17 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
       this.setState({
         transitioning: true,
       });
-
-    } else if (this.props.progress !== 0) {
-      this.progress(nextProps.progress);
+    } else if (!this.state.indeterminate) {
+      // Mark as complete if second stage and nearly 100%,
+      // otherwise resetting reducer on finish looks odd.
+      if (this.props.secondStage && this.props.progress > nextProps.progress) {
+        this.setState({
+          complete: true,
+        });
+        this.progress(100);
+      } else {
+        this.progress(nextProps.progress);
+      }
     }
   }
 
@@ -85,7 +99,7 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
             cy="50"
             r="20"
             fill="none"
-            stroke="#333"
+            stroke={this.props.secondStage ? this.secondaryColor : this.outlineColor}
             strokeWidth="2"
           />
           <circle
@@ -95,7 +109,7 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
             cy="50"
             r="20"
             fill="none"
-            stroke="#70c542"
+            stroke={this.props.secondStage ? this.primaryColor : this.secondaryColor}
             strokeWidth="2"
           />
         </g>
@@ -108,7 +122,7 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
           fill="#fff"
           className={style["circle-label-text"]}
         >
-          {this.props.label}
+          {!this.state.indeterminate && this.props.centerLabel}
         </text>
       </svg>
     );

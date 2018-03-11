@@ -1,6 +1,6 @@
 # Changelog
 
-## NEXT
+## 1.5.0
 * react 15.6 -> 16.0
   * react-dom 15.6 -> 16.0
 * webpack 2.3 -> 4.0

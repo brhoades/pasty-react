@@ -26,7 +26,7 @@ export interface ICopyAndEditPasteProps {
 }
 
 export interface ICopyAndEditPasteDispatchProps {
-  state: CREATE_STATE | VIEW_STATE;
+  viewState: VIEW_STATE;
   paste: Maybe<Paste>;
 }
 
@@ -58,7 +58,7 @@ export class CopyAndEditPaste extends React.PureComponent<PropsType> {
           location={this.props.location}
           match={this.props.match}
         />
-        {this.props.state === VIEW_STATE.VIEWING && React.createElement(customInitialCreatePaste(files))}
+        {this.props.viewState === VIEW_STATE.VIEWING && React.createElement(customInitialCreatePaste(files))}
       </React.Fragment>
     );
   }
@@ -67,7 +67,7 @@ export class CopyAndEditPaste extends React.PureComponent<PropsType> {
 export const mapStateToProps = (state: IReducer, ownProps: ICopyAndEditPasteProps)
                              : ICopyAndEditPasteDispatchProps => ({
   paste: state.viewPaste.paste,
-  state: state.viewPaste.state,
+  viewState: state.viewPaste.state,
 });
 
 export default connect(mapStateToProps, {})(CopyAndEditPaste);

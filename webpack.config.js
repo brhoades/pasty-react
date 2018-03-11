@@ -148,7 +148,7 @@ if (process.env.NODE_ENV === "production") {
   ])
 } else {
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ]);
   // https://github.com/webpack/webpack/issues/6642#issuecomment-370222543
   module.exports.output.globalObject = 'this';

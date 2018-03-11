@@ -93,8 +93,10 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
 }
 
 const mapStateToProps = (state: IReducer, ownProps: ICreatePasteFormProps): ICreatePasteFormStateProps => {
+  const form = state.form.createpaste;
+
   return {
-    files: state.form.createpaste.values.files,
+    files: form.values ? form.values.files : [],
     state: state.createPaste.state,
   };
 };

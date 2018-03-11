@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.5.2
+* Bugfix for copy-and-edit paste being stuck in loading limbo.
+
 ## 1.5.1
 * Added webpack config for splitChunks. Prod was using only a single chunk.
 

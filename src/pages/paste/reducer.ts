@@ -46,6 +46,7 @@ const createPaste = (state: ICreatePasteReducer = initial, action) => {
         ...initial,
       };
 
+    case REDIRECT_TO_SUBMITTED_PASTE:
     case SET_DECRYPTED_PASTE:
       return {
         ...initial,

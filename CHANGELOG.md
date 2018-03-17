@@ -1,6 +1,6 @@
 # Changelog
 
-## NEXT
+## 1.5.5
 * Added version indicator on header / in about.
 
 ## 1.5.4

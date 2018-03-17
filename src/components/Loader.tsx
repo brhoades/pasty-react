@@ -114,33 +114,37 @@ export default class Loader extends React.Component<ILoaderProps, ILoaderState> 
             strokeWidth="2"
           />
         </g>
-        <text
-          x="100%"
-          y="100%"
-          dy="0.25em"
+        <g
           textAnchor="middle"
-          alignmentBaseline="middle"
-          fill="#fff"
-          className={style["circle-label-text"]}
         >
-          {this.state.indeterminate ? this.props.indeterminateLabel : this.props.label}
-        </text>
-        <text
-          x="100%"
-          y="100%"
-          dy="1.5em"
-          textAnchor="middle"
-          alignmentBaseline="middle"
-          fill="#fff"
-          className={style["circle-label-subtext"]}
-        >
-          {!this.state.indeterminate && this.props.subLabel}
-        </text>
+          <text
+            x="100%"
+            y="100%"
+            fill="#fff"
+            className={style["circle-label-text"]}
+            dominantBaseline={(this.state.indeterminate || !this.props.subLabel) ? "middle" : ""}
+          >
+            {this.state.indeterminate ? this.props.indeterminateLabel : this.props.label}
+          </text>
+          <text
+            x="100%"
+            y="100%"
+            dy="1.25em"
+            fill="#fff"
+            className={style["circle-label-subtext"]}
+          >
+            {!this.state.indeterminate && this.props.subLabel}
+          </text>
+        </g>
       </svg>
     );
   }
 
   private progress(value: number) {
     this.path.style.strokeDashoffset = 150 - value * 1.26;
+  }
+
+  private labelOffset() {
+    return this.props.subLabel ? "0" : "0.25em";
   }
 }

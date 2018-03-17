@@ -2,7 +2,6 @@ import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import Dimmer from "semantic-ui-react/dist/es/modules/Dimmer";
-import Progress from "semantic-ui-react/dist/es/modules/Progress";
 
 import Maybe from "helpers/maybe";
 import { STATE as CREATE_STATE } from "pages/paste/reducer";

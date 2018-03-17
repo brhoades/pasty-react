@@ -11,17 +11,17 @@ import IconOrText from "components/IconOrText";
 const debugItems = () => ([
   (
     <Menu.Item href="#/view/myI22p0B/ggc_2ABIbA4Br20qBCu4K77tMLOBCEel" key="viewimage">
-    Image (V2)
+      Bin (V2)
     </Menu.Item>
   ),
   (
     <Menu.Item href="#/view/wpwONy0g/I5oaBMO1oIlmKulgGp46Me-A_dgpdyoE" key="codefile">
-      Code (V2)
+      Cd (V2)
     </Menu.Item>
   ),
   (
     <Menu.Item href="#/view/KnsiyfKF/cydhwk6K2xv20aHiPm3oI39dPbxJjeND" key="plainfile">
-      Plain (V2)
+      Tx (V2)
     </Menu.Item>
   ),
   (
@@ -41,12 +41,12 @@ const debugItems = () => ([
   ),
   (
     <Menu.Item href="#/view/E2HBEJs3/vBuO83c3FcHqnbh1_BLqd.rAhLnmI_qE" key="v3code">
-      V3 Code BSON
+      V3 Tx BSON
     </Menu.Item>
   ),
   (
     <Menu.Item href="#/view/BJwRQWIk/puq7oKwfI8d74.FjLb6xJ4j9w_yJ658h" key="v3binary">
-      V3 Binary BSON
+      V3 Bin BSON
     </Menu.Item>
   ),
   (
@@ -57,6 +57,11 @@ const debugItems = () => ([
   (
     <Menu.Item href="#/view/SkV9ta0Q/Bi__qFjhxua.a31sjyNcogrAEisyK-1r" key="v3mixed">
       V3 Mixed
+    </Menu.Item>
+  ),
+  (
+    <Menu.Item href="#/load" key="loading">
+      Loading
     </Menu.Item>
   ),
 ]);

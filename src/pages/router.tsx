@@ -9,6 +9,8 @@ import CreatePaste from "pages/paste/CreatePaste";
 import SettingsForm from "pages/settings/Settings";
 import ViewPaste from "pages/view/ViewPaste";
 
+import Loader from "pages/loader/Loader";
+
 
 const Router = ({ history }) => (
   <ConnectedRouter history={history}>
@@ -30,6 +32,10 @@ const Router = ({ history }) => (
       <Route
         path="/settings"
         component={SettingsForm}
+      />
+      <Route
+        path="/load"
+        component={Loader}
       />
     </Layout>
   </ConnectedRouter>

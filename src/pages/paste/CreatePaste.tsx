@@ -45,7 +45,11 @@ export class CreatePaste extends React.Component<PropsType, ICreatePasteState> {
   public render() {
     if (this.state.error) {
       return (
-        <GenericNonIdealState error={this.state.error} errorInfo={this.state.errorInfo} action="creating a paste" />
+        <GenericNonIdealState
+          error={this.state.error}
+          errorInfo={this.state.errorInfo}
+          action="creating a paste"
+        />
       );
     }
 

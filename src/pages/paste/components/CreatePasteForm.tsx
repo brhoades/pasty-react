@@ -62,7 +62,7 @@ class CreatePasteForm extends React.PureComponent<PropsType> {
               </Button.Group>
             </Grid.Column>
             <Grid.Column width={8} textAlign="right">
-              <PasteButton valid={this.props.dirty} />
+              <PasteButton valid={this.props.dirty && this.props.files.length > 0} />
             </Grid.Column>
           </Grid>
         </Form>

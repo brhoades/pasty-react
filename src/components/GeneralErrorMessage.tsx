@@ -26,7 +26,6 @@ const mapStateToProps = (state: IReducer, ownProps: {}): IGeneralErrorMessageSta
   header: state.messages.general.header,
 });
 
-
 const mapDispatchToProps = (dispatch: Dispatch<IReducer>): {} => ({
 });
 

@@ -1,8 +1,9 @@
 # Changelog
 
-## NEXT
+## 1.5.4
 * Centered new loading animation.
 * Cleaned up CopyAndEditPaste. Fixed bug where, when submitting, if there were an error the edited paste would be lost.
+* Fixed bug where you could edit a paste, make it empty, and submit it.
 
 ## 1.5.3
 * Added NonIdealState component with GenericNonIdealState.

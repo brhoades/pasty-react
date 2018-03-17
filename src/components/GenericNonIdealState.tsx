@@ -31,27 +31,27 @@ const GenericNonIdealState = (props: PropsType) => {
 
   const description = (
     <React.Fragment>
-        <p>
-          An error occurred when {props.action} and it was not properly handled.
-          Consider submitting the log below with details about what led to this error to the developers
-          on <a href="https://github.com/brhoades/pasty-react/issues/new">brhoades/pasty-react</a>.
-        </p>
-        <pre style={descriptionPreStyle as any}>
-          <code>
-            {props.error.name} "{props.error.message}"
-            {props.errorInfo.componentStack}
-            <br />
-            -----------------------<br />
-            <br />
-            {props.error.stack}
-            <br />
-            -----------------------<br />
-            <br />
-            Store at time of error:<br />
-            {props.state}
-          </code>
-        </pre>
-      </React.Fragment>
+      <p>
+        An error occurred when {props.action} and it was not properly handled.
+        Consider submitting the log below with details about what led to this error to the developers
+        on <a href="https://github.com/brhoades/pasty-react/issues/new">brhoades/pasty-react</a>.
+      </p>
+      <pre style={descriptionPreStyle as any}>
+        <code>
+          {props.error.name} "{props.error.message}"
+          {props.errorInfo.componentStack}
+          <br />
+          -----------------------<br />
+          <br />
+          {props.error.stack}
+          <br />
+          -----------------------<br />
+          <br />
+          Store at time of error:<br />
+          {props.state}
+        </code>
+      </pre>
+    </React.Fragment>
   );
 
   return (

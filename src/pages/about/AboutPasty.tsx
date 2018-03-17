@@ -4,6 +4,7 @@ import Header from "semantic-ui-react/dist/es/elements/Header";
 
 import IconOrText from "components/IconOrText";
 
+declare var VERSION: string;
 
 const AboutPasty = () => (
   <Container text={true}>
@@ -13,7 +14,13 @@ const AboutPasty = () => (
         <Header.Subheader
           style={{ display: "inline-block", paddingLeft: "0.5em" }}
         >
-          React
+          React &nbsp;
+          <a
+            style={{ display: "inline-block", fontSize: "0.7rem" }}
+            href={`https://github.com/brhoades/pasty-react/releases/tag/v${VERSION}`}
+          >
+            v{VERSION}
+          </a>
         </Header.Subheader>
       </Header.Content>
     </Header>

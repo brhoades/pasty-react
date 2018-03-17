@@ -7,6 +7,8 @@ import GeneralErrorMessage from "components/GeneralErrorMessage";
 import GenericNonIdealState from "components/GenericNonIdealState";
 import IconOrText from "components/IconOrText";
 
+declare var VERSION: string;
+
 
 const debugItems = () => ([
   (
@@ -69,7 +71,18 @@ const debugItems = () => ([
 // We render extra menu items when we debug locally.
 const getMenuItems = () => {
   let menu: JSX.Element[] = [
-    <Menu.Item href="#/about" header={true} key="about" className="header">PASTY</Menu.Item>,
+    (
+      <Menu.Item href="#/about" header={true} key="about" className="header">
+        <React.Fragment>
+          <div className="header">
+            PASTY
+            <div className="subheader">
+              v{VERSION}
+            </div>
+          </div>
+        </React.Fragment>
+      </Menu.Item>
+    ),
     <Menu.Item href="#/" key="home">Paste</Menu.Item>,
   ];
 

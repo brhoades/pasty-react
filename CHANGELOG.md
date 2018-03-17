@@ -1,5 +1,9 @@
 # Changelog
 
+## NEXT
+* Centered new loading animation.
+* Cleaned up CopyAndEditPaste. Fixed bug where, when submitting, if there were an error the edited paste would be lost.
+
 ## 1.5.3
 * Added NonIdealState component with GenericNonIdealState.
 * Implemented React 16 exception catching for view/create and layout.

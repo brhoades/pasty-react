@@ -4,7 +4,7 @@ import * as React from "react";
 import { connect, Dispatch } from "react-redux";
 import _ = require("underscore");
 
-import { clearPaste, getPaste, setHighlightedLines } from "actions/creators";
+import { getPaste, setHighlightedLines } from "actions/creators";
 import config from "configfile";
 import Maybe from "helpers/maybe";
 import { IReducer } from "reducers/index";
@@ -29,7 +29,6 @@ export interface IViewPasteStateProps {
 
 export interface IViewPasteDispatchProps {
   getPasteAction: (id: string, key: string, highlight: number[][]) => void;
-  clearPasteAction: (id: string) => void;
   setHighlightedLines: (index: number, lines: number[]) => void;
 }
 
@@ -172,7 +171,6 @@ export const mapStateToProps = (state, ownProps): IViewPasteStateProps => ({
 });
 
 export const mapDispatchToProps = (dispatch: Dispatch<IReducer>): IViewPasteDispatchProps => ({
-  clearPasteAction: (id: string) => dispatch(clearPaste(id)),
   getPasteAction: (id: string, key: string, highlight: number[][]) => (
     dispatch(getPaste(id, key, highlight, `${config.get}${id}`))
   ),

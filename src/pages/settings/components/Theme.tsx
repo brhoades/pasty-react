@@ -44,7 +44,7 @@ const ThemeSettings = (props: {}) => (
     </Header>
     <Field
       name="theme"
-      component={ThemeDropdown}
+      component={ThemeDropdown as any} // complaints about missing input/meta
     />
     <ThemePreview />
   </React.Fragment>

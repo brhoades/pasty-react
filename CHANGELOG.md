@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.6
+* pasty-core 0.4.1 for hoek vulnerability
+* misc minor package upgrades.
+
 ## 1.5.5
 * Added version indicator on header / in about.
 

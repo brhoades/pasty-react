@@ -11,9 +11,10 @@ const PasteFileForms = (props: any) => {
   const field = props.fields.map((fieldName, index) => (
     <Fields
       key={fieldName}
-      component={PasteFileForm}
+      component={PasteFileForm as any}  // complains about missing index
       names={[`${fieldName}.type`, `${fieldName}.name`, `${fieldName}.data`, `${fieldName}.meta`]}
-      props={{ index, name: fieldName }}
+      index={index}
+      name={fieldName}
     />
   ));
 

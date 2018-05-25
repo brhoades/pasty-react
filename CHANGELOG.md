@@ -1,4 +1,6 @@
 # Changelog
+## 1.5.7
+* Fixed bug with post error handling from the server.
 
 ## 1.5.6
 * pasty-core 0.4.1 for hoek vulnerability

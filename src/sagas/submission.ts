@@ -57,14 +57,19 @@ function createUploadPasteXHR(action) {
     xhr.open("POST", action.url, true);
     xhr.setRequestHeader("Content-type", "application/octet-stream");
 
-    xhr.onload = (e) => {
-      if ((e.target as any).status !== 200) {
+    xhr.onload = (event) => {
+      if ((event.target as any).status !== 200) {
         let message = "";
         try {
-          const data = JSON.parse((e.target as any).responseText.replace("\\'", "'").replace("\\n", ""));
+          const data = JSON.parse((event.target as any).responseText.replace("\\'", "'").replace("\\n", ""));
           message = data.error;
-        } catch (e) {
-          message = `HTTP${(e.target as any).status}: ${(e.target as any).statusText}`;
+        } catch (error) {
+          if (event.target) {
+            message = ("Error when parsing server response: "
+                       + `${(event.target as any).statusText} (${(event.target as any).status})`);
+          } else {
+            message = `An unknown error has occurred (${error.message})`;
+          }
         }
 
         emitter({
@@ -73,7 +78,7 @@ function createUploadPasteXHR(action) {
         });
       } else {
         emitter({
-          data: e.target,
+          data: event.target,
           type: "done",
         });
       }

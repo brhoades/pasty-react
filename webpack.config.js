@@ -3,7 +3,6 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const pkg = require("./package.json");
@@ -149,13 +148,4 @@ if (process.env.NODE_ENV === "production") {
       },
     }),
   ])
-} else {
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    // new BundleAnalyzerPlugin(),
-    new webpack.DefinePlugin({
-      "VERSION": `"${pkg.version}"`,
-    }),
-  ]);
-  // https://github.com/webpack/webpack/issues/6642#issuecomment-370222543
-  module.exports.output.globalObject = 'this';
 }

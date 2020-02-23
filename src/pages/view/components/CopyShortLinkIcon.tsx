@@ -17,7 +17,7 @@ export interface ICopyShortLinkIconState {
 }
 
 class CopyShortLinkIcon extends React.Component<ICopyShortLinkIconState, undefined> {
-  public componentWillMount() {
+  public componentDidMount() {
     const clipboard = new Clipboard(".clipboard");
   }
 

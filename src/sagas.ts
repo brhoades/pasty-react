@@ -1,8 +1,7 @@
 import * as Cookies from "js-cookie";
 import { BlobParserI, decryptFile, Paste, PasteParser } from "pasty-core";
-import { delay, END, eventChannel } from "redux-saga";
-import { SagaIterator } from "redux-saga";
-import { all, call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
+import { END, eventChannel, SagaIterator } from "redux-saga";
+import { all, call, delay, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 
 import {
   decryptPaste,

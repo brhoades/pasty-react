@@ -85,13 +85,15 @@ export const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, p
 };
 
 export const validate = (values: IPasteFormData, props: any) => {
-  let errors: { files?: any } = {};
-
-  if (values.files.length === 0) {
-    errors.files = "Must submit at least one file.";
+  if (values?.files?.length === 0) {
+    return {
+      files: "Must submit at least one file.",
+    };
   }
 
-  values.files.forEach((f, i) => {
+
+  const errors: { files?: any } = { files: [] };
+  values?.files?.forEach((f, i) => {
     if (!f.data || f.data.length === 0) {
       errors.files[i] = {
         data: "Empty files are not allowed.",

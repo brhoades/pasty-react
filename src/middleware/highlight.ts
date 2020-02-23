@@ -1,4 +1,4 @@
-import { replace } from "react-router-redux";
+import { replace } from "connected-react-router";
 import * as Redux from "redux";
 
 import { loadTheme } from "../actions/creators";

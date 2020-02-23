@@ -54,7 +54,7 @@ export class CopyAndEditPaste extends React.Component<PropsType, ICopyAndEditPas
     this.state = {};
   }
 
-  public componentWillMount() {
+  public componentDidMount() {
     if (!this.props.paste.isNothing()
         && this.props.paste.getData().name === this.props.match.params.id
         && this.props.paste.getData().key === this.props.match.params.key) {

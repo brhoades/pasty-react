@@ -1,7 +1,7 @@
 import { Paste } from "pasty-core";
 import * as React from "react";
 import { connect, Dispatch } from "react-redux";
-import { replace } from "react-router-redux";
+import { replace } from "connected-react-router";
 import Popup from "semantic-ui-react/dist/es/modules/Popup";
 
 import IconOrText from "components/IconOrText";

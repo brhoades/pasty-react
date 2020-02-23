@@ -52,24 +52,32 @@ class AddFileButton extends React.Component<PropsType, {}> {
 
       reader.addEventListener("load", () => {
         const data = reader.result;
-        let byteString: string = data.split(",")[1];
+        let byteString: string;
+        if (typeof data === 'string') {
+          // base64,...
+          byteString = data.split(",")[1];
+        } else {
+          // array buffer not supported
+          return;
+        }
 
-        let type: PasteFileTypes;
-        const meta: MetaData = {
-          mime: file.type,
-        };
-
+        let ty: PasteFileTypes;
         if (PasteFile.isReadable(file.type)) {
-          type = PasteFileTypes.CODE;
-          meta.highlight = "auto";
+          ty = PasteFileTypes.CODE;
           // code files are stored in plaintext
           byteString = Buffer.from(byteString, "base64").toString();
         } else {
-          type = PasteFileTypes.FILE;
+          ty = PasteFileTypes.FILE;
+          byteString = byteString;
         }
 
-        this.props.addFile(file.name, byteString, meta, type);
-      });
+        const meta: MetaData = {
+          mime: file.type,
+          highlight: "auto",
+        };
+
+        this.props.addFile(file.name, byteString, meta, ty);
+      })
 
       reader.readAsDataURL(file);
     });

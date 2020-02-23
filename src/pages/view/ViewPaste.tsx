@@ -69,7 +69,7 @@ export class ViewPaste extends React.Component<PropsType, IViewPasteState> {
     });
   }
 
-  public componentWillReceiveProps(newProps) {
+  public componentDidUpdate(newProps) {
     if (this.props.match.params.id !== newProps.match.params.id
         || this.props.match.params.key !== newProps.match.params.key) {
         this.updatePaste(newProps);

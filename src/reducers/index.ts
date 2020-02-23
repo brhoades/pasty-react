@@ -1,4 +1,4 @@
-import { routerReducer as router } from "react-router-redux";
+import { connectRouter } from "connected-react-router"
 import { combineReducers, Reducer } from "redux";
 import { reducer as reduxFormReducer } from "redux-form";
 
@@ -21,15 +21,12 @@ export interface IReducer {
 }
 
 
-const pasty = combineReducers<IReducer>({
+export default (history) => combineReducers<IReducer>({
   createPaste,
   form: reduxFormReducer,
   highlight,
   messages,
-  router,
+  router: connectRouter(history),
   settings,
   viewPaste,
 });
-
-
-export default pasty;

@@ -84,10 +84,8 @@ export const onSubmit = (values: IPasteFormData, dispatch: Dispatch<IReducer>, p
   dispatch(encryptThenSubmitPaste(paste));
 };
 
-export const validate = (values: IPasteFormData, props: {}) => {
-  const errors = {
-    files: {},
-  };
+export const validate = (values: IPasteFormData, props: any) => {
+  let errors: { files?: any } = {};
 
   if (values.files.length === 0) {
     errors.files = "Must submit at least one file.";

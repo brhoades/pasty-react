@@ -1,5 +1,4 @@
-import { History } from "history";
-import createHistory from "history/createHashHistory";
+import { History, createHashHistory } from "history";
 import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
@@ -14,7 +13,7 @@ import createStore from "./store";
 
 
 const App = () => {
-  const history: History = createHistory();
+  const history: History = createHashHistory();
   const store: Store<IReducer> = createStore(history);
 
   // FIXME: Put this somewhere else?

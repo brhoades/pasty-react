@@ -1,4 +1,4 @@
-import { History, createHashHistory } from "history";
+import { createHashHistory, History } from "history";
 import * as React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";

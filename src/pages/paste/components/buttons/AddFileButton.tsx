@@ -53,7 +53,7 @@ class AddFileButton extends React.Component<PropsType, {}> {
       reader.addEventListener("load", () => {
         const data = reader.result;
         let byteString: string;
-        if (typeof data === 'string') {
+        if (typeof data === "string") {
           // base64,...
           byteString = data.split(",")[1];
         } else {
@@ -72,12 +72,12 @@ class AddFileButton extends React.Component<PropsType, {}> {
         }
 
         const meta: MetaData = {
-          mime: file.type,
           highlight: "auto",
+          mime: file.type,
         };
 
         this.props.addFile(file.name, byteString, meta, ty);
-      })
+      });
 
       reader.readAsDataURL(file);
     });

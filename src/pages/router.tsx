@@ -1,6 +1,6 @@
+import { ConnectedRouter } from "connected-react-router";
 import * as React from "react";
 import { HashRouter, Route } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
 
 import AboutPasty from "pages/about/AboutPasty";
 import CopyAndEditPaste from "pages/copyandedit/CopyAndEditPaste";
